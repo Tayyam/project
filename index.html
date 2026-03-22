@@ -556,145 +556,180 @@ const DATA = {
   },
 
   purchases: {
-    local: {
-      location: "مصر – العتبة / مول البستان",
-      note: "أدوات ثقيلة الوزن، تبريد البنش، وإكسسوارات تُشترى محلياً لتفادي الشحن.",
-      currency: "EGP",
-      items: [
-        { name: "ميكروسكوب رقمي",          model: "Andonstar AD207 (7 إنش) — نفس دقة الرؤية بنصف السعر", function: "رؤية اللحامات الدقيقة — AD409 مبالغ فيه للبداية، AD207 يكفي تماماً", priceMin: 6000, priceMax: 8000 },
-        { name: "Tips متنوعة للـ Quick 205H", model: "Chisel T10 + Fine Point T2 + Bevel K2", function: "رأس عريض للهاشبورد، رأس دقيق للكنترول بورد — Quick 205H تغني عن KSGER بالـ tip الصح", priceMin: 200,  priceMax: 500   },
-        { name: "باور سبلاي معملي",        model: "Sugon 3005D (30V / 5A)",       function: "قياسات الكنترول والدوائر فقط — لا يشغّل هاشبورد S19 على PicoBT", priceMin: 4000,  priceMax: 5500  },
-        { name: "توصيل APW12 ↔ الهاشبورد", model: "أسلاك نحاس AWG6 + ترامل حلقية", function: "ربط باور الاختبار APW12 بالهاشبورد — يفصلها كهربائي ~100 ج", priceMin: 80,    priceMax: 150   },
-        { name: "تبريد البنش أثناء الاختبار", model: "مروحة تعدين 120mm + باور 12V", function: "Nidec / Delta (≥2.7A) — هواء قوي على المشتتات أثناء Hashing", priceMin: 800,   priceMax: 2000  },
-        { name: "حماية SMD أثناء الهواء الساخن", model: "شريط Kapton أصفر حراري", function: "حول الشريحة المستهدفة — يحمي المكونات المجاورة من الطيران", priceMin: 40,    priceMax: 60    },
-        { name: "مفك كهربائي",             model: "Xiaomi / Wowstick / مماثل",    function: "~70 مسمار/هاشبورد — 3 دقائق بدل ربع ساعة، يحمي المعصم", priceMin: 600,   priceMax: 1500  },
-        { name: "كاوية هاشبورد (150W+)",   model: "Quick 205H / Sugon T3602",     function: "لحام الهاشبورد — 150W. ⚠️ تأكد من وجود Tips متنوعة (Chisel, Bevel, Knife) — الـ tip الغلط يحرق الـ pad مباشرة", priceMin: 3000,  priceMax: 5500  },
-        { name: "نظافة رأس الكاوية",        model: "Brass Wire Tip Cleaner (إسفنج نحاس)", function: "تنظيف رأس الكاوية بدون خفض درجة الحرارة — يطيل عمر الـ tip", priceMin: 80,   priceMax: 200   },
-        { name: "كحول التنظيف",             model: "Isopropyl Alcohol IPA 99% (500ml)", function: "تنظيف الفلاكس بعد اللحام وتنظيف البادز — 99% فقط وليس 70%", priceMin: 150,  priceMax: 300   },
-        { name: "غسالة ألتراسونيك",        model: "Ultrasonic Cleaner 2L",        function: "تنظيف بقايا الفلاكس في 3 دقائق — بوردة كأنها جديدة",       priceMin: 1500,  priceMax: 3000  },
-        { name: "شفاط قصدير احترافي",      model: "محطة شفط أو Goot Sucker",     function: "تنظيف ثقوب البوردة (الباور)",                               priceMin: 500,   priceMax: 1500  },
-        { name: "وصلة برمجة (UART)",       model: "USB to TTL Adapter",           function: "قراءة سجلات إقلاع الكنترول بورد",                          priceMin: 150,   priceMax: 150   },
-        { name: "ملاقط دقيقة",             model: "طقم Vetus (أصلي)",             function: "التعامل مع القطع المجهرية",                                 priceMin: 600,   priceMax: 800   }
+    pageNote: "تقسيم منطقي: أصول ثابتة (مرة واحدة) → نوادر مستوردة (مخزون تخصصي) → العتبة/البستان (متجدد ومساعد).",
+
+    fixedAssets: {
+      title: "① قائمة الأصول — الاستثمار الثابت",
+      note: "هذه الأدوات «قلب المعمل»: تُشترى مرة واحدة وتعيش معك لسنوات. مرتبة حسب مكان الشراء.",
+      groups: [
+        {
+          sourceLabel: "🇨🇳 الصين — Zeus Mining / AliExpress",
+          tableHint: "أصول رأسمالية تُشحن من الخارج",
+          kind: "usd",
+          items: [
+            {
+              name: "التستر الشامل",
+              model: "PicoBT Universal Tester",
+              function: "الجهاز الأهم لتشخيص أعطال الهاشبورد على البنش.",
+              price: "$459",
+              priceBefore: "~$587 (2200 ريال)",
+              saving: "وفر $128",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2349",
+              source: "Zeus Mining",
+              badge: "أوفر"
+            },
+            {
+              name: "باور اختبار الهاشبورد (Bench)",
+              model: "Antminer APW12 (أصلي) — ثابت على طاولة الصيانة",
+              function: "12–15V / 70A+ — التشغيل الحقيقي تحت الحمل مع PicoBT.",
+              price: "$90 – $140",
+              priceBefore: "Sugon 3005D لا يكفي (150W vs 1000W+)",
+              saving: "ضروري مع التستر",
+              url: "https://www.aliexpress.com/w/wholesale-antminer-APW12-power-supply.html",
+              source: "AliExpress / سوق مستعمل",
+              badge: "ناقص إلزامي"
+            },
+            {
+              name: "الفحص الحراري + ملتيميتر",
+              model: "ZOYI ZT-R01 Thermography Multimeter",
+              function: "رؤية النقاط الساخنة وقياس الجهد في نفس اللحظة.",
+              price: "$105",
+              priceBefore: "~$294 (Infiray P2 Pro)",
+              saving: "وفر $189 — 2 في 1",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3932",
+              source: "Zeus Mining",
+              badge: "Game Changer"
+            },
+            {
+              name: "أوسيلوسكوب محمول (3-in-1)",
+              model: "FNIRSI DSO-TC3",
+              function: "أوسيلوسكوب + مولد إشارة + تحليل — فحص الكنترول والإشارات الأساسية.",
+              price: "$44",
+              priceBefore: "~$200+ (أجهزة مختبرية كبيرة)",
+              saving: "حجم جيب — يكفي لمعظم الفحوص اليومية",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3221",
+              source: "Zeus Mining",
+              badge: "أساسي"
+            },
+            {
+              name: "محطة هواء ساخن احترافية",
+              model: "Quick 861DW 1300W Hot Air Rework Station",
+              function: "هواء ساخن احترافي لصيانة الـ ASIC والـ SMD الكثيف.",
+              price: "$365",
+              priceBefore: "~$375 (Sugon 8610DX محلي)",
+              saving: "جودة أعلى + شراء مع الطلبية",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3208",
+              source: "Zeus Mining",
+              badge: "أفضل"
+            },
+            {
+              name: "منصة IR تسخين شاملة للهاشبورد",
+              model: "PUHUI T-8280 Large IR Preheater (28×27cm)",
+              function: "تسخين متساوٍ للهاشبورد كاملة — يقلل التقوس أثناء الـ rework.",
+              price: "$135",
+              priceBefore: "$46 (iTECH HP-B100 — صغيرة تسبب Warping)",
+              saving: "تسخين متساوٍ — نسبة تقوس أقل",
+              url: "https://www.aliexpress.com/w/wholesale-PUHUI-T-8280-preheater.html",
+              source: "AliExpress",
+              badge: "ترقية ضرورية"
+            }
+          ]
+        },
+        {
+          sourceLabel: "🏪 مول البستان",
+          tableHint: "أدوات ثقيلة / كهرباء معملية",
+          kind: "egp",
+          items: [
+            { name: "ميكروسكوب رقمي", model: "Andonstar AD207 (7 إنش)", function: "رؤية اللحامات والمسارات المقطوعة بدقة.", priceMin: 6000, priceMax: 8000 },
+            { name: "كاوية هاشبورد", model: "Quick 205H (150W) أو Sugon T3602", function: "القوة المطلوبة لسحب/لحام الهاشبورد — ليس للكنترول فقط.", priceMin: 3000, priceMax: 5500 },
+            { name: "Tips للـ Quick 205H", model: "Chisel T10 + Fine Point T2 + Bevel K2", function: "رأس عريض للهاشبورد ورأس دقيق للـ SMD — الـ tip الغلط يحرق الـ pad.", priceMin: 200, priceMax: 500 },
+            { name: "باور سبلاي معملي", model: "Sugon 3005D (30V / 5A)", function: "حقن فولت واختبار دوائر الكنترول — لا يشغّل هاشبورد S19 على PicoBT.", priceMin: 4000, priceMax: 5500 }
+          ]
+        },
+        {
+          sourceLabel: "📍 العتبة",
+          tableHint: "معدات مساعدة متوفرة محلياً",
+          kind: "egp",
+          items: [
+            { name: "غسالة ألتراسونيك", model: "Ultrasonic Cleaner سعة ~2L", function: "تنظيف نهائي للبوردة من الفلاكس والأوساخ بعد الشغل.", priceMin: 1500, priceMax: 3000 }
+          ]
+        },
+        {
+          sourceLabel: "📱 أونلاين (مصر)",
+          tableHint: "طلب سريع من المتاجر المحلية",
+          kind: "egp",
+          items: [
+            { name: "مفك كهربائي", model: "Xiaomi / Wowstick / مماثل", function: "فك وتركيب عشرات المسامير يومياً — يحمي المعصم.", priceMin: 600, priceMax: 1500 }
+          ]
+        }
       ]
     },
-    imported: {
-      location: "الصين – Alibaba / AliExpress / Zeus Mining",
-      note: "أدوات ومخزون تخصصي — تم تحديث المصادر بأفضل الأسعار المتاحة (مقارنة zeusbtc.com vs Alibaba).",
-      currency: "USD / SAR",
+
+    importedSpecialty: {
+      title: "② النوادر المستوردة — مخزون تخصصي",
+      note: "أشياء صغيرة لكنها «الخلطة السرية»: لا يُستبدل أغلبها ببديل محلي رخيص دون أن تتأثر جودة الإصلاح أو عمر الهاشبورد. لا تتوفر بنفس الجودة في الشارع المصري.",
+      location: "الصين — Zeus Mining / AliExpress",
+      currency: "USD",
       items: [
         {
-          name: "التستر الشامل",
-          model: "PicoBT Universal Tester",
-          price: "$459",
-          priceBefore: "~$587 (2200 ريال)",
-          saving: "وفر $128",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2349",
+          name: "شرايح ASIC (Bitmain)",
+          model: "BM1398 / BM1362 — حسب موديل اللوحة",
+          function: "قطع الغيار الأساسية لهاشبورد Antminer.",
+          price: "$2 – $3.5 / شريحة",
+          priceBefore: "بالكمية (Alibaba)",
+          saving: "سعر ثابت بدون MOQ على Zeus",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106",
           source: "Zeus Mining",
-          badge: "أوفر"
+          badge: "مخزون أساسي"
         },
         {
-          name: "باور اختبار الهاشبورد (Bench)",
-          model: "Antminer APW12 (أصلي) — ثابت على طاولة الصيانة",
-          price: "$90 – $140",
-          priceBefore: "Sugon 3005D لا يكفي (150W vs 1000W+)",
-          saving: "12–15V / 70A+ — التشغيل الحقيقي على PicoBT",
-          url: "https://www.aliexpress.com/w/wholesale-antminer-APW12-power-supply.html",
-          source: "AliExpress / سوق مستعمل",
-          badge: "ناقص إلزامي"
-        },
-        {
-          name: "طقم BGA Reballing كامل",
-          model: "منصة مغناطيسية + شبلونات ASIC خاصة بـ S19 (BM1397/BM1398/BM1362)",
-          price: "$15 – $30",
-          priceBefore: "بدونه الشريحة تتحرك وكرات القصدير تتفرق",
-          saving: "المنصة تثبّت الشريحة + الشبلونة الخاصة تحدد موضع الكرات بدقة 100%",
-          url: "https://www.aliexpress.com/w/wholesale-bga-reballing-kit-asic.html",
-          source: "AliExpress",
-          badge: "ناقص إلزامي"
-        },
-        {
-          name: "الفحص الحراري + ملتيميتر",
-          model: "ZOYI ZT-R01 Thermography Multimeter",
-          price: "$105",
-          priceBefore: "~$294 (Infiray P2 Pro)",
-          saving: "وفر $189 — 2 في 1",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3932",
+          name: "شرائح ASIC (MicroBT)",
+          model: "KF1922 — Whatsminer",
+          function: "قطع غيار أساسية لهاشبورد MicroBT.",
+          price: "$2 / chip",
+          priceBefore: "بالكمية (Bit2Miner)",
+          saving: "نفس المنتج بسعر منافس",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2148",
           source: "Zeus Mining",
-          badge: "Game Changer"
+          badge: "مخزون أساسي"
         },
         {
-          name: "أوسيلوسكوب محمول (3-in-1)",
-          model: "FNIRSI DSO-TC3",
-          price: "$44",
-          priceBefore: "~$200+ (أجهزة مختبرية كبيرة)",
-          saving: "Oscilloscope + Generator + Analyzer في حجم الجيب — يكفي لمعظم فحوص الكنترول اليومية",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3221",
-          source: "Zeus Mining",
-          badge: "أساسي"
-        },
-        {
-          name: "محطة هواء ساخن احترافية",
-          model: "Quick 861DW 1300W Hot Air Rework Station",
-          price: "$365",
-          priceBefore: "~$375 (Sugon 8610DX محلي)",
-          saving: "جودة أعلى + شراء مع الطلبية",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3208",
-          source: "Zeus Mining",
-          badge: "أفضل"
-        },
-        {
-          name: "منصة IR تسخين شاملة للهاشبورد",
-          model: "PUHUI T-8280 Large IR Preheater (28×27cm)",
-          price: "$135",
-          priceBefore: "$46 (iTECH HP-B100 — صغيرة تسبب Warping)",
-          saving: "تسخين متساوٍ للهاشبورد كاملاً — نسبة تقوس 0%",
-          url: "https://www.aliexpress.com/w/wholesale-PUHUI-T-8280-preheater.html",
-          source: "AliExpress",
-          badge: "ترقية ضرورية"
-        },
-        {
-          name: "فلاكس لحام ASIC (حقنة)",
-          model: "Amtech NC-559-ASM Flux",
+          name: "فلاكس لحام ASIC",
+          model: "Amtech NC-559-ASM (أصلي فقط)",
+          function: "لتعويم الشريحة ولحام صحيح — البديل المحلي غالباً يفشل اللحام.",
           price: "$8 / حقنة",
           priceBefore: "فلاكس محلي مضروب",
-          saving: "الشريحة تعوم وتلحم في ثوانٍ — الأصلي فقط يعمل كده",
+          saving: "الشريحة تعوم وتلحم في ثوانٍ",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3386",
           source: "Zeus Mining",
           badge: "الخلطة السرية"
         },
         {
-          name: "معجون لحام BGA",
+          name: "معجون قصدير BGA",
           model: "Mechanic Solder Paste 183°C",
+          function: "Reballing مضمون — درجة انصهار مناسبة للـ ASIC.",
           price: "$12",
-          priceBefore: "قصدير محلي درجة انصهاره عالية",
-          saving: "183°C مثالية للـ ASIC — لا تحرق الشريحة",
+          priceBefore: "قصدير محلي درجة انصهار عالية",
+          saving: "183°C — أقل ضرر على الشريحة",
           url: "https://www.aliexpress.com/w/wholesale-mechanic-solder-paste-183.html",
           source: "AliExpress",
           badge: "الخلطة السرية"
         },
         {
-          name: "معجون حراري سائل 1kg",
-          model: "GD900-1 Thermal Grease 6W/mk",
-          price: "$3.4",
-          priceBefore: "معجون محلي منخفض التوصيل",
-          saving: "استهلاك كثيف — 1kg يكفي لأكثر من 200 هاشبورد",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2182",
-          source: "Zeus Mining",
-          badge: "جديد"
-        },
-        {
-          name: "Thermal Putty (معجون جل) 1kg",
-          model: "HY234 Hash Board Thermal Putty",
+          name: "Thermal Putty (معجون جل)",
+          model: "HY234 Hash Board Thermal Putty 1kg",
+          function: "ضروري لموديلات S19 / M30 لملء الفراغات بين المشتتات المزدوجة.",
           price: "$5",
           priceBefore: null,
-          saving: "للمشتتات المزدوجة S19 — يملأ الفراغات بشكل كامل",
+          saving: "توزيع حراري أفضل من المعجون السائل في الفجوات",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638",
           source: "Zeus Mining",
-          badge: "جديد"
+          badge: "S19/M30"
         },
         {
           name: "شبلونات الصيانة",
-          model: "S19 & M30 Stencils",
+          model: "S19 & M30 Stencils — قوالب مغناطيسية للشرائح",
+          function: "توزيع معجون متساوٍ قبل الـ reflow — بدونها الشريحة تتحرك.",
           price: "$3.5 – $16",
           priceBefore: "~$40 (150 ريال)",
           saving: "وفر حتى 91%",
@@ -703,8 +738,42 @@ const DATA = {
           badge: "أوفر"
         },
         {
+          name: "ملف اختبار Antminer",
+          model: "S19 + S19j Pro Test Files",
+          function: "سوفتوير PicoBT لعائلة S19 — بدونها False Errors.",
+          price: "$49 / ملف",
+          priceBefore: null,
+          saving: "ضرورية مع PicoBT",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3093",
+          source: "Zeus Mining",
+          badge: "Game Changer"
+        },
+        {
+          name: "ملف اختبار Whatsminer",
+          model: "M30 / M50 / M60 Test File",
+          function: "سوفتوير PicoBT لموديلات MicroBT.",
+          price: "$35",
+          priceBefore: null,
+          saving: "ضرورية مع PicoBT",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3744",
+          source: "Zeus Mining",
+          badge: "Game Changer"
+        },
+        {
+          name: "طقم BGA Reballing",
+          model: "منصة مغناطيسية + شبلونات ASIC (S19)",
+          function: "تثبيت الشريحة ومحاذاة كرات القصدير بدقة.",
+          price: "$15 – $30",
+          priceBefore: "بدون منصة الشريحة تهرج",
+          saving: "أساس الـ reballing الآمن",
+          url: "https://www.aliexpress.com/w/wholesale-bga-reballing-kit-asic.html",
+          source: "AliExpress",
+          badge: "ناقص إلزامي"
+        },
+        {
           name: "مخزون كابلات داتا",
-          model: "40 كابل متنوع (10-pin / 12-pin)",
+          model: "40 كابل (10-pin / 12-pin)",
+          function: "كابلات استهلاكية للبيع والتبديل السريع.",
           price: "$0.03 – $0.38 / كابل",
           priceBefore: "~$133 (500 ريال)",
           saving: "وفر حتى 100%",
@@ -713,28 +782,9 @@ const DATA = {
           badge: "أوفر"
         },
         {
-          name: "شرايح ASIC – BM1398 / BM1362",
-          model: "BM1362 (Bitmain – S19j Pro)",
-          price: "$3.5 / chip",
-          priceBefore: "بالكمية (Alibaba)",
-          saving: "سعر ثابت بدون MOQ",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106",
-          source: "Zeus Mining",
-          badge: "أوفر"
-        },
-        {
-          name: "شريحة ASIC – KF1922",
-          model: "KF1922 (MicroBT Whatsminer)",
-          price: "$2 / chip",
-          priceBefore: "بالكمية (Bit2Miner)",
-          saving: "نفس المنتج بسعر أقل",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2148",
-          source: "Zeus Mining",
-          badge: "أوفر"
-        },
-        {
           name: "آيسيهات الكنترول",
           model: "LDOs (0.8V / 1.8V / 3.3V) & PMIC",
+          function: "مخزون إصلاح كنترول بورد.",
           price: "$0.03 – $0.06 / chip",
           priceBefore: "~$107 (400 ريال)",
           saving: "وفر حتى 100%",
@@ -745,33 +795,30 @@ const DATA = {
         {
           name: "قطع غيار الباور",
           model: "MOSFETs & PWM ICs",
+          function: "مخزون صيانة باور سبلاي التعدين.",
           price: "$0.4 – $1.56 / chip",
           priceBefore: "~$160 (600 ريال)",
           saving: "وفر حتى 99%",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934",
           source: "Zeus Mining",
           badge: "أوفر"
-        },
-        {
-          name: "ملفات اختبار S19 / S19j Pro",
-          model: "Antminer S19 + S19j Pro Test Files",
-          price: "$49 / ملف",
-          priceBefore: null,
-          saving: "ضرورية مع PicoBT",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3093",
-          source: "Zeus Mining",
-          badge: "Game Changer"
-        },
-        {
-          name: "ملف اختبار Whatsminer M30/M50",
-          model: "Whatsminer M30/M50/M60 Test File",
-          price: "$35",
-          priceBefore: null,
-          saving: "ضرورية مع PicoBT",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3744",
-          source: "Zeus Mining",
-          badge: "Game Changer"
         }
+      ]
+    },
+
+    localSupplies: {
+      title: "③ العتبة ومول البستان — متجدد ومساعد",
+      note: "كل ما هو متاح في مصر: مواد متجددة، كيماويات، تبريد، كهرباء بسيطة، وإكسسوارات يومية — أقل شحن وأسرع تعويض.",
+      location: "مصر — العتبة / مول البستان / شركات كيماويات",
+      currency: "EGP",
+      items: [
+        { name: "كيماويات التنظيف", model: "IPA 99% (≈500ml) — شركات كيماويات بالعتبة", function: "تنظيف الفلاكس والبادز — 99% فقط وليس 70%.", priceMin: 150, priceMax: 300 },
+        { name: "حماية أثناء الهواء الساخن", model: "شريط Kapton أصفر + شريط ألومنيوم", function: "عزل الحرارة وحماية الـ SMD المجاورة.", priceMin: 40, priceMax: 120 },
+        { name: "تبريد البنش", model: "مروحة تعدين 120mm + باور 12V", function: "Nidec / Delta (≥2.7A) — سوق مستعمل أو البستان.", priceMin: 800, priceMax: 2000 },
+        { name: "كهرباء البنش", model: "أسلاك نحاس AWG6 + ترامل حلقية + كابلات باور أصلية", function: "ربط APW12 بالهاشبورد بأمان — يفصلها كهربائي ~100 ج.", priceMin: 80, priceMax: 250 },
+        { name: "معجون حراري عام", model: "GD900 أو ما يعادله (سائل)", function: "للاستخدام العام على المشتتات — ليس بديل Thermal Putty في الفجوات.", priceMin: 100, priceMax: 400 },
+        { name: "إكسسوارات يد", model: "ملاقط Vetus + شفاط قصدير (Goot Sucker) + إسفنج نحاس للكاوية", function: "شغل يومي نظيف وسريع على البوردة.", priceMin: 500, priceMax: 2000 },
+        { name: "قياس وبرمجة بسيطة", model: "USB to TTL + Jumper wires", function: "UART للكنترول وتوصيلات تجريبية سريعة.", priceMin: 150, priceMax: 350 }
       ]
     }
   },
@@ -1011,6 +1058,62 @@ const fmt = n => n.toLocaleString('en-US');
 const fmtUSD = n => '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 const fmtEGP = n => n.toLocaleString('en-US') + ' ج';
 
+function purchaseImportRow(item) {
+  const isZeus = item.source === 'Zeus Mining';
+  const btnColor = isZeus
+    ? 'rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.35);color:#6ee7b7'
+    : 'rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35);color:#93c5fd';
+  const btnHoverIn = isZeus
+    ? "this.style.background='rgba(16,185,129,.25)';this.style.borderColor='rgba(16,185,129,.6)'"
+    : "this.style.background='rgba(59,130,246,.25)';this.style.borderColor='rgba(59,130,246,.6)'";
+  const btnHoverOut = isZeus
+    ? "this.style.background='rgba(16,185,129,.12)';this.style.borderColor='rgba(16,185,129,.35)'"
+    : "this.style.background='rgba(59,130,246,.12)';this.style.borderColor='rgba(59,130,246,.35)'";
+  return `
+    <tr>
+      <td>
+        ${item.badge ? `<span class="badge-better">${item.badge}</span>` : ''}
+        ${item.name}
+      </td>
+      <td class="mono">${item.model}</td>
+      <td style="color:var(--text-muted);font-size:.82rem;max-width:220px">${item.function || '—'}</td>
+      <td>
+        <span style="color:${isZeus ? '#34d399' : '#60a5fa'};font-weight:700">${item.price}</span>
+        ${item.priceBefore ? `<span class="price-old">${item.priceBefore}</span>` : ''}
+      </td>
+      <td>
+        ${item.saving
+          ? `<span class="saving-tag">✓ ${item.saving}</span>`
+          : `<span style="color:var(--text-muted);font-size:.8rem">—</span>`}
+      </td>
+      <td>
+        <a href="${item.url}" target="_blank" rel="noopener" style="
+          display:inline-flex;align-items:center;gap:5px;
+          background:${btnColor};
+          padding:4px 10px;border-radius:6px;
+          font-size:.75rem;text-decoration:none;white-space:nowrap;
+          transition:background .2s,border-color .2s;
+        "
+        onmouseover="${btnHoverIn}"
+        onmouseout="${btnHoverOut}"
+        >🔗 ${item.source}</a>
+      </td>
+    </tr>`;
+}
+
+function purchaseLocalRow(item) {
+  const price = item.priceMin === item.priceMax
+    ? fmt(item.priceMin)
+    : fmt(item.priceMin) + ' – ' + fmt(item.priceMax);
+  return `
+    <tr>
+      <td>${item.name}</td>
+      <td class="mono">${item.model}</td>
+      <td style="color:var(--text-muted)">${item.function}</td>
+      <td class="amber">${price}</td>
+    </tr>`;
+}
+
 /* ── model tags ── */
 DATA.models.forEach(m => {
   const el = document.createElement('span');
@@ -1141,97 +1244,91 @@ main.insertAdjacentHTML('beforeend', `
     <h2>خريطة <span>المشتريات</span></h2>
   </div>
 
+  <div class="card" style="margin-bottom:20px">
+    <p style="color:var(--text-muted);font-size:.88rem;line-height:1.85;margin:0">${DATA.purchases.pageNote}</p>
+  </div>
+
   <div class="card" style="margin-bottom:24px">
-    <div class="card-title">📍 المشتريات المحلية — ${DATA.purchases.local.location}</div>
-    <p style="font-size:.83rem;color:var(--text-muted);margin-bottom:14px">${DATA.purchases.local.note}</p>
+    <div class="card-title" style="justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span>${DATA.purchases.fixedAssets.title}</span>
+      <span style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35);color:#fbbf24;font-size:.72rem;padding:3px 10px;border-radius:20px;font-weight:600">مرة واحدة — أصول</span>
+    </div>
+    <p style="font-size:.83rem;color:var(--text-muted);margin-bottom:18px">${DATA.purchases.fixedAssets.note}</p>
+    ${DATA.purchases.fixedAssets.groups.map(g => `
+      <div style="margin-bottom:22px">
+        <div style="font-weight:700;font-size:.92rem;color:var(--text);margin-bottom:6px">${g.sourceLabel}</div>
+        <div style="font-size:.78rem;color:var(--text-muted);margin-bottom:10px">${g.tableHint}</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>الأداة / الأصل</th>
+                <th>الموديل</th>
+                <th>الوظيفة الأساسية</th>
+                ${g.kind === 'usd'
+                  ? '<th>السعر</th><th>ملاحظة</th><th>رابط</th>'
+                  : '<th>السعر التقديري (ج)</th>'}
+              </tr>
+            </thead>
+            <tbody>
+              ${g.kind === 'usd'
+                ? g.items.map(purchaseImportRow).join('')
+                : g.items.map(purchaseLocalRow).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `).join('')}
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title" style="justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span>${DATA.purchases.importedSpecialty.title}</span>
+      <span style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:#34d399;font-size:.72rem;padding:3px 10px;border-radius:20px;font-weight:600">
+        ✓ أسعار Zeus / AliExpress
+      </span>
+    </div>
+    <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:6px">${DATA.purchases.importedSpecialty.location} · ${DATA.purchases.importedSpecialty.currency}</p>
+    <p style="font-size:.83rem;color:var(--text-muted);margin-bottom:14px">${DATA.purchases.importedSpecialty.note}</p>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th>الأداة / المادة</th>
-            <th>الموديل المقترح</th>
+            <th>المخزون</th>
+            <th>الموديل / الوصف</th>
             <th>الوظيفة</th>
-            <th>السعر التقديري (${DATA.purchases.local.currency})</th>
+            <th>السعر</th>
+            <th>التوفير / ملاحظة</th>
+            <th>رابط</th>
           </tr>
         </thead>
         <tbody>
-          ${DATA.purchases.local.items.map(item => `
-            <tr>
-              <td>${item.name}</td>
-              <td class="mono">${item.model}</td>
-              <td style="color:var(--text-muted)">${item.function}</td>
-              <td class="amber">${item.priceMin === item.priceMax ? fmt(item.priceMin) : fmt(item.priceMin) + ' – ' + fmt(item.priceMax)}</td>
-            </tr>
-          `).join('')}
+          ${DATA.purchases.importedSpecialty.items.map(purchaseImportRow).join('')}
         </tbody>
       </table>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-title" style="justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <span>🚢 المشتريات المستوردة — ${DATA.purchases.imported.location}</span>
-      <span style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:#34d399;font-size:.72rem;padding:3px 10px;border-radius:20px;font-weight:600">
-        ✓ محدّث بأسعار Zeus Mining
-      </span>
-    </div>
-    <p style="font-size:.83rem;color:var(--text-muted);margin-bottom:14px">${DATA.purchases.imported.note}</p>
+    <div class="card-title">${DATA.purchases.localSupplies.title}</div>
+    <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:6px">📍 ${DATA.purchases.localSupplies.location}</p>
+    <p style="font-size:.83rem;color:var(--text-muted);margin-bottom:14px">${DATA.purchases.localSupplies.note}</p>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th>الأداة / المخزون</th>
-            <th>الموديل / الوصف</th>
-            <th>السعر المحدّث</th>
-            <th>التوفير</th>
-            <th>رابط الشراء</th>
+            <th>البند</th>
+            <th>الموديل / أين تشتريه</th>
+            <th>الوظيفة</th>
+            <th>السعر التقديري (${DATA.purchases.localSupplies.currency})</th>
           </tr>
         </thead>
         <tbody>
-          ${DATA.purchases.imported.items.map(item => {
-            const isZeus  = item.source === 'Zeus Mining';
-            const btnColor = isZeus
-              ? 'rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.35);color:#6ee7b7'
-              : 'rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35);color:#93c5fd';
-            const btnHoverIn  = isZeus
-              ? "this.style.background='rgba(16,185,129,.25)';this.style.borderColor='rgba(16,185,129,.6)'"
-              : "this.style.background='rgba(59,130,246,.25)';this.style.borderColor='rgba(59,130,246,.6)'";
-            const btnHoverOut = isZeus
-              ? "this.style.background='rgba(16,185,129,.12)';this.style.borderColor='rgba(16,185,129,.35)'"
-              : "this.style.background='rgba(59,130,246,.12)';this.style.borderColor='rgba(59,130,246,.35)'";
-            return `
-            <tr>
-              <td>
-                ${item.badge ? `<span class="badge-better">${item.badge}</span>` : ''}
-                ${item.name}
-              </td>
-              <td class="mono">${item.model}</td>
-              <td>
-                <span style="color:${isZeus ? '#34d399' : '#60a5fa'};font-weight:700">${item.price}</span>
-                ${item.priceBefore ? `<span class="price-old">${item.priceBefore}</span>` : ''}
-              </td>
-              <td>
-                ${item.saving
-                  ? `<span class="saving-tag">✓ ${item.saving}</span>`
-                  : `<span style="color:var(--text-muted);font-size:.8rem">—</span>`}
-              </td>
-              <td>
-                <a href="${item.url}" target="_blank" rel="noopener" style="
-                  display:inline-flex;align-items:center;gap:5px;
-                  background:${btnColor};
-                  padding:4px 10px;border-radius:6px;
-                  font-size:.75rem;text-decoration:none;white-space:nowrap;
-                  transition:background .2s,border-color .2s;
-                "
-                onmouseover="${btnHoverIn}"
-                onmouseout="${btnHoverOut}"
-                >🔗 ${item.source}</a>
-              </td>
-            </tr>
-          `}).join('')}
+          ${DATA.purchases.localSupplies.items.map(purchaseLocalRow).join('')}
         </tbody>
       </table>
     </div>
+    <p style="font-size:.78rem;color:var(--text-muted);margin-top:14px">GD900 متوفر أيضاً بعبوة 1kg من Zeus (~$3.4) إن أردت جودة ثابتة وتكلفة للوحدة أقل عند الاستهلاك العالي.</p>
   </div>
 </section>
 `);
