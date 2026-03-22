@@ -415,14 +415,69 @@ const DATA = {
       note: "أدوات ومخزون تخصصي لا يتوفر محلياً بكفاءة أو أسعار جيدة.",
       currency: "SAR",
       items: [
-        { name: "التستر الشامل",        model: "PicoBT Universal Tester",           price: "~2,200" },
-        { name: "الكاميرا الحرارية",    model: "Infiray P2 Pro",                    price: "~1,100" },
-        { name: "قالب تسخين S19",       model: "Sunshine T12A-S19",                 price: "~350"   },
-        { name: "شبلونات الصيانة",      model: "S19 & M30 Stencils",               price: "~150"   },
-        { name: "مخزون كابلات داتا",    model: "40 كابل متنوع (10-pin / 12-pin)", price: "~500"   },
-        { name: "شرايح ASIC الأساسية",  model: "BM1398 / BM1362 / KF1922",         price: "حسب الكمية" },
-        { name: "آيسيهات الكنترول",     model: "LDOs (0.8V–3.3V) & PMIC",          price: "~400"   },
-        { name: "قطع غيار الباور",      model: "MOSFETs & PWM ICs",                price: "~600"   }
+        {
+          name: "التستر الشامل",
+          model: "PicoBT Universal Tester",
+          price: "~2,200",
+          url: "https://www.alibaba.com/product-detail/PicoBT-Multifunctional-Hash-Board-Tester-Applicable-1601383281153.html",
+          source: "Alibaba"
+        },
+        {
+          name: "الكاميرا الحرارية",
+          model: "Infiray P2 Pro",
+          price: "~1,100",
+          url: "https://www.alibaba.com/product-detail/INFIRAY-P2-PRO-Infrared-Thermal-Imager_1601268492116.html",
+          source: "Alibaba"
+        },
+        {
+          name: "قالب تسخين S19",
+          model: "Sunshine SS-T12A",
+          price: "~350",
+          url: "https://www.alibaba.com/product-detail/Sunshine-SS-T12A-Motherboard-Heat-Table_1601213228686.html",
+          source: "Alibaba"
+        },
+        {
+          name: "شبلونات الصيانة",
+          model: "S19 & M30 Stencils",
+          price: "~150",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2374",
+          source: "Zeus Mining"
+        },
+        {
+          name: "مخزون كابلات داتا",
+          model: "40 كابل متنوع (10-pin / 12-pin)",
+          price: "~500",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=77",
+          source: "Zeus Mining"
+        },
+        {
+          name: "شرايح ASIC – BM1398 / BM1362",
+          model: "BM1398BB / BM1362 (Bitmain)",
+          price: "حسب الكمية",
+          url: "https://www.alibaba.com/product-detail/New-Original-ASIC-SHA256-Chip-BM1398_1600154475182.html",
+          source: "Alibaba"
+        },
+        {
+          name: "شريحة ASIC – KF1922",
+          model: "KF1922 (MicroBT Whatsminer)",
+          price: "حسب الكمية",
+          url: "https://www.bit2miner.com/products/microbt-whatsminer-kf1922-asic-replacement-hashboard-repair-ic-x10pcs",
+          source: "Bit2Miner"
+        },
+        {
+          name: "آيسيهات الكنترول",
+          model: "LDOs (0.8V–3.3V) & PMIC",
+          price: "~400",
+          url: "https://www.alibaba.com/trade/search?SearchText=LDO+voltage+regulator+mining+control+board+0.8V+1.8V+3.3V",
+          source: "Alibaba Search"
+        },
+        {
+          name: "قطع غيار الباور",
+          model: "MOSFETs (IPW60R040CFD7) & PWM ICs",
+          price: "~600",
+          url: "https://www.alibaba.com/product-detail/Original-Transistor-IPW60R024CFD7-60R024F7-PG-TO247_1601519388101.html",
+          source: "Alibaba"
+        }
       ]
     }
   },
@@ -637,6 +692,7 @@ main.insertAdjacentHTML('beforeend', `
             <th>الأداة / المخزون</th>
             <th>الموديل / الوصف</th>
             <th>السعر التقديري (${DATA.purchases.imported.currency})</th>
+            <th>رابط الشراء</th>
           </tr>
         </thead>
         <tbody>
@@ -645,6 +701,23 @@ main.insertAdjacentHTML('beforeend', `
               <td>${item.name}</td>
               <td class="mono">${item.model}</td>
               <td class="blue">${item.price}</td>
+              <td>
+                <a href="${item.url}" target="_blank" rel="noopener" style="
+                  display:inline-flex;align-items:center;gap:5px;
+                  background:rgba(59,130,246,.12);
+                  border:1px solid rgba(59,130,246,.35);
+                  color:#93c5fd;
+                  padding:4px 10px;
+                  border-radius:6px;
+                  font-size:.75rem;
+                  text-decoration:none;
+                  white-space:nowrap;
+                  transition:background .2s,border-color .2s;
+                "
+                onmouseover="this.style.background='rgba(59,130,246,.25)';this.style.borderColor='rgba(59,130,246,.6)'"
+                onmouseout="this.style.background='rgba(59,130,246,.12)';this.style.borderColor='rgba(59,130,246,.35)'"
+                >🔗 ${item.source}</a>
+              </td>
             </tr>
           `).join('')}
         </tbody>
