@@ -259,6 +259,13 @@
     .step-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
     .step-body p  { font-size: .85rem; color: var(--text-muted); }
 
+    /* ─── STAT NOTE ─── */
+    .stat-note {
+      font-size: .7rem;
+      color: #34d399;
+      margin-top: 2px;
+    }
+
     /* ─── BADGE ─── */
     .badge-better {
       display: inline-block;
@@ -382,6 +389,7 @@ const DATA = {
   navigation: [
     { id: "workflow",        label: "⚙️ مسار العمل" },
     { id: "purchases",       label: "🛒 المشتريات" },
+    { id: "ultimateSetup",   label: "🏆 الروشتة المثلى" },
     { id: "costPerRepair",   label: "🔬 تكلفة الإصلاح" },
     { id: "pricing",         label: "💰 التسعير والربح" },
     { id: "opex",            label: "📊 المصاريف والتعادل" },
@@ -452,14 +460,34 @@ const DATA = {
           badge: "أوفر"
         },
         {
-          name: "الكاميرا الحرارية",
-          model: "Infiray P2 Pro",
-          price: "~$294 (1100 ريال)",
+          name: "الفحص الحراري + ملتيميتر",
+          model: "ZOYI ZT-R01 Thermography Multimeter",
+          price: "$105",
+          priceBefore: "~$294 (Infiray P2 Pro)",
+          saving: "وفر $189 — 2 في 1",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3932",
+          source: "Zeus Mining",
+          badge: "Game Changer"
+        },
+        {
+          name: "الأوسيلوسكوب + تستر الترانزستور",
+          model: "FNIRSI DSO-TC3 (3-in-1)",
+          price: "$44",
           priceBefore: null,
-          saving: null,
-          url: "https://www.alibaba.com/product-detail/INFIRAY-P2-PRO-Infrared-Thermal-Imager_1601268492116.html",
-          source: "Alibaba",
-          badge: null
+          saving: "Oscilloscope + Component Tester",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3221",
+          source: "Zeus Mining",
+          badge: "جديد"
+        },
+        {
+          name: "ملقط قياس الكنترول بورد",
+          model: "FNIRSI LCR-ST1 Bridge Tweezers",
+          price: "$22",
+          priceBefore: null,
+          saving: "فحص SMD دون فك",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3670",
+          source: "Zeus Mining",
+          badge: "جديد"
         },
         {
           name: "قالب تسخين S19",
@@ -530,6 +558,46 @@ const DATA = {
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934",
           source: "Zeus Mining",
           badge: "أوفر"
+        },
+        {
+          name: "تستر أحمال الباور سبلاي",
+          model: "Electronic Load Tester",
+          price: "$64",
+          priceBefore: "~$1,596 (JT6322A)",
+          saving: "وفر $1,532 — 96%",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1095",
+          source: "Zeus Mining",
+          badge: "Game Changer"
+        },
+        {
+          name: "تستر مخرجات الباور",
+          model: "Power Supply Output Tester",
+          price: "$59",
+          priceBefore: null,
+          saving: "فحص الفولتيات الكاملة",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3894",
+          source: "Zeus Mining",
+          badge: "جديد"
+        },
+        {
+          name: "ملفات اختبار S19 / S19j Pro",
+          model: "Antminer S19 + S19j Pro Test Files",
+          price: "$49 / ملف",
+          priceBefore: null,
+          saving: "ضرورية مع PicoBT",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3093",
+          source: "Zeus Mining",
+          badge: "Game Changer"
+        },
+        {
+          name: "ملف اختبار Whatsminer M30/M50",
+          model: "Whatsminer M30/M50/M60 Test File",
+          price: "$35",
+          priceBefore: null,
+          saving: "ضرورية مع PicoBT",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3744",
+          source: "Zeus Mining",
+          badge: "Game Changer"
         }
       ]
     }
@@ -567,14 +635,16 @@ const DATA = {
     hoursPerDay: 8,
     totalHours: 200,
     services: [
-      { type: "صيانة هاشبورد",      monthlyCount: 30, timePerUnit: "45 دقيقة", totalHours: 23   },
-      { type: "صيانة باور سبلاي",   monthlyCount: 15, timePerUnit: "60 دقيقة", totalHours: 15   },
-      { type: "إحياء كنترول بورد",  monthlyCount: 10, timePerUnit: "30 دقيقة", totalHours: 5    },
-      { type: "بيع/تغيير كابلات",   monthlyCount: 20, timePerUnit: "10 دقائق", totalHours: 3.5  }
+      { type: "صيانة هاشبورد",      monthlyCount: 30, timePerUnit: "25–30 دقيقة", totalHours: 13.5, improvement: "كان 45 دق — بفضل قوالب المعجون والـ ZOYI" },
+      { type: "صيانة باور سبلاي",   monthlyCount: 15, timePerUnit: "60 دقيقة",    totalHours: 15,   improvement: null },
+      { type: "إحياء كنترول بورد",  monthlyCount: 10, timePerUnit: "20 دقيقة",    totalHours: 3.5,  improvement: "كان 30 دق — بفضل LCR Bridge Tweezers" },
+      { type: "بيع/تغيير كابلات",   monthlyCount: 20, timePerUnit: "10 دقائق",    totalHours: 3.5,  improvement: null }
     ],
     totalOperations: 75,
-    totalEffectiveHours: 46.5,
-    capacityUsedPercent: 25
+    totalEffectiveHours: 35.5,
+    capacityUsedPercent: 18,
+    dailyCapacity: "6–8 لوحات هاشبورد يومياً",
+    note: "بفضل القوالب والـ ZOYI، انخفض وقت الهاشبورد من 45 إلى 25-30 دقيقة"
   },
 
   monthlyRevenue: [
@@ -597,40 +667,160 @@ const DATA = {
   roi: {
     capex: {
       items: [
-        { label: "تجهيزات المحل (تشطيب + أثاث)",                   usd: 200,  egp: 10000 },
-        { label: "معدات العتبة (هوت إير، ميكروسكوب، ملتيميتر، ...)",usd: 900,  egp: 45000 },
-        { label: "معدات الصين (PicoBT، كاميرا حرارية، شبلونات)",    usd: 1000, sar: 3800  },
-        { label: "مخزون البداية (شرايح، موسفتات، كابلات، فلكس)",   usd: 300,  sar: 1100  }
+        { label: "تجهيزات المحل (تشطيب + أثاث)",                                   usd: 200  },
+        { label: "PicoBT + 3 Test Files (S19, S19j, M30)",                          usd: 600  },
+        { label: "ZOYI ZT-R01 (حرارة+ملتيميتر) + FNIRSI DSO-TC3 (أوسيلوسكوب)",     usd: 150  },
+        { label: "Quick 861DW هواء ساخن + Toor T12-X كاوية + iTECH سخان سفلي",     usd: 615  },
+        { label: "1080P Microscope + FNIRSI LCR Bridge Tweezers",                   usd: 282  },
+        { label: "4 قوالب معجون (S19, S19J, S19Pro, M50) + Stencils",               usd: 250  },
+        { label: "Electronic Load ($64) + Output Tester ($59)",                      usd: 123  },
+        { label: "معجون GD900-1 (1kg) + HY234 Putty + مواد لحام",                  usd: 30   },
+        { label: "أدوات السلامة (مفرش + أسورة + شفاط دخان)",                       usd: 30   }
       ],
-      totalUSD: 2400,
-      totalEGP: 120000
+      totalUSD: 2080,
+      totalEGP: 104000,
+      note: "انخفض رأس المال من $2,400 إلى $2,080 بعد تحسين الاختيارات"
     },
     annualNetProfit:      { usd: 51240, egp: 2562000 },
     monthlyNetProfit:     { usd: 4270,  egp: 213500  },
-    paybackDays:          17,
-    roiPercent:           2000
+    paybackDays:          15,
+    roiPercent:           2465
+  },
+
+  ultimateSetup: {
+    title: "روشتة الشراء المثلى — Best Value for Money",
+    subtitle: "التوليفة المتوازنة لافتتاح المركز فوراً بأقل تكلفة وأعلى كفاءة",
+    totalUSD: 2080,
+    sections: [
+      {
+        category: "التشخيص الذكي",
+        icon: "🔬",
+        items: [
+          { name: "PicoBT Multifunctional Hash Board Tester", price: 459, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2349", note: "الأساس — يقرأ S19 و M30" },
+          { name: "Test File — S19 (Antminer)", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3093", note: "ضروري مع PicoBT" },
+          { name: "Test File — S19j Pro", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3115", note: "ضروري مع PicoBT" },
+          { name: "Test File — Whatsminer M30/M50/M60", price: 35, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3744", note: "ضروري مع PicoBT" }
+        ],
+        subtotal: 592
+      },
+      {
+        category: "الفحص الحراري والقياس",
+        icon: "🌡️",
+        items: [
+          { name: "ZOYI ZT-R01 Thermography Multimeter", price: 105, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3932", note: "يغني عن كاميرا $300 + ملتيميتر" },
+          { name: "FNIRSI DSO-TC3 Oscilloscope 3-in-1", price: 44, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3221", note: "تتبع إشارات CLK/RST/RI" }
+        ],
+        subtotal: 149
+      },
+      {
+        category: "اللحام والهواء الساخن",
+        icon: "🔧",
+        items: [
+          { name: "Quick 861DW 1300W Hot Air Rework Station", price: 365, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3208", note: "الأقوى لفك شرايح التعدين" },
+          { name: "Toor T12-X 150W Soldering Station", price: 203, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3220", note: "بديل احترافي للـ JBC" },
+          { name: "iTECH HP-B100 PCB Preheating Platform", price: 46, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3799", note: "تسخين سفلي يحمي البوردة" }
+        ],
+        subtotal: 614
+      },
+      {
+        category: "الميكروسكوب والقياس الدقيق",
+        icon: "🔭",
+        items: [
+          { name: "1080P LCD Digital Microscope", price: 260, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2862", note: "شاشة واضحة للشرايح الدقيقة" },
+          { name: "FNIRSI LCR-ST1 Bridge Tweezers", price: 22, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3670", note: "فحص SMD بدون فك" }
+        ],
+        subtotal: 282
+      },
+      {
+        category: "قوالب المعجون الحراري",
+        icon: "🧩",
+        items: [
+          { name: "S19 Scraped Thermal Grease Stencil", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2374", note: "S19 standard" },
+          { name: "S19J PRO Thermal Grease Stencil", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2421", note: "S19j Pro" },
+          { name: "S19 PRO Thermal Grease Fixture", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2448", note: "S19 Pro" },
+          { name: "Whatsminer M50 Thermal Grease Mold", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3917", note: "M30/M50 series" }
+        ],
+        subtotal: 196
+      },
+      {
+        category: "اختبار الباور سبلاي",
+        icon: "⚡",
+        items: [
+          { name: "Electronic Load Tester", price: 64, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1095", note: "بدلاً من $1,596 — نفس الغرض" },
+          { name: "Power Supply Output Tester", price: 59, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3894", note: "فحص فولتيات الباور" }
+        ],
+        subtotal: 123
+      },
+      {
+        category: "المعجون الحراري والمواد",
+        icon: "🧴",
+        items: [
+          { name: "GD900-1 Thermal Grease 6W/mk 1kg", price: 3.4, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2182", note: "الأفضل قيمة للاستهلاك الكثيف" },
+          { name: "HY234 Hash Board Thermal Putty 1kg", price: 5, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638", note: "للمشتتات المزدوجة S19" }
+        ],
+        subtotal: 30
+      },
+      {
+        category: "السلامة والبيئة",
+        icon: "🦺",
+        items: [
+          { name: "Anti-Static Table Mat", price: 7.38, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3010", note: "" },
+          { name: "Anti-Static Wrist Strap", price: 2.6, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=174", note: "" },
+          { name: "FA-400 Soldering Fume Absorber", price: 19, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3385", note: "" }
+        ],
+        subtotal: 29
+      }
+    ]
   },
 
   recommendations: [
     {
+      icon: "🌡️",
+      title: "الضربة القاضية للكاميرا الحرارية",
+      body: "ZOYI ZT-R01 بـ $105 يدمج ملتيميتر + كاميرا حرارية في جهاز واحد — بدلاً من Infiray بـ $294. توفير $189 مع أداء أعلى لأن المهندس يرى الحرارة ويقيس الفولتيات في نفس اللحظة.",
+      tag: "Game Changer"
+    },
+    {
+      icon: "⚡",
+      title: "إنقاذ فرع الباور سبلاي",
+      body: "بدلاً من إنفاق $1,596 على JT6322A، يكفي Electronic Load Tester بـ $64 + Output Tester بـ $59 = $123 فقط. فرع صيانة الباور مكتمل واحترافي بأقل من 8% من السعر الأصلي.",
+      tag: "Game Changer"
+    },
+    {
+      icon: "🗝️",
+      title: "سر المهنة — ملفات الاختبار",
+      body: "جهاز PicoBT لا يأتي محملاً بكل الموديلات المحدثة. شراء Test Files ($49 للـ S19، $35 للـ M30) يضمن أن التستر يقرأ البوردة ولن يعطي False Errors. هذه النقطة يجهلها 90% من المراكز.",
+      tag: "Game Changer"
+    },
+    {
+      icon: "🔬",
+      title: "علاج الكنترول بورد بالملقط الذكي",
+      body: "FNIRSI LCR-ST1 Bridge Tweezers بـ $22 يجعل المهندس يفحص مقاومات ومكثفات الكنترول بورد في ثوانٍ دون الحاجة لفكها من البوردة — سرعة تشخيص تتضاعف.",
+      tag: "جديد"
+    },
+    {
       icon: "✈️",
       title: "الشحن الذكي",
-      body: "شحن الأدوات المتخصصة (PicoBT, Infiray) وقطع الغيار (ASICs, ICs, Cables) إلى السعودية أولاً، ثم نقلها في الأمتعة الشخصية لتفادي الرسوم الجمركية المرتفعة على المكونات الإلكترونية الدقيقة."
+      body: "شحن الأدوات المتخصصة (PicoBT, Test Files, Stencils, ICs) إلى السعودية أولاً، ثم نقلها في الأمتعة الشخصية لتفادي الرسوم الجمركية المرتفعة على المكونات الإلكترونية الدقيقة.",
+      tag: null
     },
     {
       icon: "❄️",
       title: "بروتوكول التبريد",
-      body: "يُمنع تشغيل الهاشبورد على الباور الأصلي دون وضع مروحة تبريد (12V) قوية وملاصقة للمشتتات، لتجنب احتراق الشرايح الجديدة."
+      body: "يُمنع تشغيل الهاشبورد على الباور الأصلي دون وضع مروحة تبريد (12V) قوية وملاصقة للمشتتات، لتجنب احتراق الشرايح الجديدة.",
+      tag: null
     },
     {
       icon: "🧴",
       title: "اقتصاديات المعجون الحراري",
-      body: "شراء المعجون الحراري (مثل GD900) في عبوات كبيرة (برطمانات) وليس حقن صغيرة، حيث تتطلب موديلات S19 كميات هائلة لتغطية المشتتات المزدوجة."
+      body: "شراء GD900-1 في عبوة 1kg وليس حقن صغيرة — موديلات S19 تتطلب كميات هائلة لتغطية المشتتات المزدوجة. القوالب (Stencils) تضمن التوزيع المثالي وتقطع وقت الإصلاح من 45 إلى 25 دقيقة.",
+      tag: null
     },
     {
       icon: "🤖",
       title: "التكامل المرجعي",
-      body: "استخدام الذكاء الاصطناعي بشكل دائم كـ «مستشار ثانٍ» لتحليل أكواد الخطأ (Error Codes) وقراءة سجلات إقلاع الكنترول لتوفير وقت الفحص اليدوي."
+      body: "استخدام الذكاء الاصطناعي بشكل دائم كـ «مستشار ثانٍ» لتحليل أكواد الخطأ (Error Codes) وقراءة سجلات إقلاع الكنترول لتوفير وقت الفحص اليدوي.",
+      tag: null
     }
   ]
 
@@ -799,6 +989,61 @@ main.insertAdjacentHTML('beforeend', `
         </tbody>
       </table>
     </div>
+  </div>
+</section>
+`);
+
+/* ── 2b. Ultimate Setup ── */
+const us = DATA.ultimateSetup;
+main.insertAdjacentHTML('beforeend', `
+<section id="ultimateSetup">
+  <div class="section-heading">
+    <div class="icon">🏆</div>
+    <h2>${us.title.split('—')[0]} <span>${us.title.split('—')[1] || ''}</span></h2>
+  </div>
+
+  <div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <p style="font-size:.9rem;color:var(--text-muted);max-width:600px">${us.subtitle}</p>
+    <div style="text-align:center">
+      <div style="font-size:.75rem;color:var(--text-muted)">إجمالي رأس المال</div>
+      <div style="font-size:2rem;font-weight:900;color:var(--accent);font-family:'Orbitron',monospace">$${us.totalUSD.toLocaleString()}</div>
+    </div>
+  </div>
+
+  ${us.sections.map(sec => `
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-title">${sec.icon} ${sec.category} <span style="margin-right:auto;color:var(--accent3);font-size:.8rem">$${sec.subtotal.toLocaleString()}</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>المنتج</th><th>السعر</th><th>ملاحظة</th><th>رابط</th></tr>
+          </thead>
+          <tbody>
+            ${sec.items.map(item => `
+              <tr>
+                <td style="font-weight:600">${item.name}</td>
+                <td class="green mono">$${item.price}</td>
+                <td style="color:var(--text-muted);font-size:.82rem">${item.note}</td>
+                <td>
+                  <a href="${item.url}" target="_blank" rel="noopener" style="
+                    display:inline-flex;align-items:center;gap:4px;
+                    background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);
+                    color:#6ee7b7;padding:3px 10px;border-radius:6px;
+                    font-size:.72rem;text-decoration:none;white-space:nowrap"
+                  >🔗 Zeus</a>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `).join('')}
+
+  <div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(245,158,11,.08));border:1px solid rgba(16,185,129,.3);border-radius:14px;padding:24px;text-align:center;margin-top:8px">
+    <div style="font-size:.85rem;color:var(--text-muted);margin-bottom:4px">إجمالي CAPEX — كامل المركز جاهز للافتتاح</div>
+    <div style="font-size:3rem;font-weight:900;color:var(--accent);font-family:'Orbitron',monospace">$${us.totalUSD.toLocaleString()}</div>
+    <div style="font-size:.85rem;color:var(--text-muted);margin-top:4px">حوالي ${(us.totalUSD * 50).toLocaleString()} جنيه مصري</div>
   </div>
 </section>
 `);
@@ -981,14 +1226,17 @@ main.insertAdjacentHTML('beforeend', `
           <tr>
             <td style="font-weight:600">${s.type}</td>
             <td class="blue mono">${s.monthlyCount}</td>
-            <td style="color:var(--text-muted)">${s.timePerUnit}</td>
+            <td>
+              <span style="color:var(--text-muted)">${s.timePerUnit}</span>
+              ${s.improvement ? `<span style="display:block;font-size:.72rem;color:#34d399;margin-top:2px">↑ ${s.improvement}</span>` : ''}
+            </td>
             <td class="amber mono">${s.totalHours}</td>
           </tr>
         `).join('')}
         <tr style="background:rgba(245,158,11,.05)">
           <td style="font-weight:800;color:var(--accent)">الإجمالي</td>
           <td class="blue mono" style="font-weight:800">${DATA.monthlyVolume.totalOperations} عملية</td>
-          <td>—</td>
+          <td style="color:#34d399;font-size:.82rem">${DATA.monthlyVolume.dailyCapacity}</td>
           <td class="amber mono" style="font-weight:800">${DATA.monthlyVolume.totalEffectiveHours} ساعة</td>
         </tr>
       </tbody>
@@ -1129,9 +1377,10 @@ main.insertAdjacentHTML('beforeend', `
   <div class="grid-2">
     <div class="card">
       <div class="card-title">💸 رأس المال المدفوع (CAPEX)</div>
+      ${roi.capex.note ? `<div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:.8rem;color:#34d399">✓ ${roi.capex.note}</div>` : ''}
       ${roi.capex.items.map(item => `
         <div class="capex-item">
-          <span style="color:var(--text-muted);font-size:.86rem">${item.label}</span>
+          <span style="color:var(--text-muted);font-size:.83rem">${item.label}</span>
           <span style="color:var(--accent);font-weight:700">${fmtUSD(item.usd)}</span>
         </div>
       `).join('')}
@@ -1139,6 +1388,7 @@ main.insertAdjacentHTML('beforeend', `
         <span style="font-weight:800">إجمالي رأس المال</span>
         <span style="font-weight:900;color:var(--accent);font-size:1.1rem">${fmtUSD(roi.capex.totalUSD)}</span>
       </div>
+      <div style="text-align:center;margin-top:8px;font-size:.78rem;color:var(--text-muted)">${fmtEGP(roi.capex.totalEGP)}</div>
     </div>
     <div class="card">
       <div class="card-title">📊 نسبة العائد على الاستثمار</div>
@@ -1178,15 +1428,24 @@ main.insertAdjacentHTML('beforeend', `
     <h2>توصيات <span>التشغيل التنفيذية</span></h2>
   </div>
   <div class="rec-grid">
-    ${DATA.recommendations.map((rec, i) => `
-      <div class="rec-item">
+    ${DATA.recommendations.map((rec, i) => {
+      const isGC = rec.tag === 'Game Changer';
+      const isNew = rec.tag === 'جديد';
+      const tagHtml = isGC
+        ? `<span style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:20px;margin-right:6px">⚡ Game Changer</span>`
+        : isNew
+        ? `<span style="background:rgba(59,130,246,.2);border:1px solid rgba(59,130,246,.4);color:#93c5fd;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:6px">✦ جديد</span>`
+        : '';
+      const borderStyle = isGC ? 'border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.03)' : '';
+      return `
+      <div class="rec-item" style="${borderStyle}">
         <div class="rec-icon">${rec.icon}</div>
         <div class="rec-body">
-          <h4>${i + 1}. ${rec.title}</h4>
+          <h4>${tagHtml}${i + 1}. ${rec.title}</h4>
           <p>${rec.body}</p>
         </div>
-      </div>
-    `).join('')}
+      </div>`;
+    }).join('')}
   </div>
 </section>
 `);
