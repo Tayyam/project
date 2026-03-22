@@ -389,7 +389,6 @@ const DATA = {
   navigation: [
     { id: "workflow",        label: "⚙️ مسار العمل" },
     { id: "purchases",       label: "🛒 المشتريات" },
-    { id: "ultimateSetup",   label: "🏆 الروشتة المثلى" },
     { id: "costPerRepair",   label: "🔬 تكلفة الإصلاح" },
     { id: "pricing",         label: "💰 التسعير والربح" },
     { id: "opex",            label: "📊 المصاريف والتعادل" },
@@ -434,9 +433,7 @@ const DATA = {
       note: "أدوات ثقيلة الوزن، تتوفر بضمان محلي وأسعار منافسة.",
       currency: "EGP",
       items: [
-        { name: "محطة هواء ساخن",       model: "Sugon 8610DX",          function: "فك وتركيب الشرايح السطحية",                     priceMin: 12000, priceMax: 15000 },
         { name: "ميكروسكوب رقمي",       model: "Andonstar AD409",        function: "رؤية اللحامات الدقيقة (شاشة 10 إنش)",           priceMin: 14000, priceMax: 18000 },
-        { name: "ملتيميتر احترافي",     model: "Uni-T UT61E+",          function: "قياس الفولت والممانعة بدقة",                    priceMin: 3500,  priceMax: 4500  },
         { name: "باور سبلاي معملي",     model: "Sugon 3005D",            function: "تشغيل البوردة للقياسات المبدئية",               priceMin: 4000,  priceMax: 5500  },
         { name: "كاوي لحام عالي القدرة",model: "90W-120W (T12/Sugon)",   function: "فك مكونات الباور سبلاي الثقيلة",               priceMin: 1500,  priceMax: 2000  },
         { name: "شفاط قصدير احترافي",   model: "محطة شفط أو Goot Sucker",function: "تنظيف ثقوب البوردة (الباور)",                  priceMin: 500,   priceMax: 1500  },
@@ -490,14 +487,34 @@ const DATA = {
           badge: "جديد"
         },
         {
-          name: "قالب تسخين S19",
-          model: "Sunshine SS-T12A",
-          price: "~$93 (350 ريال)",
-          priceBefore: null,
-          saving: null,
-          url: "https://www.alibaba.com/product-detail/Sunshine-SS-T12A-Motherboard-Heat-Table_1601213228686.html",
-          source: "Alibaba",
-          badge: null
+          name: "محطة هواء ساخن احترافية",
+          model: "Quick 861DW 1300W Hot Air Rework Station",
+          price: "$365",
+          priceBefore: "~$375 (Sugon 8610DX محلي)",
+          saving: "جودة أعلى + شراء مع الطلبية",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3208",
+          source: "Zeus Mining",
+          badge: "أفضل"
+        },
+        {
+          name: "كاوية لحام T12",
+          model: "KSGER T12 Soldering Station",
+          price: "$44",
+          priceBefore: "$203 (Toor T12-X)",
+          saving: "وفر $159 — نفس جودة لحام BGA",
+          url: "https://www.aliexpress.com/item/1005005866827783.html",
+          source: "AliExpress",
+          badge: "Game Changer"
+        },
+        {
+          name: "منصة تسخين سفلي PCB",
+          model: "iTECH HP-B100 PCB Preheating Platform",
+          price: "$46",
+          priceBefore: "~$93 (Sunshine SS-T12A)",
+          saving: "وفر $47 — تسخين PCB حقيقي وليس مجرد hot plate",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3799",
+          source: "Zeus Mining",
+          badge: "Game Changer"
         },
         {
           name: "شبلونات الصيانة",
@@ -670,107 +687,21 @@ const DATA = {
         { label: "تجهيزات المحل (تشطيب + أثاث)",                                   usd: 200  },
         { label: "PicoBT + 3 Test Files (S19, S19j, M30)",                          usd: 600  },
         { label: "ZOYI ZT-R01 (حرارة+ملتيميتر) + FNIRSI DSO-TC3 (أوسيلوسكوب)",     usd: 150  },
-        { label: "Quick 861DW هواء ساخن + Toor T12-X كاوية + iTECH سخان سفلي",     usd: 615  },
-        { label: "1080P Microscope + FNIRSI LCR Bridge Tweezers",                   usd: 282  },
+        { label: "Quick 861DW هواء ساخن + KSGER T12 كاوية + iTECH سخان سفلي",      usd: 455  },
+        { label: "FNIRSI LCR Bridge Tweezers (الميكروسكوب Andonstar محلي)",          usd: 22   },
         { label: "4 قوالب معجون (S19, S19J, S19Pro, M50) + Stencils",               usd: 250  },
         { label: "Electronic Load ($64) + Output Tester ($59)",                      usd: 123  },
         { label: "معجون GD900-1 (1kg) + HY234 Putty + مواد لحام",                  usd: 30   },
         { label: "أدوات السلامة (مفرش + أسورة + شفاط دخان)",                       usd: 30   }
       ],
-      totalUSD: 2080,
-      totalEGP: 104000,
-      note: "انخفض رأس المال من $2,400 إلى $2,080 بعد تحسين الاختيارات"
+      totalUSD: 1860,
+      totalEGP: 93000,
+      note: "انخفض رأس المال من $2,080 إلى $1,860 — توفير $220 بتغيير KSGER T12 بدلاً من Toor، وحذف 1080P Microscope المكرر (Andonstar محلي يكفي)"
     },
     annualNetProfit:      { usd: 51240, egp: 2562000 },
     monthlyNetProfit:     { usd: 4270,  egp: 213500  },
-    paybackDays:          15,
-    roiPercent:           2465
-  },
-
-  ultimateSetup: {
-    title: "روشتة الشراء المثلى — Best Value for Money",
-    subtitle: "التوليفة المتوازنة لافتتاح المركز فوراً بأقل تكلفة وأعلى كفاءة",
-    totalUSD: 2080,
-    sections: [
-      {
-        category: "التشخيص الذكي",
-        icon: "🔬",
-        items: [
-          { name: "PicoBT Multifunctional Hash Board Tester", price: 459, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2349", note: "الأساس — يقرأ S19 و M30" },
-          { name: "Test File — S19 (Antminer)", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3093", note: "ضروري مع PicoBT" },
-          { name: "Test File — S19j Pro", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3115", note: "ضروري مع PicoBT" },
-          { name: "Test File — Whatsminer M30/M50/M60", price: 35, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3744", note: "ضروري مع PicoBT" }
-        ],
-        subtotal: 592
-      },
-      {
-        category: "الفحص الحراري والقياس",
-        icon: "🌡️",
-        items: [
-          { name: "ZOYI ZT-R01 Thermography Multimeter", price: 105, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3932", note: "يغني عن كاميرا $300 + ملتيميتر" },
-          { name: "FNIRSI DSO-TC3 Oscilloscope 3-in-1", price: 44, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3221", note: "تتبع إشارات CLK/RST/RI" }
-        ],
-        subtotal: 149
-      },
-      {
-        category: "اللحام والهواء الساخن",
-        icon: "🔧",
-        items: [
-          { name: "Quick 861DW 1300W Hot Air Rework Station", price: 365, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3208", note: "الأقوى لفك شرايح التعدين" },
-          { name: "Toor T12-X 150W Soldering Station", price: 203, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3220", note: "بديل احترافي للـ JBC" },
-          { name: "iTECH HP-B100 PCB Preheating Platform", price: 46, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3799", note: "تسخين سفلي يحمي البوردة" }
-        ],
-        subtotal: 614
-      },
-      {
-        category: "الميكروسكوب والقياس الدقيق",
-        icon: "🔭",
-        items: [
-          { name: "1080P LCD Digital Microscope", price: 260, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2862", note: "شاشة واضحة للشرايح الدقيقة" },
-          { name: "FNIRSI LCR-ST1 Bridge Tweezers", price: 22, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3670", note: "فحص SMD بدون فك" }
-        ],
-        subtotal: 282
-      },
-      {
-        category: "قوالب المعجون الحراري",
-        icon: "🧩",
-        items: [
-          { name: "S19 Scraped Thermal Grease Stencil", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2374", note: "S19 standard" },
-          { name: "S19J PRO Thermal Grease Stencil", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2421", note: "S19j Pro" },
-          { name: "S19 PRO Thermal Grease Fixture", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2448", note: "S19 Pro" },
-          { name: "Whatsminer M50 Thermal Grease Mold", price: 49, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3917", note: "M30/M50 series" }
-        ],
-        subtotal: 196
-      },
-      {
-        category: "اختبار الباور سبلاي",
-        icon: "⚡",
-        items: [
-          { name: "Electronic Load Tester", price: 64, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1095", note: "بدلاً من $1,596 — نفس الغرض" },
-          { name: "Power Supply Output Tester", price: 59, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3894", note: "فحص فولتيات الباور" }
-        ],
-        subtotal: 123
-      },
-      {
-        category: "المعجون الحراري والمواد",
-        icon: "🧴",
-        items: [
-          { name: "GD900-1 Thermal Grease 6W/mk 1kg", price: 3.4, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2182", note: "الأفضل قيمة للاستهلاك الكثيف" },
-          { name: "HY234 Hash Board Thermal Putty 1kg", price: 5, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638", note: "للمشتتات المزدوجة S19" }
-        ],
-        subtotal: 30
-      },
-      {
-        category: "السلامة والبيئة",
-        icon: "🦺",
-        items: [
-          { name: "Anti-Static Table Mat", price: 7.38, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3010", note: "" },
-          { name: "Anti-Static Wrist Strap", price: 2.6, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=174", note: "" },
-          { name: "FA-400 Soldering Fume Absorber", price: 19, url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3385", note: "" }
-        ],
-        subtotal: 29
-      }
-    ]
+    paybackDays:          13,
+    roiPercent:           2655
   },
 
   recommendations: [
@@ -989,61 +920,6 @@ main.insertAdjacentHTML('beforeend', `
         </tbody>
       </table>
     </div>
-  </div>
-</section>
-`);
-
-/* ── 2b. Ultimate Setup ── */
-const us = DATA.ultimateSetup;
-main.insertAdjacentHTML('beforeend', `
-<section id="ultimateSetup">
-  <div class="section-heading">
-    <div class="icon">🏆</div>
-    <h2>${us.title.split('—')[0]} <span>${us.title.split('—')[1] || ''}</span></h2>
-  </div>
-
-  <div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-    <p style="font-size:.9rem;color:var(--text-muted);max-width:600px">${us.subtitle}</p>
-    <div style="text-align:center">
-      <div style="font-size:.75rem;color:var(--text-muted)">إجمالي رأس المال</div>
-      <div style="font-size:2rem;font-weight:900;color:var(--accent);font-family:'Orbitron',monospace">$${us.totalUSD.toLocaleString()}</div>
-    </div>
-  </div>
-
-  ${us.sections.map(sec => `
-    <div class="card" style="margin-bottom:16px">
-      <div class="card-title">${sec.icon} ${sec.category} <span style="margin-right:auto;color:var(--accent3);font-size:.8rem">$${sec.subtotal.toLocaleString()}</span></div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>المنتج</th><th>السعر</th><th>ملاحظة</th><th>رابط</th></tr>
-          </thead>
-          <tbody>
-            ${sec.items.map(item => `
-              <tr>
-                <td style="font-weight:600">${item.name}</td>
-                <td class="green mono">$${item.price}</td>
-                <td style="color:var(--text-muted);font-size:.82rem">${item.note}</td>
-                <td>
-                  <a href="${item.url}" target="_blank" rel="noopener" style="
-                    display:inline-flex;align-items:center;gap:4px;
-                    background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);
-                    color:#6ee7b7;padding:3px 10px;border-radius:6px;
-                    font-size:.72rem;text-decoration:none;white-space:nowrap"
-                  >🔗 Zeus</a>
-                </td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `).join('')}
-
-  <div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(245,158,11,.08));border:1px solid rgba(16,185,129,.3);border-radius:14px;padding:24px;text-align:center;margin-top:8px">
-    <div style="font-size:.85rem;color:var(--text-muted);margin-bottom:4px">إجمالي CAPEX — كامل المركز جاهز للافتتاح</div>
-    <div style="font-size:3rem;font-weight:900;color:var(--accent);font-family:'Orbitron',monospace">$${us.totalUSD.toLocaleString()}</div>
-    <div style="font-size:.85rem;color:var(--text-muted);margin-top:4px">حوالي ${(us.totalUSD * 50).toLocaleString()} جنيه مصري</div>
   </div>
 </section>
 `);
