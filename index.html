@@ -430,11 +430,15 @@ const DATA = {
   purchases: {
     local: {
       location: "مصر – العتبة / مول البستان",
-      note: "أدوات ثقيلة الوزن، تتوفر بضمان محلي وأسعار منافسة.",
+      note: "أدوات ثقيلة الوزن، تبريد البنش، وإكسسوارات تُشترى محلياً لتفادي الشحن.",
       currency: "EGP",
       items: [
         { name: "ميكروسكوب رقمي",          model: "Andonstar AD409",              function: "رؤية اللحامات الدقيقة (شاشة 10 إنش)",                      priceMin: 14000, priceMax: 18000 },
-        { name: "باور سبلاي معملي",        model: "Sugon 3005D",                  function: "تشغيل البوردة للقياسات المبدئية",                           priceMin: 4000,  priceMax: 5500  },
+        { name: "باور سبلاي معملي",        model: "Sugon 3005D (30V / 5A)",       function: "قياسات الكنترول والدوائر فقط — لا يشغّل هاشبورد S19 على PicoBT", priceMin: 4000,  priceMax: 5500  },
+        { name: "توصيل APW12 ↔ الهاشبورد", model: "أسلاك نحاس AWG6 + ترامل حلقية", function: "ربط باور الاختبار APW12 بالهاشبورد — يفصلها كهربائي ~100 ج", priceMin: 80,    priceMax: 150   },
+        { name: "تبريد البنش أثناء الاختبار", model: "مروحة تعدين 120mm + باور 12V", function: "Nidec / Delta (≥2.7A) — هواء قوي على المشتتات أثناء Hashing", priceMin: 800,   priceMax: 2000  },
+        { name: "حماية SMD أثناء الهواء الساخن", model: "شريط Kapton أصفر حراري", function: "حول الشريحة المستهدفة — يحمي المكونات المجاورة من الطيران", priceMin: 40,    priceMax: 60    },
+        { name: "مفك كهربائي",             model: "Xiaomi / Wowstick / مماثل",    function: "~70 مسمار/هاشبورد — 3 دقائق بدل ربع ساعة، يحمي المعصم", priceMin: 600,   priceMax: 1500  },
         { name: "كاوية هاشبورد (150W+)",   model: "Quick 205H / Sugon T3602",     function: "لحام الهاشبورد فقط — 150W لاختراق كتلة الألومنيوم",         priceMin: 3000,  priceMax: 5000  },
         { name: "غسالة ألتراسونيك",        model: "Ultrasonic Cleaner 2L",        function: "تنظيف بقايا الفلاكس في 3 دقائق — بوردة كأنها جديدة",       priceMin: 1500,  priceMax: 3000  },
         { name: "شفاط قصدير احترافي",      model: "محطة شفط أو Goot Sucker",     function: "تنظيف ثقوب البوردة (الباور)",                               priceMin: 500,   priceMax: 1500  },
@@ -456,6 +460,26 @@ const DATA = {
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2349",
           source: "Zeus Mining",
           badge: "أوفر"
+        },
+        {
+          name: "باور اختبار الهاشبورد (Bench)",
+          model: "Antminer APW12 (أصلي) — ثابت على طاولة الصيانة",
+          price: "$90 – $140",
+          priceBefore: "Sugon 3005D لا يكفي (150W vs 1000W+)",
+          saving: "12–15V / 70A+ — التشغيل الحقيقي على PicoBT",
+          url: "https://www.aliexpress.com/w/wholesale-antminer-APW12-power-supply.html",
+          source: "AliExpress / سوق مستعمل",
+          badge: "ناقص إلزامي"
+        },
+        {
+          name: "قاعدة صب قصدير BGA مغناطيسية",
+          model: "Magnetic BGA Reballing Platform + Stencil Holder",
+          price: "~$10",
+          priceBefore: "بدونها الشريحة تتحرك تحت الشبلونة",
+          saving: "ASIC صغيرة — تثبيت الشبلونة + صب Paste بثبات",
+          url: "https://www.aliexpress.com/w/wholesale-magnetic-bga-reballing-kit.html",
+          source: "AliExpress",
+          badge: "ناقص إلزامي"
         },
         {
           name: "الفحص الحراري + ملتيميتر",
@@ -759,16 +783,19 @@ const DATA = {
         { label: "4 قوالب معجون (S19, S19J, S19Pro, M50) + Stencils",                            usd: 250  },
         { label: "Electronic Load ($64) + Output Tester ($59)",                                   usd: 123  },
         { label: "Amtech Flux ×2 + Mechanic Paste 183°C + GD900-1 1kg + HY234 1kg",              usd: 38   },
+        { label: "APW12 ثابت على البنش + أسلاك AWG6 وترامل (≈100 ج)",                          usd: 123  },
+        { label: "مروحة تعدين Nidec/Delta + باور 12V + Kapton + مفك كهربائي (محلي)",            usd: 49   },
+        { label: "قاعدة BGA مغناطيسية لصب الـ Paste على شرائح ASIC",                             usd: 10   },
         { label: "أدوات السلامة (مفرش + أسورة + شفاط دخان)",                                    usd: 30   }
       ],
-      totalUSD: 2013,
-      totalEGP: 108702,
-      note: "CAPEX نهائي — PUHUI T-8280 ترقية ضرورية لحماية الهاشبورد من التقوس، والمستهلكات الأصلية تضمن جودة اللحام"
+      totalUSD: 2195,
+      totalEGP: 118530,
+      note: "يشمل إغلاق الفجوات: APW12 للبنش، تبريد أثناء الاختبار، BGA platform، ومفك كهربائي — بدونها PicoBT والـ Sugon لا يكفيان لتشغيل الهاشبورد"
     },
     annualNetProfit:      { usd: 58831.08, egp: 3176878 },
     monthlyNetProfit:     { usd: 4902.59,  egp: 264740  },
-    paybackDays:          12,
-    roiPercent:           2922
+    paybackDays:          13,
+    roiPercent:           2680
   },
 
   recommendations: [
@@ -815,6 +842,30 @@ const DATA = {
       tag: "الخلطة السرية"
     },
     {
+      icon: "🔌",
+      title: "فجوة البنش: Sugon 3005D ≠ تشغيل الهاشبورد",
+      body: "PicoBT يحتاج الهاشبورد تعمل Hashing — ذلك يتطلب 12–15V و70A+ (أكثر من 1000W). Sugon 30V/5A = 150W فقط: للقياسات المعملية على الكنترول وليس لتغذية الهاشبورد على التستر. الحل: APW12 أصلي ثابت على طاولة الاختبار + أسلاك نحاس AWG6 أو بَسبار + ترامل حلقية (كهربائي مصر ~100 ج).",
+      tag: "ناقص إلزامي"
+    },
+    {
+      icon: "🌀",
+      title: "خطر الانصهار على البنش (15 ثانية)",
+      body: "بدون كيسة معدنية، الشرايح تصل 100°C في أقل من 15 ثانية أثناء الاختبار. لازم مروحة تعدين 120mm عالية التدفق (Nidec أو Delta، تسحب ~2.7A فما فوق) على باور 12V خارجي، موجهة مباشرة على مشتتات الهاشبورد طوال اختبار PicoBT.",
+      tag: "Meltdown Risk"
+    },
+    {
+      icon: "🧲",
+      title: "شبلونة بدون قاعدة = شريحة تهرج",
+      body: "شرائح ASIC بحجم الإصبع: تحت الشبلونة والـ Paste تتحرك. قاعدة BGA Reballing مغناطيسية (~$10 AliExpress) تمسك الشبلونة فوق الشريحة. + شريط Kapton أصفر حول الشريحة المستهدفة يحمي الـ SMD المجاورة من ضغط هواء Quick 861DW.",
+      tag: "ناقص إلزامي"
+    },
+    {
+      icon: "🔩",
+      title: "70 مسمار — المعصم أول ضحية",
+      body: "هاشبورد S19 فيها عشرات المسامير للمشتتات. المفك اليدوي = بوردتين/يوم والإيد تقف. مفك كهربائي (Xiaomi أو قوي ببطارية، 600–1500 ج) يقلل فك/تركيب المشتتات لـ ~3 دقائق بدل ربع ساعة.",
+      tag: "Wrist Saver"
+    },
+    {
       icon: "✈️",
       title: "الشحن الذكي",
       body: "شحن الأدوات المتخصصة (PicoBT, Test Files, Stencils, ICs) إلى السعودية أولاً، ثم نقلها في الأمتعة الشخصية لتفادي الرسوم الجمركية المرتفعة على المكونات الإلكترونية الدقيقة.",
@@ -822,8 +873,8 @@ const DATA = {
     },
     {
       icon: "❄️",
-      title: "بروتوكول التبريد",
-      body: "يُمنع تشغيل الهاشبورد على الباور الأصلي دون وضع مروحة تبريد (12V) قوية وملاصقة للمشتتات، لتجنب احتراق الشرايح الجديدة.",
+      title: "بروتوكول التبريد (بعد الإصلاح أيضاً)",
+      body: "يُمنع تشغيل الهاشبورد على APW12 بعد الإصلاح دون مروحة 12V قوية ملاصقة للمشتتات — نفس قاعدة البنش تنطبق على أي اختبار نهائي لتجنب احتراق الشرائح الجديدة.",
       tag: null
     },
     {
