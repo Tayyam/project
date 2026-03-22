@@ -488,7 +488,7 @@ const DATA = {
         target: "Control Board",
         prepare: [
           "ضع الكنترول بورد تحت الميكروسكوب مع إضاءة أمامية جيدة. هنا لا تحتاج `APW12` ولا مروحة تعدين ولا `PUHUI` الكبيرة في أغلب الحالات.",
-          "الأدوات الرئيسية لهذا المسار: `USB to TTL`، `Sugon 3005D`، `ZOYI`، `RIGOL DHO814`، `FNIRSI LCR-ST1`، `KSGER T12`، `Quick 861DW` عند الضرورة فقط، و`Flux`."
+          "الأدوات الرئيسية لهذا المسار: `USB to TTL`، `Sugon 3005D`، `ZOYI`، `DSO-TC3` (أو `RIGOL DHO814` لاحقاً)، `Quick 205H + رأس Fine Point` للـ SMD الدقيق، `Quick 861DW` عند الضرورة فقط، و`Flux` + `IPA 99%`."
         ],
         steps: [
           "1. صوّر وجهَي الكنترول بورد قبل أي شغل، ثم افحص بصرياً موصلات الإيثرنت، الـ SD، الذاكرة، منظمات الجهد، والكونكتورات.",
@@ -497,7 +497,7 @@ const DATA = {
           "4. استخدم `ZOYI` أو اللمس الحذر لتحديد أي منظم جهد أو آيسي يسخن أكثر من اللازم فور التغذية.",
           "5. استخدم `FNIRSI LCR-ST1` لفحص المقاومات والمكثفات والملفات الصغيرة حول مسار العطل بدون فك غير ضروري. الهدف أن تقلل الفك إلى الحد الأدنى.",
           "6. استخدم `RIGOL DHO814` للتأكد من وجود `CLK / RST / RI` وقياس الشكل الموجي بدقة. استخدم قناتين متزامنتين لمقارنة إشارة مرجعية بإشارة مشبوهة مباشرةً.",
-          "7. إذا تحدد عنصر تالف من نوع `LDO / PMIC / مقاومة / مكثف`، ضع `Kapton` حول المنطقة إذا كانت مزدحمة، ثم استخدم `KSGER T12` للفك والتركيب الدقيق. لا تستخدم كاوية الهاشبورد هنا.",
+          "7. إذا تحدد عنصر تالف من نوع `LDO / PMIC / مقاومة / مكثف`، ضع `Kapton` حول المنطقة إذا كانت مزدحمة، ثم استخدم `Quick 205H + رأس Fine Point T2` للفك والتركيب الدقيق — نفس نتيجة KSGER بشرط استخدام الـ tip الصح.",
           "8. إن كان العنصر كبيراً أو مثبتاً بغراء أو يحتاج هواء ساخن، استخدم `Quick 861DW` على أقل منطقة ممكنة وبأقصر زمن ممكن مع حماية العناصر المجاورة.",
           "9. بعد استبدال القطعة، نظّف الفلاكس بفرشة دقيقة + `IPA 99%` تحت الميكروسكوب وتأكد من عدم وجود `solder bridge` بين الأرجل.",
           "10. أعد التشغيل على `Sugon 3005D` وراقب استهلاك التيار من جديد. نجاح الإصلاح الأولي يعني أن السحب عاد منطقياً والقطعة البديلة لا تسخن فوراً.",
@@ -514,7 +514,7 @@ const DATA = {
           "إذا كان سحب التيار عالياً بشكل غير طبيعي من أول ثانية: افصل فوراً ولا تكرر التغذية.",
           "إذا لم تتأكد من اتجاه الآيسي أو pin 1: لا تركبه.",
           "إذا كانت المشكلة Firmware أو NAND وليست Hardware واضح: لا تدخل في فك عشوائي للمكونات.",
-          "إذا احتجت حرارة كبيرة، لا تستخدم `Quick 205H` على الكنترول بورد؛ هذا مسار `KSGER T12` أساساً."
+          "للكنترول بورد: استخدم دائماً `Quick 205H + رأس Fine Point T2` وليس الرأس العريض — الـ tip الدقيق يعوّض غياب KSGER بالكامل."
         ]
       },
       {
@@ -561,7 +561,8 @@ const DATA = {
       note: "أدوات ثقيلة الوزن، تبريد البنش، وإكسسوارات تُشترى محلياً لتفادي الشحن.",
       currency: "EGP",
       items: [
-        { name: "ميكروسكوب رقمي",          model: "Andonstar AD409",              function: "رؤية اللحامات الدقيقة (شاشة 10 إنش)",                      priceMin: 14000, priceMax: 18000 },
+        { name: "ميكروسكوب رقمي",          model: "Andonstar AD207 (7 إنش) — نفس دقة الرؤية بنصف السعر", function: "رؤية اللحامات الدقيقة — AD409 مبالغ فيه للبداية، AD207 يكفي تماماً", priceMin: 6000, priceMax: 8000 },
+        { name: "Tips متنوعة للـ Quick 205H", model: "Chisel T10 + Fine Point T2 + Bevel K2", function: "رأس عريض للهاشبورد، رأس دقيق للكنترول بورد — Quick 205H تغني عن KSGER بالـ tip الصح", priceMin: 200,  priceMax: 500   },
         { name: "باور سبلاي معملي",        model: "Sugon 3005D (30V / 5A)",       function: "قياسات الكنترول والدوائر فقط — لا يشغّل هاشبورد S19 على PicoBT", priceMin: 4000,  priceMax: 5500  },
         { name: "توصيل APW12 ↔ الهاشبورد", model: "أسلاك نحاس AWG6 + ترامل حلقية", function: "ربط باور الاختبار APW12 بالهاشبورد — يفصلها كهربائي ~100 ج", priceMin: 80,    priceMax: 150   },
         { name: "تبريد البنش أثناء الاختبار", model: "مروحة تعدين 120mm + باور 12V", function: "Nidec / Delta (≥2.7A) — هواء قوي على المشتتات أثناء Hashing", priceMin: 800,   priceMax: 2000  },
@@ -612,16 +613,6 @@ const DATA = {
           badge: "ناقص إلزامي"
         },
         {
-          name: "كحول أيزوبروبيل للتنظيف",
-          model: "Isopropyl Alcohol IPA 99% — 500ml أو أكثر",
-          price: "$5 – $10",
-          priceBefore: "كحول 70% لا يُجفف ويترك رطوبة",
-          saving: "99% فقط يُزيل الفلاكس الصمغي بدون أثر — لا تقبل بديلاً",
-          url: "https://www.aliexpress.com/w/wholesale-isopropyl-alcohol-99.html",
-          source: "AliExpress / محلي",
-          badge: "ناقص إلزامي"
-        },
-        {
           name: "الفحص الحراري + ملتيميتر",
           model: "ZOYI ZT-R01 Thermography Multimeter",
           price: "$105",
@@ -632,24 +623,14 @@ const DATA = {
           badge: "Game Changer"
         },
         {
-          name: "أوسيلوسكوب احترافي",
-          model: "RIGOL DHO814 — 100MHz / 4CH / 12-bit",
-          price: "$440",
-          priceBefore: "$44 (FNIRSI DSO-TC3 — محدود جداً)",
-          saving: "4 قنوات حقيقية، 12-bit، يقيس ripple + jitter على خطوط جهد ASIC بدقة احترافية",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3898",
+          name: "أوسيلوسكوب للبداية (مؤجل: RIGOL DHO814)",
+          model: "FNIRSI DSO-TC3 (3-in-1) — مرحلة أولى",
+          price: "$44",
+          priceBefore: "RIGOL DHO814 $440 — مؤجل لحين الأرباح",
+          saving: "80% من الأعطال لا تحتاج Oscilloscope متقدم. وفّر $396 الآن واشتر RIGOL من أول ربح شهري",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3221",
           source: "Zeus Mining",
-          badge: "ترقية ضرورية"
-        },
-        {
-          name: "ملقط قياس الكنترول بورد",
-          model: "FNIRSI LCR-ST1 Bridge Tweezers",
-          price: "$22",
-          priceBefore: null,
-          saving: "فحص SMD دون فك",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3670",
-          source: "Zeus Mining",
-          badge: "جديد"
+          badge: "مؤجل → RIGOL لاحقاً"
         },
         {
           name: "محطة هواء ساخن احترافية",
@@ -660,16 +641,6 @@ const DATA = {
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3208",
           source: "Zeus Mining",
           badge: "أفضل"
-        },
-        {
-          name: "كاوية كنترول بورد T12",
-          model: "KSGER T12 Soldering Station",
-          price: "$44",
-          priceBefore: "$203 (Toor T12-X)",
-          saving: "للكنترول بورد فقط (SMD دقيق) — الهاشبورد له Quick 205H محلي",
-          url: "https://www.aliexpress.com/item/1005005866827783.html",
-          source: "AliExpress",
-          badge: "للكنترول فقط"
         },
         {
           name: "منصة IR تسخين شاملة للهاشبورد",
@@ -783,23 +754,23 @@ const DATA = {
         },
         {
           name: "تستر أحمال الباور سبلاي",
-          model: "Electronic Load Tester",
-          price: "$64",
-          priceBefore: "~$1,596 (JT6322A)",
-          saving: "وفر $1,532 — 96%",
+          model: "Electronic Load Tester — مؤجل للمرحلة الثانية",
+          price: "$64 (مؤجل)",
+          priceBefore: "في البداية: ملتيميتر + هاشبورد سليمة لاختبار الباور",
+          saving: "مؤجل — للمراكز الكبيرة التي تستلم مئات الباورات. اشتره من الأرباح",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1095",
           source: "Zeus Mining",
-          badge: "Game Changer"
+          badge: "مؤجل - مرحلة 2"
         },
         {
           name: "تستر مخرجات الباور",
-          model: "Power Supply Output Tester",
-          price: "$59",
-          priceBefore: null,
-          saving: "فحص الفولتيات الكاملة",
+          model: "Power Supply Output Tester — مؤجل للمرحلة الثانية",
+          price: "$59 (مؤجل)",
+          priceBefore: "في البداية: قياس الفولتيات بـ ZOYI يكفي",
+          saving: "مؤجل — اشتره مع Electronic Load في مرحلة التوسع",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3894",
           source: "Zeus Mining",
-          badge: "جديد"
+          badge: "مؤجل - مرحلة 2"
         },
         {
           name: "ملفات اختبار S19 / S19j Pro",
@@ -916,26 +887,24 @@ const DATA = {
       items: [
         { label: "تجهيزات المحل (تشطيب + أثاث)",                                                usd: 200  },
         { label: "PicoBT + 3 Test Files (S19, S19j, M30)",                                       usd: 600  },
-        { label: "ZOYI ZT-R01 (حرارة+ملتيميتر) + RIGOL DHO814 (أوسيلوسكوب 100MHz)",               usd: 545  },
-        { label: "Quick 861DW (هواء ساخن) + KSGER T12 (كنترول) + Quick 205H محلي (هاشبورد)",    usd: 465  },
+        { label: "ZOYI ZT-R01 (حرارة+ملتيميتر) + DSO-TC3 مرحلة أولى (RIGOL مؤجل للأرباح)",        usd: 149  },
+        { label: "Quick 861DW (هواء ساخن) + Quick 205H + Tips متنوعة (بدون KSGER)",              usd: 421  },
         { label: "PUHUI T-8280 IR Preheater (28×27cm) — تسخين متساوٍ للهاشبورد كاملاً",          usd: 135  },
-        { label: "FNIRSI LCR Bridge Tweezers (الميكروسكوب Andonstar محلي)",                       usd: 22   },
         { label: "4 قوالب معجون (S19, S19J, S19Pro, M50) + Stencils",                            usd: 250  },
-        { label: "Electronic Load ($64) + Output Tester ($59)",                                   usd: 123  },
         { label: "Amtech Flux ×2 + Mechanic Paste 183°C + GD900-1 1kg + HY234 1kg",              usd: 38   },
         { label: "APW12 ثابت على البنش + أسلاك AWG6 وترامل (≈100 ج)",                          usd: 123  },
-        { label: "مروحة تعدين Nidec/Delta + باور 12V + Kapton + مفك كهربائي (محلي)",            usd: 49   },
-        { label: "طقم BGA Reballing (منصة + شبلونات ASIC) + IPA 99% + Brass Cleaner",             usd: 35   },
-        { label: "أدوات السلامة (مفرش + أسورة + شفاط دخان)",                                    usd: 30   }
+        { label: "مروحة تعدين + باور 12V + Kapton + مفك كهربائي (محلي)",                        usd: 49   },
+        { label: "طقم BGA Reballing (منصة + شبلونات ASIC) + Brass Cleaner",                      usd: 20   },
+        { label: "أدوات السلامة + IPA 99% محلي (لا تشحن سوائل)",                               usd: 30   }
       ],
-      totalUSD: 2586,
-      totalEGP: 139644,
-      note: "CAPEX محدّث — يشمل RIGOL DHO814 100MHz بدلاً من DSO-TC3، وطقم BGA كامل + IPA 99% + Brass Cleaner"
+      totalUSD: 2015,
+      totalEGP: 108810,
+      note: "CAPEX نهائي مُحسَّن — وفّر $571: مؤجل RIGOL ($396) + حذف KSGER ($44) + حذف LCR ($22) + مؤجل Load/Output Tester ($123 مؤجل) + ميكروسكوب AD207 بدل AD409 (8,000ج). RIGOL والـ Load Tester من الأرباح"
     },
     annualNetProfit:      { usd: 58831.08, egp: 3176878 },
     monthlyNetProfit:     { usd: 4902.59,  egp: 264740  },
-    paybackDays:          16,
-    roiPercent:           2279
+    paybackDays:          12,
+    roiPercent:           2920
   },
 
   recommendations: [
@@ -947,9 +916,9 @@ const DATA = {
     },
     {
       icon: "⚡",
-      title: "إنقاذ فرع الباور سبلاي",
-      body: "بدلاً من إنفاق $1,596 على JT6322A، يكفي Electronic Load Tester بـ $64 + Output Tester بـ $59 = $123 فقط. فرع صيانة الباور مكتمل واحترافي بأقل من 8% من السعر الأصلي.",
-      tag: "Game Changer"
+      title: "باور سبلاي — ملتيميتر + هاشبورد سليمة في المرحلة الأولى",
+      body: "في البداية، افحص الباور بـ ZOYI (قياس فولتيات) وجرّبه على هاشبورد سليمة كاختبار تحت الحمل. Electronic Load ($64) + Output Tester ($59) = $123 أدوات للمرحلة الثانية حين تستلم مئات الباورات. اشترهم من أول شهر ربح.",
+      tag: "مؤجل - مرحلة 2"
     },
     {
       icon: "🗝️",
@@ -959,9 +928,9 @@ const DATA = {
     },
     {
       icon: "🔬",
-      title: "علاج الكنترول بورد بالملقط الذكي",
-      body: "FNIRSI LCR-ST1 Bridge Tweezers بـ $22 يجعل المهندس يفحص مقاومات ومكثفات الكنترول بورد في ثوانٍ دون الحاجة لفكها من البوردة — سرعة تشخيص تتضاعف.",
-      tag: "جديد"
+      title: "LCR-ST1 مريح لكن ZOYI يكفي في البداية",
+      body: "FNIRSI LCR-ST1 Bridge Tweezers ($22) مريح للقطع الصغيرة جداً لكنه ليس ضرورة قصوى الآن. ZOYI ZT-R01 عنده وضع قياس مقاومات ومكثفات يكفي لـ 90% من المهام. أضف LCR-ST1 لاحقاً حين تشعر بالحاجة الفعلية إليه.",
+      tag: "مؤجل - اختياري"
     },
     {
       icon: "🔥",
@@ -1025,15 +994,15 @@ const DATA = {
     },
     {
       icon: "🔧",
-      title: "Quick 205H — Tips متنوعة أو تحرق الـ pad",
-      body: "الكاوية ممتازة لكن بدون Tip صح لا قيمة لها. احتفظ دائماً بثلاثة أنواع: Chisel (للسطوح الكبيرة)، Bevel (للإزاحة الجانبية على BGA)، Knife/Blade (للمكونات الضيقة). الـ tip الغلط يحرق pad البوردة مباشرة ولا يصلحه شيء بعد كده.",
-      tag: "تحذير تقني"
+      title: "Quick 205H — Tip الصح تغني عن محطة ثانية",
+      body: "Quick 205H (150W) بـ رأس Fine Point T2 تعمل على الكنترول بورد بنفس كفاءة KSGER T12 ($44). Chisel T10 للهاشبورد، Fine Point T2 للـ SMD الدقيق، Bevel K2 للـ BGA. الـ tip الغلط يحرق pad لا يُصلح. شراء طقم Tips ($10-15) يوفر $44 ثمن KSGER.",
+      tag: "توفير ذكي"
     },
     {
       icon: "📡",
-      title: "RIGOL DHO814 — أوسيلوسكوب احترافي بدل DSO-TC3",
-      body: "DHO814: 100MHz، 4 قنوات حقيقية، 12-bit ADC، معدل عينة 1.25GSa/s. يقيس ripple على خطوط جهد ASIC، jitter على CLK، ويعطيك الشكل الموجي كاملاً. FNIRSI DSO-TC3 بـ $44 كان نقطة بداية، RIGOL DHO814 بـ $440 من Zeus هو الأداة التي تُعطي إجابات حقيقية.",
-      tag: "ترقية تمت"
+      title: "RIGOL DHO814 — مؤجل، اشتره من الأرباح",
+      body: "80% من الأعطال في البداية (شرائح تالفة، LDOs، مشاكل الطاقة) تُحل بـ PicoBT + ZOYI. FNIRSI DSO-TC3 ($44) يكفي للإشارات الأساسية الآن. وفّر الـ $396 الفرق، وحين تواجه أعطالاً خبيثة تحتاج ripple/jitter — اشتر RIGOL DHO814 (100MHz / 4CH / 12-bit) من Zeus بـ $440 من أرباح الشهر الأول.",
+      tag: "مؤجل → من الأرباح"
     },
     {
       icon: "🧫",
