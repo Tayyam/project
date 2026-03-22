@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
   <style>
     :root {
       --bg:        #0a0d14;
@@ -292,6 +293,33 @@
       font-weight: 700;
     }
 
+    /* ─── KNOWLEDGE BASE (Markdown) ─── */
+    .md-kb {
+      padding: 22px 26px 32px;
+      text-align: left;
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--text);
+      overflow-x: auto;
+    }
+    .md-kb h1 { font-size: 1.65rem; color: var(--accent); margin: 1.2em 0 0.5em; border-bottom: 1px solid var(--border); padding-bottom: 0.25em; }
+    .md-kb h2 { font-size: 1.25rem; color: #93c5fd; margin: 1.5em 0 0.45em; }
+    .md-kb h3 { font-size: 1.05rem; color: #e2e8f0; margin: 1.1em 0 0.35em; }
+    .md-kb h4 { font-size: 0.95rem; color: var(--text-muted); margin: 1em 0 0.3em; }
+    .md-kb p { margin: 0.55em 0; color: var(--text-muted); }
+    .md-kb ul, .md-kb ol { margin: 0.5em 0 0.5em 1.25em; padding: 0; color: var(--text-muted); }
+    .md-kb li { margin: 0.25em 0; }
+    .md-kb hr { border: none; border-top: 1px solid var(--border); margin: 1.5em 0; }
+    .md-kb code { font-family: ui-monospace, monospace; background: var(--bg3); padding: 0.12em 0.35em; border-radius: 4px; font-size: 0.86em; color: #fdba74; }
+    .md-kb pre { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; overflow-x: auto; margin: 0.85em 0; }
+    .md-kb pre code { background: none; padding: 0; color: #a5b4fc; font-size: 0.82rem; }
+    .md-kb blockquote { border-left: 3px solid var(--accent); margin: 0.75em 0; padding: 0.35em 0 0.35em 1em; background: rgba(245,158,11,.06); color: #fcd34d; }
+    .md-kb table { width: 100%; border-collapse: collapse; margin: 1em 0; font-size: 0.82rem; }
+    .md-kb th, .md-kb td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+    .md-kb th { background: var(--bg3); color: var(--accent); font-weight: 700; }
+    .md-kb a { color: #6ee7b7; word-break: break-word; }
+    .md-kb strong { color: var(--text); }
+
     /* ─── P&L BOX ─── */
     .pl-row {
       display: flex;
@@ -368,7 +396,7 @@ const DATA = {
 
   navigation: [
     { id: "workflow",        label: "⚙️ مسار العمل" },
-    { id: "protocol",        label: "📋 بروتوكول المهندس" },
+    { id: "protocol",        label: "📚 دليل الإصلاح" },
     { id: "purchases",       label: "🛒 المشتريات" },
     { id: "costPerRepair",   label: "🔬 تكلفة الإصلاح" },
     { id: "pricing",         label: "💰 التسعير والربح" },
@@ -407,131 +435,10 @@ const DATA = {
     }
   ],
 
-  protocol: {
-    intro: "هذا بروتوكول تنفيذ يومي للمبتدئ قبل المحترف. التزم بالترتيب كما هو: جهّز الطاولة، حضّر الأدوات، نفّذ الخطوات، ثم لا تنتقل للخطوة التالية قبل تحقق علامة النجاح.",
-    commonSetup: [
-      "افصل الكهرباء عن كل ما على الطاولة ثم امسح سطح العمل جيداً. ركّب المفرش المضاد للكهرباء الساكنة ووصل سلكه بالأرضي، ثم البس سوار الـ ESD قبل لمس أي بوردة.",
-      "ضع الأدوات الثقيلة في الخلف من اليمين لليسار: `PUHUI T-8280`، ثم `Quick 861DW`، ثم الميكروسكوب `Andonstar AD207`. اترك منتصف الطاولة خالياً لوضع البوردة بالكامل بدون أن تلمس أي جهاز ساخن.",
-      "ضع المواد الاستهلاكية أمام يد المهندس مباشرة: `Amtech Flux`، `Mechanic 183°C Paste`، `GD900-1`، `HY234`، `Kapton Tape`، والملاقط. لا تفتح أي عبوة قبل لحظة استخدامها لتقليل الاتساخ والهدر.",
-      "جهّز البنش الكهربائي قبل استقبال أي لوحة: `APW12` موصل بأسلاك `AWG6` والترامل، ومروحة التعدين `120mm` موصلة على `12V` خارجي ومثبتة بحيث تضرب الهواء داخل مشتتات الهاشبورد مباشرة.",
-      "اختبر الأدوات سريعاً قبل أول شغل كل يوم: شغّل `ZOYI`، شغّل `DSO-TC3`، افتح الميكروسكوب، تأكد أن `Quick 861DW` و`Quick 205H` تسخن، وأن `PicoBT` يتعرف على نفسه وملفات الاختبار موجودة.",
-      "اعمل قاعدة تنظيم ثابتة على يسارك: علبة مسامير، علبة شرايح سليمة، علبة شرايح تالفة، ومناديل بدون وبر. ممنوع وضع مسامير أو شرايح مفكوكة مباشرة على الطاولة حتى لا تضيع أو تعمل شورت.",
-      "قبل أي تشغيل كهربائي، التقط صورة للبورد من الأمام والخلف بالموبايل. هذه الصورة مرجعك لإعادة تركيب الكابلات والمشتتات واتجاه الشريحة لاحقاً."
-    ],
-    tracks: [
-      {
-        icon: "⛏️",
-        title: "بروتوكول إصلاح الهاشبورد",
-        target: "Hash Board / S19 / M30-M50",
-        prepare: [
-          "ضع الهاشبورد أفقياً في منتصف الطاولة فوق المفرش المضاد للكهرباء. اجعل اتجاه موصلات الداتا والطاقة ناحية المهندس، وليس بعيداً عنه.",
-          "ضع بجانبها فقط الأدوات المسموح بها لهذا المسار: `PicoBT`، `APW12`، `مروحة التبريد 120mm`، `ZOYI`، `PUHUI T-8280`، `Quick 861DW`، `Quick 205H`، `قاعدة BGA`، `Kapton`، `Flux`، `Paste`، `GD900-1/HY234`، `المفك الكهربائي`.",
-          "ضع علبة صغيرة باسم البوردة الحالية فقط. كل مسمار أو شريحة أو مشتت يخرج من هذه البوردة يدخل هذه العلبة فقط."
-        ],
-        steps: [
-          "1. افحص بصرياً تحت الميكروسكوب قبل أي كهرباء: ابحث عن شريحة محترقة، مكثف مكسور، نقطة تفحم، لحام قديم، أو مشتت مفكوك. لو وجدت نقطة واضحة صوّرها أولاً.",
-          "2. افحص حرارياً بدون تخمين: استخدم `ZOYI ZT-R01` على البوردة الباردة. إذا كان هناك قصر واضح أو منطقة سبق لها التسخين ستظهر غالباً قبل التشغيل الكامل.",
-          "3. جهّز اختبار البنش: صِل `APW12` بالهاشبورد عبر أسلاك `AWG6` والترامل، ثم ثبّت مروحة التعدين بحيث يدخل الهواء في اتجاه زعانف المشتتات. ممنوع تشغيل `PicoBT` بدون المروحة.",
-          "4. صِل `PicoBT` بالهاشبورد، واختر ملف الاختبار الصحيح للموديل (`S19` أو `S19j Pro` أو `Whatsminer M30/M50`). إذا لم تكن متأكداً من الملف، لا تبدأ الاختبار.",
-          "5. شغّل الاختبار لثوانٍ قصيرة فقط وراقب النتيجة. إذا ظهرت قراءة ناقصة لعدد الشرايح أو سلسلة مفقودة، دوّن رقم الشريحة أو القطاع المشتبه قبل فصل الكهرباء.",
-          "6. افصل `APW12` أولاً ثم `PicoBT`. لا تعمل أي فك أو لحام والبورد ما زال بها كهرباء أو حرارة مرتفعة من الاختبار.",
-          "7. لو احتجت فك المشتتات، استخدم `المفك الكهربائي` وليس اليد. رتب المسامير في صفوف أو مجموعات حتى تعود لنفس أماكنها. لا تعتمد على الذاكرة.",
-          "8. قبل الفك الحراري، غطِّ المكونات المجاورة للشريحة المستهدفة بشريط `Kapton`. هذا ضروري لحماية المقاومات والمكثفات الصغيرة من تيار الهواء.",
-          "9. سخّن البوردة بالكامل على `PUHUI T-8280` تدريجياً حتى تصبح اللوحة دافئة بشكل متجانس. لا تستخدم `Quick 861DW` على بوردة باردة لأن ذلك يسبب تقوساً أو فصل مسارات داخلية.",
-          "10. وجّه `Quick 861DW` على الشريحة التالفة فقط بعد التسخين المسبق. عندما يبدأ اللحام باللمعان والحركة، ارفع الشريحة بالملاقط برفق. إذا قاومت، لا تجبرها؛ ارجع خطوة وزد التسخين تدريجياً.",
-          "11. نظّف البادز بفلاكس `Amtech`، ثم أزل القصدير القديم. استخدم `Quick 205H` فقط إذا كان هناك كتلة قصدير أو نقطة سحب حرارة كبيرة لا تكفي لها `KSGER T12`.",
-          "12. إذا كانت الشريحة سليمة وتحتاج إعادة كرات فقط، ضعها في `قاعدة BGA المغناطيسية`، ثبت الشبلونة، افرد `Mechanic 183°C Paste` بكمية خفيفة، ثم ارفعها بعد تكوّن الكرات بانتظام.",
-          "13. ركّب الشريحة البديلة أو المعاد reballed لها بعد وضع كمية قليلة جداً من الفلاكس. راقب تحت الميكروسكوب أن اتجاه الشريحة صحيح قبل التسخين النهائي.",
-          "14. بعد انتهاء اللحام، اترك البوردة تبرد تدريجياً. لا تنفخ عليها ولا تنقلها مباشرة وهي ساخنة.",
-          "15. نظّف بقايا الفلاكس في `الغسالة الألتراسونيك` أو بفرشة مع `IPA 99%` فقط — وليس 70%. جفف اللوحة جيداً قبل الكهرباء. `IPA 70%` يترك رطوبة تصنع شورت كاذب.",
-          "16. أعد تركيب المشتتات والمعجون الحراري: استخدم `GD900-1` أو `HY234` وفق التصميم، وافرد المعجون بالشبلونة لا بالعين. الهدف طبقة متساوية، لا كمية كبيرة.",
-          "17. أعد اختبار البوردة على `PicoBT + APW12 + المروحة`. النجاح يعني: كل الشرايح تظهر، لا توجد سلسلة مفقودة، ولا ترتفع الحرارة بشكل غير طبيعي في نقطة واحدة.",
-          "18. اكتب ملحوظة نهائية: الشريحة التي تم تغييرها، الاختبار المستخدم، ونتيجة ما بعد الإصلاح. ثم ضع لاصق حالة على البوردة: `تم الإصلاح / تحت المتابعة / مرفوضة`."
-        ],
-        success: [
-          "قراءة كاملة لعدد الشرايح على `PicoBT` بدون سلسلة مفقودة.",
-          "عدم وجود نقطة حرارة شاذة على `ZOYI` بعد إعادة التشغيل.",
-          "المشتتات راكبة بإحكام والمعجون موزع بشكل متساوٍ لا متكتل.",
-          "لا توجد مكونات مائلة أو طايرة أو آثار فلاكس لزجة حول موقع الإصلاح."
-        ],
-        stop: [
-          "إذا سخنت الشريحة ولم تتحرك: لا تخلعها بالقوة.",
-          "إذا انقطعت بادز أو تحركت مكونات مجاورة: أوقف العمل وقيّم الضرر قبل المتابعة.",
-          "إذا لم توجد مروحة البنش: ممنوع تشغيل الهاشبورد على `APW12` حتى لثوانٍ.",
-          "إذا شككت في ملف الاختبار الصحيح: أوقف الاختبار حتى تتأكد من الموديل."
-        ]
-      },
-      {
-        icon: "🧠",
-        title: "بروتوكول إصلاح الكنترول بورد",
-        target: "Control Board",
-        prepare: [
-          "ضع الكنترول بورد تحت الميكروسكوب مع إضاءة أمامية جيدة. هنا لا تحتاج `APW12` ولا مروحة تعدين ولا `PUHUI` الكبيرة في أغلب الحالات.",
-          "الأدوات الرئيسية لهذا المسار: `USB to TTL`، `Sugon 3005D`، `ZOYI`، `DSO-TC3`، `Quick 205H + رأس Fine Point` للـ SMD الدقيق، `Quick 861DW` عند الضرورة فقط، و`Flux` + `IPA 99%`."
-        ],
-        steps: [
-          "1. صوّر وجهَي الكنترول بورد قبل أي شغل، ثم افحص بصرياً موصلات الإيثرنت، الـ SD، الذاكرة، منظمات الجهد، والكونكتورات.",
-          "2. وصّل `USB to TTL` واقرأ سجلات الإقلاع. لا تبدأ بتغيير مكونات قبل معرفة هل المشكلة Boot, PMIC, LDO, Clock, أو Firmware.",
-          "3. شغّل الكنترول بورد على `Sugon 3005D` بحد تيار محافظ. هذه التغذية للدوائر الصغيرة فقط، وليست للهاشبورد. راقب سحب التيار منذ أول لحظة.",
-          "4. استخدم `ZOYI` أو اللمس الحذر لتحديد أي منظم جهد أو آيسي يسخن أكثر من اللازم فور التغذية.",
-          "5. استخدم `ZOYI` (وضع المقاومات/المكثفات) لفحص المقاومات والمكثفات الصغيرة حول مسار العطل بدون فك غير ضروري. الهدف أن تقلل الفك إلى الحد الأدنى.",
-          "6. استخدم `DSO-TC3` للتحقق من وجود نبضات أساسية مثل `CLK` ومراقبة الشكل الموجي على الخطوط الحرجة قدر إمكانات الجهاز.",
-          "7. إذا تحدد عنصر تالف من نوع `LDO / PMIC / مقاومة / مكثف`، ضع `Kapton` حول المنطقة إذا كانت مزدحمة، ثم استخدم `Quick 205H + رأس Fine Point T2` للفك والتركيب الدقيق — نفس نتيجة KSGER بشرط استخدام الـ tip الصح.",
-          "8. إن كان العنصر كبيراً أو مثبتاً بغراء أو يحتاج هواء ساخن، استخدم `Quick 861DW` على أقل منطقة ممكنة وبأقصر زمن ممكن مع حماية العناصر المجاورة.",
-          "9. بعد استبدال القطعة، نظّف الفلاكس بفرشة دقيقة + `IPA 99%` تحت الميكروسكوب وتأكد من عدم وجود `solder bridge` بين الأرجل.",
-          "10. أعد التشغيل على `Sugon 3005D` وراقب استهلاك التيار من جديد. نجاح الإصلاح الأولي يعني أن السحب عاد منطقياً والقطعة البديلة لا تسخن فوراً.",
-          "11. أعد اختبار الإقلاع عبر `UART`. إذا اختفت رسالة الخطأ وبدأت مراحل الإقلاع بشكل طبيعي، انتقل للفحص النهائي.",
-          "12. دوّن في ورقة العمل: القطعة المستبدلة، قيمة الجهد قبل/بعد، ورسالة الخطأ الأصلية. الكنترول بورد بدون توثيق تضيع مشكلتها لاحقاً."
-        ],
-        success: [
-          "الـ `UART` يعطي إقلاعاً سليماً أو رسالة خطأ مختلفة تدل على تقدم حقيقي.",
-          "الجهود الرئيسية موجودة وثابتة بعد الاستبدال.",
-          "لا يوجد سخونة غير طبيعية في `LDO / PMIC` بعد التشغيل.",
-          "منطقة اللحام نظيفة ولا تحتوي على قصور أو bridges."
-        ],
-        stop: [
-          "إذا كان سحب التيار عالياً بشكل غير طبيعي من أول ثانية: افصل فوراً ولا تكرر التغذية.",
-          "إذا لم تتأكد من اتجاه الآيسي أو pin 1: لا تركبه.",
-          "إذا كانت المشكلة Firmware أو NAND وليست Hardware واضح: لا تدخل في فك عشوائي للمكونات.",
-          "للكنترول بورد: استخدم دائماً `Quick 205H + رأس Fine Point T2` وليس الرأس العريض — الـ tip الدقيق يعوّض غياب KSGER بالكامل."
-        ]
-      },
-      {
-        icon: "⚡",
-        title: "بروتوكول إصلاح الباور سبلاي",
-        target: "PSU / Power Supply",
-        prepare: [
-          "ضع الباور على جزء منفصل من الطاولة بعيداً عن الهاشبورد والكنترول. هذا المسار أعلى خطورة كهربائياً ويجب أن يبقى معزولاً.",
-          "الأدوات المسموحة: `Sugon 3005D` للدوائر المنفصلة فقط، `Quick 205H`، `Quick 861DW`، `شفاط القصدير`, `ZOYI`, والميكروسكوب — و`APW12` + مروحة فقط لاختبار تحت حمل حقيقي على هاشبورد سليمة بحذر."
-        ],
-        steps: [
-          "1. افصل الباور تماماً وانتظر، ثم افحص بصرياً: موسفت محترق، مكثف منتفخ، أثر قوس كهربائي، فيوز ضارب، أو منطقة متفحمة.",
-          "2. لا تلمس أي جزء من المرحلة الابتدائية مباشرة بعد الفتح. تأكد أن المكثفات الكبيرة مفرغة قبل القياس أو اللحام.",
-          "3. استخدم الميكروسكوب لفحص لحامات الموسفتات، المقاومات الشنت، ووحدات القيادة. كثير من أعطال الباور تكون لحاماً متعباً لا قطعة ميتة فقط.",
-          "4. استخدم `ZOYI` أثناء اختبار محدود أو بعد التغذية المتحكم بها لتحديد المكون الذي يسخن بشكل غير طبيعي.",
-          "5. افحص المخرجات بـ `ZOYI`: الفولتيات الأساسية يجب أن تكون ضمن النطاق المتوقع. إذا كانت غائبة أو مضطربة جداً، لا تربط الباور بهاشبورد كاملة قبل المعالجة.",
-          "6. للاختبار تحت حمل حقيقي: وصّل الباور إلى هاشبورد سليمة عبر `APW12` مع مروحة قوية، وارفع الحمل تدريجياً (بدءاً من تيار منخفض/وضع اختبار محافظ إن وُجد). راقب الجهد والحرارة خطوة بخطوة ولا تقفز مباشرة لأقصى سحب.",
-          "7. إذا تحددت مجموعة موسفتات أو `PWM IC` تالفة، استخدم `Quick 205H` و`شفاط القصدير` للأجزاء ذات الكتلة الحرارية العالية.",
-          "8. نظّف الثقوب والبادز جيداً قبل تركيب البديل. في الباور أي لحام ناقص أو بارد سيعود عطلًا أسرع من الهاشبورد.",
-          "9. بعد التركيب، افحص تحت الميكروسكوب عدم وجود شورت بين الأرجل أو لحام ناقص على الأرجل الكبيرة.",
-          "10. أعد قياس المخرجات بـ `ZOYI`، ثم أعد اختبار الهاشبورد السليمة تحت نفس شروط التبريد. لا تعتبر الباور سليمة فقط لأنها اشتغلت بدون حمل.",
-          "11. راقب الحرارة لعدة دقائق. لو عنصر جديد يسخن أسرع من الطبيعي، ارجع وافحص دائرة القيادة أو القطع المرتبطة به.",
-          "12. قبل إغلاق الباور، نظّف بقايا الفلاكس، ثم اكتب على الملصق: نوع القطعة المستبدلة، تاريخ الإصلاح، ونتيجة الاختبار تحت الحمل."
-        ],
-        success: [
-          "الفولتيات الخارجة مستقرة ومقاسة بـ `ZOYI` ضمن النطاق المتوقع.",
-          "الباور تتحمل اختبار الهاشبورد السليمة تدريجياً بدون هبوط حاد أو فصل تحت تبريد مناسب.",
-          "لا توجد سخونة موضعية غير طبيعية أو صفير/رائحة احتراق.",
-          "الموسفتات والآيسيهات الجديدة ركبت بلحام نظيف وممتلئ."
-        ],
-        stop: [
-          "إذا لم تفرغ المكثفات الكبيرة: ممنوع البدء في الفك.",
-          "إذا فشل الاختبار بدون حمل: لا تنتقل لاختبار الحمل.",
-          "إذا لم تُحل مشكلة القيادة أو الشورت الأصلي: لا تغيّر موسفتات جديدة وتحرقها مرة ثانية.",
-          "إذا كان هناك أثر تفحم شديد في أكثر من مرحلة، دوّن الحالة كإصلاح عالي الخطورة ولا تَعِد العميل بموعد نهائي قبل تقييم أعمق."
-        ]
-      }
-    ]
+  knowledgeBase: {
+    file: "asic_repair_knowledge_base.md",
+    titleAr: "دليل الإصلاح",
+    titleEn: "ASIC Repair Knowledge Base"
   },
 
   purchases: {
@@ -1050,72 +957,19 @@ main.insertAdjacentHTML('beforeend', `
 </section>
 `);
 
-/* ── 2. Engineer Protocol ── */
+/* ── 2. Knowledge Base (asic_repair_knowledge_base.md) ── */
 main.insertAdjacentHTML('beforeend', `
 <section id="protocol">
   <div class="section-heading">
-    <div class="icon">📋</div>
-    <h2>بروتوكول <span>المهندس التنفيذي</span></h2>
+    <div class="icon">📚</div>
+    <h2>${DATA.knowledgeBase.titleAr} <span style="font-size:.72em;color:var(--text-muted)">— ${DATA.knowledgeBase.titleEn}</span></h2>
   </div>
-
-  <div class="card" style="margin-bottom:24px">
-    <div class="card-title">🧭 فلسفة التنفيذ</div>
-    <p style="color:var(--text-muted);font-size:.88rem;line-height:1.9">${DATA.protocol.intro}</p>
+  <div id="kbStatus" class="card" style="margin-bottom:16px">
+    <p class="kb-loading" style="color:var(--text-muted);margin:0;font-size:.88rem;line-height:1.8">
+      جاري تحميل <code style="color:#93c5fd">${DATA.knowledgeBase.file}</code>…
+    </p>
   </div>
-
-  <div class="card" style="margin-bottom:24px">
-    <div class="card-title">🪑 تجهيز الطاولة قبل أول عملية</div>
-    <div class="workflow-list">
-      ${DATA.protocol.commonSetup.map((step, i) => `
-        <div class="workflow-step">
-          <div class="step-num">${String(i + 1).padStart(2, '0')}</div>
-          <div class="step-body">
-            <h3>تجهيز أساسي</h3>
-            <p>${step}</p>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  </div>
-
-  ${DATA.protocol.tracks.map((track, idx) => `
-    <div class="card" style="margin-bottom:24px">
-      <div class="card-title" style="justify-content:space-between;flex-wrap:wrap">
-        <span>${track.icon} ${idx + 1}. ${track.title}</span>
-        <span style="font-size:.74rem;color:var(--text-muted);font-weight:600">${track.target}</span>
-      </div>
-
-      <div class="grid-2">
-        <div class="card" style="margin-bottom:0;padding:18px">
-          <div class="card-title">🧰 ما الذي تضعه أمامك؟</div>
-          <ol style="margin:0;padding-right:20px;line-height:1.95;color:var(--text-muted);font-size:.84rem">
-            ${track.prepare.map(item => `<li style="margin-bottom:8px">${item}</li>`).join('')}
-          </ol>
-        </div>
-
-        <div class="card" style="margin-bottom:0;padding:18px">
-          <div class="card-title">✅ علامات النجاح النهائية</div>
-          <ul style="margin:0;padding-right:18px;line-height:1.95;color:var(--text-muted);font-size:.84rem">
-            ${track.success.map(item => `<li style="margin-bottom:8px">${item}</li>`).join('')}
-          </ul>
-        </div>
-      </div>
-
-      <div class="card" style="margin:16px 0 0;padding:18px">
-        <div class="card-title">🛠️ خطوات التنفيذ التفصيلية</div>
-        <ol style="margin:0;padding-right:20px;line-height:2;color:var(--text-muted);font-size:.84rem">
-          ${track.steps.map(item => `<li style="margin-bottom:10px">${item.replace(/^\d+\.\s*/, '')}</li>`).join('')}
-        </ol>
-      </div>
-
-      <div class="card" style="margin:16px 0 0;padding:18px;border-color:rgba(239,68,68,.25);background:rgba(239,68,68,.03)">
-        <div class="card-title" style="color:#f87171">⛔ متى تتوقف فوراً؟</div>
-        <ul style="margin:0;padding-right:18px;line-height:1.95;color:#fca5a5;font-size:.84rem">
-          ${track.stop.map(item => `<li style="margin-bottom:8px">${item}</li>`).join('')}
-        </ul>
-      </div>
-    </div>
-  `).join('')}
+  <article id="kbRoot" class="card md-kb" dir="ltr" lang="en" hidden></article>
 </section>
 `);
 
@@ -1627,6 +1481,36 @@ main.insertAdjacentHTML('beforeend', `
   </div>
 </section>
 `);
+
+/* ── Load Knowledge Base markdown ── */
+(function loadKnowledgeBase() {
+  const kb = DATA.knowledgeBase;
+  const root = document.getElementById('kbRoot');
+  const status = document.getElementById('kbStatus');
+  if (!root || !status) return;
+  const failMsg =
+    '<p style="color:#fca5a5;margin:0;line-height:1.85">لم يُفتح <code style="color:#fdba74">' +
+    kb.file +
+    '</code>. شغّل الصفحة عبر <strong>خادم محلي</strong> (مثل Live Server في VS Code) وضع الملف بجانب <code>index.html</code>. فتح الملف مباشرة (<code>file://</code>) يمنع المتصفح من جلب ملف الـ Markdown.</p>';
+  if (typeof marked === 'undefined' || typeof marked.parse !== 'function') {
+    status.innerHTML = '<div style="padding:4px 0"><p style="color:#f87171;margin:0">تعذّر تحميل مكتبة <code>marked</code> من CDN — تحقق من الاتصال بالإنترنت.</p></div>';
+    return;
+  }
+  if (typeof marked.use === 'function') marked.use({ gfm: true });
+  fetch(kb.file, { cache: 'no-store' })
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(function (md) {
+      root.innerHTML = marked.parse(md);
+      status.style.display = 'none';
+      root.hidden = false;
+    })
+    .catch(function () {
+      status.innerHTML = '<div style="padding:4px 0">' + failMsg + '</div>';
+    });
+})();
 
 /* ── ROI bar animation ── */
 function animateRoiBars() {
