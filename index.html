@@ -292,26 +292,6 @@
       font-weight: 700;
     }
 
-    /* ─── RECOMMENDATIONS ─── */
-    .rec-grid { display: flex; flex-direction: column; gap: 14px; }
-    .rec-item {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-      display: flex; gap: 14px; align-items: flex-start;
-      transition: border-color .25s;
-    }
-    .rec-item:hover { border-color: rgba(59,130,246,.4); }
-    .rec-icon {
-      font-size: 1.4rem;
-      width: 40px; height: 40px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .rec-body h4 { font-weight: 700; margin-bottom: 4px; }
-    .rec-body p  { font-size: .84rem; color: var(--text-muted); }
-
     /* ─── P&L BOX ─── */
     .pl-row {
       display: flex;
@@ -397,7 +377,6 @@ const DATA = {
     { id: "monthly",         label: "📈 الإيرادات الشهرية" },
     { id: "pl",              label: "🧾 قائمة الدخل" },
     { id: "roi",             label: "🚀 العائد على الاستثمار" },
-    { id: "recommendations", label: "💡 توصيات التشغيل" }
   ],
 
   workflow: [
@@ -932,118 +911,7 @@ const DATA = {
     monthlyNetProfit:     { usd: 4902.59,  egp: 264740  },
     paybackDays:          12,
     roiPercent:           2920
-  },
-
-  recommendations: [
-    {
-      icon: "🌡️",
-      title: "الضربة القاضية للكاميرا الحرارية",
-      body: "ZOYI ZT-R01 بـ $105 يدمج ملتيميتر + كاميرا حرارية في جهاز واحد — بدلاً من Infiray بـ $294. توفير $189 مع أداء أعلى لأن المهندس يرى الحرارة ويقيس الفولتيات في نفس اللحظة.",
-      tag: "Game Changer"
-    },
-    {
-      icon: "⚡",
-      title: "اختبار الباور: ZOYI ثم هاشبورد سليمة",
-      body: "اقِس المخرجات المهمة بـ ZOYI أولاً. للتحقق تحت حمل حقيقي، وصّل الباور إلى هاشبورد سليمة عبر APW12 مع مروحة قوية وارفع الحمل تدريجياً — لا تعتمد على «بدون حمل» كدليل نهائي.",
-      tag: null
-    },
-    {
-      icon: "🗝️",
-      title: "سر المهنة — ملفات الاختبار",
-      body: "جهاز PicoBT لا يأتي محملاً بكل الموديلات المحدثة. شراء Test Files ($49 للـ S19، $35 للـ M30) يضمن أن التستر يقرأ البوردة ولن يعطي False Errors. هذه النقطة يجهلها 90% من المراكز.",
-      tag: "Game Changer"
-    },
-    {
-      icon: "🔥",
-      title: "قانون الكاويتين — هاشبورد vs كنترول",
-      body: "KSGER T12 (72W فعلية) للكنترول بورد فقط: SMD دقيق وسنون رفيعة. الهاشبورد كتلة ألومنيوم تمتص الحرارة بشراسة — تحتاج Quick 205H (150W+) محلي. لو الفني حاول لحام هاشبورد بـ T12، السن هيلزق والقصدير مش هيسيح.",
-      tag: "تحذير تقني"
-    },
-    {
-      icon: "🛁",
-      title: "الغسالة الألتراسونيك — الرفاهية المُنتجة",
-      body: "3 دقائق في الغسالة تُنظف كل بقايا الفلاكس بدون فرشة ولا كحول ولا خطر طيران مقاومات SMD. البوردة تطلع بريميوم كأنها جديدة من مصنع Bitmain — يُحسّن رأي العميل فيك فوراً. متوفرة في العتبة بحوالي 2,200 جنيه.",
-      tag: "رفاهية منتجة"
-    },
-    {
-      icon: "🧪",
-      title: "الخلطة السرية — مستهلكات أصلية أو لا شيء",
-      body: "Amtech NC-559-ASM الأصلي يخلي الشريحة تعوم وتلحم في ثوانٍ. Mechanic Paste 183°C مثالية للـ ASIC لأن انصهارها الواطئ يحمي الشريحة من الحرارة الزائدة. الفلاكس المحلي المضروب هو سبب 40% من فشل اللحامات.",
-      tag: "الخلطة السرية"
-    },
-    {
-      icon: "🔌",
-      title: "فجوة البنش: Sugon 3005D ≠ تشغيل الهاشبورد",
-      body: "PicoBT يحتاج الهاشبورد تعمل Hashing — ذلك يتطلب 12–15V و70A+ (أكثر من 1000W). Sugon 30V/5A = 150W فقط: للقياسات المعملية على الكنترول وليس لتغذية الهاشبورد على التستر. الحل: APW12 أصلي ثابت على طاولة الاختبار + أسلاك نحاس AWG6 أو بَسبار + ترامل حلقية (كهربائي مصر ~100 ج).",
-      tag: "ناقص إلزامي"
-    },
-    {
-      icon: "🌀",
-      title: "خطر الانصهار على البنش (15 ثانية)",
-      body: "بدون كيسة معدنية، الشرايح تصل 100°C في أقل من 15 ثانية أثناء الاختبار. لازم مروحة تعدين 120mm عالية التدفق (Nidec أو Delta، تسحب ~2.7A فما فوق) على باور 12V خارجي، موجهة مباشرة على مشتتات الهاشبورد طوال اختبار PicoBT.",
-      tag: "Meltdown Risk"
-    },
-    {
-      icon: "🧲",
-      title: "شبلونة بدون قاعدة = شريحة تهرج",
-      body: "شرائح ASIC بحجم الإصبع: تحت الشبلونة والـ Paste تتحرك. قاعدة BGA Reballing مغناطيسية (~$10 AliExpress) تمسك الشبلونة فوق الشريحة. + شريط Kapton أصفر حول الشريحة المستهدفة يحمي الـ SMD المجاورة من ضغط هواء Quick 861DW.",
-      tag: "ناقص إلزامي"
-    },
-    {
-      icon: "🔩",
-      title: "70 مسمار — المعصم أول ضحية",
-      body: "هاشبورد S19 فيها عشرات المسامير للمشتتات. المفك اليدوي = بوردتين/يوم والإيد تقف. مفك كهربائي (Xiaomi أو قوي ببطارية، حوالي 1,000 ج) يقلل فك/تركيب المشتتات لـ ~3 دقائق بدل ربع ساعة.",
-      tag: "Wrist Saver"
-    },
-    {
-      icon: "✈️",
-      title: "الشحن الذكي",
-      body: "شحن الأدوات المتخصصة (PicoBT, Test Files, Stencils, ICs) إلى السعودية أولاً، ثم نقلها في الأمتعة الشخصية لتفادي الرسوم الجمركية المرتفعة على المكونات الإلكترونية الدقيقة.",
-      tag: null
-    },
-    {
-      icon: "❄️",
-      title: "بروتوكول التبريد (بعد الإصلاح أيضاً)",
-      body: "يُمنع تشغيل الهاشبورد على APW12 بعد الإصلاح دون مروحة 12V قوية ملاصقة للمشتتات — نفس قاعدة البنش تنطبق على أي اختبار نهائي لتجنب احتراق الشرائح الجديدة.",
-      tag: null
-    },
-    {
-      icon: "🧴",
-      title: "اقتصاديات المعجون الحراري",
-      body: "شراء GD900-1 في عبوة 1kg وليس حقن صغيرة — موديلات S19 تتطلب كميات هائلة لتغطية المشتتات المزدوجة. القوالب (Stencils) تضمن التوزيع المثالي وتقطع وقت الإصلاح من 45 إلى 25 دقيقة.",
-      tag: null
-    },
-    {
-      icon: "🔧",
-      title: "Quick 205H — Tip الصح تغني عن محطة ثانية",
-      body: "Quick 205H (150W) بـ رأس Fine Point T2 تعمل على الكنترول بورد بنفس كفاءة KSGER T12 ($44). Chisel T10 للهاشبورد، Fine Point T2 للـ SMD الدقيق، Bevel K2 للـ BGA. الـ tip الغلط يحرق pad لا يُصلح. شراء طقم Tips (حوالي $12) يوفر $44 ثمن KSGER.",
-      tag: "توفير ذكي"
-    },
-    {
-      icon: "🧫",
-      title: "IPA 99% — الـ 70% يصنع شورت كاذب",
-      body: "كحول التنظيف 99% يتبخر كاملاً ولا يترك رطوبة. 70% يحتوي 30% ماء — يترك فيلماً رطباً يصنع شورت كاذب عند التشغيل أو يُقلل عمر البوردة. لا تستخدم أي كحول آخر. السعر تقريباً نفسه، الفارق كارثي.",
-      tag: "الخلطة السرية"
-    },
-    {
-      icon: "🐭",
-      title: "Brass Tip Cleaner — حفّظ رأس الكاوية",
-      body: "إسفنج الماء التقليدي يُصدم رأس الكاوية بالبرودة المفاجئة ويُقلّص عمره من مئات الساعات إلى عشرات. مُنظف النحاس (Brass Wire Ball) ينظف بدون خفض الحرارة، يُبقي الـ tip لامعاً ومُقدّراً للحرارة. موجود محلياً بأقل من 100 جنيه.",
-      tag: "رفاهية منتجة"
-    },
-    {
-      icon: "🧲",
-      title: "BGA Kit — منصة + شبلونة خاصة بالـ ASIC",
-      body: "المنصة المغناطيسية وحدها لا تكفي إذا لم تكن شبلونة الـ reballing مصممة خصيصاً لشرائح BM1397/BM1398/BM1362. الشبلونة الخاطئة تحدد موضع كرات القصدير في الفراغ الغلط فيصعب الـ reflow عليها. ابحث في AliExpress عن: «BGA reballing stencil Antminer S19».",
-      tag: "ناقص إلزامي"
-    },
-    {
-      icon: "🤖",
-      title: "التكامل المرجعي",
-      body: "استخدام الذكاء الاصطناعي بشكل دائم كـ «مستشار ثانٍ» لتحليل أكواد الخطأ (Error Codes) وقراءة سجلات إقلاع الكنترول لتوفير وقت الفحص اليدوي.",
-      tag: null
-    }
-  ]
+  }
 
 };
 </script>
@@ -1717,36 +1585,6 @@ main.insertAdjacentHTML('beforeend', `
         <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px">${fmtEGP(roi.annualNetProfit.egp)} سنوياً</div>
       </div>
     </div>
-  </div>
-</section>
-`);
-
-/* ── 10. Recommendations ── */
-main.insertAdjacentHTML('beforeend', `
-<section id="recommendations">
-  <div class="section-heading">
-    <div class="icon">💡</div>
-    <h2>توصيات <span>التشغيل التنفيذية</span></h2>
-  </div>
-  <div class="rec-grid">
-    ${DATA.recommendations.map((rec, i) => {
-      const isGC = rec.tag === 'Game Changer';
-      const isNew = rec.tag === 'جديد';
-      const tagHtml = isGC
-        ? `<span style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:20px;margin-right:6px">⚡ Game Changer</span>`
-        : isNew
-        ? `<span style="background:rgba(59,130,246,.2);border:1px solid rgba(59,130,246,.4);color:#93c5fd;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:6px">✦ جديد</span>`
-        : '';
-      const borderStyle = isGC ? 'border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.03)' : '';
-      return `
-      <div class="rec-item" style="${borderStyle}">
-        <div class="rec-icon">${rec.icon}</div>
-        <div class="rec-body">
-          <h4>${tagHtml}${i + 1}. ${rec.title}</h4>
-          <p>${rec.body}</p>
-        </div>
-      </div>`;
-    }).join('')}
   </div>
 </section>
 `);
