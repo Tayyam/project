@@ -259,6 +259,32 @@
     .step-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
     .step-body p  { font-size: .85rem; color: var(--text-muted); }
 
+    /* ─── BADGE ─── */
+    .badge-better {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      font-size: .65rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: .05em;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+    .price-old {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      font-size: .75rem;
+      display: block;
+      margin-top: 2px;
+    }
+    .saving-tag {
+      color: #34d399;
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
     /* ─── RECOMMENDATIONS ─── */
     .rec-grid { display: flex; flex-direction: column; gap: 14px; }
     .rec-item {
@@ -411,72 +437,99 @@ const DATA = {
       ]
     },
     imported: {
-      location: "الصين – Alibaba / AliExpress",
-      note: "أدوات ومخزون تخصصي لا يتوفر محلياً بكفاءة أو أسعار جيدة.",
-      currency: "SAR",
+      location: "الصين – Alibaba / AliExpress / Zeus Mining",
+      note: "أدوات ومخزون تخصصي — تم تحديث المصادر بأفضل الأسعار المتاحة (مقارنة zeusbtc.com vs Alibaba).",
+      currency: "USD / SAR",
       items: [
         {
           name: "التستر الشامل",
           model: "PicoBT Universal Tester",
-          price: "~2,200",
-          url: "https://www.alibaba.com/product-detail/PicoBT-Multifunctional-Hash-Board-Tester-Applicable-1601383281153.html",
-          source: "Alibaba"
+          price: "$459",
+          priceBefore: "~$587 (2200 ريال)",
+          saving: "وفر $128",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2349",
+          source: "Zeus Mining",
+          badge: "أوفر"
         },
         {
           name: "الكاميرا الحرارية",
           model: "Infiray P2 Pro",
-          price: "~1,100",
+          price: "~$294 (1100 ريال)",
+          priceBefore: null,
+          saving: null,
           url: "https://www.alibaba.com/product-detail/INFIRAY-P2-PRO-Infrared-Thermal-Imager_1601268492116.html",
-          source: "Alibaba"
+          source: "Alibaba",
+          badge: null
         },
         {
           name: "قالب تسخين S19",
           model: "Sunshine SS-T12A",
-          price: "~350",
+          price: "~$93 (350 ريال)",
+          priceBefore: null,
+          saving: null,
           url: "https://www.alibaba.com/product-detail/Sunshine-SS-T12A-Motherboard-Heat-Table_1601213228686.html",
-          source: "Alibaba"
+          source: "Alibaba",
+          badge: null
         },
         {
           name: "شبلونات الصيانة",
           model: "S19 & M30 Stencils",
-          price: "~150",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2374",
-          source: "Zeus Mining"
+          price: "$3.5 – $16",
+          priceBefore: "~$40 (150 ريال)",
+          saving: "وفر حتى 91%",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2418",
+          source: "Zeus Mining",
+          badge: "أوفر"
         },
         {
           name: "مخزون كابلات داتا",
           model: "40 كابل متنوع (10-pin / 12-pin)",
-          price: "~500",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=77",
-          source: "Zeus Mining"
+          price: "$0.03 – $0.38 / كابل",
+          priceBefore: "~$133 (500 ريال)",
+          saving: "وفر حتى 100%",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107",
+          source: "Zeus Mining",
+          badge: "أوفر"
         },
         {
           name: "شرايح ASIC – BM1398 / BM1362",
-          model: "BM1398BB / BM1362 (Bitmain)",
-          price: "حسب الكمية",
-          url: "https://www.alibaba.com/product-detail/New-Original-ASIC-SHA256-Chip-BM1398_1600154475182.html",
-          source: "Alibaba"
+          model: "BM1362 (Bitmain – S19j Pro)",
+          price: "$3.5 / chip",
+          priceBefore: "بالكمية (Alibaba)",
+          saving: "سعر ثابت بدون MOQ",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106",
+          source: "Zeus Mining",
+          badge: "أوفر"
         },
         {
           name: "شريحة ASIC – KF1922",
           model: "KF1922 (MicroBT Whatsminer)",
-          price: "حسب الكمية",
-          url: "https://www.bit2miner.com/products/microbt-whatsminer-kf1922-asic-replacement-hashboard-repair-ic-x10pcs",
-          source: "Bit2Miner"
+          price: "$2 / chip",
+          priceBefore: "بالكمية (Bit2Miner)",
+          saving: "نفس المنتج بسعر أقل",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2148",
+          source: "Zeus Mining",
+          badge: "أوفر"
         },
         {
           name: "آيسيهات الكنترول",
-          model: "LDOs (0.8V–3.3V) & PMIC",
-          price: "~400",
-          url: "https://www.alibaba.com/trade/search?SearchText=LDO+voltage+regulator+mining+control+board+0.8V+1.8V+3.3V",
-          source: "Alibaba Search"
+          model: "LDOs (0.8V / 1.8V / 3.3V) & PMIC",
+          price: "$0.03 – $0.06 / chip",
+          priceBefore: "~$107 (400 ريال)",
+          saving: "وفر حتى 100%",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=997",
+          source: "Zeus Mining",
+          badge: "أوفر"
         },
         {
           name: "قطع غيار الباور",
-          model: "MOSFETs (IPW60R040CFD7) & PWM ICs",
-          price: "~600",
-          url: "https://www.alibaba.com/product-detail/Original-Transistor-IPW60R024CFD7-60R024F7-PG-TO247_1601519388101.html",
-          source: "Alibaba"
+          model: "MOSFETs & PWM ICs",
+          price: "$0.4 – $1.56 / chip",
+          priceBefore: "~$160 (600 ريال)",
+          saving: "وفر حتى 99%",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934",
+          source: "Zeus Mining",
+          badge: "أوفر"
         }
       ]
     }
@@ -683,7 +736,12 @@ main.insertAdjacentHTML('beforeend', `
   </div>
 
   <div class="card">
-    <div class="card-title">🚢 المشتريات المستوردة — ${DATA.purchases.imported.location}</div>
+    <div class="card-title" style="justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span>🚢 المشتريات المستوردة — ${DATA.purchases.imported.location}</span>
+      <span style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:#34d399;font-size:.72rem;padding:3px 10px;border-radius:20px;font-weight:600">
+        ✓ محدّث بأسعار Zeus Mining
+      </span>
+    </div>
     <p style="font-size:.83rem;color:var(--text-muted);margin-bottom:14px">${DATA.purchases.imported.note}</p>
     <div class="table-wrap">
       <table>
@@ -691,35 +749,53 @@ main.insertAdjacentHTML('beforeend', `
           <tr>
             <th>الأداة / المخزون</th>
             <th>الموديل / الوصف</th>
-            <th>السعر التقديري (${DATA.purchases.imported.currency})</th>
+            <th>السعر المحدّث</th>
+            <th>التوفير</th>
             <th>رابط الشراء</th>
           </tr>
         </thead>
         <tbody>
-          ${DATA.purchases.imported.items.map(item => `
+          ${DATA.purchases.imported.items.map(item => {
+            const isZeus  = item.source === 'Zeus Mining';
+            const btnColor = isZeus
+              ? 'rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.35);color:#6ee7b7'
+              : 'rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35);color:#93c5fd';
+            const btnHoverIn  = isZeus
+              ? "this.style.background='rgba(16,185,129,.25)';this.style.borderColor='rgba(16,185,129,.6)'"
+              : "this.style.background='rgba(59,130,246,.25)';this.style.borderColor='rgba(59,130,246,.6)'";
+            const btnHoverOut = isZeus
+              ? "this.style.background='rgba(16,185,129,.12)';this.style.borderColor='rgba(16,185,129,.35)'"
+              : "this.style.background='rgba(59,130,246,.12)';this.style.borderColor='rgba(59,130,246,.35)'";
+            return `
             <tr>
-              <td>${item.name}</td>
+              <td>
+                ${item.badge ? `<span class="badge-better">${item.badge}</span>` : ''}
+                ${item.name}
+              </td>
               <td class="mono">${item.model}</td>
-              <td class="blue">${item.price}</td>
+              <td>
+                <span style="color:${isZeus ? '#34d399' : '#60a5fa'};font-weight:700">${item.price}</span>
+                ${item.priceBefore ? `<span class="price-old">${item.priceBefore}</span>` : ''}
+              </td>
+              <td>
+                ${item.saving
+                  ? `<span class="saving-tag">✓ ${item.saving}</span>`
+                  : `<span style="color:var(--text-muted);font-size:.8rem">—</span>`}
+              </td>
               <td>
                 <a href="${item.url}" target="_blank" rel="noopener" style="
                   display:inline-flex;align-items:center;gap:5px;
-                  background:rgba(59,130,246,.12);
-                  border:1px solid rgba(59,130,246,.35);
-                  color:#93c5fd;
-                  padding:4px 10px;
-                  border-radius:6px;
-                  font-size:.75rem;
-                  text-decoration:none;
-                  white-space:nowrap;
+                  background:${btnColor};
+                  padding:4px 10px;border-radius:6px;
+                  font-size:.75rem;text-decoration:none;white-space:nowrap;
                   transition:background .2s,border-color .2s;
                 "
-                onmouseover="this.style.background='rgba(59,130,246,.25)';this.style.borderColor='rgba(59,130,246,.6)'"
-                onmouseout="this.style.background='rgba(59,130,246,.12)';this.style.borderColor='rgba(59,130,246,.35)'"
+                onmouseover="${btnHoverIn}"
+                onmouseout="${btnHoverOut}"
                 >🔗 ${item.source}</a>
               </td>
             </tr>
-          `).join('')}
+          `}).join('')}
         </tbody>
       </table>
     </div>
