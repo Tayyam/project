@@ -433,12 +433,13 @@ const DATA = {
       note: "أدوات ثقيلة الوزن، تتوفر بضمان محلي وأسعار منافسة.",
       currency: "EGP",
       items: [
-        { name: "ميكروسكوب رقمي",       model: "Andonstar AD409",        function: "رؤية اللحامات الدقيقة (شاشة 10 إنش)",           priceMin: 14000, priceMax: 18000 },
-        { name: "باور سبلاي معملي",     model: "Sugon 3005D",            function: "تشغيل البوردة للقياسات المبدئية",               priceMin: 4000,  priceMax: 5500  },
-        { name: "كاوي لحام عالي القدرة",model: "90W-120W (T12/Sugon)",   function: "فك مكونات الباور سبلاي الثقيلة",               priceMin: 1500,  priceMax: 2000  },
-        { name: "شفاط قصدير احترافي",   model: "محطة شفط أو Goot Sucker",function: "تنظيف ثقوب البوردة (الباور)",                  priceMin: 500,   priceMax: 1500  },
-        { name: "وصلة برمجة (UART)",    model: "USB to TTL Adapter",     function: "قراءة سجلات إقلاع الكنترول بورد",              priceMin: 150,   priceMax: 150   },
-        { name: "ملاقط دقيقة",          model: "طقم Vetus (أصلي)",       function: "التعامل مع القطع المجهرية",                    priceMin: 600,   priceMax: 800   }
+        { name: "ميكروسكوب رقمي",          model: "Andonstar AD409",              function: "رؤية اللحامات الدقيقة (شاشة 10 إنش)",                      priceMin: 14000, priceMax: 18000 },
+        { name: "باور سبلاي معملي",        model: "Sugon 3005D",                  function: "تشغيل البوردة للقياسات المبدئية",                           priceMin: 4000,  priceMax: 5500  },
+        { name: "كاوية هاشبورد (150W+)",   model: "Quick 205H / Sugon T3602",     function: "لحام الهاشبورد فقط — 150W لاختراق كتلة الألومنيوم",         priceMin: 3000,  priceMax: 5000  },
+        { name: "غسالة ألتراسونيك",        model: "Ultrasonic Cleaner 2L",        function: "تنظيف بقايا الفلاكس في 3 دقائق — بوردة كأنها جديدة",       priceMin: 1500,  priceMax: 3000  },
+        { name: "شفاط قصدير احترافي",      model: "محطة شفط أو Goot Sucker",     function: "تنظيف ثقوب البوردة (الباور)",                               priceMin: 500,   priceMax: 1500  },
+        { name: "وصلة برمجة (UART)",       model: "USB to TTL Adapter",           function: "قراءة سجلات إقلاع الكنترول بورد",                          priceMin: 150,   priceMax: 150   },
+        { name: "ملاقط دقيقة",             model: "طقم Vetus (أصلي)",             function: "التعامل مع القطع المجهرية",                                 priceMin: 600,   priceMax: 800   }
       ]
     },
     imported: {
@@ -497,24 +498,64 @@ const DATA = {
           badge: "أفضل"
         },
         {
-          name: "كاوية لحام T12",
+          name: "كاوية كنترول بورد T12",
           model: "KSGER T12 Soldering Station",
           price: "$44",
           priceBefore: "$203 (Toor T12-X)",
-          saving: "وفر $159 — نفس جودة لحام BGA",
+          saving: "للكنترول بورد فقط (SMD دقيق) — الهاشبورد له Quick 205H محلي",
           url: "https://www.aliexpress.com/item/1005005866827783.html",
           source: "AliExpress",
-          badge: "Game Changer"
+          badge: "للكنترول فقط"
         },
         {
-          name: "منصة تسخين سفلي PCB",
-          model: "iTECH HP-B100 PCB Preheating Platform",
-          price: "$46",
-          priceBefore: "~$93 (Sunshine SS-T12A)",
-          saving: "وفر $47 — تسخين PCB حقيقي وليس مجرد hot plate",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3799",
+          name: "منصة IR تسخين شاملة للهاشبورد",
+          model: "PUHUI T-8280 Large IR Preheater (28×27cm)",
+          price: "$135",
+          priceBefore: "$46 (iTECH HP-B100 — صغيرة تسبب Warping)",
+          saving: "تسخين متساوٍ للهاشبورد كاملاً — نسبة تقوس 0%",
+          url: "https://www.aliexpress.com/w/wholesale-PUHUI-T-8280-preheater.html",
+          source: "AliExpress",
+          badge: "ترقية ضرورية"
+        },
+        {
+          name: "فلاكس لحام ASIC (حقنة)",
+          model: "Amtech NC-559-ASM Flux",
+          price: "$8 / حقنة",
+          priceBefore: "فلاكس محلي مضروب",
+          saving: "الشريحة تعوم وتلحم في ثوانٍ — الأصلي فقط يعمل كده",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3386",
           source: "Zeus Mining",
-          badge: "Game Changer"
+          badge: "الخلطة السرية"
+        },
+        {
+          name: "معجون لحام BGA",
+          model: "Mechanic Solder Paste 183°C",
+          price: "$12",
+          priceBefore: "قصدير محلي درجة انصهاره عالية",
+          saving: "183°C مثالية للـ ASIC — لا تحرق الشريحة",
+          url: "https://www.aliexpress.com/w/wholesale-mechanic-solder-paste-183.html",
+          source: "AliExpress",
+          badge: "الخلطة السرية"
+        },
+        {
+          name: "معجون حراري سائل 1kg",
+          model: "GD900-1 Thermal Grease 6W/mk",
+          price: "$3.4",
+          priceBefore: "معجون محلي منخفض التوصيل",
+          saving: "استهلاك كثيف — 1kg يكفي لأكثر من 200 هاشبورد",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2182",
+          source: "Zeus Mining",
+          badge: "جديد"
+        },
+        {
+          name: "Thermal Putty (معجون جل) 1kg",
+          model: "HY234 Hash Board Thermal Putty",
+          price: "$5",
+          priceBefore: null,
+          saving: "للمشتتات المزدوجة S19 — يملأ الفراغات بشكل كامل",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638",
+          source: "Zeus Mining",
+          badge: "جديد"
         },
         {
           name: "شبلونات الصيانة",
@@ -684,24 +725,25 @@ const DATA = {
   roi: {
     capex: {
       items: [
-        { label: "تجهيزات المحل (تشطيب + أثاث)",                                   usd: 200  },
-        { label: "PicoBT + 3 Test Files (S19, S19j, M30)",                          usd: 600  },
-        { label: "ZOYI ZT-R01 (حرارة+ملتيميتر) + FNIRSI DSO-TC3 (أوسيلوسكوب)",     usd: 150  },
-        { label: "Quick 861DW هواء ساخن + KSGER T12 كاوية + iTECH سخان سفلي",      usd: 455  },
-        { label: "FNIRSI LCR Bridge Tweezers (الميكروسكوب Andonstar محلي)",          usd: 22   },
-        { label: "4 قوالب معجون (S19, S19J, S19Pro, M50) + Stencils",               usd: 250  },
-        { label: "Electronic Load ($64) + Output Tester ($59)",                      usd: 123  },
-        { label: "معجون GD900-1 (1kg) + HY234 Putty + مواد لحام",                  usd: 30   },
-        { label: "أدوات السلامة (مفرش + أسورة + شفاط دخان)",                       usd: 30   }
+        { label: "تجهيزات المحل (تشطيب + أثاث)",                                                usd: 200  },
+        { label: "PicoBT + 3 Test Files (S19, S19j, M30)",                                       usd: 600  },
+        { label: "ZOYI ZT-R01 (حرارة+ملتيميتر) + FNIRSI DSO-TC3 (أوسيلوسكوب)",                  usd: 150  },
+        { label: "Quick 861DW (هواء ساخن) + KSGER T12 (كنترول) + Quick 205H محلي (هاشبورد)",    usd: 465  },
+        { label: "PUHUI T-8280 IR Preheater (28×27cm) — تسخين متساوٍ للهاشبورد كاملاً",          usd: 135  },
+        { label: "FNIRSI LCR Bridge Tweezers (الميكروسكوب Andonstar محلي)",                       usd: 22   },
+        { label: "4 قوالب معجون (S19, S19J, S19Pro, M50) + Stencils",                            usd: 250  },
+        { label: "Electronic Load ($64) + Output Tester ($59)",                                   usd: 123  },
+        { label: "Amtech Flux ×2 + Mechanic Paste 183°C + GD900-1 1kg + HY234 1kg",              usd: 38   },
+        { label: "أدوات السلامة (مفرش + أسورة + شفاط دخان)",                                    usd: 30   }
       ],
-      totalUSD: 1860,
-      totalEGP: 93000,
-      note: "انخفض رأس المال من $2,080 إلى $1,860 — توفير $220 بتغيير KSGER T12 بدلاً من Toor، وحذف 1080P Microscope المكرر (Andonstar محلي يكفي)"
+      totalUSD: 2013,
+      totalEGP: 100650,
+      note: "CAPEX نهائي — PUHUI T-8280 ترقية ضرورية لحماية الهاشبورد من التقوس، والمستهلكات الأصلية تضمن جودة اللحام"
     },
     annualNetProfit:      { usd: 51240, egp: 2562000 },
     monthlyNetProfit:     { usd: 4270,  egp: 213500  },
-    paybackDays:          13,
-    roiPercent:           2655
+    paybackDays:          14,
+    roiPercent:           2446
   },
 
   recommendations: [
@@ -728,6 +770,24 @@ const DATA = {
       title: "علاج الكنترول بورد بالملقط الذكي",
       body: "FNIRSI LCR-ST1 Bridge Tweezers بـ $22 يجعل المهندس يفحص مقاومات ومكثفات الكنترول بورد في ثوانٍ دون الحاجة لفكها من البوردة — سرعة تشخيص تتضاعف.",
       tag: "جديد"
+    },
+    {
+      icon: "🔥",
+      title: "قانون الكاويتين — هاشبورد vs كنترول",
+      body: "KSGER T12 (72W فعلية) للكنترول بورد فقط: SMD دقيق وسنون رفيعة. الهاشبورد كتلة ألومنيوم تمتص الحرارة بشراسة — تحتاج Quick 205H (150W+) محلي. لو الفني حاول لحام هاشبورد بـ T12، السن هيلزق والقصدير مش هيسيح.",
+      tag: "تحذير تقني"
+    },
+    {
+      icon: "🛁",
+      title: "الغسالة الألتراسونيك — الرفاهية المُنتجة",
+      body: "3 دقائق في الغسالة تُنظف كل بقايا الفلاكس بدون فرشة ولا كحول ولا خطر طيران مقاومات SMD. البوردة تطلع بريميوم كأنها جديدة من مصنع Bitmain — يُحسّن رأي العميل فيك فوراً. متوفرة في العتبة بـ 1,500–3,000 جنيه.",
+      tag: "رفاهية منتجة"
+    },
+    {
+      icon: "🧪",
+      title: "الخلطة السرية — مستهلكات أصلية أو لا شيء",
+      body: "Amtech NC-559-ASM الأصلي يخلي الشريحة تعوم وتلحم في ثوانٍ. Mechanic Paste 183°C مثالية للـ ASIC لأن انصهارها الواطئ يحمي الشريحة من الحرارة الزائدة. الفلاكس المحلي المضروب هو سبب 40% من فشل اللحامات.",
+      tag: "الخلطة السرية"
     },
     {
       icon: "✈️",
