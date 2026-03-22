@@ -662,17 +662,41 @@ const DATA = {
   },
 
   costPerRepair: [
-    { category: "الهاشبورد",      materials: "شريحة أو شريحتين + معجون حراري (كثيف) + فلاكس + قصدير", avgCostUSD: 18.00 },
-    { category: "الباور سبلاي",   materials: "2 موسفت كبير + آيسي تحكم + قصدير صلب + مكونات صغيرة",  avgCostUSD: 12.00 },
-    { category: "الكنترول بورد",  materials: "منظم جهد (LDO) أو مقاومات SMD + فلاكس",               avgCostUSD: 4.00  },
-    { category: "الكابلات",       materials: "كابل داتا جديد (شراء الجاهز للبيع أو الاستبدال)",      avgCostUSD: 6.50  }
+    {
+      category: "الهاشبورد",
+      materials: "1.5 شريحة متوسط ($5) + معجون حراري مقنن بالشبلونة ($0.5) + فلاكس أصلي وقصدير 183°C ($1.5)",
+      oldCostUSD: 18,
+      avgCostUSD: 7,
+      savingReason: "شراء الشرائح بسعر ($2–$3.5) + الشبلونة قللت هدر المعجون ~80%"
+    },
+    {
+      category: "الباور سبلاي",
+      materials: "2 موسفت ($2) + آيسي تحكم ($0.5) + قصدير ومكونات SMD صغيرة ($1.5)",
+      oldCostUSD: 12,
+      avgCostUSD: 4,
+      savingReason: "الموسفتات والآيسيهات من Zeus/Alibaba بسنتات مقارنة بالسوق المحلي"
+    },
+    {
+      category: "الكنترول بورد",
+      materials: "2 منظم جهد LDO ($0.15) + فلاكس وقصدير ($0.85)",
+      oldCostUSD: 4,
+      avgCostUSD: 1,
+      savingReason: "LDO بالجملة لا يتجاوز ~$0.05 للقطعة"
+    },
+    {
+      category: "الكابلات",
+      materials: "كابل داتا جديد (10-pin أو 12-pin)",
+      oldCostUSD: 6.5,
+      avgCostUSD: 0.5,
+      savingReason: "طلب 40–100 كابل دفعة واحدة يهبط السعر لأقل من نصف دولار"
+    }
   ],
 
   pricing: [
-    { service: "صيانة الهاشبورد",    clientPrice: 120, materialCost: 18,   netProfit: 102 },
-    { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 12,   netProfit: 68  },
-    { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 4,    netProfit: 46  },
-    { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 6.50, netProfit: 8.50}
+    { service: "صيانة الهاشبورد",    clientPrice: 120, materialCost: 7,    netProfit: 113 },
+    { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 4,    netProfit: 76  },
+    { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1,    netProfit: 49  },
+    { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 0.5,  netProfit: 14.5}
   ],
 
   opex: {
@@ -684,8 +708,8 @@ const DATA = {
     ],
     totalMonthly: 22000,
     setupCost: 10000,
-    breakEvenNote: "يحتاج المركز إلى إصلاح 5 لوحات هاشبورد فقط شهرياً لتغطية كافة المصاريف. أي عملية بعد اللوحة الخامسة تصب في صافي الأرباح.",
-    breakEvenUnits: 5
+    breakEvenNote: "يحتاج المركز إلى إصلاح ~4 لوحات هاشبورد شهرياً (بعد خصم خامات $7) لتغطية المصاريف الثابتة بسعر صرف 54 ج/$. أي عملية بعدها تصب في صافي الأرباح.",
+    breakEvenUnits: 4
   },
 
   monthlyVolume: {
@@ -706,20 +730,21 @@ const DATA = {
   },
 
   monthlyRevenue: [
-    { service: "الهاشبورد",      count: 30, pricePerUnit: 120, totalRevenue: 3600, costPerUnit: 18,   totalCost: 540  },
-    { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 12,   totalCost: 180  },
-    { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 4,    totalCost: 40   },
-    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 6.50, totalCost: 130  }
+    { service: "الهاشبورد",      count: 30, pricePerUnit: 120, totalRevenue: 3600, costPerUnit: 7,    totalCost: 210  },
+    { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 4,    totalCost: 60   },
+    { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1,    totalCost: 10   },
+    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 0.5,  totalCost: 10   }
   ],
 
   pl: {
     currency: "USD / EGP",
-    exchangeRate: 50,
-    grossRevenue:    { usd: 5600,  egp: 280000 },
-    cogs:            { usd: 890,   egp: 44500  },
-    grossProfit:     { usd: 4710,  egp: 235500 },
-    opex:            { usd: 440,   egp: 22000  },
-    netProfit:       { usd: 4270,  egp: 213500 }
+    exchangeRate: 54,
+    exchangeNote: "جميع تحويلات الجنيه أدناه على أساس 1 USD = 54 EGP",
+    grossRevenue:    { usd: 5600,  egp: 302400 },
+    cogs:            { usd: 290,   egp: 15660  },
+    grossProfit:     { usd: 5310,  egp: 286740 },
+    opex:            { usd: 407.41, egp: 22000  },
+    netProfit:       { usd: 4902.59, egp: 264740 }
   },
 
   roi: {
@@ -737,13 +762,13 @@ const DATA = {
         { label: "أدوات السلامة (مفرش + أسورة + شفاط دخان)",                                    usd: 30   }
       ],
       totalUSD: 2013,
-      totalEGP: 100650,
+      totalEGP: 108702,
       note: "CAPEX نهائي — PUHUI T-8280 ترقية ضرورية لحماية الهاشبورد من التقوس، والمستهلكات الأصلية تضمن جودة اللحام"
     },
-    annualNetProfit:      { usd: 51240, egp: 2562000 },
-    monthlyNetProfit:     { usd: 4270,  egp: 213500  },
-    paybackDays:          14,
-    roiPercent:           2446
+    annualNetProfit:      { usd: 58831.08, egp: 3176878 },
+    monthlyNetProfit:     { usd: 4902.59,  egp: 264740  },
+    paybackDays:          12,
+    roiPercent:           2922
   },
 
   recommendations: [
@@ -994,14 +1019,22 @@ main.insertAdjacentHTML('beforeend', `
   <div class="table-wrap" style="margin-bottom:28px">
     <table>
       <thead>
-        <tr><th>القسم</th><th>متوسط الخامات المستهلكة</th><th>متوسط التكلفة</th></tr>
+        <tr>
+          <th>القسم</th>
+          <th>متوسط الخامات المستهلكة (شراء ذكي)</th>
+          <th>قديم</th>
+          <th>جديد</th>
+          <th>سبب التوفير</th>
+        </tr>
       </thead>
       <tbody>
         ${DATA.costPerRepair.map(r => `
           <tr>
             <td style="font-weight:600">${r.category}</td>
-            <td style="color:var(--text-muted);font-size:.83rem">${r.materials}</td>
+            <td style="color:var(--text-muted);font-size:.8rem;max-width:320px">${r.materials}</td>
+            <td class="mono price-old">${fmtUSD(r.oldCostUSD)}</td>
             <td class="green mono">${fmtUSD(r.avgCostUSD)}</td>
+            <td style="color:var(--text-muted);font-size:.78rem;max-width:220px">${r.savingReason}</td>
           </tr>
         `).join('')}
       </tbody>
@@ -1014,7 +1047,7 @@ main.insertAdjacentHTML('beforeend', `
         <div class="stat-card ${colors[i]}">
           <div class="stat-label">${r.category}</div>
           <div class="stat-value">${fmtUSD(r.avgCostUSD)}</div>
-          <div class="stat-sub">تكلفة الخامات</div>
+          <div class="stat-sub">كان ${fmtUSD(r.oldCostUSD)} → وفّر ${fmtUSD(r.oldCostUSD - r.avgCostUSD)}</div>
         </div>
       `;
     }).join('')}
@@ -1035,25 +1068,32 @@ main.insertAdjacentHTML('beforeend', `
         <tr>
           <th>الخدمة</th>
           <th>سعر العميل ($)</th>
-          <th>تكلفة الخامات ($)</th>
-          <th>صافي الربح ($)</th>
-          <th>هامش الربح %</th>
+          <th>سعر العميل (ج)</th>
+          <th>خامات ($)</th>
+          <th>خامات (ج)</th>
+          <th>صافي ($)</th>
+          <th>صافي (ج)</th>
+          <th>هامش %</th>
         </tr>
       </thead>
       <tbody>
         ${DATA.pricing.map(p => {
           const margin = ((p.netProfit / p.clientPrice) * 100).toFixed(1);
+          const xr = DATA.pl.exchangeRate;
           return `
             <tr>
               <td style="font-weight:600">${p.service}</td>
               <td class="blue mono">${fmtUSD(p.clientPrice)}</td>
+              <td class="mono" style="color:#93c5fd;font-size:.85rem">${fmtEGP(Math.round(p.clientPrice * xr))}</td>
               <td style="color:#f87171" class="mono">${fmtUSD(p.materialCost)}</td>
+              <td class="mono" style="color:#fca5a5;font-size:.85rem">${fmtEGP(Math.round(p.materialCost * xr))}</td>
               <td class="green mono">${fmtUSD(p.netProfit)}</td>
+              <td class="mono" style="color:#6ee7b7;font-size:.85rem">${fmtEGP(Math.round(p.netProfit * xr))}</td>
               <td>
                 <div style="display:flex;align-items:center;gap:8px">
                   <span class="amber" style="font-weight:700">${margin}%</span>
                   <div style="flex:1;background:var(--bg3);border-radius:4px;height:6px;min-width:60px">
-                    <div style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent3),#6ee7b7);width:${margin}%"></div>
+                    <div style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent3),#6ee7b7);width:${Math.min(parseFloat(margin), 100)}%"></div>
                   </div>
                 </div>
               </td>
@@ -1062,6 +1102,7 @@ main.insertAdjacentHTML('beforeend', `
         }).join('')}
       </tbody>
     </table>
+    <p class="stat-note" style="margin-top:10px;text-align:center">تحويل الجنيه: 1 USD = ${DATA.pl.exchangeRate} EGP (للمقارنة المحلية فقط)</p>
   </div>
   <div class="grid-4">
     ${DATA.pricing.map((p, i) => {
@@ -1221,6 +1262,7 @@ main.insertAdjacentHTML('beforeend', `
         </tr>
       </tbody>
     </table>
+    <p class="stat-note" style="margin-top:10px;text-align:center">تكلفة الخامات الشهرية الإجمالية ≈ ${fmtEGP(Math.round(totCost * DATA.pl.exchangeRate))} (× ${DATA.pl.exchangeRate} ج/دولار)</p>
   </div>
 </section>
 `);
@@ -1233,6 +1275,7 @@ main.insertAdjacentHTML('beforeend', `
     <div class="icon">🧾</div>
     <h2>قائمة الدخل <span>الشهرية</span></h2>
   </div>
+  ${pl.exchangeNote ? `<p class="stat-note" style="text-align:center;margin:-8px 0 16px;font-size:.85rem">${pl.exchangeNote}</p>` : ''}
   <div class="grid-2">
     <div class="card">
       <div class="card-title">📑 بالدولار الأمريكي (USD)</div>
