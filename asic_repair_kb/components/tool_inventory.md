@@ -19,8 +19,7 @@
 | ZOYI ZT-R01 (حراري + ملتيميتر) | ✅ |
 | FNIRSI DSO-TC3 (Tester فقط) | ✅ |
 | Oscilloscope UNI-T UTD2102CEX+ (100 MHz) — Zeus | ✅ |
-| Sugon 3005D (دوائر كنترول فقط) | ✅ |
-| WANPTEK KPS3030D (هاشبورد / بنش DC) — Zeus | ✅ |
+| WANPTEK KPS3030D (بنش: هاش + كنترول بحد تيار منخفض) — Zeus | ✅ |
 | USB to TTL + أسلاك جسر Zeus (2461) | ✅ |
 | PICKit 3.5 + كابل EEPROM (Hashboard decode) — Zeus | ✅ |
 
@@ -28,11 +27,10 @@
 
 | العنصر | الحالة |
 |---|---|
-| Quick 861DW هواء ساخن | ✅ |
-| Quick 707D+ / 709D+ (2 في 1) — Zeus | ✅ |
+| Quick 861DW هواء ساخن (BGA قوي) | ✅ |
+| Quick 707D+ / 709D+ (كاوية + هواء، Zeus) — بدل كاوية هاش منفصلة | ✅ |
 | PUHUI T-8280 IR Preheater | ✅ |
 | iTECH HP-B100 (سطح صغير) — Zeus | ✅ |
-| Quick 205H + Tips | ✅ |
 | Andonstar AD207 Microscope | ✅ |
 | Ultrasonic Cleaner | ✅ |
 

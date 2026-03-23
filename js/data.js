@@ -117,7 +117,7 @@ export const DATA = {
               model: "Antminer APW12 — إصدارات 1215 (a/b/c/d/e/f/g) حسب الموديل",
               function: "12–15V / 70A+ — التشغيل الحقيقي تحت الحمل مع PicoBT. ⚠️ أكد رقم الإصدار مع مبيعات Zeus (واتساب) — الإصدارات غير متوافقة بين الموديلات.",
               price: "$82",
-              priceBefore: "Sugon 3005D لا يكفي (150W vs 1000W+)",
+              priceBefore: "باور مختبر صغير لا يكفي لتيار الهاش الكامل (≈150W مقابل 1000W+)",
               saving: "صفحة Zeus — اختر الإصدار المناسب لهاشبورداتك",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=306",
               source: "Zeus Mining",
@@ -223,12 +223,12 @@ export const DATA = {
               badge: "EEPROM"
             },
             {
-              name: "باور DC قابل للضبط (هاشبورد)",
+              name: "باور DC قابل للضبط (بنش — هاش + كنترول)",
               model: "WANPTEK KPS3030D — 30V 30A 900W + كابلات تمساح 6mm",
-              function: "تغذية هاشبورد لقياس الجهد بدل الاعتماد على الباور الأصلي فقط؛ اختر الموديل/الكابلات على الصفحة (~**$230** مع كابلات 6mm حسب اختيارك).",
+              function: "**وحدة واحدة للبنش:** قياس/تغذية هاشبورد (تيار عالٍ) **و** حقن فولت دوائر الكنترول — على الكنترول اضبط **حد تيار منخفض** وفعّل OCP حتى لا تضر بالـ LDO. اختر الموديل/الكابلات على الصفحة (~**$230** مع كابلات 6mm حسب اختيارك).",
               price: "$230",
-              priceBefore: "Sugon 3005D للكنترول فقط (ضعيف أمام الهاش)",
-              saving: "Zeus — مرجع لسلسلة KPS",
+              priceBefore: "باورين منفصلين (5A محلي + هاش) لم يعودا ضروريين",
+              saving: "Zeus — سلسلة KPS",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2184",
               source: "Zeus Mining",
               badge: "Bench DC"
@@ -247,7 +247,7 @@ export const DATA = {
             {
               name: "محطة لحام 2 في 1",
               model: "Quick 707D+ أو 709D+ — هواء ساخن + كاوية",
-              function: "إصلاح هاش وباور ASIC — اختر 707D+ (800W هواء) أو 709D+ أقوى على نفس الصفحة؛ **لا يستبدل 861DW** إن احتجت هواء أقصى للـ BGA الكبير.",
+              function: "إصلاح هاش وباور ASIC — **كاوية اللحام + الهواء الساخن في محطة واحدة**؛ يغني عن شراء كاوية هاش منفصلة (مثل 205H محلياً). اختر 707D+ (800W هواء) أو 709D+ أقوى؛ رؤوس **سلسلة 960** من نفس صفحة Zeus. **لا يستبدل 861DW** إن احتجت هواء أقصى للـ BGA الكبير.",
               price: "$90",
               priceBefore: null,
               saving: "Zeus — توفير مساحة مقابل محطتين منفصلتين",
@@ -296,9 +296,6 @@ export const DATA = {
           kind: "egp",
           items: [
             { name: "ميكروسكوب رقمي", model: "Andonstar AD207 (7 إنش)", function: "رؤية اللحامات والمسارات المقطوعة بدقة.", price: 7000 },
-            { name: "كاوية هاشبورد", model: "Quick 205H (150W) أو Sugon T3602", function: "القوة المطلوبة لسحب/لحام الهاشبورد — ليس للكنترول فقط.", price: 4000 },
-            { name: "Tips للـ Quick 205H", model: "Chisel T10 + Fine Point T2 + Bevel K2", function: "رأس عريض للهاشبورد ورأس دقيق للـ SMD — الـ tip الغلط يحرق الـ pad.", price: 350 },
-            { name: "باور سبلاي معملي (كنترول)", model: "Sugon 3005D (30V / 5A)", function: "حقن فولت واختبار دوائر الكنترول — لا يشغّل هاشبورد S19 على PicoBT كاملاً؛ **للهاش استخدم WANPTEK من Zeus.**", price: 4700 },
             { name: "سنون ملتيميتر دقيقة", model: "Steel Needle Probes / حامل سن رفيع", function: "قياس بين رجلي شريحة ASIC والـ test points الضيقة — السن العادي يعمل قفلة.", price: 350 },
             { name: "قصدير لحام خالي من الرصاص", model: "Alpha أو Kester lead-free", function: "هاش S19 lead-free — خلط 60/40 في نقاط حساسة قد يسبب مشاكل توصيل حراري/موثوقية.", price: 900 },
             { name: "منظف بورد مائي", model: "Board Wash / Aqueous flux cleaner", function: "بعد الشغل: أنظف من IPA وحده — يقلل بقايا بيضاء أحياناً مع الفلاكس.", price: 450 },
@@ -588,7 +585,7 @@ export const DATA = {
 
     localSupplies: {
       title: "③ العتبة ومول البستان — متجدد ومساعد",
-      note: "كل ما هو متاح في مصر: مواد متجددة، كيماويات، كهرباء بسيطة، وإكسسوارات يومية — أقل شحن وأسرع تعويض. **تبريد اختبار الهاش، سكوب 100 MHz، PICkit، باور DC للهاش، منفضة F10، وطقم Jumpers Zeus** انقلت لقائمة أصول Zeus في `① قائمة الأصول`.",
+      note: "كل ما هو متاح في مصر: مواد متجددة، كيماويات، كهرباء بسيطة، وإكسسوارات يومية — أقل شحن وأسرع تعويض. **تبريد اختبار الهاش، سكوب 100 MHz، PICkit، باور DC بنش (WANPTEK — هاش + كنترول)، منفضة F10، وطقم Jumpers Zeus** في `① قائمة الأصول`.",
       location: "مصر — العتبة / مول البستان / شركات كيماويات",
       currency: "EGP",
       items: [
@@ -705,7 +702,7 @@ export const DATA = {
         { label: "تجهيزات المحل (تشطيب + أثاث)", usd: 200 },
         { label: "جمارك + شحن منتجات من الخارج (مرة واحدة)", usd: 500 }
       ],
-      note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي + TC3 كـ tester + ZOYI + PICKit 3.5 Zeus + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm Zeus + Quick 205H/707D+ + 861DW + AD207 + PUHUI T-8280 / HP-B100."
+      note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي + TC3 كـ tester + ZOYI + PICKit 3.5 Zeus + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm Zeus + **Quick 707D+** (كاوية+هواء) + **861DW** (هواء قوي BGA) + AD207 + PUHUI T-8280 / HP-B100."
     },
     annualNetProfit:      { usd: 36172.44, egp: 1953312 },
     monthlyNetProfit:     { usd: 3014.37,  egp: 162776  },
