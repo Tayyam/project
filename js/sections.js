@@ -658,7 +658,7 @@ main.insertAdjacentHTML('beforeend', `
 `);
 
 /* ── 10. ROI ── */
-const roi = DATA.roi;
+const roiCfg = DATA.roi || {};
 const xr = DATA.pl.exchangeRate || 54;
 
 function parseUsdPrice(value) {
@@ -684,7 +684,7 @@ function buildCapexFromPurchases(data) {
     }
   });
 
-  const extras = (data.roi.capex.extraItems || []).map(x => ({
+  const extras = (((data.roi || {}).capex || {}).extraItems || []).map(x => ({
     label: x.label,
     usd: Number(x.usd) || 0
   }));
@@ -709,11 +709,29 @@ function buildCapexFromPurchases(data) {
 }
 
 const capexComputed = buildCapexFromPurchases(DATA);
+const monthlyRevenueFromTable = totRev;
+const monthlyMktFromTable = totMkt;
+const monthlyCogsFromTable = totCost;
+const monthlyGrossProfitFromTable = monthlyRevenueFromTable - monthlyMktFromTable - monthlyCogsFromTable;
+const monthlyOpexEGP = Number(DATA.opex?.totalMonthly) || (DATA.opex?.monthly || []).reduce((s, r) => s + (Number(r.amount) || 0), 0);
+const monthlyOpexUSD = monthlyOpexEGP / xr;
+const monthlyNetProfitUSD = monthlyGrossProfitFromTable - monthlyOpexUSD;
+const monthlyNetProfitEGP = Math.round(monthlyNetProfitUSD * xr);
+const annualNetProfitUSD = monthlyNetProfitUSD * 12;
+const annualNetProfitEGP = Math.round(annualNetProfitUSD * xr);
+const paybackDays = monthlyNetProfitUSD > 0
+  ? Math.ceil((capexComputed.totalUSD / monthlyNetProfitUSD) * 30)
+  : null;
+const roiPercent = capexComputed.totalUSD > 0
+  ? Math.round((annualNetProfitUSD / capexComputed.totalUSD) * 100)
+  : 0;
+const paybackLabel = paybackDays ? `${paybackDays} يوم` : "غير متاح";
+const paybackSub = paybackDays ? "فترة الاسترداد" : "صافي الربح الشهري ≤ 0";
 const roiItems = [
-  { label: 'صافي الربح الشهري',  value: fmtUSD(roi.monthlyNetProfit.usd),  color: 'green',  sub: fmtEGP(roi.monthlyNetProfit.egp) },
-  { label: 'صافي الربح السنوي',  value: fmtUSD(roi.annualNetProfit.usd),   color: 'amber',  sub: fmtEGP(roi.annualNetProfit.egp)  },
-  { label: 'استرداد رأس المال',  value: roi.paybackDays + ' يوم',           color: 'blue',   sub: 'فترة الاسترداد'                 },
-  { label: 'العائد السنوي',      value: '+' + roi.roiPercent + '%',          color: 'red',    sub: 'ROI مذهل'                       }
+  { label: 'صافي الربح الشهري',  value: fmtUSD(monthlyNetProfitUSD), color: 'green', sub: fmtEGP(monthlyNetProfitEGP) },
+  { label: 'صافي الربح السنوي',  value: fmtUSD(annualNetProfitUSD),  color: 'amber', sub: fmtEGP(annualNetProfitEGP)  },
+  { label: 'استرداد رأس المال',  value: paybackLabel,                color: 'blue',  sub: paybackSub                 },
+  { label: 'العائد السنوي',      value: (roiPercent >= 0 ? '+' : '') + roiPercent + '%', color: 'red', sub: 'محسوب ديناميكياً' }
 ];
 
 main.insertAdjacentHTML('beforeend', `
@@ -736,7 +754,7 @@ main.insertAdjacentHTML('beforeend', `
   <div class="grid-2">
     <div class="card">
       <div class="card-title">💸 رأس المال المدفوع (CAPEX)</div>
-      ${roi.capex.note ? `<div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:.8rem;color:#34d399">✓ ${roi.capex.note}</div>` : ''}
+      ${roiCfg.capex?.note ? `<div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:.8rem;color:#34d399">✓ ${roiCfg.capex.note}</div>` : ''}
       ${capexComputed.items.map(item => `
         <div class="capex-item">
           <span style="color:var(--text-muted);font-size:.83rem">${item.label}</span>
@@ -754,7 +772,7 @@ main.insertAdjacentHTML('beforeend', `
       <div style="padding:10px 0">
         <div style="display:flex;justify-content:space-between;margin-bottom:6px">
           <span style="font-size:.84rem;color:var(--text-muted)">ROI السنوي</span>
-          <span style="font-weight:800;color:var(--accent3)">+${roi.roiPercent}%</span>
+          <span style="font-weight:800;color:var(--accent3)">${(roiPercent >= 0 ? '+' : '') + roiPercent}%</span>
         </div>
         <div class="roi-bar-wrap">
           <div class="roi-bar" id="roiBar1" style="width:0%"></div>
@@ -763,7 +781,7 @@ main.insertAdjacentHTML('beforeend', `
       <div style="padding:10px 0;margin-top:8px">
         <div style="display:flex;justify-content:space-between;margin-bottom:6px">
           <span style="font-size:.84rem;color:var(--text-muted)">نسبة استرداد رأس المال</span>
-          <span style="font-weight:800;color:#60a5fa">في ${roi.paybackDays} يوماً فقط!</span>
+          <span style="font-weight:800;color:#60a5fa">${paybackDays ? `في ${paybackDays} يوماً فقط!` : "غير متاح حالياً"}</span>
         </div>
         <div class="roi-bar-wrap">
           <div class="roi-bar" id="roiBar2" style="width:0%;background:linear-gradient(90deg,var(--accent2),#93c5fd)"></div>
@@ -771,9 +789,12 @@ main.insertAdjacentHTML('beforeend', `
       </div>
       <div style="margin-top:20px;padding:14px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:10px;text-align:center">
         <div style="font-size:.84rem;color:var(--text-muted);margin-bottom:6px">الربح السنوي المتوقع</div>
-        <div style="font-size:1.8rem;font-weight:900;color:#34d399">${fmtUSD(roi.annualNetProfit.usd)}</div>
-        <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px">${fmtEGP(roi.annualNetProfit.egp)} سنوياً</div>
+        <div style="font-size:1.8rem;font-weight:900;color:#34d399">${fmtUSD(annualNetProfitUSD)}</div>
+        <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px">${fmtEGP(annualNetProfitEGP)} سنوياً</div>
       </div>
+      <p class="stat-note" style="margin-top:12px;text-align:center">
+        يعتمد على «الإيرادات الشهرية»: ${fmtUSD(monthlyRevenueFromTable)} إيراد - ${fmtUSD(monthlyMktFromTable)} عمولة - ${fmtUSD(monthlyCogsFromTable)} خامات - ${fmtUSD(monthlyOpexUSD)} OPEX.
+      </p>
     </div>
   </div>
 </section>
