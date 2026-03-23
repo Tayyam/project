@@ -166,12 +166,12 @@ export const DATA = {
             { name: "Tips للـ Quick 205H", model: "Chisel T10 + Fine Point T2 + Bevel K2", function: "رأس عريض للهاشبورد ورأس دقيق للـ SMD — الـ tip الغلط يحرق الـ pad.", price: 350 },
             { name: "باور سبلاي معملي", model: "Sugon 3005D (30V / 5A)", function: "حقن فولت واختبار دوائر الكنترول — لا يشغّل هاشبورد S19 على PicoBT.", price: 4700 },
             { name: "مبرمج PIC (S19)", model: "PICkit 3 أو PICkit 4 + تثبيت MPLAB IPE", function: "برمجة PIC16F1704 على هاشبورد S19 — بدون سوفت سليم البوردة لا تكتشف شرائح حتى لو الهارد سليم.", price: 3200 },
-            { name: "سوار تفريغ كهروستاتيكي", model: "ESD Wrist Strap موصول أرضي مع المات", function: "الحصيرة وحدها لا تكفي — السوار إلزامي لتقليل تلف الـ ASIC من جسمك.", price: 150 },
             { name: "سنون ملتيميتر دقيقة", model: "Steel Needle Probes / حامل سن رفيع", function: "قياس بين رجلي شريحة ASIC والـ test points الضيقة — السن العادي يعمل قفلة.", price: 350 },
             { name: "قصدير لحام خالي من الرصاص", model: "Alpha أو Kester lead-free", function: "هاش S19 lead-free — خلط 60/40 في نقاط حساسة قد يسبب مشاكل توصيل حراري/موثوقية.", price: 900 },
             { name: "منظف بورد مائي", model: "Board Wash / Aqueous flux cleaner", function: "بعد الشغل: أنظف من IPA وحده — يقلل بقايا بيضاء أحياناً مع الفلاكس.", price: 450 },
             { name: "حامل مفكات وملاقط", model: "Tool Rack / حامل رأسي — مول البستان أو محلات صيانة", function: "تنظيم الملاقط والمفكات رأسياً لحماية السنون وتوفير مساحة البنش.", price: 350 },
-            { name: "حصيرة سيليكون مغناطيسية", model: "Magnetic Heat-Insulation Mat — حماية سطح المكتب + تثبيت مسامير", function: "سيليكون مقاوم للحرارة مع مناطق مغناطيس للمسامير أثناء فك الجهاز؛ يحمي من الهوت إير.", price: 480 }
+            { name: "حصيرة سيليكون مغناطيسية", model: "Magnetic Heat-Insulation Mat — حماية سطح المكتب + تثبيت مسامير", function: "سيليكون مقاوم للحرارة مع مناطق مغناطيس للمسامير أثناء فك الجهاز؛ يحمي من الهوت إير.", price: 480 },
+            { name: "محول عزل (APW12 + Oscilloscope)", model: "Isolation Transformer 220V↔220V (1kVA تقريباً)", function: "إلزامي لقياسات الباور على البنش مع الأوسيلوسكوب لتجنب قفلة أرضي وحماية السكوب أثناء تشخيص APW12.", price: 6500 }
           ]
         },
         {
@@ -192,8 +192,8 @@ export const DATA = {
           tableHint: "طلب سريع من المتاجر المحلية",
           kind: "egp",
           items: [
-            { name: "مفك كهربائي", model: "Xiaomi / Wowstick / مماثل", function: "فك وتركيب عشرات المسامير يومياً — يحمي المعصم.", price: 1000 },
-            { name: "ماكينة طباعة ملصقات", model: "Label Maker — جرير / Amazon.eg / Noon (تقريباً)", function: "ملصقات لقيم المكونات على الأدراج وأكواد تتبع لكل بوردة.", price: 1850 }
+            { name: "ماكينة طباعة ملصقات", model: "Label Maker — جرير / Amazon.eg / Noon (تقريباً)", function: "ملصقات لقيم المكونات على الأدراج وأكواد تتبع لكل بوردة.", price: 1850 },
+            { name: "كاميرا حرارية منفصلة", model: "Infiray P2 Pro أو FLIR (نسخة موبايل/USB)", function: "كشف الـ Short على مستوى البوردة كاملة بسرعة أعلى من وضع الملتيميتر الحراري وحده.", price: 12500 }
           ]
         }
       ]
@@ -391,6 +391,17 @@ export const DATA = {
           url: "https://www.aliexpress.com/w/wholesale-esd-anti-static-storage-box-smd.html",
           source: "AliExpress",
           badge: "تنظيم · ASIC"
+        },
+        {
+          name: "أكياس مانعة للشحنات (ESD Bags)",
+          model: "عبوة 100 كيس مقاسات مختلطة",
+          function: "تسليم الهاش بورد بعد الإصلاح بشكل احترافي وحمايته من ESD أثناء النقل والتخزين.",
+          price: "$12 / 100 pcs",
+          priceBefore: null,
+          saving: "مستهلك بسيط يرفع الجودة ويحمي الشحن",
+          url: "https://www.aliexpress.com/w/wholesale-anti-static-esd-bag-pcb.html",
+          source: "AliExpress",
+          badge: "Packaging"
         }
       ]
     },
@@ -407,9 +418,14 @@ export const DATA = {
         { name: "كهرباء البنش", model: "أسلاك نحاس AWG6 + ترامل حلقية + كابلات باور أصلية", function: "ربط APW12 بالهاشبورد بأمان — يفصلها كهربائي ~100 ج.", price: 150 },
         { name: "مقاومة تفريغ (سلامة البنش)", model: "Discharge Resistor — 25Ω / 100W اسمنتية — محلياً", function: "✗ مطلوب لأمان باور الاختبار على البنش: تفريغ تدريجي للمكثفات الكبيرة بعد الفصل وتقليل صدمات/شرر عند التعامل مع APW12 أو التغذية العالية. اشترِها من محلات المقاومات والكهرباء (العتبة/البستان).", price: 100 },
         { name: "معجون حراري عام", model: "GD900 أو ما يعادله (سائل)", function: "للاستخدام العام على المشتتات — ليس بديل Thermal Putty في الفجوات.", price: 250 },
-        { name: "إكسسوارات يد", model: "ملاقط Vetus + شفاط قصدير (Goot Sucker) + إسفنج نحاس للكاوية", function: "شغل يومي نظيف وسريع على البوردة.", price: 1200 },
         { name: "قياس وبرمجة بسيطة", model: "USB to TTL + Dupont jumpers (ذكر-ذكر/أنثى-أنثى)", function: "UART للكنترول؛ **Dupont** لتوصيل PICkit بنقاط الاختبار/ICSP على البوردة.", price: 350 },
-        { name: "سلك جسر فائق الدقة", model: "Jumper / Enameled Wire قطر 0.1mm — العتبة / مول البستان", function: "جسور للمسارات المقطوعة أو الـ pads الضيقة؛ يُباع بالمتر أو بكرة صغيرة من محلات الكيماويات والإلكترونيات.", price: 120 }
+        { name: "سلك جسر فائق الدقة", model: "Jumper / Enameled Wire قطر 0.1mm — العتبة / مول البستان", function: "جسور للمسارات المقطوعة أو الـ pads الضيقة؛ يُباع بالمتر أو بكرة صغيرة من محلات الكيماويات والإلكترونيات.", price: 120 },
+        { name: "لمبة UV لتجفيف الماسك", model: "UV Curing Lamp صغيرة (365-405nm)", function: "تجفيف UV Mask بعد عمل Jumper خلال دقيقة تقريباً بدل انتظار طويل.", price: 320 },
+        { name: "بخاخ تنظيف تلامسات", model: "WD-40 Specialist Contact Cleaner أو مكافئ", function: "تنظيف سوكيتات الداتا والمناطق المتأكسدة/المكربنة قبل إعادة الاختبار.", price: 280 },
+        { name: "سلك تنظيف الكاوية", model: "Brass Wool Cup", function: "أفضل من السفنجة المبلولة للحفاظ على حرارة السن وإطالة عمر الـ tip.", price: 90 },
+        { name: "شفاط قصدير يدوي", model: "Desoldering Pump (SS-02 أو مكافئ)", function: "فك مكونات PSU الأكبر وسحب القصدير من الثقوب بشكل أنظف.", price: 420 },
+        { name: "فرش تنظيف ESD", model: "طقم 3-5 أحجام (Anti-static Brushes)", function: "تنظيف الفلاكس وبواقي الكربون حول الـ ASIC ودوائر الباور بدون شحنات ساكنة.", price: 220 },
+        { name: "مناديل خالية من الوبر", model: "Lint-free Wipes", function: "تنظيف سطح الـ ASIC والـ pads قبل وضع Thermal Putty أو المعجون.", price: 140 }
       ]
     }
   },

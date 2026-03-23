@@ -16,6 +16,8 @@
 - ✓ ZOYI ZT-R01 Thermography Multimeter (thermal + voltage simultaneously)
 - ✓ FNIRSI DSO-TC3 — **LCR / component tester** (caps, transistors, simple checks). **Not** hash CLK scope: oscilloscope mode bandwidth **≪ 1 MHz**; S19/M30 CLK **~25 MHz+** does not display.
 - ⚠️ **Desktop oscilloscope ≥ 100 MHz** (e.g. Rigol DS1102Z-E / Siglent) — **required** for hash CLK / high-speed signals — *on purchase plan (EGP, local mall)*.
+- 📋 **Standalone thermal camera** (Infiray P2 Pro / FLIR class) — board-level short scan in seconds — *on purchase plan (online Egypt)*.
+- 📋 **Isolation transformer** (APW12 + oscilloscope safety for mains-side probing) — *on purchase plan (البستان)*.
 - ✓ Sugon 3005D Lab PSU 30V/5A (control-board circuits only — **not** full hash rail current for M30/M50)
 - ✓ USB to TTL + **Dupont jumpers** (UART; PICkit / ICSP to test points on S19 hash — *on purchase plan in local supplies*)
 
@@ -43,7 +45,13 @@
 - ✓ HY234 thermal putty 1kg (dual-heatsink S19/M30 gaps)
 - ✓ GD900 (general paste — **not** Zeus chip-surface spec)
 - ✓ IPA 99% + Kapton + aluminum tape + solder wick + copper sponge
+- 📋 **UV curing lamp** (365–405nm) — for quick UV mask curing after jumper repair — *on purchase plan (local)*.
 - 📋 **Board wash** (aqueous / flux cleaner) — *on purchase plan (EGP)*
+- 📋 **Contact cleaner spray** (WD-40 Specialist class) — sockets / oxidation cleanup — *on purchase plan (EGP)*.
+- 📋 **Brass wool cup** (tip cleaner) — *on purchase plan (EGP)*.
+- 📋 **Desoldering pump** (SS-02 class) — *on purchase plan (EGP)*.
+- 📋 **ESD cleaning brushes** (multi-size set) — *on purchase plan (EGP)*.
+- 📋 **Lint-free wipes** — ASIC/pad surface prep before thermal interface — *on purchase plan (EGP)*.
 - 📋 **Lead-free solder wire** (Alpha / Kester class) — *on purchase plan (EGP)* — S19 boards are lead-free process
 
 ### Spare parts stock *(+ specialty import list in hub)*
@@ -54,6 +62,7 @@
 - 📋 **BGA solder balls 0.4 mm** — reball S19/M30
 - 📋 **APW12 bench IIC/EN enable jig** — outputs on bench without full miner — Zeus / equivalent (`importedSpecialty`)
 - 📋 **Industrial MicroSD** 8–16 GB × several — PicoBT/CB4 FPGA, S19 SD recovery (*per card ~$8 in data*)
+- 📋 **Anti-static ESD bags** (mixed sizes) — repaired-board delivery / transport protection — *on purchase plan (`importedSpecialty`)*
 
 ### Additional specs from Zeus guides *(not always in shop JSON — acquire to match FILE text)*
 - ⚠️ **Fujipoly SPG-30B** (or equivalent Zeus chip-surface thermal gel) — **not** GD900 on ASIC top
@@ -89,7 +98,6 @@ Cross-check [FILE 1](repair_s19_hashboard.md), [FILE 2](repair_whatsminer_m30s_h
 | **Oscilloscope ≥ 100 MHz** | ⚠️ **Must acquire** | CLK diagnosis; TC3 invalid for ~25 MHz — **in `data.js` (البستان)**. |
 | **Electronic load ~3.6 kW / 0–50 V** or resistive dummy | ⚠️ Missing | FILE 7 — APW12 load test. |
 | **AC variac / 200–250 V limited** OR **100 W bulb in series** | ⚠️ Missing | FILE 7 — safe AC bring-up. |
-| **ESD wrist strap** | 📋 In **`data.js`** (البستان) | Required with mat — FILE 7. |
 | **Steel needle probes** | 📋 In **`data.js`** | FILE 1 — tight TPs / ASIC legs. |
 | **PICkit + MPLAB IPE** | 📋 Hardware in **`data.js`**; ⚠️ **install SW** | S19 PIC firmware path. |
 | **MicroSD industrial × several** | 📋 In **`data.js`** (`importedSpecialty`) | PicoBT / recovery images. |
@@ -97,13 +105,16 @@ Cross-check [FILE 1](repair_s19_hashboard.md), [FILE 2](repair_whatsminer_m30s_h
 | **Board wash** | 📋 In **`data.js`** | Complements IPA / flux residue. |
 | **4× fans + duct** (or miner shell) S19 signal test | ⚠️ Missing | FILE 1 — mandatory for signal measurements. |
 | **M1 shell + fan** (or equivalent) Whatsminer | ⚠️ Missing | FILE 2 — cooled hash on bench. |
-| **Hand tools** — pliers, cutters, Phillips | ⚠️ Missing | FILE 7 + general tear-down. |
 | **Knife-shaped iron tip** (optional) | ⚠️ Optional | FILE 7 — large through-hole on APW12. |
+| **Isolation transformer** | 📋 In **`data.js`** (البستان) | For APW12 + oscilloscope mains-side diagnostics; prevents ground short risk. |
+| **Standalone thermal camera** | 📋 In **`data.js`** (online Egypt) | Fast whole-board short detection beyond multimeter-thermal workflow. |
+| **UV curing lamp** | 📋 In **`data.js`** (local supplies) | Needed to cure UV mask quickly after jumper repair. |
+| **Contact cleaner / Brass wool / Desolder pump / ESD brushes / Lint-free wipes** | 📋 In **`data.js`** (local supplies) | Missing consumables set now added to purchase plan. |
 | **USB–Ethernet adapter** | ⚠️ Optional | FILE 4 — if no RJ45 on laptop. |
 | **Ethernet patch cables** | ⚠️ Optional | PicoBT / miner LAN. |
 | **PSU test card / ZJ0001000001** | ⚠️ Unclear | FILE 7 vs PicoBT capability — see [knowledge_in_progress](knowledge_in_progress.md) `psu_output_tester`. |
 | **Zeus paste column M705** | ⚠️ Optional | FILE 1 vs your **Mechanic 183 °C** — validate process. |
 
-> **Summary:** Strongest remaining **process** gaps = **≥10 A hash bench supply** (Whatsminer), **electronic load / variac** for APW12, **fan/duct or shell** for guided signal tests, plus **install MPLAB IPE** when PICkit arrives. Purchase-plan items (ESD strap, scope, jig, 0402 kits, etc.) are already in **`js/data.js`** — track receipt here by flipping 📋 → ✓.
+> **Summary:** Strongest remaining **process** gaps = **≥10 A hash bench supply** (Whatsminer), **electronic load / variac** for APW12, **fan/duct or shell** for guided signal tests, plus **install MPLAB IPE** when PICkit arrives. New diagnostics/consumables (thermal camera, isolation transformer, UV lamp, cleaner set) are mapped in **`js/data.js`** — flip 📋 → ✓ after receipt.
 
 > Treat this section as a **pre-flight checklist** before claiming “fully equipped” for every FILE.
