@@ -472,6 +472,46 @@ main.insertAdjacentHTML('beforeend', `
 `);
 
 /* ── 6. Monthly Volume ── */
+const volumeCfg = DATA.monthlyVolume || {};
+const templateServices = Array.isArray(volumeCfg.services) ? volumeCfg.services : [];
+const serviceTemplateByKey = new Map();
+const keyOfService = (name = "") => {
+  const s = String(name);
+  if (s.includes("هاش")) return "hash";
+  if (s.includes("باور")) return "psu";
+  if (s.includes("كنترول")) return "ctrl";
+  if (s.includes("كابل")) return "cable";
+  return s.trim();
+};
+templateServices.forEach(s => serviceTemplateByKey.set(keyOfService(s.type), s));
+
+const volumeRows = (DATA.monthlyRevenue || []).map(r => {
+  const key = keyOfService(r.service);
+  const tpl = serviceTemplateByKey.get(key);
+  const count = Number(r.count) || 0;
+  const fallbackHoursPerUnit = tpl && (Number(tpl.monthlyCount) > 0)
+    ? (Number(tpl.totalHours) || 0) / Number(tpl.monthlyCount)
+    : 0;
+  const hoursPerUnit = Number(tpl?.hoursPerUnit) || fallbackHoursPerUnit;
+  const totalHours = count * hoursPerUnit;
+  return {
+    type: tpl?.type || r.service,
+    monthlyCount: count,
+    timePerUnit: tpl?.timePerUnit || "—",
+    improvement: tpl?.improvement || null,
+    totalHours
+  };
+});
+
+const totalOperationsDyn = volumeRows.reduce((s, r) => s + r.monthlyCount, 0);
+const totalEffectiveHoursDyn = volumeRows.reduce((s, r) => s + r.totalHours, 0);
+const workDays = Number(volumeCfg.workDays) || 25;
+const hoursPerDay = Number(volumeCfg.hoursPerDay) || 8;
+const totalHoursDyn = workDays * hoursPerDay;
+const capacityUsedPercentDyn = totalHoursDyn > 0
+  ? Math.round((totalEffectiveHoursDyn / totalHoursDyn) * 100)
+  : 0;
+
 main.insertAdjacentHTML('beforeend', `
 <section id="volume">
   <div class="section-heading">
@@ -481,22 +521,22 @@ main.insertAdjacentHTML('beforeend', `
   <div class="grid-4" style="margin-bottom:24px">
     <div class="stat-card amber">
       <div class="stat-label">أيام العمل</div>
-      <div class="stat-value">${DATA.monthlyVolume.workDays}</div>
+      <div class="stat-value">${workDays}</div>
       <div class="stat-sub">يوم / شهر</div>
     </div>
     <div class="stat-card blue">
       <div class="stat-label">إجمالي ساعات الدوام</div>
-      <div class="stat-value">${DATA.monthlyVolume.totalHours}</div>
+      <div class="stat-value">${totalHoursDyn}</div>
       <div class="stat-sub">ساعة شهرياً</div>
     </div>
     <div class="stat-card green">
       <div class="stat-label">ساعات العمل الفعلية</div>
-      <div class="stat-value">${DATA.monthlyVolume.totalEffectiveHours}</div>
+      <div class="stat-value">${totalEffectiveHoursDyn.toFixed(1)}</div>
       <div class="stat-sub">ساعة فعلية</div>
     </div>
     <div class="stat-card red">
       <div class="stat-label">نسبة استخدام الوقت</div>
-      <div class="stat-value">${DATA.monthlyVolume.capacityUsedPercent}%</div>
+      <div class="stat-value">${capacityUsedPercentDyn}%</div>
       <div class="stat-sub">من طاقة المهندس</div>
     </div>
   </div>
@@ -511,7 +551,7 @@ main.insertAdjacentHTML('beforeend', `
         </tr>
       </thead>
       <tbody>
-        ${DATA.monthlyVolume.services.map(s => `
+        ${volumeRows.map(s => `
           <tr>
             <td style="font-weight:600">${s.type}</td>
             <td class="blue mono">${s.monthlyCount}</td>
@@ -519,18 +559,19 @@ main.insertAdjacentHTML('beforeend', `
               <span style="color:var(--text-muted)">${s.timePerUnit}</span>
               ${s.improvement ? `<span style="display:block;font-size:.72rem;color:#34d399;margin-top:2px">↑ ${s.improvement}</span>` : ''}
             </td>
-            <td class="amber mono">${s.totalHours}</td>
+            <td class="amber mono">${s.totalHours.toFixed(1)}</td>
           </tr>
         `).join('')}
         <tr style="background:rgba(245,158,11,.05)">
           <td style="font-weight:800;color:var(--accent)">الإجمالي</td>
-          <td class="blue mono" style="font-weight:800">${DATA.monthlyVolume.totalOperations} عملية</td>
-          <td style="color:#34d399;font-size:.82rem">${DATA.monthlyVolume.dailyCapacity}</td>
-          <td class="amber mono" style="font-weight:800">${DATA.monthlyVolume.totalEffectiveHours} ساعة</td>
+          <td class="blue mono" style="font-weight:800">${totalOperationsDyn} عملية</td>
+          <td style="color:#34d399;font-size:.82rem">${volumeCfg.dailyCapacity || "—"}</td>
+          <td class="amber mono" style="font-weight:800">${totalEffectiveHoursDyn.toFixed(1)} ساعة</td>
         </tr>
       </tbody>
     </table>
   </div>
+  ${volumeCfg.note ? `<p class="stat-note" style="margin-top:10px;text-align:center">${volumeCfg.note}</p>` : ''}
 </section>
 `);
 
