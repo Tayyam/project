@@ -433,41 +433,41 @@ export const DATA = {
   costPerRepair: [
     {
       category: "الهاشبورد",
-      materials: "1.5 شريحة متوسط ($5) + معجون حراري مقنن بالشبلونة ($0.5) + فلاكس أصلي وقصدير 183°C ($1.5)",
-      oldCostUSD: 18,
-      avgCostUSD: 7,
-      savingReason: "شراء الشرائح بسعر ~$3 + الشبلونة قللت هدر المعجون ~80%"
+      materials: "~1.5 شريحة @ ~$3.2 + HY234/معجون بالشبلونة + فلاكس Amtech + مناديل خالية من الوبر + تآكل فرش/IPA — تقدير **$8.5** للوحة متوسطة",
+      oldCostUSD: 22,
+      avgCostUSD: 8.5,
+      savingReason: "شراء رخيص للشرائح + شبلونة تقلل هدر المعجون؛ استهلاكيات التنظيف (Lint-free + ESD brushes) مدمجة في المتوسط"
     },
     {
       category: "الباور سبلاي",
-      materials: "2 موسفت ($2) + آيسي تحكم ($0.5) + قصدير ومكونات SMD صغيرة ($1.5)",
-      oldCostUSD: 12,
-      avgCostUSD: 4,
-      savingReason: "الموسفتات والآيسيهات من Zeus/Alibaba بسنتات مقارنة بالسوق المحلي"
+      materials: "2–3 موسفت + آيسي تحكم + قصدير lead-free + فلاكس + Contact cleaner (تقسيم تكلفة) — تقدير **$5**",
+      oldCostUSD: 15,
+      avgCostUSD: 5,
+      savingReason: "قطع Zeus/Ali بسعر وحدة منخفض + أدوات الاستهلاك (شفاط قصدير/قصافة) مُوزَّعة على عدد الإصلاحات"
     },
     {
       category: "الكنترول بورد",
-      materials: "2 منظم جهد LDO ($0.15) + فلاكس وقصدير ($0.85)",
-      oldCostUSD: 4,
-      avgCostUSD: 1,
-      savingReason: "LDO بالجملة لا يتجاوز ~$0.05 للقطعة"
+      materials: "2 LDO + فلاكس/قصدير + وصلات صغيرة نادراً — تقدير **$1.5**",
+      oldCostUSD: 5,
+      avgCostUSD: 1.5,
+      savingReason: "LDO بالجملة ~$0.05–0.08 للقطعة + استهلاك نحيف للفلاكس"
     },
     {
       category: "الكابلات",
-      materials: "كابل داتا جديد (10-pin أو 12-pin)",
-      oldCostUSD: 6.5,
-      avgCostUSD: 0.5,
-      savingReason: "طلب كابلات داتا بالجملة دفعة واحدة يهبط سعر الكابل لحوالي $0.20"
+      materials: "كابل داتا (10/12-pin) + كيس ESD للتسليم — تقدير **$0.55**",
+      oldCostUSD: 7,
+      avgCostUSD: 0.55,
+      savingReason: "كابلات بالجملة ~$0.20–0.25 + كيس مانع شحنات ~$0.12 من طقم الأكياس"
     }
   ],
 
   marketerCommissionPercent: 20,
 
   pricing: [
-    { service: "صيانة الهاشبورد",    clientPrice: 100, materialCost: 7,   marketerCommission: 20,  netProfit: 73   },
-    { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 4,   marketerCommission: 16,  netProfit: 60   },
-    { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1,   marketerCommission: 10,  netProfit: 39   },
-    { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 0.5, marketerCommission: 3,   netProfit: 11.5 }
+    { service: "صيانة الهاشبورد",    clientPrice: 100, materialCost: 8.5, marketerCommission: 20,  netProfit: 71.5 },
+    { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 5,   marketerCommission: 16,  netProfit: 59   },
+    { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1.5, marketerCommission: 10,  netProfit: 38.5 },
+    { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 0.55, marketerCommission: 3,   netProfit: 11.45 }
   ],
 
   opex: {
@@ -479,7 +479,7 @@ export const DATA = {
     ],
     totalMonthly: 34000,
     setupCost: 10000,
-    breakEvenNote: "بعد خصم خامات الهاشبورد ($7) وعمولة المسوق (20% من $100 = $20)، صافي اللوحة للمركز ≈ $73. لتغطية المصاريف الثابتة (~630 $ شهرياً ≈ 34,000 ج) يحتاج ≈ 9 لوحات هاشبورد شهرياً (بسعر صرف 54 ج/$).",
+    breakEvenNote: "بعد خصم خامات الهاشبورد (~$8.5) وعمولة المسوق (20% من $100 = $20)، صافي اللوحة للمركز ≈ $71.5. لتغطية المصاريف الثابتة (~630 $ شهرياً ≈ 34,000 ج) يحتاج ≈ 9 لوحات هاشبورد شهرياً (بسعر صرف 54 ج/$).",
     breakEvenUnits: 9
   },
 
@@ -501,10 +501,10 @@ export const DATA = {
   },
 
   monthlyRevenue: [
-    { service: "الهاشبورد",      count: 30, pricePerUnit: 100, totalRevenue: 3000, costPerUnit: 7,    totalCost: 210,  marketerTotal: 600  },
-    { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 4,    totalCost: 60,   marketerTotal: 240  },
-    { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1,    totalCost: 10,   marketerTotal: 100  },
-    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 0.5,  totalCost: 10,   marketerTotal: 60   }
+    { service: "الهاشبورد",      count: 30, pricePerUnit: 100, totalRevenue: 3000, costPerUnit: 8.5,  totalCost: 255,  marketerTotal: 600  },
+    { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 5,    totalCost: 75,   marketerTotal: 240  },
+    { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1.5,  totalCost: 15,   marketerTotal: 100  },
+    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 0.55, totalCost: 11,   marketerTotal: 60   }
   ],
 
   pl: {
@@ -513,10 +513,10 @@ export const DATA = {
     exchangeNote: "عمولة المسوق 20% تُخصم من إيراد كل خدمة قبل حساب صافي الربح التشغيلي. التحويل: 1 USD = 54 EGP",
     grossRevenue:         { usd: 5000,   egp: 270000 },
     marketerCommission:   { usd: 1000,   egp: 54000  },
-    cogs:                 { usd: 290,    egp: 15660  },
-    grossProfit:          { usd: 3710,   egp: 200340 },
+    cogs:                 { usd: 356,    egp: 19224  },
+    grossProfit:          { usd: 3644,   egp: 196776 },
     opex:                 { usd: 629.63, egp: 34000  },
-    netProfit:            { usd: 3080.37,egp: 166340 }
+    netProfit:            { usd: 3014.37,egp: 162776 }
   },
 
   roi: {
@@ -527,8 +527,8 @@ export const DATA = {
       ],
       note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **سكوب مكتبي ~100 MHz** (بديل فخ TC3) + فاحص TC3 كـ tester + ZOYI + إكسسوارات برمجة/0402/IIC لـ APW12 + Quick 205H + AD207 + PUHUI T-8280."
     },
-    annualNetProfit:      { usd: 36964.44, egp: 1996080 },
-    monthlyNetProfit:     { usd: 3080.37,  egp: 166340  },
+    annualNetProfit:      { usd: 36172.44, egp: 1953312 },
+    monthlyNetProfit:     { usd: 3014.37,  egp: 162776  },
     paybackDays:          24,
     roiPercent:           1470
   }
