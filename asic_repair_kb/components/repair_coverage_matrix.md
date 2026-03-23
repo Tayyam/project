@@ -52,7 +52,7 @@ Physical **bench capability** tracked in this project (what you own / must acqui
 
 | Tool area | Documented | Notes |
 |-----------|:----------:|-------|
-| Diagnosis (tester, scope, thermal, lab PSU, UART) | true | PicoBT + APW12 bench, UNI-T UTD2102CEX+ (أو ≥100 MHz), ZT-R01, WANPTEK KPS (بنش)، PICKit 3.5، كابل EEPROM، USB–TTL |
+| Diagnosis (tester, scope, thermal, lab PSU, UART) | true | PicoBT + APW12 bench, UNI-T UTD2102CEX+ (أو ≥100 MHz), UT136C+ + أطراف Zeus، WANPTEK KPS، PICKit 3.5، كابل EEPROM، USB–TTL |
 | Rework (hot air, preheater, iron, microscope, ultrasonic) | true | Quick 861DW, Quick 707D+ (حديد+هواء), PUHUI T-8280, AD207, ultrasonic |
 | Consumables (flux, paste, putty, IPA, tin stencil) | true | Amtech, Mechanic 183 °C, HY234, GD900, Zeus tin stencil لكل جيل شريحة |
 | Spares (ASIC, LDO, MOSFET, cables, copper) | true | BM1362 / BM1366BS + KF1950–KF1973, LDO/PMIC kit, AWG6, data cables |

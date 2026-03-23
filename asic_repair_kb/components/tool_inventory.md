@@ -16,7 +16,8 @@
 |---|---|
 | PicoBT Universal Tester + ملفات الاختبار | ✅ |
 | APW12 Bench PSU (1215 مطابق) | ✅ |
-| ZOYI ZT-R01 (حراري + ملتيميتر) | ✅ |
+| UNI-T UT136C+ ملتيميتر رقمي — Zeus | ✅ |
+| أطراف قياس + مشبك SMD للملتيميتر — Zeus (2856 / 1647) | ✅ |
 | FNIRSI DSO-TC3 (Tester فقط) | ✅ |
 | Oscilloscope UNI-T UTD2102CEX+ (100 MHz) — Zeus | ✅ |
 | WANPTEK KPS3030D (بنش: هاش + كنترول بحد تيار منخفض) — Zeus | ✅ |
@@ -30,7 +31,6 @@
 | Quick 861DW هواء ساخن (BGA قوي) | ✅ |
 | Quick 707D+ / 709D+ (كاوية + هواء، Zeus) — بدل كاوية هاش منفصلة | ✅ |
 | PUHUI T-8280 IR Preheater | ✅ |
-| iTECH HP-B100 (سطح صغير) — Zeus | ✅ |
 | Andonstar AD207 Microscope | ✅ |
 | Ultrasonic Cleaner | ✅ |
 
@@ -38,10 +38,10 @@
 
 | العنصر | الحالة |
 |---|---|
-| علب ESD لتخزين الشرائح | ✅ |
+| علب تخزين شرائح ESD — Zeus (1754) | ✅ |
 | زجاجة ضغط IPA | ✅ |
 | حقن فارغة بسن معدني | ✅ |
-| Silicon heat mat | ✅ |
+| حصيرة صيانة حرارية — Zeus (182) | ✅ |
 | مشابك تنظيم الكابلات | ✅ |
 | صناديق فرز ملونة (WIP/Done) | ✅ |
 | تبريد بنش Zeus 4×120mm + منظم سرعة | ✅ |
@@ -54,19 +54,19 @@
 | العنصر | الحالة |
 |---|---|
 | Flux Amtech + Paste Mechanic 183°C | ✅ |
+| منظف بورد Mechanic 500 — Zeus (1782) | ✅ |
+| سلك لحام SANKI 0.6mm 500g — Zeus (3133) | ✅ |
 | Tin stencil لكل جيل شريحة (Zeus) + منصة BGA 90×90 اختيارية | ✅ |
 | HY234 Thermal Putty | ✅ |
 | GD900 | ✅ |
 | IPA 99% + Kapton + Aluminum tape + Wick + Copper sponge | ✅ |
 | UV Mask (Mechanic UVH900-LY) | ✅ |
 | UV Curing Lamp | ✅ |
-| Board wash | ✅ |
 | Contact cleaner | ✅ |
 | Brass wool cup | ✅ |
 | Desoldering pump | ✅ |
 | ESD cleaning brushes | ✅ |
 | Lint-free wipes | ✅ |
-| Lead-free solder wire (good brand) | ✅ |
 | Jumper wire 0.1mm | ✅ |
 
 ### 5) مخزون قطع الغيار

@@ -112,7 +112,7 @@ Regenerate: `python scripts/fetch_zeus_kb_source.py whatsminer_support_hub`
 ## Checklist Before Starting
 
 - [ ] Error code recorded from web interface before any power-off
-- [ ] Thermal camera (ZOYI ZT-R01) ready for hotspot detection
+- [ ] (اختياري) كاميرا حرارية للنقاط الساخنة — أو اعتماد قياس جهد/تيار بـ UT136C+ وأطراف Zeus
 - [ ] Spare APW12 (correct version) available for PSU swap test
 - [ ] Data cables (40× available) for quick cable swap
 - [ ] HY234 Thermal Putty available for putty replacement

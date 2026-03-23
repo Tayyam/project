@@ -27,8 +27,8 @@ export const DATA = {
     },
     {
       step: "02",
-      title: "المسح الحراري",
-      description: "استخدام الكاميرا الحرارية لرؤية نقاط القصر (Short Circuits) أو الحرارة الزائدة فوراً."
+      title: "التشخيص الحراري / النقاط الساخنة",
+      description: "ملتيميتر عادي + ملاحظة بصرية؛ **كاميرا حرارية اختيارية** إن وُجدت — لرؤية قصر أو حرارة زائدة بسرعة."
     },
     {
       step: "03",
@@ -124,15 +124,15 @@ export const DATA = {
               badge: "ناقص إلزامي"
             },
             {
-              name: "الفحص الحراري + ملتيميتر",
-              model: "ZOYI ZT-R01 Thermography Multimeter",
-              function: "رؤية النقاط الساخنة وقياس الجهد في نفس اللحظة.",
-              price: "$105",
-              priceBefore: "~$294 (Infiray P2 Pro)",
-              saving: "وفر $189 — 2 في 1",
-              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3932",
+              name: "ملتيميتر رقمي (يومي)",
+              model: "UNI-T UT136C+",
+              function: "قياس جهد/مقاومة/استمرارية للبنش — جهاز «عادي» موثوق؛ **ليس حرارياً** — للنقاط الضيقة استخدم أطراف Zeus (2856/1647) أدناه.",
+              price: "$43",
+              priceBefore: "ZOYI ZT-R01 (حراري + DMM) — أغلى إن احتجت لاحقاً كاميرا حرارية",
+              saving: "Zeus — MOQ 1",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3210",
               source: "Zeus Mining",
-              badge: "Game Changer"
+              badge: "DMM أساسي"
             },
             {
               name: "فاحص مكونات (ليس بديل سكوب الهاش)",
@@ -161,7 +161,7 @@ export const DATA = {
               model: "PUHUI T-8280 Large IR Preheater (28×27cm)",
               function: "تسخين متساوٍ للهاشبورد كاملة — يقلل التقوس أثناء الـ rework.",
               price: "$92",
-              priceBefore: "$46 (iTECH HP-B100 على Zeus — سطح 100×100 أصغر؛ PUHUI تغطية أوسع)",
+              priceBefore: "منصات تسخين صغيرة لا تغطي الهاش كاملاً — PUHUI لسطح كبير 28×27cm",
               saving: "تسخين متساوٍ — نسبة تقوس أقل",
               url: "https://ar.aliexpress.com/item/1005010520024198.html",
               source: "AliExpress",
@@ -234,17 +234,6 @@ export const DATA = {
               badge: "Bench DC"
             },
             {
-              name: "منصة تسخين PCB (صغيرة)",
-              model: "iTECH HP-B100 (100×100mm)",
-              function: "تسخين أولي للوح ألومنيوم/هاش قبل الهواء الساخن — أصغر من PUHUI T-8280؛ راقب التقوس على اللوح الكبيرة.",
-              price: "$46",
-              priceBefore: null,
-              saving: "Zeus — بديل اقتصادي لسطح صغير",
-              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3799",
-              source: "Zeus Mining",
-              badge: "Preheater"
-            },
-            {
               name: "محطة لحام 2 في 1",
               model: "Quick 707D+ أو 709D+ — هواء ساخن + كاوية",
               function: "إصلاح هاش وباور ASIC — **كاوية اللحام + الهواء الساخن في محطة واحدة**؛ يغني عن شراء كاوية هاش منفصلة (مثل 205H محلياً). اختر 707D+ (800W هواء) أو 709D+ أقوى؛ رؤوس **سلسلة 960** من نفس صفحة Zeus. **لا يستبدل 861DW** إن احتجت هواء أقصى للـ BGA الكبير.",
@@ -287,6 +276,39 @@ export const DATA = {
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2461",
               source: "Zeus Mining",
               badge: "توصيل"
+            },
+            {
+              name: "حصيرة صيانة تحت حرارة عالية",
+              model: "High temperature repair mat",
+              function: "حماية سطح المكتب أثناء الهوت إير/الكاوية — بديل الحصيرة السيليكون المحلية.",
+              price: "$8.48",
+              priceBefore: "حصيرة مغناطيس محلية ~480 ج",
+              saving: "Zeus",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=182",
+              source: "Zeus Mining",
+              badge: "سلامة البنش"
+            },
+            {
+              name: "أطراف قياس للملتيميتر",
+              model: "Multimeter test probes",
+              function: "بديل السنون المحلية — توصيل أدق على الـ test points.",
+              price: "$3.3",
+              priceBefore: "سنون محلية ~350 ج",
+              saving: "Zeus",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2856",
+              source: "Zeus Mining",
+              badge: "قياس"
+            },
+            {
+              name: "مشبك اختبار SMD للملتيميتر",
+              model: "Multimeter SMD Test Clip",
+              function: "تثبيت على أرجل رقيقة / SMD دون انزلاق اليد.",
+              price: "$2.85",
+              priceBefore: null,
+              saving: "Zeus",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1647",
+              source: "Zeus Mining",
+              badge: "SMD"
             }
           ]
         },
@@ -295,11 +317,7 @@ export const DATA = {
           tableHint: "أدوات ثقيلة / كهرباء معملية",
           kind: "egp",
           items: [
-            { name: "ميكروسكوب رقمي", model: "Andonstar AD207 (7 إنش)", function: "رؤية اللحامات والمسارات المقطوعة بدقة.", price: 7000 },
-            { name: "سنون ملتيميتر دقيقة", model: "Steel Needle Probes / حامل سن رفيع", function: "قياس بين رجلي شريحة ASIC والـ test points الضيقة — السن العادي يعمل قفلة.", price: 350 },
-            { name: "قصدير لحام خالي من الرصاص", model: "Alpha أو Kester lead-free", function: "هاش S19 lead-free — خلط 60/40 في نقاط حساسة قد يسبب مشاكل توصيل حراري/موثوقية.", price: 900 },
-            { name: "منظف بورد مائي", model: "Board Wash / Aqueous flux cleaner", function: "بعد الشغل: أنظف من IPA وحده — يقلل بقايا بيضاء أحياناً مع الفلاكس.", price: 450 },
-            { name: "حصيرة سيليكون مغناطيسية", model: "Magnetic Heat-Insulation Mat — حماية سطح المكتب + تثبيت مسامير", function: "سيليكون مقاوم للحرارة مع مناطق مغناطيس للمسامير أثناء فك الجهاز؛ يحمي من الهوت إير.", price: 480 }
+            { name: "ميكروسكوب رقمي", model: "Andonstar AD207 (7 إنش)", function: "رؤية اللحامات والمسارات المقطوعة بدقة.", price: 7000 }
           ]
         },
         {
@@ -411,6 +429,28 @@ export const DATA = {
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264",
           source: "Zeus Mining",
           badge: "الخلطة السرية"
+        },
+        {
+          name: "منظف بورد (سائل)",
+          model: "Mechanic 500 / S880 / 850 — lead-free circuit board cleaner",
+          function: "تنظيف هاش/كنترول/باور بعد الشغل — بديل منظف البورد المحلي.",
+          price: "$3.9",
+          priceBefore: "Board wash محلي ~450 ج",
+          saving: "Zeus — موديل 500 على الصفحة",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1782",
+          source: "Zeus Mining",
+          badge: "تنظيف"
+        },
+        {
+          name: "سلك لحام خالي من الرصاص",
+          model: "SANKI — 0.6mm (500g)",
+          function: "لحام يدوي للهاش S19 lead-free — بديل قصدير Alpha/Kester المحلي.",
+          price: "$16.9",
+          priceBefore: "قصدير سلك محلي ~900 ج",
+          saving: "Zeus — قطر 0.6mm / 500g",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3133",
+          source: "Zeus Mining",
+          badge: "سلك لحام"
         },
         {
           name: "قناع لحام UV",
@@ -569,15 +609,15 @@ export const DATA = {
         
         
         {
-          name: "علب تخزين Anti-static (ESD)",
-          model: "طقم علب موصولة / أدراج ESD للـ ASIC — Zeus غالباً لا يبيع الطقم؛ AliExpress",
-          function: "حفظ شرائح ASIC الغالية بعيداً عن الكهرباء الساكنة والرطوبة؛ **أساسي مع مخزون شرائح.**",
-          price: "$18 / طقم (~10 علب)",
-          priceBefore: null,
-          saving: "سعر تقديري شحن من الصين — قارن البائعين (ESD safe)",
-          url: "https://www.aliexpress.com/w/wholesale-esd-anti-static-storage-box-smd.html",
-          source: "AliExpress",
-          badge: "تنظيم · ASIC"
+          name: "علبة تخزين شرائح (ESD)",
+          model: "Chip anti-static storage box",
+          function: "حفظ شرائح ASIC مفردة أو قطع صغيرة — كرّر الشراء حسب حجم المخزون.",
+          price: "$4.4 / علبة",
+          priceBefore: "طقم AliExpress تقديري",
+          saving: "Zeus — MOQ 1",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1754",
+          source: "Zeus Mining",
+          badge: "ESD · شريحة"
         },
         
       ]
@@ -585,7 +625,7 @@ export const DATA = {
 
     localSupplies: {
       title: "③ العتبة ومول البستان — متجدد ومساعد",
-      note: "كل ما هو متاح في مصر: مواد متجددة، كيماويات، كهرباء بسيطة، وإكسسوارات يومية — أقل شحن وأسرع تعويض. **تبريد اختبار الهاش، سكوب 100 MHz، PICkit، باور DC بنش (WANPTEK — هاش + كنترول)، منفضة F10، وطقم Jumpers Zeus** في `① قائمة الأصول`.",
+      note: "كل ما هو متاح في مصر: مواد متجددة، كيماويات، كهرباء بسيطة، وإكسسوارات يومية. **ملتيميتر Zeus، حصيرة صيانة، أطراف قياس، قصدير سلك SANKI، منظف Mechanic 500، علب ESD للشرائح** في `①` و`②` مع Zeus؛ ميكروسكوب AD207 يبقى محلياً غالباً.",
       location: "مصر — العتبة / مول البستان / شركات كيماويات",
       currency: "EGP",
       items: [
@@ -665,16 +705,16 @@ export const DATA = {
     hoursPerDay: 8,
     totalHours: 200,
     services: [
-      { type: "صيانة هاشبورد",      monthlyCount: 30, timePerUnit: "25–30 دقيقة", totalHours: 13.5, improvement: "كان 45 دق — بفضل قوالب المعجون والـ ZOYI" },
+      { type: "صيانة هاشبورد",      monthlyCount: 30, timePerUnit: "25–30 دقيقة", totalHours: 13.5, improvement: "كان 45 دق — بفضل قوالب المعجون والتنظيم" },
       { type: "صيانة باور سبلاي",   monthlyCount: 15, timePerUnit: "60 دقيقة",    totalHours: 15,   improvement: null },
-      { type: "إحياء كنترول بورد",  monthlyCount: 10, timePerUnit: "20 دقيقة",    totalHours: 3.5,  improvement: "كان 30 دق — بفضل ZOYI + سكوب مكتبي + لحام دقيق + برمجة عند الحاجة" },
+      { type: "إحياء كنترول بورد",  monthlyCount: 10, timePerUnit: "20 دقيقة",    totalHours: 3.5,  improvement: "كان 30 دق — بفضل سكوب مكتبي + لحام دقيق + برمجة عند الحاجة" },
       { type: "بيع/تغيير كابلات",   monthlyCount: 20, timePerUnit: "10 دقائق",    totalHours: 3.5,  improvement: null }
     ],
     totalOperations: 75,
     totalEffectiveHours: 35.5,
     capacityUsedPercent: 18,
     dailyCapacity: "6–8 لوحات هاشبورد يومياً",
-    note: "بفضل القوالب والـ ZOYI، انخفض وقت الهاشبورد من 45 إلى 25-30 دقيقة"
+    note: "بفضل قوالب المعجون والسير المنظم، انخفض وقت الهاشبورد من 45 إلى 25–30 دقيقة"
   },
 
   monthlyRevenue: [
@@ -702,7 +742,7 @@ export const DATA = {
         { label: "تجهيزات المحل (تشطيب + أثاث)", usd: 200 },
         { label: "جمارك + شحن منتجات من الخارج (مرة واحدة)", usd: 500 }
       ],
-      note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي + TC3 كـ tester + ZOYI + PICKit 3.5 Zeus + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm Zeus + **Quick 707D+** (كاوية+هواء) + **861DW** (هواء قوي BGA) + AD207 + PUHUI T-8280 / HP-B100."
+      note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي + TC3 كـ tester + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + حصيرة صيانة 182 + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر)."
     },
     annualNetProfit:      { usd: 36172.44, egp: 1953312 },
     monthlyNetProfit:     { usd: 3014.37,  egp: 162776  },
