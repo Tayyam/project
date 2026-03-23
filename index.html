@@ -781,6 +781,85 @@ const DATA = {
         { name: "قياس وبرمجة بسيطة", model: "USB to TTL + Dupont jumpers (ذكر-ذكر/أنثى-أنثى)", function: "UART للكنترول؛ **Dupont** لتوصيل PICkit بنقاط الاختبار/ICSP على البوردة.", price: 350 },
         { name: "سلك جسر فائق الدقة", model: "Jumper / Enameled Wire قطر 0.1mm — العتبة / مول البستان", function: "جسور للمسارات المقطوعة أو الـ pads الضيقة؛ يُباع بالمتر أو بكرة صغيرة من محلات الكيماويات والإلكترونيات.", price: 120 }
       ]
+    },
+
+    benchOrganization: {
+      title: "④ تنظيم المعمل وسير العمل",
+      note: "أدوات تخزين وتنظيم لا تبدو «إلكترونيات» لكنها تقلل الأخطاء وضياع الـ SMD والمسامير وتسرّع تتبّع كل بوردة في الورشة.",
+      rows: [
+        {
+          category: "قطع الغيار (SMD)",
+          tool: "وحدة أدراج بلاستيك (40–60 درج)",
+          function: "تخزين المقاومات (0402) والترانزستورات والـ Chips الصغيرة مع كتابة القيم عليها.",
+          where: "العتبة / محلات كماليات السيارات / أمازون",
+          priority: "قصوى (Must)",
+          priorityTier: "must"
+        },
+        {
+          category: "قطع الغيار (SMD)",
+          tool: "علب تخزين Anti-static (ESD Boxes)",
+          function: "حفظ شرائح الـ ASIC الغالية بعيداً عن الكهرباء الساكنة والرطوبة.",
+          where: "Zeus Mining / AliExpress",
+          priority: "عالية",
+          priorityTier: "high"
+        },
+        {
+          category: "أدوات البنش",
+          tool: "حامل مفكات وملاقط (Tool Rack)",
+          function: "تنظيم الملاقط والمفكات بشكل رأسي لحماية «السنون» وتوفير مساحة.",
+          where: "مول البستان / محلات الصيانة",
+          priority: "عالية",
+          priorityTier: "high"
+        },
+        {
+          category: "السوائل والكيماويات",
+          tool: "زجاجات مضخة (Push-down Dispenser)",
+          function: "للكحول (IPA)؛ تمنع التبخر وتسمح بسحب كمية بسيطة بضغطة واحدة.",
+          where: "محلات صيانة الموبايل (العتبة)",
+          priority: "قصوى (Must)",
+          priorityTier: "must"
+        },
+        {
+          category: "السوائل والكيماويات",
+          tool: "حقن فارغة بـ «سن» معدني",
+          function: "تعبئة الفلاكس (Flux) وتوزيعه بدقة مجهرية تحت الشريحة.",
+          where: "الصيدليات / محلات الصيانة",
+          priority: "عالية",
+          priorityTier: "high"
+        },
+        {
+          category: "التوثيق والتمييز",
+          tool: "ماكينة طباعة ملصقات (Label Maker)",
+          function: "طباعة قيم المكونات على الأدراج وأرقام «الأكواد» للبوردات.",
+          where: "جرير / أمازون / مكتبات كبرى",
+          priority: "متوسطة",
+          priorityTier: "medium"
+        },
+        {
+          category: "سطح العمل",
+          tool: "Magnetic Heat-Insulation Mat",
+          function: "حصيرة سيليكون فيها أماكن مغناطيسية للمسامير وتحمي المكتب من حرارة الهوت إير.",
+          where: "العتبة / مول البستان",
+          priority: "قصوى (Must)",
+          priorityTier: "must"
+        },
+        {
+          category: "الكابلات والوصلات",
+          tool: "منظم كابلات سيليكون (Adhesive Clips)",
+          function: "تثبيت كابلات الـ PicoBT والباور في طرف المكتب لمنع تشابكها.",
+          where: "أي محل إكسسوارات كمبيوتر",
+          priority: "متوسطة",
+          priorityTier: "medium"
+        },
+        {
+          category: "سير العمل (Process)",
+          tool: "صناديق بلاستيك ملونة (Job Bins)",
+          function: "صندوق لكل بوردة (أحمر: عطلان / أخضر: تم الإصلاح) لعدم خلط قطع الغيار.",
+          where: "محلات الأدوات المنزلية",
+          priority: "عالية",
+          priorityTier: "high"
+        }
+      ]
     }
   },
 
@@ -970,6 +1049,23 @@ function purchaseLocalRow(item) {
     </tr>`;
 }
 
+function benchOrgRow(row) {
+  const tier = row.priorityTier || 'medium';
+  const priStyle = tier === 'must'
+    ? 'background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.45);color:#fca5a5'
+    : tier === 'high'
+    ? 'background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);color:#fcd34d'
+    : 'background:rgba(148,163,184,.1);border:1px solid rgba(148,163,184,.35);color:#cbd5e1';
+  return `
+    <tr>
+      <td style="font-weight:600;white-space:nowrap;font-size:.82rem;vertical-align:top">${row.category}</td>
+      <td style="font-weight:700;font-size:.86rem;vertical-align:top;max-width:200px">${row.tool}</td>
+      <td style="color:var(--text-muted);font-size:.8rem;line-height:1.65;vertical-align:top">${row.function}</td>
+      <td style="font-size:.78rem;color:var(--text-muted);vertical-align:top;max-width:200px">${row.where}</td>
+      <td style="vertical-align:top;white-space:nowrap"><span style="display:inline-block;padding:4px 10px;border-radius:20px;font-size:.72rem;font-weight:800;${priStyle}">${row.priority}</span></td>
+    </tr>`;
+}
+
 /* ── model tags ── */
 DATA.models.forEach(m => {
   const el = document.createElement('span');
@@ -1140,6 +1236,30 @@ main.insertAdjacentHTML('beforeend', `
       </table>
     </div>
     <p style="font-size:.78rem;color:var(--text-muted);margin-top:14px">GD900 متوفر أيضاً بعبوة 1kg من Zeus (~$3.4) إن أردت جودة ثابتة وتكلفة للوحدة أقل عند الاستهلاك العالي.</p>
+  </div>
+
+  <div class="card" style="margin-top:24px">
+    <div class="card-title" style="justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span>${DATA.purchases.benchOrganization.title}</span>
+      <span style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35);color:#93c5fd;font-size:.72rem;padding:3px 10px;border-radius:20px;font-weight:600">تنظيم · تخزين · سير عمل</span>
+    </div>
+    <p style="font-size:.83rem;color:var(--text-muted);margin-bottom:14px;line-height:1.75">${DATA.purchases.benchOrganization.note}</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>الفئة</th>
+            <th>الأداة التنظيمية</th>
+            <th>الوظيفة الأساسية</th>
+            <th>مكان الشراء المتوقع</th>
+            <th>الأولوية</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${DATA.purchases.benchOrganization.rows.map(benchOrgRow).join('')}
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 `);
