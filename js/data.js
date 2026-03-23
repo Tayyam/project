@@ -56,16 +56,27 @@ export const DATA = {
 
   importedConsumablesQuarterly: {
     title: "خطة الطلب ربع السنوية — مستهلكات مستوردة فقط",
-    note: "هذه الصفحة تحسب تلقائياً كمية الطلب كل 3 شهور بناءً على حجم العمل الشهري. المبدأ: مخزون يكفي ربع سنة بدون توقف.",
+    note: "نفس بنود جدول «النوادر المستوردة» مع تقديرات شهرية مرتبطة بحجم العمل (المرجع: 75 عملية/شهر). **الكمية = تقريب** — عدّل `baseMonthlyQty` في `data.js` حسب واقعك. البنود «ثابتة/ربع» لها `fixedQuarterlyQty` (مثلاً 1 = وحدة واحدة كل ربع بغض النظر عن المعدل). البنود بصفر دولار في الربع ما زالت مذكورة للتذكير (أدوات طويلة العمر).",
     baselineMonthlyOperations: 75,
     items: [
-      { name: "Amtech NC-559-ASM", unit: "10g syringe", baseMonthlyQty: 3, unitUSD: 8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2277" },
-      { name: "Mechanic Solder Paste 183°C", unit: "60g jar", baseMonthlyQty: 1, unitUSD: 12, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264" },
-      { name: "HY234 Thermal Putty", unit: "1kg pack", baseMonthlyQty: 0.5, unitUSD: 5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638" },
-      { name: "BGA Solder Balls 0.4mm", unit: "jar/pack", baseMonthlyQty: 1, unitUSD: 15, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0.4mm-solder-balls-bga.html" },
-      { name: "0402 Resistor Kit", unit: "kit", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-resistor-kit-smd.html" },
-      { name: "0402 Capacitor Kit", unit: "kit", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-capacitor-kit-smd.html" },
-      { name: "Anti-static ESD Bags", unit: "100 pcs pack", baseMonthlyQty: 1, unitUSD: 12, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-anti-static-esd-bag-pcb.html" }
+      { name: "شرائح ASIC (Bitmain)", unit: "شريحة (BM1398 / BM1362)", baseMonthlyQty: 45, unitUSD: 3, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106", planHint: "مرتبط بهاش Antminer — يزيد مع نسبة الهاش في الحجم." },
+      { name: "شرائح ASIC (MicroBT)", unit: "شريحة (KF1922)", baseMonthlyQty: 16, unitUSD: 2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2148", planHint: "مرتبط بهاش Whatsminer." },
+      { name: "فلاكس لحام ASIC", unit: "حقنة 10g Amtech NC-559-ASM", baseMonthlyQty: 3, unitUSD: 8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2277" },
+      { name: "معجون قصدير BGA", unit: "عبوة 60g Mechanic 183°C", baseMonthlyQty: 1, unitUSD: 12, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264" },
+      { name: "قناع لحام UV", unit: "أنبوبة Mechanic UVH900-LY", baseMonthlyQty: 2, unitUSD: 3, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1585" },
+      { name: "Thermal Putty HY234", unit: "كيس 1kg", baseMonthlyQty: 0.5, unitUSD: 5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638" },
+      { name: "شبلونات الصيانة (S19 & M30)", unit: "طقم مغناطيسي", baseMonthlyQty: 0.2, unitUSD: 8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2418", planHint: "استهلاك أبطأ من اللحيم — خفّض baseMonthlyQty إن كان الطقم يعيش أطول عندك." },
+      { name: "طقم BGA Reballing", unit: "منصة + شبلونات ASIC", baseMonthlyQty: 0, unitUSD: 22, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-bga-reballing-kit-asic.html", planHint: "أداة أساسية لكنها ليست مستهلكة — اطلب مرة مع الأصول؛ لا تُكرر كل ربع في التقدير." },
+      { name: "كابلات داتا (10-pin / 12-pin)", unit: "كابل", baseMonthlyQty: 22, unitUSD: 0.2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107" },
+      { name: "آيسيهات الكنترول (LDO / PMIC)", unit: "شريحة", baseMonthlyQty: 26, unitUSD: 0.05, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=997" },
+      { name: "قطع غيار الباور (MOSFET / PWM)", unit: "شريحة", baseMonthlyQty: 32, unitUSD: 1, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934" },
+      { name: "وصلة تشغيل APW12 (IIC / EN)", unit: "وصلة بنش", baseMonthlyQty: 0, unitUSD: 25, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=306", planHint: "أصل تشغيلي — ليست مستهلكة؛ اطلب عند إعداد البنش (لا تُحسب في احتياطي الربع)." },
+      { name: "طقم مقاومات 0402", unit: "طقم Zeus / AliExpress", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-resistor-kit-smd.html" },
+      { name: "طقم مكثفات 0402", unit: "طقم", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-capacitor-kit-smd.html" },
+      { name: "كرات لحام BGA 0.4mm", unit: "علبة / عبوة", baseMonthlyQty: 1, unitUSD: 15, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0.4mm-solder-balls-bga.html" },
+      { name: "كروت MicroSD (صناعية)", unit: "كرت 8–16GB", baseMonthlyQty: 0.35, unitUSD: 8, source: "Amazon / محلي", url: "https://www.amazon.com/s?k=industrial+micro+sd+card+16gb", planHint: "للصور/الـ FPGA — ليست كل عملية؛ راجع تدوير الكروت." },
+      { name: "علب تخزين ESD للشرائح", unit: "طقم ~10 علب", baseMonthlyQty: 0.2, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-esd-anti-static-storage-box-smd.html", planHint: "تجهيز مخزون شرائح — خفّض الكمية إن كان عندك طقم كافٍ." },
+      { name: "أكياس ESD للشحنات", unit: "عبوة 100 كيس", baseMonthlyQty: 1, unitUSD: 12, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-anti-static-esd-bag-pcb.html" }
     ]
   },
 

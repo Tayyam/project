@@ -15,7 +15,7 @@ Then browse `http://localhost:8080/`.
 |------|------|
 | `index.html` | Shell: header, nav, `#mainContent`, loads `js/app.js` |
 | `css/main.css` | All styles |
-| `js/data.js` | `export const DATA` — models, navigation, purchases, financials |
+| `js/data.js` | `export const DATA` — models, navigation, purchases, financials; **`importedConsumablesQuarterly.items`** يطابق بنود «النوادر المستوردة» مع `baseMonthlyQty` لتقدير الطلب كل 3 شهور ويدمج تلقائياً في CAPEX |
 | `js/utils.js` | DOM helper + number formatters |
 | `js/purchase-rows.js` | Table row templates for purchase tables |
 | `js/sections.js` | `mountSections(...)` — injects all `<section>` tabs |

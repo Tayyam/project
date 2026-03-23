@@ -13,14 +13,25 @@ function computeImportQuarterlyPlan(data) {
   const loadFactor = baseline > 0 ? currentOps / baseline : 1;
 
   const rows = plan.items.map(item => {
-    const monthlyQty = item.baseMonthlyQty * loadFactor;
-    const quarterlyQty = Math.max(1, Math.ceil(monthlyQty * 3));
-    const quarterUSD = quarterlyQty * item.unitUSD;
+    const baseM = Number(item.baseMonthlyQty) || 0;
+    const monthlyQty = baseM * loadFactor;
+    let quarterlyQty;
+    if (item.fixedQuarterlyQty != null && item.fixedQuarterlyQty !== "") {
+      const fq = Number(item.fixedQuarterlyQty);
+      quarterlyQty = Math.max(0, Math.ceil(fq * loadFactor));
+    } else if (baseM > 0) {
+      quarterlyQty = Math.max(0, Math.round(monthlyQty * 3));
+    } else {
+      quarterlyQty = 0;
+    }
+    const unitUSD = Number(item.unitUSD) || 0;
+    const quarterUSD = quarterlyQty * unitUSD;
     return {
       ...item,
       monthlyQty,
       quarterlyQty,
-      quarterUSD
+      quarterUSD,
+      unitUSD
     };
   });
 
@@ -198,17 +209,26 @@ main.insertAdjacentHTML('beforeend', `
         </tr>
       </thead>
       <tbody>
-        ${importQuarter.rows.map(r => `
+        ${importQuarter.rows.map(r => {
+          const fq = r.fixedQuarterlyQty != null && r.fixedQuarterlyQty !== "" ? Number(r.fixedQuarterlyQty) : null;
+          const monthlyCell = (Number(r.baseMonthlyQty) > 0)
+            ? r.monthlyQty.toFixed(2)
+            : (fq != null && fq > 0)
+              ? `<span style="opacity:.85">ثابت/ربع</span>`
+              : "—";
+          const qCell = r.quarterlyQty > 0 ? r.quarterlyQty : "—";
+          const usdCell = r.quarterlyQty > 0 ? fmtUSD(r.quarterUSD) : "—";
+          return `
           <tr>
-            <td style="font-weight:600">${r.name}</td>
+            <td style="font-weight:600">${r.name}${r.planHint ? `<div style="font-size:.72rem;color:var(--text-muted);font-weight:400;margin-top:4px">${r.planHint}</div>` : ""}</td>
             <td class="mono">${r.unit}</td>
-            <td class="mono">${r.monthlyQty.toFixed(2)}</td>
-            <td class="amber mono">${r.quarterlyQty}</td>
+            <td class="mono">${monthlyCell}</td>
+            <td class="amber mono">${qCell}</td>
             <td class="mono">${fmtUSD(r.unitUSD)}</td>
-            <td class="green mono">${fmtUSD(r.quarterUSD)}</td>
+            <td class="green mono">${usdCell}</td>
             <td><a href="${r.url}" target="_blank" rel="noopener" style="color:#6ee7b7;text-decoration:none">🔗 ${r.source}</a></td>
-          </tr>
-        `).join('')}
+          </tr>`;
+        }).join('')}
       </tbody>
     </table>
   </div>
