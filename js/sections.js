@@ -3,13 +3,11 @@
  */
 export function mountSections(main, DATA, { fmt, fmtUSD, fmtEGP }, { purchaseImportRow, purchaseLocalRow }) {
 
-function computeImportQuarterlyPlan(data) {
-  const plan = data.importedConsumablesQuarterly;
+function computeQuarterlyPlan(plan, currentOps, unitField, costField) {
   if (!plan || !Array.isArray(plan.items)) {
-    return { rows: [], totalQuarterlyUSD: 0, loadFactor: 1 };
+    return { rows: [], totalQuarterlyCost: 0, loadFactor: 1 };
   }
   const baseline = plan.baselineMonthlyOperations || 75;
-  const currentOps = (data.monthlyVolume && data.monthlyVolume.totalOperations) || baseline;
   const loadFactor = baseline > 0 ? currentOps / baseline : 1;
 
   const rows = plan.items.map(item => {
@@ -24,25 +22,45 @@ function computeImportQuarterlyPlan(data) {
     } else {
       quarterlyQty = 0;
     }
-    const unitUSD = Number(item.unitUSD) || 0;
-    const quarterUSD = quarterlyQty * unitUSD;
+    const unitCost = Number(item[unitField]) || 0;
+    const quarterCost = quarterlyQty * unitCost;
     return {
       ...item,
       monthlyQty,
       quarterlyQty,
-      quarterUSD,
-      unitUSD
+      quarterCost,
+      [costField]: unitCost
     };
   });
 
   rows.sort((a, b) => {
-    const d = b.quarterUSD - a.quarterUSD;
+    const d = b.quarterCost - a.quarterCost;
     if (d !== 0) return d;
     return String(a.name).localeCompare(String(b.name), "ar");
   });
 
-  const totalQuarterlyUSD = rows.reduce((sum, r) => sum + r.quarterUSD, 0);
-  return { rows, totalQuarterlyUSD, loadFactor };
+  const totalQuarterlyCost = rows.reduce((sum, r) => sum + r.quarterCost, 0);
+  return { rows, totalQuarterlyCost, loadFactor };
+}
+
+function computeImportQuarterlyPlan(data) {
+  const currentOps = (data.monthlyVolume && data.monthlyVolume.totalOperations) || 75;
+  const result = computeQuarterlyPlan(data.importedConsumablesQuarterly, currentOps, "unitUSD", "unitUSD");
+  return {
+    rows: result.rows,
+    totalQuarterlyUSD: result.totalQuarterlyCost,
+    loadFactor: result.loadFactor
+  };
+}
+
+function computeLocalQuarterlyPlan(data) {
+  const currentOps = (data.monthlyVolume && data.monthlyVolume.totalOperations) || 75;
+  const result = computeQuarterlyPlan(data.localConsumablesQuarterly, currentOps, "unitEGP", "unitEGP");
+  return {
+    rows: result.rows,
+    totalQuarterlyEGP: result.totalQuarterlyCost,
+    loadFactor: result.loadFactor
+  };
 }
 
 /* ── 1. Workflow ── */
@@ -189,6 +207,7 @@ main.insertAdjacentHTML('beforeend', `
 
 /* ── 4. Imported Consumables Quarterly ── */
 const importQuarter = computeImportQuarterlyPlan(DATA);
+const localQuarter = computeLocalQuarterlyPlan(DATA);
 main.insertAdjacentHTML('beforeend', `
 <section id="importQuarterly">
   <div class="section-heading">
@@ -246,6 +265,54 @@ main.insertAdjacentHTML('beforeend', `
       <span style="font-weight:900;color:var(--accent);font-size:1.1rem">${fmtUSD(importQuarter.totalQuarterlyUSD)}</span>
     </div>
     <div style="text-align:center;margin-top:6px;font-size:.78rem;color:var(--text-muted)">${fmtEGP(Math.round(importQuarter.totalQuarterlyUSD * DATA.pl.exchangeRate))}</div>
+  </div>
+
+  <div class="section-heading" style="margin-top:28px">
+    <div class="icon">🏪</div>
+    <h2>${DATA.localConsumablesQuarterly.title}</h2>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <p style="color:var(--text-muted);font-size:.88rem;line-height:1.85;margin:0">${DATA.localConsumablesQuarterly.note}</p>
+    <p style="margin-top:8px;font-size:.8rem;color:#93c5fd">حجم العمل الحالي: ${DATA.monthlyVolume.totalOperations} عملية/شهر — عامل التحميل: ×${localQuarter.loadFactor.toFixed(2)}</p>
+    <p style="margin-top:6px;font-size:.75rem;color:var(--text-muted)">ترتيب الصفوف: <strong>الإجمالي الربع سنوي (ج)</strong> من الأعلى → الأقل.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>الاستهلاك المحلي</th>
+          <th>وحدة الشراء</th>
+          <th>الاحتياج الشهري</th>
+          <th>الكمية المطلوبة كل 3 شهور</th>
+          <th>تكلفة الوحدة (ج)</th>
+          <th>الإجمالي الربع سنوي (ج)</th>
+          <th>المصدر</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${localQuarter.rows.map(r => `
+          <tr>
+            <td style="font-weight:600">${r.name}${r.planHint ? `<div style="font-size:.72rem;color:var(--text-muted);font-weight:400;margin-top:4px">${r.planHint}</div>` : ""}</td>
+            <td class="mono">${r.unit}</td>
+            <td class="mono">${r.monthlyQty.toFixed(2)}</td>
+            <td class="amber mono">${r.quarterlyQty}</td>
+            <td class="mono">${fmt(r.unitEGP)}</td>
+            <td class="green mono">${fmt(r.quarterCost)}</td>
+            <td style="color:var(--text-muted)">${r.source || "محلي"}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="capex-item" style="border-bottom:none;padding:4px 0">
+      <span style="font-weight:800">إجمالي الاستهلاكات المحلية (3 شهور)</span>
+      <span style="font-weight:900;color:#34d399;font-size:1.1rem">${fmt(localQuarter.totalQuarterlyEGP)}</span>
+    </div>
+    <div style="text-align:center;margin-top:6px;font-size:.78rem;color:var(--text-muted)">${fmtUSD(localQuarter.totalQuarterlyEGP / DATA.pl.exchangeRate)}</div>
   </div>
 </section>
 `);

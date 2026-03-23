@@ -71,8 +71,23 @@ export const DATA = {
       { name: "طقم مقاومات 0402", unit: "طقم Zeus / AliExpress", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-resistor-kit-smd.html" },
       { name: "طقم مكثفات 0402", unit: "طقم", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-capacitor-kit-smd.html" },
       { name: "كرات لحام BGA 0.4mm", unit: "علبة / عبوة", baseMonthlyQty: 1, unitUSD: 15, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0.4mm-solder-balls-bga.html" },
-      { name: "كروت MicroSD (صناعية)", unit: "كرت 8–16GB", baseMonthlyQty: 0.35, unitUSD: 8, source: "Amazon / محلي", url: "https://www.amazon.com/s?k=industrial+micro+sd+card+16gb", planHint: "للصور/الـ FPGA — ليست كل عملية؛ راجع تدوير الكروت." },
       { name: "أكياس ESD للشحنات", unit: "عبوة 100 كيس", baseMonthlyQty: 1, unitUSD: 12, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-anti-static-esd-bag-pcb.html" }
+    ]
+  },
+
+  localConsumablesQuarterly: {
+    title: "خطة الطلب ربع السنوية — استهلاكات محلية",
+    note: "مواد محلية متكررة (العتبة/البستان) محسوبة على نفس حجم العمل الشهري. الجدول مرتب تلقائياً من الأعلى تكلفة للربع إلى الأقل.",
+    baselineMonthlyOperations: 75,
+    currency: "EGP",
+    items: [
+      { name: "كيماويات التنظيف", unit: "IPA 99% (عبوة 500ml)", baseMonthlyQty: 1.2, unitEGP: 220, source: "العتبة / كيماويات" },
+      { name: "تبريد البنش", unit: "مروحة تعدين 120mm + باور 12V", baseMonthlyQty: 0.34, unitEGP: 1400, source: "البستان / مستعمل" },
+      { name: "معجون حراري عام", unit: "GD900 أو ما يعادله", baseMonthlyQty: 1, unitEGP: 250, source: "العتبة / البستان" },
+      { name: "حماية أثناء الهواء الساخن", unit: "Kapton + شريط ألومنيوم", baseMonthlyQty: 1, unitEGP: 80, source: "العتبة" },
+      { name: "أسلاك توصيل/قياس صغيرة", unit: "Dupont + أسلاك استبدال", baseMonthlyQty: 0.4, unitEGP: 350, source: "البستان" },
+      { name: "حقن فارغة بسن معدني", unit: "علبة ~10 قطع", baseMonthlyQty: 0.6, unitEGP: 45, source: "صيدليات / محلي" },
+      { name: "مشابك تثبيت كابلات", unit: "Silicone Cable Clips", baseMonthlyQty: 0.34, unitEGP: 95, source: "إكسسوارات كمبيوتر" }
     ]
   },
 

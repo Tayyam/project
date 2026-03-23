@@ -15,7 +15,7 @@ Then browse `http://localhost:8080/`.
 |------|------|
 | `index.html` | Shell: header, nav, `#mainContent`, loads `js/app.js` |
 | `css/main.css` | All styles |
-| `js/data.js` | `export const DATA` — models, navigation, purchases, financials; **`importedConsumablesQuarterly.items`** = مستهلكات/قطع فقط (بدون أصول تشغيلية)، مرتبة في الواجهة حسب تكلفة الربع تنازلياً |
+| `js/data.js` | `export const DATA` — models, navigation, purchases, financials; **`importedConsumablesQuarterly.items`** للمستهلكات المستوردة + **`localConsumablesQuarterly.items`** للاستهلاكات المحلية، وكلاهما مرتّب في الواجهة حسب تكلفة الربع تنازلياً |
 | `js/utils.js` | DOM helper + number formatters |
 | `js/purchase-rows.js` | Table row templates for purchase tables |
 | `js/sections.js` | `mountSections(...)` — injects all `<section>` tabs |
