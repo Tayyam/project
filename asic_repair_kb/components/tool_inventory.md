@@ -18,16 +18,20 @@
 | APW12 Bench PSU (1215 مطابق) | ✅ |
 | ZOYI ZT-R01 (حراري + ملتيميتر) | ✅ |
 | FNIRSI DSO-TC3 (Tester فقط) | ✅ |
-| Oscilloscope مكتبي ≥ 100 MHz | ✅ |
+| Oscilloscope UNI-T UTD2102CEX+ (100 MHz) — Zeus | ✅ |
 | Sugon 3005D (دوائر كنترول فقط) | ✅ |
-| USB to TTL + Dupont | ✅ |
+| WANPTEK KPS3030D (هاشبورد / بنش DC) — Zeus | ✅ |
+| USB to TTL + أسلاك جسر Zeus (2461) | ✅ |
+| PICKit 3.5 + كابل EEPROM (Hashboard decode) — Zeus | ✅ |
 
 ### 2) معدات اللحام وإعادة العمل
 
 | العنصر | الحالة |
 |---|---|
 | Quick 861DW هواء ساخن | ✅ |
+| Quick 707D+ / 709D+ (2 في 1) — Zeus | ✅ |
 | PUHUI T-8280 IR Preheater | ✅ |
+| iTECH HP-B100 (سطح صغير) — Zeus | ✅ |
 | Quick 205H + Tips | ✅ |
 | Andonstar AD207 Microscope | ✅ |
 | Ultrasonic Cleaner | ✅ |
@@ -42,7 +46,8 @@
 | Silicon heat mat | ✅ |
 | مشابك تنظيم الكابلات | ✅ |
 | صناديق فرز ملونة (WIP/Done) | ✅ |
-| 4 مراوح + Duct للتبريد الإجباري | ✅ |
+| تبريد بنش Zeus 4×120mm + منظم سرعة | ✅ |
+| منفضة F10 turbo تنظيف — Zeus | ✅ |
 | لمبة 100W سيري أمان APW12 | ✅ |
 | مقاومة تفريغ 25Ω/100W | ✅ |
 
@@ -51,7 +56,7 @@
 | العنصر | الحالة |
 |---|---|
 | Flux Amtech + Paste Mechanic 183°C | ✅ |
-| Stencils + منصة Reball | ✅ |
+| Tin stencil لكل جيل شريحة (Zeus) + منصة BGA 90×90 اختيارية | ✅ |
 | HY234 Thermal Putty | ✅ |
 | GD900 | ✅ |
 | IPA 99% + Kapton + Aluminum tape + Wick + Copper sponge | ✅ |
@@ -70,7 +75,7 @@
 
 | العنصر | الحالة |
 |---|---|
-| شرائح ASIC (BM1398 / KF1922) | ✅ |
+| شرائح ASIC (BM1362 / BM1366BS + KF1950–KF1973) | ✅ |
 | LDO/PMIC + MOSFET/PWM + Data cables + AWG6 wiring | ✅ |
 | طقم مقاومات 0402 | ✅ |
 | طقم مكثفات 0402 | ✅ |

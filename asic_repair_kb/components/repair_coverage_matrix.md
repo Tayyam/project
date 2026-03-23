@@ -52,10 +52,10 @@ Physical **bench capability** tracked in this project (what you own / must acqui
 
 | Tool area | Documented | Notes |
 |-----------|:----------:|-------|
-| Diagnosis (tester, scope, thermal, lab PSU, UART) | true | PicoBT + APW12 bench, DSO, ZT-R01, Sugon 3005D, USB–TTL |
+| Diagnosis (tester, scope, thermal, lab PSU, UART) | true | PicoBT + APW12 bench, UNI-T UTD2102CEX+ (أو ≥100 MHz), ZT-R01, Sugon 3005D + WANPTEK KPS، PICKit 3.5، كابل EEPROM، USB–TTL |
 | Rework (hot air, preheater, iron, microscope, ultrasonic) | true | Quick 861DW, PUHUI T-8280, Quick 205H, AD207, ultrasonic |
-| Consumables (flux, paste, putty, IPA, stencils) | true | Amtech, Mechanic 183 °C, HY234, GD900, magnetic stencils |
-| Spares (ASIC, LDO, MOSFET, cables, copper) | true | BM1398, KF1922, LDO/PMIC kit, AWG6, data cables |
+| Consumables (flux, paste, putty, IPA, tin stencil) | true | Amtech, Mechanic 183 °C, HY234, GD900, Zeus tin stencil لكل جيل شريحة |
+| Spares (ASIC, LDO, MOSFET, cables, copper) | true | BM1362 / BM1366BS + KF1950–KF1973, LDO/PMIC kit, AWG6, data cables |
 | Guide-required extras (⚠️ in inventory) | partial | 0402 R/C, 0.4 mm balls, SPG-30B, paste 2500, 704 silicone, PICkit3 — see ⚠️ rows in [tool_inventory.md](tool_inventory.md) |
 
 ### Tool × repair file (where guides mention requirements)
@@ -63,7 +63,7 @@ Physical **bench capability** tracked in this project (what you own / must acqui
 | Repair doc | Typical tools / spares called out in KB |
 |------------|----------------------------------------|
 | [repair_s19_hashboard.md](repair_s19_hashboard.md) | APW12, PicoBT V2.2010, 4 fans, 25 Ω discharge, scope (CLK), 0402 kit, SPG-30B, 0.4 mm balls, PICkit3 |
-| [repair_whatsminer_m30s_hashboard.md](repair_whatsminer_m30s_hashboard.md) | CB4-V10, 12 V + adjustable hash supply, **100 MHz scope**, M1 shell + fan, HY234, KF1922 |
+| [repair_whatsminer_m30s_hashboard.md](repair_whatsminer_m30s_hashboard.md) | CB4-V10, 12 V + adjustable hash supply, **100 MHz scope**, M1 shell + fan, HY234, شرائح KF1950–KF1973 + tin stencil المطابق |
 | [repair_whatsminer_test_fixture.md](repair_whatsminer_test_fixture.md) | CB4-V10, 13 V / 31 A PSU, Ethernet/USB dongle, MobaXterm |
 | [repair_apw12_psu.md](repair_apw12_psu.md) | 80 W+ iron, heat gun 260 °C, AC variac or bulb, electronic load, scope, paste **2500**, **704 silicone** |
 | [repair_s19_control_board.md](repair_s19_control_board.md) | UART, PuTTY, fine soldering, LDO/PMIC spares |
