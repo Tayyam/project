@@ -9,6 +9,7 @@ export const DATA = {
     { id: "workflow",        label: "⚙️ مسار العمل" },
     { id: "protocol",        label: "📚 دليل الإصلاح" },
     { id: "purchases",       label: "🛒 المشتريات" },
+    { id: "importQuarterly", label: "📦 مستورد 3 شهور" },
     { id: "costPerRepair",   label: "🔬 تكلفة الإصلاح" },
     { id: "pricing",         label: "💰 التسعير والربح" },
     { id: "opex",            label: "📊 المصاريف والتعادل" },
@@ -51,6 +52,21 @@ export const DATA = {
     titleAr: "دليل الإصلاح",
     titleEn: "ASIC Repair Knowledge Base",
     hubNote: "المحتوى مُحدَّث على شكل **فهرس** + ملفات فرعية داخل <code style=\"color:#93c5fd\">asic_repair_kb/components/</code> ومرايا Zeus تحت <code style=\"color:#93c5fd\">asic_repair_kb/sources/</code>. اضغط أي رابط ينتهي بـ <code>.md</code> في الجدول لفتحه هنا. يظهر زر العودة للفهرس عند تصفّح ملف فرعي."
+  },
+
+  importedConsumablesQuarterly: {
+    title: "خطة الطلب ربع السنوية — مستهلكات مستوردة فقط",
+    note: "هذه الصفحة تحسب تلقائياً كمية الطلب كل 3 شهور بناءً على حجم العمل الشهري. المبدأ: مخزون يكفي ربع سنة بدون توقف.",
+    baselineMonthlyOperations: 75,
+    items: [
+      { name: "Amtech NC-559-ASM", unit: "10g syringe", baseMonthlyQty: 3, unitUSD: 8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2277" },
+      { name: "Mechanic Solder Paste 183°C", unit: "60g jar", baseMonthlyQty: 1, unitUSD: 12, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264" },
+      { name: "HY234 Thermal Putty", unit: "1kg pack", baseMonthlyQty: 0.5, unitUSD: 5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638" },
+      { name: "BGA Solder Balls 0.4mm", unit: "jar/pack", baseMonthlyQty: 1, unitUSD: 15, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0.4mm-solder-balls-bga.html" },
+      { name: "0402 Resistor Kit", unit: "kit", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-resistor-kit-smd.html" },
+      { name: "0402 Capacitor Kit", unit: "kit", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-capacitor-kit-smd.html" },
+      { name: "Anti-static ESD Bags", unit: "100 pcs pack", baseMonthlyQty: 1, unitUSD: 12, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-anti-static-esd-bag-pcb.html" }
+    ]
   },
 
   purchases: {

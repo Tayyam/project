@@ -3,6 +3,31 @@
  */
 export function mountSections(main, DATA, { fmt, fmtUSD, fmtEGP }, { purchaseImportRow, purchaseLocalRow }) {
 
+function computeImportQuarterlyPlan(data) {
+  const plan = data.importedConsumablesQuarterly;
+  if (!plan || !Array.isArray(plan.items)) {
+    return { rows: [], totalQuarterlyUSD: 0, loadFactor: 1 };
+  }
+  const baseline = plan.baselineMonthlyOperations || 75;
+  const currentOps = (data.monthlyVolume && data.monthlyVolume.totalOperations) || baseline;
+  const loadFactor = baseline > 0 ? currentOps / baseline : 1;
+
+  const rows = plan.items.map(item => {
+    const monthlyQty = item.baseMonthlyQty * loadFactor;
+    const quarterlyQty = Math.max(1, Math.ceil(monthlyQty * 3));
+    const quarterUSD = quarterlyQty * item.unitUSD;
+    return {
+      ...item,
+      monthlyQty,
+      quarterlyQty,
+      quarterUSD
+    };
+  });
+
+  const totalQuarterlyUSD = rows.reduce((sum, r) => sum + r.quarterUSD, 0);
+  return { rows, totalQuarterlyUSD, loadFactor };
+}
+
 /* ── 1. Workflow ── */
 main.insertAdjacentHTML('beforeend', `
 <section id="workflow" class="active">
@@ -145,7 +170,60 @@ main.insertAdjacentHTML('beforeend', `
 </section>
 `);
 
-/* ── 3. Cost Per Repair ── */
+/* ── 4. Imported Consumables Quarterly ── */
+const importQuarter = computeImportQuarterlyPlan(DATA);
+main.insertAdjacentHTML('beforeend', `
+<section id="importQuarterly">
+  <div class="section-heading">
+    <div class="icon">📦</div>
+    <h2>${DATA.importedConsumablesQuarterly.title}</h2>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <p style="color:var(--text-muted);font-size:.88rem;line-height:1.85;margin:0">${DATA.importedConsumablesQuarterly.note}</p>
+    <p style="margin-top:8px;font-size:.8rem;color:#93c5fd">حجم العمل الحالي: ${DATA.monthlyVolume.totalOperations} عملية/شهر — عامل التحميل: ×${importQuarter.loadFactor.toFixed(2)}</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>المستهلك المستورد</th>
+          <th>وحدة الشراء</th>
+          <th>الاحتياج الشهري</th>
+          <th>الكمية المطلوبة كل 3 شهور</th>
+          <th>تكلفة الوحدة ($)</th>
+          <th>الإجمالي الربع سنوي ($)</th>
+          <th>المصدر</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${importQuarter.rows.map(r => `
+          <tr>
+            <td style="font-weight:600">${r.name}</td>
+            <td class="mono">${r.unit}</td>
+            <td class="mono">${r.monthlyQty.toFixed(2)}</td>
+            <td class="amber mono">${r.quarterlyQty}</td>
+            <td class="mono">${fmtUSD(r.unitUSD)}</td>
+            <td class="green mono">${fmtUSD(r.quarterUSD)}</td>
+            <td><a href="${r.url}" target="_blank" rel="noopener" style="color:#6ee7b7;text-decoration:none">🔗 ${r.source}</a></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="capex-item" style="border-bottom:none;padding:4px 0">
+      <span style="font-weight:800">إجمالي طلب المستورد (3 شهور)</span>
+      <span style="font-weight:900;color:var(--accent);font-size:1.1rem">${fmtUSD(importQuarter.totalQuarterlyUSD)}</span>
+    </div>
+    <div style="text-align:center;margin-top:6px;font-size:.78rem;color:var(--text-muted)">${fmtEGP(Math.round(importQuarter.totalQuarterlyUSD * DATA.pl.exchangeRate))}</div>
+  </div>
+</section>
+`);
+
+/* ── 5. Cost Per Repair ── */
 main.insertAdjacentHTML('beforeend', `
 <section id="costPerRepair">
   <div class="section-heading">
@@ -485,7 +563,7 @@ main.insertAdjacentHTML('beforeend', `
 </section>
 `);
 
-/* ── 9. ROI ── */
+/* ── 10. ROI ── */
 const roi = DATA.roi;
 const xr = DATA.pl.exchangeRate || 54;
 
@@ -516,6 +594,14 @@ function buildCapexFromPurchases(data) {
     label: x.label,
     usd: Number(x.usd) || 0
   }));
+
+  const quarterlyImportReserve = computeImportQuarterlyPlan(data).totalQuarterlyUSD;
+  if (quarterlyImportReserve > 0) {
+    extras.push({
+      label: "مخزون مستهلكات مستوردة (يكفي 3 شهور)",
+      usd: quarterlyImportReserve
+    });
+  }
 
   const items = [...base, ...extras].filter(i => i.usd > 0);
   items.sort((a, b) => b.usd - a.usd);
