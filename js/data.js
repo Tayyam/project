@@ -59,19 +59,17 @@ export const DATA = {
     note: "**مستهلكات ومخزون قطع فقط** (بدون أصول تشغيلية مثل شبلونات/منصة reballing/وصلة APW12/علب تخزين — تبقى في جدول النوادر أو الأصول). تقديرات شهرية مرتبطة بحجم العمل (المرجع: 75 عملية/شهر). **الجدول مرتب تلقائياً** من الأعلى تكلفة للربع إلى الأقل. عدّل `baseMonthlyQty` في `data.js` حسب واقعك.",
     baselineMonthlyOperations: 75,
     items: [
-      { name: "شرائح ASIC (Bitmain)", unit: "شريحة (BM1398 / BM1362)", baseMonthlyQty: 45, unitUSD: 3, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106", planHint: "مرتبط بهاش Antminer — يزيد مع نسبة الهاش في الحجم." },
+      { name: "شرائح ASIC (Bitmain)", unit: "شريحة (BM1398 / BM1362)", baseMonthlyQty: 45, unitUSD: 3.5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106", planHint: "مرتبط بهاش Antminer — يزيد مع نسبة الهاش في الحجم." },
       { name: "شرائح ASIC (MicroBT)", unit: "شريحة (KF1922)", baseMonthlyQty: 16, unitUSD: 2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2148", planHint: "مرتبط بهاش Whatsminer." },
       { name: "فلاكس لحام ASIC", unit: "حقنة 10g Amtech NC-559-ASM", baseMonthlyQty: 3, unitUSD: 8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2277" },
       { name: "معجون قصدير BGA", unit: "عبوة 60g Mechanic 183°C", baseMonthlyQty: 1, unitUSD: 12, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264" },
-      { name: "قناع لحام UV", unit: "أنبوبة Mechanic UVH900-LY", baseMonthlyQty: 2, unitUSD: 3, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1585" },
+      { name: "قناع لحام UV", unit: "أنبوبة Mechanic UVH900-LY", baseMonthlyQty: 2, unitUSD: 6.54, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1585" },
       { name: "Thermal Putty HY234", unit: "كيس 1kg", baseMonthlyQty: 0.5, unitUSD: 5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638" },
-      { name: "كابلات داتا (10-pin / 12-pin)", unit: "كابل", baseMonthlyQty: 22, unitUSD: 0.2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107" },
+      { name: "كابلات داتا 24-pin (60cm)", unit: "كابل", baseMonthlyQty: 22, unitUSD: 1.8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107" },
       { name: "آيسيهات الكنترول (LDO / PMIC)", unit: "شريحة", baseMonthlyQty: 26, unitUSD: 0.05, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=997" },
-      { name: "قطع غيار الباور (MOSFET / PWM)", unit: "شريحة", baseMonthlyQty: 32, unitUSD: 1, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934" },
-      { name: "طقم مقاومات 0402", unit: "طقم Zeus / AliExpress", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-resistor-kit-smd.html" },
-      { name: "طقم مكثفات 0402", unit: "طقم", baseMonthlyQty: 0.5, unitUSD: 18, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0402-capacitor-kit-smd.html" },
-      { name: "كرات لحام BGA 0.4mm", unit: "علبة / عبوة", baseMonthlyQty: 1, unitUSD: 15, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-0.4mm-solder-balls-bga.html" },
-      { name: "أكياس ESD للشحنات", unit: "عبوة 100 كيس", baseMonthlyQty: 1, unitUSD: 12, source: "AliExpress", url: "https://www.aliexpress.com/w/wholesale-anti-static-esd-bag-pcb.html" }
+      { name: "قطع غيار الباور (SI7N65F MOSFET)", unit: "شريحة", baseMonthlyQty: 32, unitUSD: 0.4, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934" },
+      { name: "طقم مقاومات SMD", unit: "Sample Book", baseMonthlyQty: 0.5, unitUSD: 7.75, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005008894523897.html" },
+      { name: "طقم مكثفات SMD", unit: "Sample Book", baseMonthlyQty: 0.5, unitUSD: 12, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005004657585875.html" }
     ]
   },
 
@@ -118,7 +116,7 @@ export const DATA = {
               name: "باور اختبار الهاشبورد (Bench)",
               model: "Antminer APW12 — إصدارات 1215 (a/b/c/d/e/f/g) حسب الموديل",
               function: "12–15V / 70A+ — التشغيل الحقيقي تحت الحمل مع PicoBT. ⚠️ أكد رقم الإصدار مع مبيعات Zeus (واتساب) — الإصدارات غير متوافقة بين الموديلات.",
-              price: "$115",
+              price: "$82",
               priceBefore: "Sugon 3005D لا يكفي (150W vs 1000W+)",
               saving: "صفحة Zeus — اختر الإصدار المناسب لهاشبورداتك",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=306",
@@ -162,10 +160,10 @@ export const DATA = {
               name: "منصة IR تسخين شاملة للهاشبورد",
               model: "PUHUI T-8280 Large IR Preheater (28×27cm)",
               function: "تسخين متساوٍ للهاشبورد كاملة — يقلل التقوس أثناء الـ rework.",
-              price: "$135",
+              price: "$92",
               priceBefore: "$46 (iTECH HP-B100 — صغيرة تسبب Warping)",
               saving: "تسخين متساوٍ — نسبة تقوس أقل",
-              url: "https://www.aliexpress.com/w/wholesale-PUHUI-T-8280-preheater.html",
+              url: "https://ar.aliexpress.com/item/1005010520024198.html",
               source: "AliExpress",
               badge: "ترقية ضرورية"
             },
@@ -235,9 +233,9 @@ export const DATA = {
       items: [
         {
           name: "شرايح ASIC (Bitmain)",
-          model: "BM1398 / BM1362 — حسب موديل اللوحة",
+          model: "BM1398 / BM1362 (BM1362AA/AK/AC/AI/AJ) — حسب موديل اللوحة",
           function: "قطع الغيار الأساسية لهاشبورد Antminer.",
-          price: "$3 / شريحة",
+          price: "$3.5 / شريحة",
           priceBefore: "بالكمية (Alibaba)",
           saving: "سعر ثابت بدون MOQ على Zeus",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106",
@@ -281,7 +279,7 @@ export const DATA = {
           name: "قناع لحام UV",
           model: "Mechanic UVH900-LY",
           function: "عند احتراق أو رفع الـ pad: يحمي الـ traces والـ pads بعد الإصلاح — بدونه كثير من الترميمات تبقى مؤقتة. يتصلب في ثوانٍ تحت مصباح UV.",
-          price: "$3",
+          price: "$6.54",
           priceBefore: null,
           saving: "عزل دائم للمسار بعد إعادة اللحام",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1585",
@@ -311,23 +309,23 @@ export const DATA = {
           badge: "أوفر"
         },
         {
-          name: "طقم BGA Reballing",
-          model: "منصة مغناطيسية + شبلونات ASIC (S19)",
-          function: "تثبيت الشريحة ومحاذاة كرات القصدير بدقة.",
-          price: "$22",
-          priceBefore: "بدون منصة الشريحة تهرج",
-          saving: "أساس الـ reballing الآمن",
-          url: "https://www.aliexpress.com/w/wholesale-bga-reballing-kit-asic.html",
-          source: "AliExpress",
-          badge: "ناقص إلزامي"
+          name: "طقم BGA Reballing (90×90)",
+          model: "BGA 90x90 Universal Chip Tinning Platform Tinning Kit",
+          function: "منصة Tinning/Reballing شاملة. تتضمن ملحقات مثل suction pen, desoldering wire, flux paste, solder paste, tweezers, solder balls, tinning nets.",
+          price: "$61.9",
+          priceBefore: "بديل مباشر بدل خيارات Alibaba",
+          saving: "طقم شامل يقلل شراء ملحقات منفصلة",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1829",
+          source: "Zeus Mining",
+          badge: "طقم شامل"
         },
         {
           name: "مخزون كابلات داتا",
-          model: "40 كابل (10-pin / 12-pin)",
+          model: "Data line data cable 24 pin — 60cm",
           function: "كابلات استهلاكية للبيع والتبديل السريع.",
-          price: "$0.20 / كابل",
-          priceBefore: "~$133 (500 ريال)",
-          saving: "وفر حتى 100%",
+          price: "$1.8 / كابل",
+          priceBefore: null,
+          saving: "سعر محدث حسب النوع 24-pin / 60cm",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107",
           source: "Zeus Mining",
           badge: "أوفر"
@@ -345,59 +343,49 @@ export const DATA = {
         },
         {
           name: "قطع غيار الباور",
-          model: "MOSFETs & PWM ICs",
+          model: "SI7N65F 650V 7A N-channel MOSFET",
           function: "مخزون صيانة باور سبلاي التعدين.",
-          price: "$1 / chip",
-          priceBefore: "~$160 (600 ريال)",
-          saving: "وفر حتى 99%",
+          price: "$0.4 / chip",
+          priceBefore: null,
+          saving: "سعر محدث لشريحة SI7N65F",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934",
           source: "Zeus Mining",
           badge: "أوفر"
         },
         {
-          name: "وصلة تشغيل APW12 على البنش (IIC / EN)",
-          model: "IIC interface enable / EN short jig — Zeus أو ما يعادله",
-          function: "APW12 لا يخرج 12–15V على البنش بدون ماينر إلا بتمكين I²C أو تقصير EN حسب الدليل — **ضرورية لاختبار الهاش مع APW12 خارج الجهاز.**",
-          price: "~$25",
-          priceBefore: null,
-          saving: "ابحث في Zeus عن APW12 test / IIC enable بجانب صفحة APW12",
-          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=306",
-          source: "Zeus Mining",
-          badge: "بنش APW12"
+          name: "Dupont Jumper Wire Kit",
+          model: "40-120Pcs 10/20/30cm 24AWG Male/Female",
+          function: "أسلاك توصيل عملية للبنش والبرمجة والاختبارات بدلاً من وصلة IIC/EN المنفصلة.",
+          price: "$1.02 / kit",
+          priceBefore: "SAR 3.82",
+          saving: "حل عملي منخفض التكلفة",
+          url: "https://ar.aliexpress.com/item/1005003219096948.html",
+          source: "AliExpress",
+          badge: "بديل"
         },
         {
-          name: "طقم مقاومات 0402",
-          model: "0Ω · 51Ω · 10KΩ · 4.7KΩ — Zeus / AliExpress",
+          name: "طقم مقاومات SMD",
+          model: "Resistor Kit Sample Book (0201/0402/0603/0805/1206)",
           function: "Zeus §I.5 S19 — المقاومات حول الـ ASIC تتلف مع الحرارة؛ حجم رملي — اشتِ sets جاهزة.",
-          price: "~$18",
+          price: "$7.75",
           priceBefore: null,
-          saving: "تجميع يدوي في مصر صعب",
-          url: "https://www.aliexpress.com/w/wholesale-0402-resistor-kit-smd.html",
+          saving: "سعر أقل + قيم كثيرة في كتاب واحد",
+          url: "https://ar.aliexpress.com/item/1005008894523897.html",
           source: "AliExpress",
           badge: "S19 أساسي"
         },
         {
-          name: "طقم مكثفات 0402",
-          model: "0.1µF · 1µF · 2.2µF",
+          name: "طقم مكثفات SMD",
+          model: "Capacitor Sample Book (01005/0201/0402/0603/0805/1206)",
           function: "نفس منطق الهاش S19 — فلترة بجانب الشرائح؛ أضف 2.2µF كما يوصي Zeus للتكملة.",
-          price: "~$18",
+          price: "$12",
           priceBefore: null,
-          saving: "مجموعة واحدة توفر وقت البحث عن كل قيمة",
-          url: "https://www.aliexpress.com/w/wholesale-0402-capacitor-kit-smd.html",
+          saving: "كتاب قيم متعددة بسعر اقتصادي",
+          url: "https://ar.aliexpress.com/item/1005004657585875.html",
           source: "AliExpress",
           badge: "S19 أساسي"
         },
-        {
-          name: "كرات لحام BGA",
-          model: "0.4mm diameter — SnAgCu",
-          function: "Reballing BM1398 / KF1922 حسب الدليل.",
-          price: "~$15",
-          priceBefore: null,
-          saving: "مطابقة قطر Zeus",
-          url: "https://www.aliexpress.com/w/wholesale-0.4mm-solder-balls-bga.html",
-          source: "AliExpress",
-          badge: "Reball"
-        },
+        
         
         {
           name: "علب تخزين Anti-static (ESD)",
@@ -410,17 +398,7 @@ export const DATA = {
           source: "AliExpress",
           badge: "تنظيم · ASIC"
         },
-        {
-          name: "أكياس مانعة للشحنات (ESD Bags)",
-          model: "عبوة 100 كيس مقاسات مختلطة",
-          function: "تسليم الهاش بورد بعد الإصلاح بشكل احترافي وحمايته من ESD أثناء النقل والتخزين.",
-          price: "$12 / 100 pcs",
-          priceBefore: null,
-          saving: "مستهلك بسيط يرفع الجودة ويحمي الشحن",
-          url: "https://www.aliexpress.com/w/wholesale-anti-static-esd-bag-pcb.html",
-          source: "AliExpress",
-          badge: "Packaging"
-        }
+        
       ]
     },
 
