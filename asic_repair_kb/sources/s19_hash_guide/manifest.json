@@ -1,0 +1,253 @@
+{
+  "slug": "s19_hash_guide",
+  "source_url": "https://www.zeusbtc.com/manuals/Antminer-S19-Hash-Board-Repair-Guide.asp",
+  "fetched_at": "2026-03-23T05:49:09.088190+00:00",
+  "image_count": 49,
+  "images": [
+    {
+      "order": 1,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280669255318281.JPG",
+      "local": "images/202108/16280669255318281.JPG"
+    },
+    {
+      "order": 2,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280669332283857.JPG",
+      "local": "images/202108/16280669332283857.JPG"
+    },
+    {
+      "order": 3,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280669718083128.JPG",
+      "local": "images/202108/16280669718083128.JPG"
+    },
+    {
+      "order": 4,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280670439942976.JPG",
+      "local": "images/202108/16280670439942976.JPG"
+    },
+    {
+      "order": 5,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280670989112547.JPG",
+      "local": "images/202108/16280670989112547.JPG"
+    },
+    {
+      "order": 6,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280671263690793.JPG",
+      "local": "images/202108/16280671263690793.JPG"
+    },
+    {
+      "order": 7,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280671577488218.JPG",
+      "local": "images/202108/16280671577488218.JPG"
+    },
+    {
+      "order": 8,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280672139981566.JPG",
+      "local": "images/202108/16280672139981566.JPG"
+    },
+    {
+      "order": 9,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280672448823607.JPG",
+      "local": "images/202108/16280672448823607.JPG"
+    },
+    {
+      "order": 10,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280673436987379.jpg",
+      "local": "images/202108/16280673436987379.jpg"
+    },
+    {
+      "order": 11,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280673851292066.JPG",
+      "local": "images/202108/16280673851292066.JPG"
+    },
+    {
+      "order": 12,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280675029636732.jpg",
+      "local": "images/202108/16280675029636732.jpg"
+    },
+    {
+      "order": 13,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280675329455458.jpg",
+      "local": "images/202108/16280675329455458.jpg"
+    },
+    {
+      "order": 14,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280675609637282.JPG",
+      "local": "images/202108/16280675609637282.JPG"
+    },
+    {
+      "order": 15,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280676018461882.JPG",
+      "local": "images/202108/16280676018461882.JPG"
+    },
+    {
+      "order": 16,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280677076156400.jpg",
+      "local": "images/202108/16280677076156400.jpg"
+    },
+    {
+      "order": 17,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280677762706693.jpg",
+      "local": "images/202108/16280677762706693.jpg"
+    },
+    {
+      "order": 18,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280678779025618.jpg",
+      "local": "images/202108/16280678779025618.jpg"
+    },
+    {
+      "order": 19,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280679098027647.JPG",
+      "local": "images/202108/16280679098027647.JPG"
+    },
+    {
+      "order": 20,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280679412382871.JPG",
+      "local": "images/202108/16280679412382871.JPG"
+    },
+    {
+      "order": 21,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280679709801253.JPG",
+      "local": "images/202108/16280679709801253.JPG"
+    },
+    {
+      "order": 22,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280679896800337.JPG",
+      "local": "images/202108/16280679896800337.JPG"
+    },
+    {
+      "order": 23,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280680154961774.JPG",
+      "local": "images/202108/16280680154961774.JPG"
+    },
+    {
+      "order": 24,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280680638577513.JPG",
+      "local": "images/202108/16280680638577513.JPG"
+    },
+    {
+      "order": 25,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280680775892317.JPG",
+      "local": "images/202108/16280680775892317.JPG"
+    },
+    {
+      "order": 26,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280681615335996.jpg",
+      "local": "images/202108/16280681615335996.jpg"
+    },
+    {
+      "order": 27,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280681949383909.JPG",
+      "local": "images/202108/16280681949383909.JPG"
+    },
+    {
+      "order": 28,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280687224064054.JPG",
+      "local": "images/202108/16280687224064054.JPG"
+    },
+    {
+      "order": 29,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280687517173735.JPG",
+      "local": "images/202108/16280687517173735.JPG"
+    },
+    {
+      "order": 30,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280687683264249.JPG",
+      "local": "images/202108/16280687683264249.JPG"
+    },
+    {
+      "order": 31,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280687955976637.JPG",
+      "local": "images/202108/16280687955976637.JPG"
+    },
+    {
+      "order": 32,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280688356818739.JPG",
+      "local": "images/202108/16280688356818739.JPG"
+    },
+    {
+      "order": 33,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280689649568480.JPG",
+      "local": "images/202108/16280689649568480.JPG"
+    },
+    {
+      "order": 34,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280690203020490.JPG",
+      "local": "images/202108/16280690203020490.JPG"
+    },
+    {
+      "order": 35,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280691358575865.jpg",
+      "local": "images/202108/16280691358575865.jpg"
+    },
+    {
+      "order": 36,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16280691868885679.JPG",
+      "local": "images/202108/16280691868885679.JPG"
+    },
+    {
+      "order": 37,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281252098008009.JPG",
+      "local": "images/202108/16281252098008009.JPG"
+    },
+    {
+      "order": 38,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281252916071119.JPG",
+      "local": "images/202108/16281252916071119.JPG"
+    },
+    {
+      "order": 39,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281253208141905.JPG",
+      "local": "images/202108/16281253208141905.JPG"
+    },
+    {
+      "order": 40,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281254173846250.jpg",
+      "local": "images/202108/16281254173846250.jpg"
+    },
+    {
+      "order": 41,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281255087210813.JPG",
+      "local": "images/202108/16281255087210813.JPG"
+    },
+    {
+      "order": 42,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281255507527082.JPG",
+      "local": "images/202108/16281255507527082.JPG"
+    },
+    {
+      "order": 43,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281255876188535.JPG",
+      "local": "images/202108/16281255876188535.JPG"
+    },
+    {
+      "order": 44,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281256176355390.JPG",
+      "local": "images/202108/16281256176355390.JPG"
+    },
+    {
+      "order": 45,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281256719764448.jpg",
+      "local": "images/202108/16281256719764448.jpg"
+    },
+    {
+      "order": 46,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281256966372007.jpg",
+      "local": "images/202108/16281256966372007.jpg"
+    },
+    {
+      "order": 47,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281259808162230.jpg",
+      "local": "images/202108/16281259808162230.jpg"
+    },
+    {
+      "order": 48,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281260712654783.jpg",
+      "local": "images/202108/16281260712654783.jpg"
+    },
+    {
+      "order": 49,
+      "url": "https://www.zeusbtc.com/Upload/image/202108/16281261554488676.jpg",
+      "local": "images/202108/16281261554488676.jpg"
+    }
+  ]
+}

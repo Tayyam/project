@@ -1,0 +1,18 @@
+{
+  "slug": "whatsminer_m50_manual_blog",
+  "source_url": "https://www.zeusbtc.com/blog/details/4764-whatsminer-m50-series-manual",
+  "fetched_at": "2026-03-23T05:50:15.382648+00:00",
+  "image_count": 2,
+  "images": [
+    {
+      "order": 1,
+      "url": "https://www.zeusbtc.com/Upload/image/202310/16967583225058729.jpg",
+      "local": "images/202310/16967583225058729.jpg"
+    },
+    {
+      "order": 2,
+      "url": "https://www.zeusbtc.com/Upload/image/202310/16967511585427869.jpg",
+      "local": "images/202310/16967511585427869.jpg"
+    }
+  ]
+}

@@ -438,7 +438,8 @@ const DATA = {
   knowledgeBase: {
     file: "asic_repair_knowledge_base.md",
     titleAr: "دليل الإصلاح",
-    titleEn: "ASIC Repair Knowledge Base"
+    titleEn: "ASIC Repair Knowledge Base",
+    hubNote: "المحتوى مُحدَّث على شكل **فهرس** + ملفات فرعية داخل <code style=\"color:#93c5fd\">asic_repair_kb/components/</code> ومرايا Zeus تحت <code style=\"color:#93c5fd\">asic_repair_kb/sources/</code>. اضغط أي رابط ينتهي بـ <code>.md</code> في الجدول لفتحه هنا. يظهر زر العودة للفهرس عند تصفّح ملف فرعي."
   },
 
   purchases: {
@@ -957,12 +958,20 @@ main.insertAdjacentHTML('beforeend', `
 </section>
 `);
 
-/* ── 2. Knowledge Base (asic_repair_knowledge_base.md) ── */
+/* ── 2. Knowledge Base (hub + asic_repair_kb/components) ── */
 main.insertAdjacentHTML('beforeend', `
 <section id="protocol">
   <div class="section-heading">
     <div class="icon">📚</div>
     <h2>${DATA.knowledgeBase.titleAr} <span style="font-size:.72em;color:var(--text-muted)">— ${DATA.knowledgeBase.titleEn}</span></h2>
+  </div>
+  <div class="card" style="margin-bottom:14px;padding:14px 18px">
+    <p style="color:var(--text-muted);margin:0;font-size:.84rem;line-height:1.85">${DATA.knowledgeBase.hubNote}</p>
+  </div>
+  <div id="kbToolbar" class="card" style="margin-bottom:12px;padding:12px 16px;display:none">
+    <button type="button" id="kbBackHub" style="background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);color:#93c5fd;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.86rem;font-weight:700">
+      ← العودة للفهرس الرئيسي
+    </button>
   </div>
   <div id="kbStatus" class="card" style="margin-bottom:16px">
     <p class="kb-loading" style="color:var(--text-muted);margin:0;font-size:.88rem;line-height:1.8">
@@ -1482,34 +1491,81 @@ main.insertAdjacentHTML('beforeend', `
 </section>
 `);
 
-/* ── Load Knowledge Base markdown ── */
-(function loadKnowledgeBase() {
+/* ── Knowledge Base: hub + nested .md under asic_repair_kb/ ── */
+(function setupKnowledgeBase() {
   const kb = DATA.knowledgeBase;
   const root = document.getElementById('kbRoot');
   const status = document.getElementById('kbStatus');
+  const toolbar = document.getElementById('kbToolbar');
+  const btnBack = document.getElementById('kbBackHub');
   if (!root || !status) return;
+
+  const hubPath = kb.file;
   const failMsg =
     '<p style="color:#fca5a5;margin:0;line-height:1.85">لم يُفتح <code style="color:#fdba74">' +
-    kb.file +
-    '</code>. شغّل الصفحة عبر <strong>خادم محلي</strong> (مثل Live Server في VS Code) وضع الملف بجانب <code>index.html</code>. فتح الملف مباشرة (<code>file://</code>) يمنع المتصفح من جلب ملف الـ Markdown.</p>';
+    hubPath +
+    '</code> أو أحد المكوّنات. شغّل الصفحة عبر <strong>خادم محلي</strong> من جذر المشروع (مجلد يحتوي <code>index.html</code> و <code>asic_repair_kb/</code>). <code>file://</code> لا يكفي لجلب الـ Markdown.</p>';
+
   if (typeof marked === 'undefined' || typeof marked.parse !== 'function') {
-    status.innerHTML = '<div style="padding:4px 0"><p style="color:#f87171;margin:0">تعذّر تحميل مكتبة <code>marked</code> من CDN — تحقق من الاتصال بالإنترنت.</p></div>';
+    status.innerHTML = '<div style="padding:4px 0"><p style="color:#f87171;margin:0">تعذّر تحميل مكتبة <code>marked</code> من CDN.</p></div>';
     return;
   }
   if (typeof marked.use === 'function') marked.use({ gfm: true });
-  fetch(kb.file, { cache: 'no-store' })
-    .then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.text();
-    })
-    .then(function (md) {
-      root.innerHTML = marked.parse(md);
-      status.style.display = 'none';
-      root.hidden = false;
-    })
-    .catch(function () {
-      status.innerHTML = '<div style="padding:4px 0">' + failMsg + '</div>';
+
+  function setToolbar(isSubPage) {
+    if (toolbar) toolbar.style.display = isSubPage ? 'block' : 'none';
+  }
+
+  function renderMd(text, path) {
+    root.innerHTML = marked.parse(text);
+    root.hidden = false;
+    status.style.display = 'none';
+    setToolbar(path !== hubPath);
+  }
+
+  function loadMd(path, pushHistory) {
+    return fetch(path, { cache: 'no-store' })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(function (md) {
+        renderMd(md, path);
+        if (pushHistory) history.pushState({ kbPath: path }, '', '');
+      });
+  }
+
+  root.addEventListener('click', function (e) {
+    const a = e.target.closest('a');
+    if (!a || !root.contains(a)) return;
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('http://') || href.startsWith('https://') || href.startsWith('mailto:') || href.startsWith('#')) return;
+    if (!href.endsWith('.md')) return;
+    e.preventDefault();
+    loadMd(href, true).catch(function () {
+      alert('تعذّر فتح الملف:\n' + href);
     });
+  });
+
+  if (btnBack) {
+    btnBack.addEventListener('click', function () {
+      loadMd(hubPath, false).then(function () {
+        history.replaceState({ kbPath: hubPath }, '', '');
+      }).catch(function () {});
+    });
+  }
+
+  window.addEventListener('popstate', function (ev) {
+    var path = (ev.state && ev.state.kbPath) || hubPath;
+    loadMd(path, false).catch(function () {
+      loadMd(hubPath, false).catch(function () {});
+    });
+  });
+
+  history.replaceState({ kbPath: hubPath }, '', '');
+  loadMd(hubPath, false).catch(function () {
+    status.innerHTML = '<div style="padding:4px 0">' + failMsg + '</div>';
+  });
 })();
 
 /* ── ROI bar animation ── */
