@@ -23,17 +23,7 @@ These Zeus / MicroBT documents are **registered for the KB** but **not yet** tur
 | PSU Output Tester Tutorial | https://www.zeusbtc.com/blog/details/5731-antminer-whatsminer-power-supply-output-tester-usage-tutorial | `psu_output_tester` |
 | WhatsMiner P21 Series PSU Manual (PDF) | https://www.zeusbtc.com/manuals/user-manuals/WhatsMiner-P21-Series-PSU-Manual.pdf | `whatsminer_p21_psu_manual` |
 
-### Expected local paths (after fetch)
-
-| Slug | Typical layout |
-|------|----------------|
-| `whatsminer_solutions` | `asic_repair_kb/sources/whatsminer_solutions/index.html` + `images/` |
-| `s19_control_flashing` | `asic_repair_kb/sources/s19_control_flashing/index.html` + `images/` |
-| `picobt_universal_manual` | `asic_repair_kb/sources/picobt_universal_manual/index.html` + `images/` |
-| `whatsminer_cb_repair` | `asic_repair_kb/sources/whatsminer_cb_repair/index.html` + `images/` |
-| `whatsminer_psu_repair` | `asic_repair_kb/sources/whatsminer_psu_repair/index.html` + `images/` |
-| `psu_output_tester` | `asic_repair_kb/sources/psu_output_tester/index.html` + `images/` |
-| `whatsminer_p21_psu_manual` | `asic_repair_kb/sources/whatsminer_p21_psu_manual/WhatsMiner-P21-Series-PSU-Manual.pdf` (PDF-only, same pattern as M30S manual) |
+> **ملاحظة:** مجلدات `asic_repair_kb/sources/<slug>/` لهذه الوثائق **غير موجودة** في المستودع حتى تشغيل سكربت الجلب. لا تفترض مسارات محلية جاهزة — استخدم روابط Zeus أعلاه إلى أن يظهر المرآة فعلياً.
 
 ---
 
