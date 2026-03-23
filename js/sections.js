@@ -243,7 +243,7 @@ main.insertAdjacentHTML('beforeend', `
               ? `<span style="opacity:.85">ثابت/ربع</span>`
               : "—";
           const qCell = r.quarterlyQty > 0 ? r.quarterlyQty : "—";
-          const usdCell = r.quarterlyQty > 0 ? fmtUSD(r.quarterUSD) : "—";
+          const usdCell = r.quarterlyQty > 0 ? fmtUSD(r.quarterCost) : "—";
           return `
           <tr>
             <td style="font-weight:600">${r.name}${r.planHint ? `<div style="font-size:.72rem;color:var(--text-muted);font-weight:400;margin-top:4px">${r.planHint}</div>` : ""}</td>
