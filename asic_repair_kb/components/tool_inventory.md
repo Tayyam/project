@@ -16,8 +16,6 @@
 - ✓ ZOYI ZT-R01 Thermography Multimeter (thermal + voltage simultaneously)
 - ✓ FNIRSI DSO-TC3 — **LCR / component tester** (caps, transistors, simple checks). **Not** hash CLK scope: oscilloscope mode bandwidth **≪ 1 MHz**; S19/M30 CLK **~25 MHz+** does not display.
 - ⚠️ **Desktop oscilloscope ≥ 100 MHz** (e.g. Rigol DS1102Z-E / Siglent) — **required** for hash CLK / high-speed signals — *on purchase plan (EGP, local mall)*.
-- 📋 **Standalone thermal camera** (Infiray P2 Pro / FLIR class) — board-level short scan in seconds — *on purchase plan (online Egypt)*.
-- 📋 **Isolation transformer** (APW12 + oscilloscope safety for mains-side probing) — *on purchase plan (البستان)*.
 - ✓ Sugon 3005D Lab PSU 30V/5A (control-board circuits only — **not** full hash rail current for M30/M50)
 - ✓ USB to TTL + **Dupont jumpers** (UART; PICkit / ICSP to test points on S19 hash — *on purchase plan in local supplies*)
 
@@ -29,15 +27,14 @@
 - ✓ Ultrasonic Cleaner ~2L — *on purchase plan (EGP, العتبة)*
 
 ### Bench organization & workflow *(purchase plan — `js/data.js` fixed assets)*
-- 📋 **Plastic drawer cabinet (40–60 drawers)** — 0402 / small parts + labels (العتبة / كماليات سيارات)
 - 📋 **Anti-static storage boxes (ASIC)** — specialty import (AliExpress kit; Zeus rarely sells full ESD box sets)
-- 📋 **Tool rack** (pliers / drivers vertical) — مول البستان
 - 📋 **Push-down dispenser bottle** for IPA — mobile-repair supply shops
 - 📋 **Empty syringes, metal tip** — flux dispensing under chips
-- 📋 **Label maker** — drawers + board traceability (جرير / Amazon.eg / Noon)
 - 📋 **Magnetic silicone heat-insulation mat** — screws + desk protection from hot air
 - 📋 **Silicone adhesive cable clips** — PicoBT / bench power leads
 - 📋 **Colored job bins** — WIP vs done boards, avoid mixing spares
+- 📋 **4× fans + duct** — mandatory high-airflow cooling for hashboard bench test
+- 📋 **100W bulb in series** — low-cost first-power safety for APW12 after repair
 
 ### Materials & consumables
 - ✓ Amtech NC-559-ASM Flux (10g original) + Mechanic 183 °C paste (Zeus / stock)
@@ -96,8 +93,7 @@ Cross-check [FILE 1](repair_s19_hashboard.md), [FILE 2](repair_whatsminer_m30s_h
 |------|--------|-----|
 | **Adjustable hashboard PSU ≥ 10 A** at set voltage | ⚠️ **Gap risk** | FILE 2 — hash rail **10 A+**. **Sugon 3005D = 5 A max** — OK for control, **not** full M30/M50 hash bench. |
 | **Oscilloscope ≥ 100 MHz** | ⚠️ **Must acquire** | CLK diagnosis; TC3 invalid for ~25 MHz — **in `data.js` (البستان)**. |
-| **Electronic load ~3.6 kW / 0–50 V** or resistive dummy | ⚠️ Missing | FILE 7 — APW12 load test. |
-| **AC variac / 200–250 V limited** OR **100 W bulb in series** | ⚠️ Missing | FILE 7 — safe AC bring-up. |
+| **AC variac / 200–250 V limited** OR **100 W bulb in series** | 📋 On purchase plan (`data.js`) | FILE 7 — safe AC bring-up; start with 100W bulb as low-cost minimum. |
 | **Steel needle probes** | 📋 In **`data.js`** | FILE 1 — tight TPs / ASIC legs. |
 | **PICkit + MPLAB IPE** | 📋 Hardware in **`data.js`**; ⚠️ **install SW** | S19 PIC firmware path. |
 | **MicroSD industrial × several** | 📋 In **`data.js`** (`importedSpecialty`) | PicoBT / recovery images. |
@@ -106,8 +102,6 @@ Cross-check [FILE 1](repair_s19_hashboard.md), [FILE 2](repair_whatsminer_m30s_h
 | **4× fans + duct** (or miner shell) S19 signal test | ⚠️ Missing | FILE 1 — mandatory for signal measurements. |
 | **M1 shell + fan** (or equivalent) Whatsminer | ⚠️ Missing | FILE 2 — cooled hash on bench. |
 | **Knife-shaped iron tip** (optional) | ⚠️ Optional | FILE 7 — large through-hole on APW12. |
-| **Isolation transformer** | 📋 In **`data.js`** (البستان) | For APW12 + oscilloscope mains-side diagnostics; prevents ground short risk. |
-| **Standalone thermal camera** | 📋 In **`data.js`** (online Egypt) | Fast whole-board short detection beyond multimeter-thermal workflow. |
 | **UV curing lamp** | 📋 In **`data.js`** (local supplies) | Needed to cure UV mask quickly after jumper repair. |
 | **Contact cleaner / Brass wool / Desolder pump / ESD brushes / Lint-free wipes** | 📋 In **`data.js`** (local supplies) | Missing consumables set now added to purchase plan. |
 | **USB–Ethernet adapter** | ⚠️ Optional | FILE 4 — if no RJ45 on laptop. |
@@ -115,6 +109,6 @@ Cross-check [FILE 1](repair_s19_hashboard.md), [FILE 2](repair_whatsminer_m30s_h
 | **PSU test card / ZJ0001000001** | ⚠️ Unclear | FILE 7 vs PicoBT capability — see [knowledge_in_progress](knowledge_in_progress.md) `psu_output_tester`. |
 | **Zeus paste column M705** | ⚠️ Optional | FILE 1 vs your **Mechanic 183 °C** — validate process. |
 
-> **Summary:** Strongest remaining **process** gaps = **≥10 A hash bench supply** (Whatsminer), **electronic load / variac** for APW12, **fan/duct or shell** for guided signal tests, plus **install MPLAB IPE** when PICkit arrives. New diagnostics/consumables (thermal camera, isolation transformer, UV lamp, cleaner set) are mapped in **`js/data.js`** — flip 📋 → ✓ after receipt.
+> **Summary:** Strongest remaining **process** gaps = **≥10 A hash bench supply** (Whatsminer), **variac or 100W series bulb** for APW12 first power, **fan/duct or shell** for guided signal tests, plus **install MPLAB IPE** when PICkit arrives. Core consumables (UV lamp + cleaner set) are mapped in **`js/data.js`** — flip 📋 → ✓ after receipt.
 
 > Treat this section as a **pre-flight checklist** before claiming “fully equipped” for every FILE.
