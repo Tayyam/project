@@ -518,6 +518,7 @@ function buildCapexFromPurchases(data) {
   }));
 
   const items = [...base, ...extras].filter(i => i.usd > 0);
+  items.sort((a, b) => b.usd - a.usd);
   const totalUSD = items.reduce((sum, i) => sum + i.usd, 0);
 
   return {
