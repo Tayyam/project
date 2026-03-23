@@ -430,41 +430,41 @@ export const DATA = {
   costPerRepair: [
     {
       category: "الهاشبورد",
-      materials: "~1.5 شريحة @ ~$3.2 + HY234/معجون بالشبلونة + فلاكس Amtech + مناديل خالية من الوبر + تآكل فرش/IPA — تقدير **$8.5** للوحة متوسطة",
+      materials: "~1.5 شريحة @ ~$3.5 + HY234/معجون بالشبلونة + فلاكس Amtech + Paste + مستهلكات تنظيف — تقدير **$9.8** للوحة متوسطة",
       oldCostUSD: 22,
-      avgCostUSD: 8.5,
-      savingReason: "شراء رخيص للشرائح + شبلونة تقلل هدر المعجون؛ استهلاكيات التنظيف (Lint-free + ESD brushes) مدمجة في المتوسط"
+      avgCostUSD: 9.8,
+      savingReason: "تحديث حسب سعر BM1362 الجديد ($3.5) مع متوسط استهلاك معجون/فلاكس/تنظيف فعلي"
     },
     {
       category: "الباور سبلاي",
-      materials: "2–3 موسفت + آيسي تحكم + قصدير lead-free + فلاكس + Contact cleaner (تقسيم تكلفة) — تقدير **$5**",
+      materials: "2–3 MOSFET (SI7N65F ~$0.4) + آيسي تحكم + قصدير/فلاكس + منظف — تقدير **$3.9**",
       oldCostUSD: 15,
-      avgCostUSD: 5,
-      savingReason: "قطع Zeus/Ali بسعر وحدة منخفض + أدوات الاستهلاك (شفاط قصدير/قصافة) مُوزَّعة على عدد الإصلاحات"
+      avgCostUSD: 3.9,
+      savingReason: "سعر MOSFET المحدث ($0.4) خفّض متوسط تكلفة صيانة الباور لكل وحدة"
     },
     {
       category: "الكنترول بورد",
-      materials: "2 LDO + فلاكس/قصدير + وصلات صغيرة نادراً — تقدير **$1.5**",
+      materials: "2 LDO + فلاكس/قصدير + استهلاك بسيط من أسلاك Dupont عند الحاجة — تقدير **$1.3**",
       oldCostUSD: 5,
-      avgCostUSD: 1.5,
-      savingReason: "LDO بالجملة ~$0.05–0.08 للقطعة + استهلاك نحيف للفلاكس"
+      avgCostUSD: 1.3,
+      savingReason: "LDO منخفض التكلفة مع استهلاك لحام محدود في أغلب أعطال الكنترول"
     },
     {
       category: "الكابلات",
-      materials: "كابل داتا (10/12-pin) + كيس ESD للتسليم — تقدير **$0.55**",
+      materials: "كابل داتا 24-pin / 60cm — تقدير **$1.8**",
       oldCostUSD: 7,
-      avgCostUSD: 0.55,
-      savingReason: "كابلات بالجملة ~$0.20–0.25 + كيس مانع شحنات ~$0.12 من طقم الأكياس"
+      avgCostUSD: 1.8,
+      savingReason: "السعر محدث لبند الكابل الجديد 24-pin بطول 60cm"
     }
   ],
 
   marketerCommissionPercent: 20,
 
   pricing: [
-    { service: "صيانة الهاشبورد",    clientPrice: 100, materialCost: 8.5, marketerCommission: 20,  netProfit: 71.5 },
-    { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 5,   marketerCommission: 16,  netProfit: 59   },
-    { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1.5, marketerCommission: 10,  netProfit: 38.5 },
-    { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 0.55, marketerCommission: 3,   netProfit: 11.45 }
+    { service: "صيانة الهاشبورد",    clientPrice: 100, materialCost: 9.8, marketerCommission: 20,  netProfit: 70.2 },
+    { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 3.9, marketerCommission: 16,  netProfit: 60.1 },
+    { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1.3, marketerCommission: 10,  netProfit: 38.7 },
+    { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 1.8, marketerCommission: 3,   netProfit: 10.2 }
   ],
 
   opex: {
@@ -476,7 +476,7 @@ export const DATA = {
     ],
     totalMonthly: 34000,
     setupCost: 10000,
-    breakEvenNote: "بعد خصم خامات الهاشبورد (~$8.5) وعمولة المسوق (20% من $100 = $20)، صافي اللوحة للمركز ≈ $71.5. لتغطية المصاريف الثابتة (~630 $ شهرياً ≈ 34,000 ج) يحتاج ≈ 9 لوحات هاشبورد شهرياً (بسعر صرف 54 ج/$).",
+    breakEvenNote: "بعد خصم خامات الهاشبورد (~$9.8) وعمولة المسوق (20% من $100 = $20)، صافي اللوحة للمركز ≈ $70.2. لتغطية المصاريف الثابتة (~630 $ شهرياً ≈ 34,000 ج) يحتاج ≈ 9 لوحات هاشبورد شهرياً (بسعر صرف 54 ج/$).",
     breakEvenUnits: 9
   },
 
@@ -498,10 +498,10 @@ export const DATA = {
   },
 
   monthlyRevenue: [
-    { service: "الهاشبورد",      count: 30, pricePerUnit: 100, totalRevenue: 3000, costPerUnit: 8.5,  totalCost: 255,  marketerTotal: 600  },
-    { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 5,    totalCost: 75,   marketerTotal: 240  },
-    { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1.5,  totalCost: 15,   marketerTotal: 100  },
-    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 0.55, totalCost: 11,   marketerTotal: 60   }
+    { service: "الهاشبورد",      count: 30, pricePerUnit: 100, totalRevenue: 3000, costPerUnit: 9.8, totalCost: 294,  marketerTotal: 600  },
+    { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 3.9, totalCost: 58.5, marketerTotal: 240  },
+    { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1.3, totalCost: 13,   marketerTotal: 100  },
+    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 1.8, totalCost: 36,   marketerTotal: 60   }
   ],
 
   pl: {
