@@ -1,4 +1,4 @@
-export const DATA = {
+﻿export const DATA = {
 
   models: [
     "Antminer S19 Series",
@@ -505,10 +505,26 @@ export const DATA = {
 
   roi: {
     capex: {
-      extraItems: [
-        { label: "تجهيزات المحل (تشطيب + أثاث)", usd: 200 },
-        { label: "جمارك + شحن منتجات من الخارج (مرة واحدة)", usd: 500 }
+      items: [
+        { label: "تجهيزات المحل (تشطيب + أثاث)",                                                usd: 200  },
+        { label: "PicoBT + 3 Test Files (S19, S19j, M30)",                                       usd: 600  },
+        { label: "ZOYI ZT-R01 (حرارة + ملتيميتر)",                                              usd: 105  },
+        { label: "FNIRSI DSO-TC3 — فاحص مكونات (ليس بديل سكوب CLK)",                            usd: 44   },
+        { label: "أوسيلوسكوب مكتبي ≥100 MHz (Rigol/Siglent — تقدير ~28k ج من البستان)",         usd: 519  },
+        { label: "وصلة IIC/EN لـ APW12 + طقم 0402 R/C + كرات 0.4mm + MicroSD صناعية (×5)",       usd: 175  },
+        { label: "Quick 861DW (هواء ساخن) + Quick 205H + Tips متنوعة (بدون KSGER)",              usd: 421  },
+        { label: "PUHUI T-8280 IR Preheater (28×27cm) — تسخين متساوٍ للهاشبورد كاملاً",          usd: 135  },
+        { label: "4 قوالب معجون (S19, S19J, S19Pro, M50) + Stencils",                            usd: 250  },
+        { label: "Amtech Flux ×2 + Mechanic Paste 183°C + GD900-1 1kg + HY234 1kg",              usd: 38   },
+        { label: "APW12 ثابت على البنش + أسلاك AWG6 وترامل (≈100 ج)",                          usd: 123  },
+        { label: "مروحة تعدين + باور 12V + Kapton + مفك كهربائي (محلي)",                        usd: 49   },
+        { label: "طقم BGA Reballing (منصة + شبلونات ASIC) + Brass Cleaner",                      usd: 20   },
+        { label: "أدوات السلامة + IPA 99% محلي (لا تشحن سوائل)",                               usd: 30   },
+        { label: "جمارك + شحن منتجات من الخارج (مرة واحدة)",                                    usd: 500  },
+        { label: "Andonstar AD207 (7\") — ميكروسكوب رقمي (تقدير من البستان ~7k ج)",              usd: 130  }
       ],
+      totalUSD: 3339,
+      totalEGP: 180306,
       note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **سكوب مكتبي ~100 MHz** (بديل فخ TC3) + فاحص TC3 كـ tester + ZOYI + إكسسوارات برمجة/0402/IIC لـ APW12 + Quick 205H + AD207 + PUHUI T-8280."
     },
     annualNetProfit:      { usd: 36964.44, egp: 1996080 },

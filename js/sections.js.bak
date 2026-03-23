@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Tab sections rendered into #mainContent (workflow, KB shell, purchases, financials, ROI).
  */
 export function mountSections(main, DATA, { fmt, fmtUSD, fmtEGP }, { purchaseImportRow, purchaseLocalRow }) {
@@ -487,47 +487,6 @@ main.insertAdjacentHTML('beforeend', `
 
 /* ── 9. ROI ── */
 const roi = DATA.roi;
-const xr = DATA.pl.exchangeRate || 54;
-
-function parseUsdPrice(value) {
-  if (typeof value === 'number') return value;
-  if (typeof value !== 'string') return 0;
-  const m = value.match(/\$\s*([0-9]+(?:\.[0-9]+)?)/);
-  return m ? Number(m[1]) : 0;
-}
-
-function buildCapexFromPurchases(data) {
-  const base = [];
-  (data.purchases.fixedAssets.groups || []).forEach(group => {
-    if (group.kind === 'usd') {
-      (group.items || []).forEach(item => base.push({
-        label: `${item.name} — ${item.model}`,
-        usd: parseUsdPrice(item.price)
-      }));
-    } else {
-      (group.items || []).forEach(item => base.push({
-        label: `${item.name} — ${item.model}`,
-        usd: (Number(item.price) || 0) / xr
-      }));
-    }
-  });
-
-  const extras = (data.roi.capex.extraItems || []).map(x => ({
-    label: x.label,
-    usd: Number(x.usd) || 0
-  }));
-
-  const items = [...base, ...extras].filter(i => i.usd > 0);
-  const totalUSD = items.reduce((sum, i) => sum + i.usd, 0);
-
-  return {
-    items,
-    totalUSD,
-    totalEGP: Math.round(totalUSD * xr)
-  };
-}
-
-const capexComputed = buildCapexFromPurchases(DATA);
 const roiItems = [
   { label: 'صافي الربح الشهري',  value: fmtUSD(roi.monthlyNetProfit.usd),  color: 'green',  sub: fmtEGP(roi.monthlyNetProfit.egp) },
   { label: 'صافي الربح السنوي',  value: fmtUSD(roi.annualNetProfit.usd),   color: 'amber',  sub: fmtEGP(roi.annualNetProfit.egp)  },
@@ -556,7 +515,7 @@ main.insertAdjacentHTML('beforeend', `
     <div class="card">
       <div class="card-title">💸 رأس المال المدفوع (CAPEX)</div>
       ${roi.capex.note ? `<div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:.8rem;color:#34d399">✓ ${roi.capex.note}</div>` : ''}
-      ${capexComputed.items.map(item => `
+      ${roi.capex.items.map(item => `
         <div class="capex-item">
           <span style="color:var(--text-muted);font-size:.83rem">${item.label}</span>
           <span style="color:var(--accent);font-weight:700">${fmtUSD(item.usd)}</span>
@@ -564,9 +523,9 @@ main.insertAdjacentHTML('beforeend', `
       `).join('')}
       <div class="capex-item" style="border-top:2px solid rgba(245,158,11,.3);padding-top:14px;margin-top:4px">
         <span style="font-weight:800">إجمالي رأس المال</span>
-        <span style="font-weight:900;color:var(--accent);font-size:1.1rem">${fmtUSD(capexComputed.totalUSD)}</span>
+        <span style="font-weight:900;color:var(--accent);font-size:1.1rem">${fmtUSD(roi.capex.totalUSD)}</span>
       </div>
-      <div style="text-align:center;margin-top:8px;font-size:.78rem;color:var(--text-muted)">${fmtEGP(capexComputed.totalEGP)}</div>
+      <div style="text-align:center;margin-top:8px;font-size:.78rem;color:var(--text-muted)">${fmtEGP(roi.capex.totalEGP)}</div>
     </div>
     <div class="card">
       <div class="card-title">📊 نسبة العائد على الاستثمار</div>
