@@ -4,463 +4,38 @@
 
 ---
 
-## REPAIR FILE 7 — APW12 Power Supply Repair
+## Scope & Quick Reference
 
-**References:**
-- [Antminer APW12 Power Supply Repair Guide [EN]](https://www.zeusbtc.com/manuals/Antminer-APW12-Power-Supply-Repair-Guide.asp)
-- [Antminer APW121215A Miner Power Supply Repair Manual](https://www.zeusbtc.com/manuals/5869-antminer-apw121215a-miner-power-supply-repair-manual)
+| Field | Value |
+|-------|-------|
+| Component | Bitmain APW12 power supply (switching PSU for Antminer S19-class) |
+| Variants | APW121215a/b/c/d/e/f/g (see compatibility table) |
+| Schematic reference | KJ-P023_SCH.PDF (internal part number) |
+| Physical dimensions | ~254.6 × 245 × 64 mm body; ~250 mm length in side view |
+| Weight | ~3.8 kg |
+| Acoustic | ~67 dBA |
+| AC input | Dual C14 connectors; **both must be live simultaneously** |
+| AC input range | 200–240 Vac |
+| AC input UVLO | ~80–89 Vac |
+| Output 1 (Main) | 12–15 V adjustable; 240 A @ 15 V / 300 A @ 12 V; max 3600 W |
+| Output 1 OCP | ~291–350 A |
+| Output 2 (SB/Standby) | 12.3 V fixed (12.2–12.4 V); 15 A max → powers control board + fans |
+| 4-pin control header | GND / EN / SCL / SDA (top→bottom); EN active low |
+| 6-pin ATX_2X3 (standby) | +12 V row + GND row |
+| Cooling | 3 × 60 mm fans (all intake) |
+| Default bench voltage | ~15.2 V at power-up without I2C control (requires EN short to GND) |
 
-### Local mirrors (offline)
+**Critical — Dual AC input:**
+> Both AC inputs must be connected simultaneously. Two independent PFC stages require simultaneous power. Single input = PSU will not function.
 
-| Guide | `index.html` | `manifest.json` |
-|-------|--------------|-----------------|
-| APW12 main (EN) | [apw12_repair_guide/index.html](../sources/apw12_repair_guide/index.html) | [manifest.json](../sources/apw12_repair_guide/manifest.json) |
-| APW12 **1215A** supplement | [apw12_1215a_manual/index.html](../sources/apw12_1215a_manual/index.html) | [manifest.json](../sources/apw12_1215a_manual/manifest.json) |
-
-Regenerate: `python scripts/fetch_zeus_kb_source.py apw12_repair_guide apw12_1215a_manual`
-
-### Mirrored images — main APW12 guide (document order)
-
-| # | Local file |
-|---|------------|
-| 1 | [16279616285583875.jpg](../sources/apw12_repair_guide/images/202108/16279616285583875.jpg) |
-| 2 | [16279616506154066.jpg](../sources/apw12_repair_guide/images/202108/16279616506154066.jpg) |
-| 3 | [16279617412997281.jpg](../sources/apw12_repair_guide/images/202108/16279617412997281.jpg) |
-| 4 | [16279618932109037.jpg](../sources/apw12_repair_guide/images/202108/16279618932109037.jpg) |
-| 5 | [16279619261096097.jpg](../sources/apw12_repair_guide/images/202108/16279619261096097.jpg) |
-| 6 | [16279619384501173.jpg](../sources/apw12_repair_guide/images/202108/16279619384501173.jpg) |
-| 7 | [16279620522193219.jpg](../sources/apw12_repair_guide/images/202108/16279620522193219.jpg) |
-| 8 | [16279621082456342.jpg](../sources/apw12_repair_guide/images/202108/16279621082456342.jpg) |
-| 9 | [16279621241877363.jpg](../sources/apw12_repair_guide/images/202108/16279621241877363.jpg) |
-| 10 | [16279621416077024.jpg](../sources/apw12_repair_guide/images/202108/16279621416077024.jpg) |
-| 11 | [16279621876812971.jpg](../sources/apw12_repair_guide/images/202108/16279621876812971.jpg) |
-| 12 | [16279621987968183.jpg](../sources/apw12_repair_guide/images/202108/16279621987968183.jpg) |
-| 13 | [16279622278816328.jpg](../sources/apw12_repair_guide/images/202108/16279622278816328.jpg) |
-| 14 | [16279622552940977.jpg](../sources/apw12_repair_guide/images/202108/16279622552940977.jpg) |
-| 15 | [16279624557125120.jpg](../sources/apw12_repair_guide/images/202108/16279624557125120.jpg) |
-| 16 | [16279624809715697.jpg](../sources/apw12_repair_guide/images/202108/16279624809715697.jpg) |
-| 17 | [16279624978293654.jpg](../sources/apw12_repair_guide/images/202108/16279624978293654.jpg) |
-| 18 | [16279625112474195.jpg](../sources/apw12_repair_guide/images/202108/16279625112474195.jpg) |
-| 19 | [16279625435882154.jpg](../sources/apw12_repair_guide/images/202108/16279625435882154.jpg) |
-| 20 | [16279625732283033.jpg](../sources/apw12_repair_guide/images/202108/16279625732283033.jpg) |
-| 21 | [16279626852314344.jpg](../sources/apw12_repair_guide/images/202108/16279626852314344.jpg) |
-
-### Mirrored images — APW121215A manual (document order)
-
-| # | Local file |
-|---|------------|
-| 1 | [17685445953712629.jpg](../sources/apw12_1215a_manual/images/202601/17685445953712629.jpg) |
-| 2 | [17685446259205793.jpg](../sources/apw12_1215a_manual/images/202601/17685446259205793.jpg) |
-| 3 | [17685447543877698.jpg](../sources/apw12_1215a_manual/images/202601/17685447543877698.jpg) |
-| 4 | [17685447763271665.jpg](../sources/apw12_1215a_manual/images/202601/17685447763271665.jpg) |
-| 5 | [17685448046236326.jpg](../sources/apw12_1215a_manual/images/202601/17685448046236326.jpg) |
-| 6 | [17685449834079984.jpg](../sources/apw12_1215a_manual/images/202601/17685449834079984.jpg) |
-| 7 | [17685455718935118.jpg](../sources/apw12_1215a_manual/images/202601/17685455718935118.jpg) |
-| 8 | [17685456155859083.jpg](../sources/apw12_1215a_manual/images/202601/17685456155859083.jpg) |
-| 9 | [17685456604312070.jpg](../sources/apw12_1215a_manual/images/202601/17685456604312070.jpg) |
-| 10 | [17685457209345320.jpg](../sources/apw12_1215a_manual/images/202601/17685457209345320.jpg) |
-| 11 | [17685457529228178.jpg](../sources/apw12_1215a_manual/images/202601/17685457529228178.jpg) |
-| 12 | [17685457874434293.jpg](../sources/apw12_1215a_manual/images/202601/17685457874434293.jpg) |
-| 13 | [17685458189165281.jpg](../sources/apw12_1215a_manual/images/202601/17685458189165281.jpg) |
-| 14 | [17685459695807722.jpg](../sources/apw12_1215a_manual/images/202601/17685459695807722.jpg) |
-| 15 | [17685459965649931.jpg](../sources/apw12_1215a_manual/images/202601/17685459965649931.jpg) |
-| 16 | [17685460354209074.jpg](../sources/apw12_1215a_manual/images/202601/17685460354209074.jpg) |
-| 17 | [17685460687268904.jpg](../sources/apw12_1215a_manual/images/202601/17685460687268904.jpg) |
-| 18 | [17685460954560911.jpg](../sources/apw12_1215a_manual/images/202601/17685460954560911.jpg) |
-| 19 | [17685461208339109.jpg](../sources/apw12_1215a_manual/images/202601/17685461208339109.jpg) |
-| 20 | [17685461469383909.jpg](../sources/apw12_1215a_manual/images/202601/17685461469383909.jpg) |
-| 21 | [17685461705757322.jpg](../sources/apw12_1215a_manual/images/202601/17685461705757322.jpg) |
-| 22 | [17685475653581205.jpg](../sources/apw12_1215a_manual/images/202601/17685475653581205.jpg) |
-| 23 | [17685462136087736.jpg](../sources/apw12_1215a_manual/images/202601/17685462136087736.jpg) |
-| 24 | [17685462396865293.jpg](../sources/apw12_1215a_manual/images/202601/17685462396865293.jpg) |
-
-### Connectors, harness polarity, and ratings (local diagrams)
-
-**Main guide — image 1** ([16279616285583875.jpg](../sources/apw12_repair_guide/images/202108/16279616285583875.jpg)): line art with **dual C14** inputs, **3-fan** intake face, outline **~254.6 × 245 × 64 mm** (body length **~250 mm** in side view). Output end: **main DC lugs** labeled **`OUT -12V-15`** and **`OUT-GND`** with **M4** lug pattern (**4-M4**); **4-pin control** header **top → bottom: GND, EN, SCL, SDA**; **6-pin `+12V ATX_2X3`** standby block drawn as one row **+12 V**, one row **GND**.
-
-**Main guide — image 3** ([16279617412997281.jpg](../sources/apw12_repair_guide/images/202108/16279617412997281.jpg)): **6-pin PCIe-style** output connector — **pins 1–3 (yellow)** = **+12 V** rail; **pins 4–6 (black)** = return (match wire colors when rebuilding harnesses).
-
-**Main guide — image 4** ([16279618932109037.jpg](../sources/apw12_repair_guide/images/202108/16279618932109037.jpg)): excerpt from the electrical table — **OUT1** **12–15 V**, **240 A** / **3600 W** @ nominal input; **OUT2** **12.3 V** (**12.2–12.4 V**), **15 A**; **dual 200–240 Vac** inputs; **output OCP** about **291–350 A**; **input UVLO** about **80–89 Vac**; mechanical **250 × 249 × 62.2 mm**, **~3.8 kg**, **~67 dBA** acoustic note on the same sheet.
-
-**1215A manual — image 1** ([17685445953712629.jpg](../sources/apw12_1215a_manual/images/202601/17685445953712629.jpg)): photo callouts — **three 6 cm** fans blowing **into** the chassis; **both AC inputs must be live**; rear **MCU programming** port; large **positive / negative** bus lugs; separate **I²C** and **SB auxiliary** **4-pin** headers called out beside the main terminals.
-
-**Main guide — image 8** ([16279621082456342.jpg](../sources/apw12_repair_guide/images/202108/16279621082456342.jpg)): partial **AC → PFC** schematic — **F1 16A**, **GBJ2506** bridge (**D2**), **NTC** inrush pair + **K1** bypass relay, **NCP1654**-family **U1** PFC controller, **TK20N60W** (**Q4**), **SiC** boost diode (**D3**), **5 mΩ** current sense (**R15**), **PC817** optocouplers, EMI **X-caps** and **TEST1–TEST6** labels — anchor for fuse/bridge/PFC-stage troubleshooting.
-
-**1215A manual — image 5** ([17685448046236326.jpg](../sources/apw12_1215a_manual/images/202601/17685448046236326.jpg)): multi-block **main-stage** collage; diagram annotations include **Fpwm ≈ 450 kHz–1 MHz** and **≈ 400 kHz–2 MHz** on PWM sections and a **V-in and sensing** strip — use with a scope to confirm switching is present (not a dead oscillator/gate drive) before swapping FETs blindly.
-
-### Vision model supplements (figures without full callouts above)
-
-One-time vision-model readout — **do not treat as calibrated specs**; prefer Zeus tables and DMM/scope. Figures **1, 3, 4, 8** (main guide) and **1, 5** (1215A) are summarized only in **Connectors, harness polarity...**.
-
-**Main guide — image 2** ([16279616506154066.jpg](../sources/apw12_repair_guide/images/202108/16279616506154066.jpg)):
-- يحتوي الجهاز على مجموعتين من الناقلات المعدنية (Busbars) المخصصة لمخارج التيار المستمر (DC Output) عالية الأمبير.
-- يتوفر مقبس طاقة 6-pin إضافي بجانب مخارج التيار الرئيسية.
-- يوجد منفذ بيانات صغير (Communication Port) مخصص للربط مع لوحة التحكم (Control Board).
-- يحتوي الهيكل المعدني على علامتي سهم باللون الأسود مطبوعتين لتحديد اتجاه التركيب أو تدفق الهواء.
-- تصميم الهيكل يعتمد على غلاف معدني موصل للتأريض مع فتحات لتثبيت البراغي في الناقلات النحاسية.
-
-**Main guide — image 5** ([16279619261096097.jpg](../sources/apw12_repair_guide/images/202108/16279619261096097.jpg)):
-- **دخل الطاقة:** يحتوي الجهاز على مدخلين تيار متردد مستقلين (AC 1 و AC 2) يعملان بجهد يتراوح بين 200V-240V.
-- **المراحل الأولية:** يمر التيار في كل مسار عبر دوائر EMI، ثم دائرة التقويم (Rectifier)، وصولاً إلى دائرة تصحيح معامل القدرة (PFC).
-- **تصفية الجهد العالي:** ينتقل الجهد بعد مرحلة الـ PFC إلى دائرة ترشيح VBUS.
-- **تحويل الطاقة (DC-DC):** يتم خفض الجهد باستخدام محول LLC (Main Step-down DC Converter) بالتعاون مع دوائر PWM Main Switch MOS.
-- **الجهد الناتج الرئيسي:** مخرج التقويم المتزامن (Synchronous Rectification) يعطي جهداً متغيراً يتراوح بين 14.5V-21V.
-- **مخارج الطاقة الثانوية:** توجد دائرة مخرج 12V متوازية (Parallel output 12V port).
-- **نظام التبريد والتحكم:** تتوفر دوائر مخصصة لتزويد المراوح (FAN) بجهد 12V مع وجود خطوط تغذية راجعة (Feedback).
-- **التحكم الرقمي:** يعتمد النظام على دائرة تحكم واتصال وبرمجة من نوع PIC (PIC burning and communication control circuit).
-- **القيادة والعزل:** يتم استخدام دوائر Isolated driver (قيادة معزولة) لنقل إشارات التحكم من رقاقة VCC-PWM إلى مفاتيح الـ MOS.
-- **استقرار الجهد:** توجد دائرة أخذ عينات للتغذية الراجعة (Sampling feedback) لضمان استقرار الجهد الخارج.
-
-**Main guide — image 6** ([16279619384501173.jpg](../sources/apw12_repair_guide/images/202108/16279619384501173.jpg)):
-- قيمة جهد الخرج الرئيسي (Main voltage) بعد عملية التقويم تتراوح بين 12V إلى 15V.
-- يوجد مخرج جهد مساعد (Auxiliary output) ثابت بقيمة 12V مخصص لتغذية المراوح (fans) ودوائر التحكم.
-- تعتمد اللوحة على مدخلي تيار متردد منفصلين يرمز لهما بـ AC1 input و AC2 input.
-- كل مرحلة دخل AC مرتبطة بدوائر تصحيح معامل القدرة (PFC) ودوائر تعديل عرض النبضة (PWM) ومحول DC/DC.
-- توجد منطقة تحكم مخصصة تحتوي على آيسيات القيادة (Maint drive IC) ومعالج من نوع PIC IC.
-- المسارات النحاسية العريضة في الجزء العلوي مخصصة للتيارات العالية الناتجة عن عملية التقويم (rectified output).
-
-**Main guide — image 7** ([16279620522193219.jpg](../sources/apw12_repair_guide/images/202108/16279620522193219.jpg)):
-- يحتوي الجهاز على 3 مروحات تبريد (Cooling Fans) مثبتة في الجزء العلوي من الهيكل.
-- لوحة الدائرة المطبوعة (PCB) تأتي باللون الأخضر.
-- يتضمن التصميم 4 مكثفات كهرلية (Electrolytic Capacitors) كبيرة الحجم في مرحلة التنعيم الأولية.
-- وجود ملفات حث حلقية (Toroidal Inductors) متعددة تستخدم لترشيح التداخل الكهرومغناطيسي (EMI) وتصحيح معامل القدرة (PFC).
-- يتم استخدام مشتتات حرارية (Heatsinks) من الألمنيوم موزعة داخلياً لتبريد ترانزستورات الطاقة والموحدات.
-- يحتوي الجزء الثانوي على قضبان توصيل معدنية (Busbars) لنقل التيارات العالية إلى كابلات الإخراج.
-- توجد لوحات تحكم رأسية (Daughterboards) صغيرة مثبتة على اللوحة الأم لإدارة إشارات التحكم.
-
-**Main guide — image 9** ([16279621241877363.jpg](../sources/apw12_repair_guide/images/202108/16279621241877363.jpg)):
-- الصمام الكهربائي (Fuse) المسمى F1 يأتي بسعة 16A لحماية مدخل التيار AC.
-- ملفات الخنق (Common Mode Chokes) L5 وL6 تحمل الرمز التقني 3R1350W-L11.3.
-- القنطرة المقومة (Bridge Rectifier) U17 هي من طراز GBU2510.
-- ترانزستور الطاقة (MOSFET) الرئيسي في دائرة الرفع هو Q6 ويحمل الرمز TK31N60W.
-- الدايود عالي السرعة D17 المستخدم في مرحلة الرفع هو من نوع SiC Schottky وطرازه SCS210AMC.
-- تستخدم الدائرة المقاومات الحرارية NTC6 وNTC7 من طراز MF72-10D15 للحد من تيار الاندفاع.
-- منظم الجهد القابل للتعديل (Shunt Regulator) D23 يحمل الرمز ZTL431BFTA.
-- يتم عزل إشارات التحكم باستخدام العازل الضوئي (Optocoupler) PC817.
-- يحتوي المخطط على نقاط فحص محددة تبدأ من TEST21 وتنتهي عند TEST36 لتتبع الإشارات والجهود.
-- الدائرة المتكاملة U18 تعمل كمتحكم PFC وتتلقى تغذية VCC عبر خط +12V_1.
-- توجد إشارات تحكم خارجية تدخل الدائرة مسمّاة PWM و RELAY_1 و ON/OFF DC-DC_1.
-
-**Main guide — image 10** ([16279621416077024.jpg](../sources/apw12_repair_guide/images/202108/16279621416077024.jpg)):
-- **وحدة التحكم الرئيسية:** المستخدمة هي U27 من نوع ICE2QR4765 (Quasi-Resonant PWM Controller).
-- **المحولات:** المحول الرئيسي T1 يحمل الرمز EE16_4+6.
-- **مخارج الجهد:** يوفر المخطط مخرجين بجهد +12V هما +12V1 و +12V2.
-- **نقطة فحص المخرج الرئيسي:** يتم قياس الجهد +12V2 عند نقطة الاختبار TEST15.
-- **نقطة فحص المخرج الثانوي:** يتم قياس الجهد +12V1 عند نقطة الاختبار TEST13.
-- **دائرة التغذية المرتدة (Feedback):** تعتمد على العازل الضوئي U4 (PC817) والمنظم U6 (ZTL431BFTA).
-- **مقاومة استشعار التيار (Current Sense):** المقاومة R37 بقيمة 2R7 متصلة بالطرف رقم 3 (CS) الخاص بـ U27.
-- **مكثفات الترشيح للمخرجات:** يستخدم مكثف C31 (220uF/25V) للمخرج +12V2، ومكثف C29 (220uF/25V) للمخرج +12V1.
-- **دائرة الحماية (Snubber):** تتكون من المقاومة R71 (390K) والمكثف C48 (10nF/1KV) مع الدايود D9 (M7).
-- **دايودات التقويم:** D2 و D12 هما من النوع ES1J (Ultra Fast Recovery).
-- **تغذية VCC:** يتم تزويد الطرف رقم 7 لـ U27 بجهد التغذية عبر الدايود D10 مع ترشيح بواسطة المكثفين C74 (10uF) و C75 (1uF).
-- **تقسيم الجهد المرجعي:** يتم ضبط جهد الخارج عبر المقسم الجهد المكون من R43 (20K) و R44 (5.1K).
-
-**Main guide — image 11** ([16279621876812971.jpg](../sources/apw12_repair_guide/images/202108/16279621876812971.jpg)):
-- *(No structured facts list parsed for this file — use mirror HTML.)*
-
-**Main guide — image 12** ([16279621987968183.jpg](../sources/apw12_repair_guide/images/202108/16279621987968183.jpg)):
-- *(No structured facts list parsed for this file — use mirror HTML.)*
-
-**Main guide — image 13** ([16279622278816328.jpg](../sources/apw12_repair_guide/images/202108/16279622278816328.jpg)):
-- تستخدم الدائرة عازلين ضوئيين (Optocouplers) من الطراز PC817 وتسميتهما U4 و U15.
-- الترانزستور المسئول عن تمرير جهد التغذية هو Q3 من نوع PNP وطرازه MMBT3906.
-- الجهد الرئيسي المغذي للمرحلة هو +12V3، والجهد الناتج هو VCC-FAN7688.
-- تعتمد الدائرة على إشارتي تحكم منفصلتين: ON/OFF DC-DC_1 و ON/OFF DC-DC_2.
-- المقاومات R20، R49، R21، R79، R81 جميعها ذات قيمة موحدة وهي 5.1K أوم.
-- المقاومة R22 الموصلة بين قاعدة ومشع الترانزستور Q3 قيمتها 1.69K أوم.
-- المكثف C26 المستخدم في الفلترة قيمته 100nF وبجهد تحمل 50V.
-- مكثفات التنعيم C21 و C76 تأتي بسعة 1uF.
-- الطرف رقم 3 في العازل الضوئي U15 مسمى بالرمز EN (Enable).
-- ترتبط العوازل الضوئية U4 و U15 بجهود تغذية مستقلة تسمى +12V1_1 و +12V1_2.
-
-**Main guide — image 14** ([16279622552940977.jpg](../sources/apw12_repair_guide/images/202108/16279622552940977.jpg)):
-- المتحكم الرئيسي في الدائرة هو الآي سي U22 من طراز FAN7688 (LLC Resonant Converter Controller).
-- تستخدم الدائرة أربعة عوازل ضوئية لقيادة البوابات (Gate Drive Photocouplers) من طراز TLP5772 وتحمل الرموز U20، U24، U26، U28.
-- توجد أربعة ترانزستورات PNP من نوع MMBT3906 (الرموز Q11، Q23، Q24، Q26) تعمل كجزء من دوائر تفريغ البوابة.
-- يتم تزويد مراحل القيادة بجهد تشغيل عبر خطوط +12V1 و +12V2.
-- المقاومة R175 المسؤولة عن تغذية VCC للمتحكم FAN7688 قيمتها 10R.
-- قيمة المقاومة R56 المتصلة بمنفذ التردد الأدنى FMIN هي 130K.
-- قيمة المقاومة R94 المتصلة بدائرة تحسس التيار CS هي 316K.
-- المكثفات الكيميائية C149 و C150 في دوائر التغذية تحمل قيم 220uF بجهد 25V.
-- إشارات الخرج النهائية للقيادة تسمى DRVL_1، DRVH_1، DRVH_2، DRVL_2.
-- يوجد جهد مرجعي أو إمداد داخلي يسمى 5VB متصل بالمنفذ رقم 1 (VFB) والمنفذ رقم 2 (VDD).
-- المقاومات R63، R165، R170، R176 المسؤولة عن حماية البوابات قيمتها 51R.
-
-**Main guide — image 15** ([16279624557125120.jpg](../sources/apw12_repair_guide/images/202108/16279624557125120.jpg)):
-- تستخدم الدائرة ترانزستورات MOSFET من طراز TK31N60W5 في مرحلة القدرة الابتدائية (Q14, Q15, Q21, Q22).
-- تعتمد مرحلة التعديل/التقويم في الخارج على ترانزستورات MOSFET من طراز TPH4R10ANH (مثل Q17, Q18, Q25, Q26).
-- المحولات الرئيسية في الدائرة مصنفة تحت الرمز PQ5050 (T3 و T6).
-- توجد ملفات حث (Inductors) بقيمة 400uH تحمل الرموز L8 و L9.
-- مكثفات الحماية (Snubber) في المرحلة الثانوية مصنفة بجهد 1000V وسعة 1nF (مثل C146, C148, C168, C171).
-- مكثفات الربط في الدائرة الابتدائية مصنفة بجهد 630V (مثل C52, C57, C152, C167).
-- يتكون بنك تنعيم الخرج النهائي (Output Filter) من مجموعة مكثفات كيميائية بسعة 150uF وجهد 35V.
-- تستخدم مقاومات بقيمة 10R (مثل R166, R180) ومقاومات بقيمة 10K (مثل R167, R176) في دوائر قيادة البوابة (Gate Drive).
-- إشارات التحكم الرئيسية للبوابات تسمى DRVH 1، DRVL 1، DRVH 2، DRVL 2.
-- نقاط الخرج الرئيسية محددة بالرموز OUT+ و GND-OUT.
-
-**Main guide — image 16** ([16279624809715697.jpg](../sources/apw12_repair_guide/images/202108/16279624809715697.jpg)):
-- المكون المركزي للدائرة هو الأيسيه U25 من طراز IX4340 وهو مشغل بوابات مزدوج (Dual Gate Driver).
-- تعتمد الدائرة على مستويات جهد تشغيل هي +12VOUT و -3VOUT و GND-OUT.
-- يتم استقبال إشارات التحكم عبر المداخل SROUT1 و SROUT2 من خلال الثنائيات D30 و D34.
-- قيمة المقاومات R190 و R191 في مسار إشارات الإدخال هي 200R.
-- المخرجات الرئيسية للأيسيه هي OUTA (الطرف رقم 7) و OUTB (الطرف رقم 5).
-- تستخدم مراحل التضخيم ترانزستورات ثنائية القطبية من طراز DSS4540X و DSS5540X.
-- مكثفات التصفية (مثل C63، C185، C191) تبلغ قيمتها 1uF بجهد تحمل 25V.
-- المقاومة R192 الموصلة بخط التغذية VDD للأيسيه قيمتها 10R.
-- مقاومات حماية القواعد (Base Resistors) للترانزستورات مثل R214 و R215 تبلغ قيمتها 10R.
-- توجد مقاومات سحب (Pull-up/down) بقيمة 1K مثل R188 و R193 مرتبطة بخطوط الإشارة.
-- المخارج النهائية للدائرة موسومة بالرموز SR1_1، SR1_2، SR2_1، SR2_2 وهي المخصصة لقيادة بوابات ترانزستورات القدرة (MOSFETs).
-
-**Main guide — image 17** ([16279624978293654.jpg](../sources/apw12_repair_guide/images/202108/16279624978293654.jpg)):
-- *(No structured facts list parsed for this file — use mirror HTML.)*
-
-**Main guide — image 18** ([16279625112474195.jpg](../sources/apw12_repair_guide/images/202108/16279625112474195.jpg)):
-- *(No structured facts list parsed for this file — use mirror HTML.)*
-
-**Main guide — image 19** ([16279625435882154.jpg](../sources/apw12_repair_guide/images/202108/16279625435882154.jpg)):
-- توزيع دوائر الحماية عبر المصهرات الفتيلية المرمزة بـ F1، F2، F3، وF4.
-- وجود ملفات حث وتصفية للطاقة مرمزة بـ L1، L2، L3، L4، L7، L10، L11، L18، وL19.
-- تحديد مواقع الدوائر المتكاملة (ICs) بالرموز: U3، U4، U5، U6، U7، U9، U10، U11، U13، وU15.
-- استخدام مكثفات كيميائية كبيرة الحجم في مراحل الترشيح تحمل الرموز C27، C28، C34، وC35.
-- وجود مكونات تصفية (Chokes) تحمل نمط العلامة "Z" في الجزء العلوي الأيسر من المخطط.
-- تجمعات كثيفة للمكونات الصغيرة (مكثفات ومقاومات سطحية) في الجهة اليمنى من اللوحة بجانب نقاط الاختبار.
-- استخدام ترانزستورات أو منظمات جهد موزعة تحمل الرموز Q وD (مثل D3، D4).
-
-**Main guide — image 20** ([16279625732283033.jpg](../sources/apw12_repair_guide/images/202108/16279625732283033.jpg)):
-- نطاق جهد الخرج الرئيسي للمزود محدد بين `14.5-21V` عبر أطراف `OUT-14.5-21V`.
-- أطراف القطب السالب (التأريض) للخرج الرئيسي يرمز لها بـ `OUT-GND`.
-- يحتوي موصل التحكم الصغير (4 أقطاب) على خط البيانات `SDA` وخط الساعة `SCL` لبروتوكول I2C.
-- يتضمن موصل التحكم إشارة تفعيل يرمز لها بالرمز `EN`.
-- يوجد منفذ طاقة إضافي بمعيار `ATX_2X3` (يحتوي على 6 أقطاب).
-- يوفر موصل `ATX_2X3` جهد خرج بقيمة `+12V`.
-- يتصل الطرف العلوي لموصل `ATX_2X3` بنقطة التأريض `GND`.
-- يحتوي موصل التحكم على طرف تأريض مخصص يرمز له بـ `GND`.
-
-**Main guide — image 21** ([16279626852314344.jpg](../sources/apw12_repair_guide/images/202108/16279626852314344.jpg)):
-- *(No structured facts list parsed for this file — use mirror HTML.)*
+**Cross-references:**
+- S19 hashboard: [FILE 1 — S19 Hashboard](repair_s19_hashboard.md)
+- Whatsminer M30/M50 hub: [FILE 3 — Whatsminer Hub](repair_whatsminer_m30_m50_hub.md)
 
 ---
 
-**1215A manual — image 2** ([17685446259205793.jpg](../sources/apw12_1215a_manual/images/202601/17685446259205793.jpg)):
-- اللوحة مقسمة تقنياً إلى منطقتين رئيسيتين: "Low voltage area" و "High voltage area".
-- تقع منطقة الجهد المنخفض "Low voltage area" في الجانب الأيسر، وتتميز بمسارات عريضة معززة بطبقة قصدير سميكة للتعامل مع تيارات الخرج العالية.
-- تقع منطقة الجهد العالي "High voltage area" في الجانب الأيمن من اللوحة.
-- يوجد عزل مادي واضح (Isolation gap) يفصل بين دوائر الجهد العالي والمنخفض لضمان السلامة الكهربائية.
-- يوجد تدوين يدوي بالرقم "03" في الزاوية العلوية اليسرى للوحة.
-- اللوحة تحتوي على مكونات لحام سطحي (SMD) موزعة على الجانب السفلي (Solder side).
-- الصورة تحمل علامة مائية للمصدر "ZEUS MINING CRYPTO MINING PRO".
+## APW12 Version Compatibility
 
-**1215A manual — image 3** ([17685447543877698.jpg](../sources/apw12_1215a_manual/images/202601/17685447543877698.jpg)):
-- يحتوي اللوح على شريحة تحكم PFC MCU control chip لإدارة تصحيح معامل القدرة.
-- توجد وحدة تغذية مساعدة SB auxiliary power supply في الجزء العلوي لتشغيل دوائر التحكم.
-- يعتمد النظام على شريحة PWM control chip للتحكم في عرض النبضة.
-- توجد شريحة مخصصة للتحكم في المخرجات والاتصالات Output + communication MCU control chip.
-- يتضمن التصميم محولين للطاقة Main transformer في جهة الخرج.
-- يحتوي اللوح على واجهة مخرجات رئيسية Main output interface في أقصى يمين اللوح.
-- يوجد مبدد حراري مخصص لترانزستورات الخرج من نوع SR output transistor heatsink.
-- يتوسط اللوح مبدد حراري لترانزستورات الـ PWM transistor heatsink.
-- يتوفر مبدد حراري لترانزستورات الـ PFC transistor heatsink لتبديد حرارة دوائر الدخل.
-- يستخدم اللوح قنطرتي تقويم Bridge rectifier في مرحلة الدخل الأولي.
-- يوجد ملفا تحريض PFC inductor كبيران ضمن دائرة تحسين القدرة.
-
-**1215A manual — image 4** ([17685447763271665.jpg](../sources/apw12_1215a_manual/images/202601/17685447763271665.jpg)):
-- يعتمد التصميم على مدخلي تيار متردد (AC input) مزدوجين في بداية المسار.
-- تبدأ المعالجة بمرحلة كبت التداخل الكهرومغناطيسي (EMI Suppression) تليها مرحلة التقويم (Rectification).
-- يستخدم المزود تقنية تحسين معامل القدرة من نوع (PFC Boost).
-- يوجد نظام حماية مخصص للجهد الزائد والمنخفض (Overvoltage and Undervoltage Protection System) يتوسط مرحلتي التقويم ونظام PWM.
-- يتم التحكم في العمليات الأساسية عبر نظام تعديل عرض النبضة (PWM System).
-- تتم عملية تحويل الطاقة (Power Conversion) متبوعة بالتقويم المتزامن (Synchronous Rectification) قبل الوصول للمخرج النهائي.
-- المخرج الرئيسي للمزود هو تيار مستمر (DC Output).
-- يتضمن التصميم نظام طاقة مساعد (Auxiliary Power Supply System) يؤدي إلى مخرج جهد الاستعداد (SB Output).
-- يرتبط نظام (PWM System) بستة مسارات تغذية راجعة وحماية هي: (Over-temperature protection)، (Short-circuit protection)، (Voltage regulation)، (Sampling)، (Over-current protection)، و (Over-power protection).
-
-**1215A manual — image 6** ([17685449834079984.jpg](../sources/apw12_1215a_manual/images/202601/17685449834079984.jpg)):
-- اسم الملف الفني هو KJ-P023_SCH.PDF.
-- الرمز SCH في التسمية يشير إلى أن المستند يحتوي على المخططات الكهربائية (Schematic) للوحة.
-- الكود KJ-P023 يمثل رقم الموديل أو المرجع التصميمي (Part Number) الخاص باللوحة.
-- صيغة الملف هي PDF، وهي الصيغة القياسية لتداول المخططات التقنية.
-
-**1215A manual — image 7** ([17685455718935118.jpg](../sources/apw12_1215a_manual/images/202601/17685455718935118.jpg)):
-- تتضمن مجموعة الأدوات قطاعة أسلاك جانبية (Diagonal cutting pliers) لقص الأطراف والأسلاك الزائدة.
-- توجد كماشة مدببة الرأس (Long-nose pliers) للإمساك بالمكونات الدقيقة في الأماكن الضيقة.
-- تُستخدم مضخة شفط القصدير (Solder sucker) يدوية باللون الأزرق لإزالة اللحام من على اللوحة.
-- يتوفر مفك براغي (Screwdriver) بمقبض شفاف أحمر لفك وتثبيت مسامير اللوحات أو الهيكل.
-- جهاز القياس المستخدم هو ملتيميتر رقمي من شركة FLUKE، ويظهر على واجهته الطراز 17B+.
-- شاشة الملتيميتر تعرض الرمز "O.L" (Over Load)، مما يعني دائرة مفتوحة أو مقاومة تفوق قدرة النطاق الحالي.
-- وحدة القياس النشطة على شاشة الملتيميتر هي MΩ (Megaohm).
-- مفتاح الاختيار في الملتيميتر مضبوط على وضعية قياس المقاومة (Ω).
-
-**1215A manual — image 8** ([17685456155859083.jpg](../sources/apw12_1215a_manual/images/202601/17685456155859083.jpg)):
-- الجهاز الأيسر من طراز KOTEBONK KT-120.
-- الجهاز الأيسر مصنف كجهاز آمن من التفريغ الإلكتروستاتيكي ESD SAFE.
-- تم تعليم الجهاز الأيسر بعبارة LEAD FREE، مما يشير لمناسبته للحام الخالي من الرصاص.
-- القراءة الظاهرة على شاشة الجهاز الأيسر هي 390.
-- الإعداد المطلوب للجهاز الأيسر (Constant temperature) هو 380±10°C.
-- القراءة الظاهرة على شاشة الجهاز الأيمن هي 400.
-- الإعداد المطلوب للجهاز الأيمن (High-temperature) هو 400±10°C.
-- يحتوي الجهاز الأيسر على منفذ معايرة خارجي يدوي CAL في الواجهة الأمامية.
-- يتم التحكم في تشغيل الطاقة عبر مفتاح Power أحمر موجود في الركن السفلي الأيسر لكل واجهة.
-
-**1215A manual — image 9** ([17685456604312070.jpg](../sources/apw12_1215a_manual/images/202601/17685456604312070.jpg)):
-- يوجد مؤشر ضوئي مخصص يسمى "SB output indicator light" للتأكد من سلامة جهد الاستعداد.
-- اللون الأخضر لمؤشر SB يشير إلى أن وحدة التغذية في حالة انتظار (Standby) وتخرج الجهد الأولي اللازم لتشغيل لوحة التحكم.
-- يحتوي مزود الطاقة على قضبان توصيل (Busbars) للمخرجات الرئيسية في الجهة اليسرى.
-- يوجد منفذ توصيل تحكم (Control Connector) يقع مباشرة بجانب مؤشر SB.
-- يظهر مؤشر ضوئي أخضر إضافي في أقصى يمين الواجهة الأمامية للجهاز قيد التشغيل.
-- الهيكل الخارجي للمزود مصنوع من المعدن (ألمونيوم) لتبديد الحرارة.
-
-**1215A manual — image 10** ([17685457209345320.jpg](../sources/apw12_1215a_manual/images/202601/17685457209345320.jpg)):
-- يُستخدم مفتاح خارجي (Switch) موصل بكابل مخصص لتفعيل واجهة IIC ويُسمى "IIC interface enable switch".
-- يتم توصيل مفتاح تفعيل IIC بمنفذ صغير (Header) يقع في الواجهة الجانبية لمزود الطاقة بجانب أطراف التوصيل.
-- يتكون كابل مفتاح الـ IIC من أربعة أسلاك ملونة (أزرق، بني، أخضر، أبيض) تنتهي بموصل (Connector) أبيض صغير.
-- تُصنف الإضاءة الخضراء الظاهرة من فتحات الهيكل المعدني كـ "Main output indicator light" (مؤشر مخرج الطاقة الرئيسي).
-- يعود مصدر الصورة أو المعدات الموضحة لعلامة "ZEUS MINING".
-
-**1215A manual — image 11** ([17685457529228178.jpg](../sources/apw12_1215a_manual/images/202601/17685457529228178.jpg)):
-- الجهاز مخصص لاختبار اتصالات IIC (IIC communication test fixture).
-- إصدار برنامج الفحص الظاهر هو POWER TEST v2.0.
-- ملف تعريف وحدة الطاقة المبرمج هو APW12 v0.1.
-- إجمالي عدد خطوات الاختبار في الدورة الواحدة هو Total Step: 4.
-- نطاق الجهد المسجل على الشاشة يتراوح من 11.89v إلى 15.12v.
-- يحمل الهيكل الخارجي رقم التعريف ZJ0001000001.
-- الواجهة المادية تحتوي على مفتاح تشغيل/إيقاف (Rocker switch) وزر تحكم أخضر.
-- تظهر تسمية المكون VR2 على لوحة الدوائر المطبوعة (PCB) أسفل الشاشة جهة اليمين.
-
-**1215A manual — image 12** ([17685457874434293.jpg](../sources/apw12_1215a_manual/images/202601/17685457874434293.jpg)):
-- يتطلب فتح الغطاء المعدني الخارجي إزالة 6 براغي تثبيت (3 على الحافة العلوية و3 على الحافة السفلية).
-- يتم تثبيت لوحة الدوائر المطبوعة (PCB) داخل الهيكل المعدني بواسطة 5 نقاط تثبيت ببراغي محددة بدوائر حمراء.
-- اللوحة الأم تحمل علامة التعريف النصية "ALPHA MINER".
-- يوجد محول طاقة داخلي يحمل الملصق التعريفي "LC 2201" والرقم "30330029".
-- نظام التبريد يعتمد على مروحتين (Dual Fans) مثبتتين على جانب الهيكل لسحب وطرده الهواء.
-- تحتوي دائرة الإخراج (Secondary side) على صف من المكثفات الصلبة (Solid Capacitors) لتحقيق استقرار الجهد.
-- يحتوي القسم الأولي (Primary side) على 4 مكثفات كيميائية كبيرة لتنعيم الجهد العالي.
-
-**1215A manual — image 13** ([17685458189165281.jpg](../sources/apw12_1215a_manual/images/202601/17685458189165281.jpg)):
-- يحتوي الجهاز على ترانزستورات طاقة (MOSFETs/Rectifiers) مثبتة ببراغي على مشتتات حرارية ألمنيوم مع استخدام المعجون الحراري الأبيض لتحسين النقل الحراري.
-- يتضمن نظام الترشيح الأولي ملفين (Toroidal Inductors) بقلب حلقي ونحاس سميك للتعامل مع التيارات العالية.
-- توجد مكثفات ترشيح (Film Capacitors) صفراء اللون من نوع DAIN ضمن دائرة الحماية والفلترة EMI.
-- يحتوي مزود الطاقة على محول تردد عالٍ (Transformer) يحمل الكود المطبوع "L12201 30330020".
-- تم استخدام مكثفات كهرلية (Electrolytic Capacitors) بجهد تحمل يصل إلى 450V في مرحلة التنعيم الأساسية.
-- يظهر المشتت الحراري الصغير في الصورة اليمنى وهو مخصص لمكون طاقة واحد، غالباً ما يكون لترانزستور دائرة التبديل أو دايود خرج ثانوي.
-
-**1215A manual — image 14** ([17685459695807722.jpg](../sources/apw12_1215a_manual/images/202601/17685459695807722.jpg)):
-- اللوحة المعروضة هي لوحة مطبوعة (PCB) لمزود طاقة (PSU) خاص بأجهزة التعدين، وتظهر الوجهين العلوي والسفلي.
-- يحتوي الوجه العلوي على مكثفات كيميائية كبيرة للترشيح الأولي (Primary Filtering).
-- توجد محولات طاقة (Transformers) أحدها يحمل الرمز "32201 0330020".
-- تم تحديد 4 مناطق فحص دائرية في الوجه السفلي (Solder Side) تركز على مكونات SMD الصغيرة ومسارات الطاقة.
-- تم تحديد 4 مناطق فحص مستطيلة في الوجه العلوي (Component Side) تركز على دوائر التحكم والـ ICs المسؤولة عن تنظيم الجهد.
-- اللوحة تحتوي على ملفات خانقة (Inductors) ضخمة ومشتتات حرارية (Heat Sinks) لتبريد عناصر التبديل (MOSFETs).
-- تظهر الصورة وجود علامة مائية لجهة تقنية متخصصة وهي "ZEUS MINING".
-
-**1215A manual — image 15** ([17685459965649931.jpg](../sources/apw12_1215a_manual/images/202601/17685459965649931.jpg)):
-- يُستخدم وضع المقاومة (Resistance range) لفحص أطراف المخرج (Output terminal)؛ القراءة $0.0$ تشير إلى دائرة قصر (Short circuit)، بينما القراءة $0.712 k\Omega$ تشير إلى حالة طبيعية (Normal).
-- يتم التحقق من سلامة الترانزستور الأساسي (Primary transistor) باستخدام وضع الديود (Diode setting)؛ القراءة $0.000$ تعني وجود قصر، والقراءة $0.397$ تعني أن المكون سليم.
-- لفحص المصهر (Fuse)، يُستخدم وضع المقاومة أو الديود؛ القراءة $0.000$ تعني أن المصهر موصل وسليم، بينما القراءة $OL$ تعني أنه تالف (دائرة مفتوحة).
-- فحص قنطرة التقويم (Bridge rectifier) يتطلب قياس جميع الأرجل الأربعة (All four pins) باستخدام وضع الديود.
-- في فحص قنطرة التقويم، القراءة $0.000$ تشير إلى وجود قصر (Short circuit)، بينما القراءة $0.472$ تعتبر طبيعية.
-- تعتمد المنهجية الموضحة على المقارنة المباشرة بين القيم الرقمية (Digital readings) لتحديد المكونات التالفة على لوحة الدائرة المطبوعة (PCB).
-
-**1215A manual — image 16** ([17685460354209074.jpg](../sources/apw12_1215a_manual/images/202601/17685460354209074.jpg)):
-- نطاق جهد المكثف عالي الجهد (High-voltage capacitor) يتراوح بين 400V و450V DC.
-- القراءة الفعلية المسجلة في نقطة اختبار المكثف الرئيسي هي 426.1V.
-- نطاق جهد VCC الأساسي (Primary VCC) يتراوح بين 13V و15V.
-- وظيفة جهد Primary VCC هي تزويد الطاقة لدوائر PFC وPWM.
-- يغلق المرحل (Relay) بعد اكتمال عملية التشغيل الطبيعي.
-- يقوم المكثف عالي الجهد برفع الجهد (Boost) بعد إغلاق المرحل.
-- يبدأ عمود الطوطم (Totem pole) الخاص بـ PWM MOSFET في العمل بعد استقرار الجهد.
-- رصد قراءة جهد بقيمة 13.35V و 13.33V ضمن نطاق Primary VCC.
-- رصد قراءة جهد خرج بقيمة 12.50V DC في نقاط الاختبار الثانوية.
-- رصد قراءة جهد منطقي بقيمة 3.304V DC.
-
-**1215A manual — image 17** ([17685460687268904.jpg](../sources/apw12_1215a_manual/images/202601/17685460687268904.jpg)):
-- استخدام مفك براغي (screwdriver) كأداة يدوية لإزالة مادة السيليكون الرمادية المثبتة للمكونات.
-- مادة السيليكون تُستخدم لتغطية نقاط اتصال الأسلاك السوداء السميكة باللوحة المطبوعة (PCB).
-- وجود مكثفات غشائية (film capacitors) حمراء اللون في منطقة العمل، أحدها يحمل الرمز التوضيحي C65.
-- وجود مكثف كيميائي صغير بجانب الأسلاك يحمل الرمز C13.
-- اللوحة تحتوي على لوحة ابنة (daughter board) صغيرة مثبتة عمودياً بجانب مبدد حراري (heatsink).
-- إزالة السيليكون تسمح بفحص جودة اللحام ونقاط التوصيل الكهربائي المباشرة.
-
-**1215A manual — image 18** ([17685460954560911.jpg](../sources/apw12_1215a_manual/images/202601/17685460954560911.jpg)):
-- يتم تجهيز مضخة الشفط (desoldering pump) عبر إمساك جسمها باليد اليسرى وضغط الرافعة (lever) باليد اليمنى.
-- يتم تفعيل آلية الشفط عن طريق الضغط على مفتاح (switch) المضخة باستخدام إصبع الإبهام.
-- يجب استخدام كاوية لحام ذات درجة حرارة ثابتة (constant-temperature soldering iron) لصهر القصدير.
-- توضع فوهة مضخة الشفط مباشرة فوق دبابيس (pins) ترانزستور MOS بعد انصهار اللحام تماماً.
-- تظهر اللوحة المطبوعة (PCB) تسميات توضيحية لعناصر إلكترونية تشمل R127، R129، R125، R123، R153، R166، و D34.
-- الهدف من العملية هو الوصول إلى حالة تكون فيها ثقوب الدبابيس (pins) خالية تماماً من بقايا القصدير لتسهيل إزالة العنصر.
-
-**1215A manual — image 19** ([17685461208339109.jpg](../sources/apw12_1215a_manual/images/202601/17685461208339109.jpg)):
-- يتم استخدام مفك براغي (screwdriver) لفك المسامير المثبتة للترانزستورات على المشتت.
-- توجد ورقة عازلة (insulating sheet) موضوعة بين الترانزستور والمشتت الحراري.
-- الوظيفة الأساسية للورقة العازلة هي منع حدوث تقوس كهربائي (arcing) بين جسم الترانزستور والمشتت.
-- القاعدة التقنية تفرض استبدال القطعة التالفة بأخرى من نفس الموديل (same model).
-- تظهر أربعة عناصر قدرة (transistor) مثبتة على صف واحد فوق طبقة عازلة وردية اللون.
-- توجد مادة بيضاء (غالباً غراء عازل أو معجون حراري) عند قاعدة أطراف الترانزستورات.
-
-**1215A manual — image 20** ([17685461469383909.jpg](../sources/apw12_1215a_manual/images/202601/17685461469383909.jpg)):
-- يوجد صف من نقاط اللحام الثقبي (Through-hole pads) داخل الإطار الأحمر، تظهر بوضوح آثار فك لحام أو فقدان لدبابيس التوصيل (Pins).
-- المنطقة المحددة تحتوي على مادة رمادية عازلة (Potting compound/Glue) تغطي قاعدة نقاط التوصيل لحمايتها وتثبيتها.
-- اللوحة مزودة بمكثفات كهرلية (Electrolytic Capacitors) كبيرة الحجم في الجزء العلوي لتنعيم الجهد.
-- توجد ترانزستورات من نوع MOSFET أو منظمات جهد بتغليف سطحي (SMD) مصطفة أسفل نقاط التوصيل مباشرة.
-- اللوحة تحتوي على مشتتات حرارية (Heatsinks) من الألمنيوم موزعة لتبريد مكونات الطاقة عالية القدرة.
-- يظهر في اللوحة محول أو ملف حث (Inductor) مغلف بشريط أصفر مخصص للعمل في الترددات العالية.
-- توجد أسلاك توصيل سوداء معزولة وسميكة متصلة باللوحة لنقل التيارات العالية.
-
-**1215A manual — image 21** ([17685461705757322.jpg](../sources/apw12_1215a_manual/images/202601/17685461705757322.jpg)):
-- استخدام فرشاة صغيرة مع سائل تنظيف (غالباً Isopropyl Alcohol) لتنظيف الجهة الخلفية من PCB وإزالة بقايا اللحام أو الأتربة.
-- اللوحة مزودة بمكثفات كهرلية (Electrolytic Capacitors) كبيرة الحجم لتنعيم الجهد في دوائر الطاقة.
-- وجود مشتت حراري (Heatsink) من الألومنيوم يغطي المكونات التي تولد حرارة عالية مثل MOSFETs.
-- تتم عملية اللحام اليدوي لمكونات دقيقة على المسارات النحاسية في الجهة الخلفية للوحة الخضراء.
-- تظهر الأسلاك السوداء السميكة المسؤولة عن نقل التيارات العالية (DC Output) مثبتة بالقرب من المشتتات.
-- العلامة التجارية للمصدر هي ZEUS MINING CRYPTO MINING PRO.
-
-**1215A manual — image 22** ([17685462136087736.jpg](../sources/apw12_1215a_manual/images/202601/17685462136087736.jpg)):
-- إصدار نظام جهاز الفحص هو POWER TEST v2.0.
-- البرنامج مخصص لاختبار مزودات طاقة من طراز APW12 إصدار v0.1.
-- تتكون دورة الفحص الكاملة من 4 خطوات (Total Step: 4).
-- في الخطوة الثانية (Step: 2/4)، سجل الجهاز حالة "OK ON" بجهد مخرج قيمته 15.12V.
-- في الخطوة الرابعة النهائية (Step: 4/4)، سجل الجهاز حالة "OK ON" بجهد مخرج قيمته 14.87V.
-- تظهر الشاشة الرئيسية قراءة لجهد منخفض بقيمة 11.89V بالتوازي مع قراءة الـ 15.12V.
-- يتم الربط بين جهاز الاختبار ولوحة مزود الطاقة عبر كابل بيانات مرن (Ribbon cable).
-- الجهاز مزود بمفتاح تشغيل/إيقاف (I/O switch) وزر ضاغط أخضر للتنقل بين خطوات الفحص.
-
-**1215A manual — image 23** ([17685462396865293.jpg](../sources/apw12_1215a_manual/images/202601/17685462396865293.jpg)):
-- يتطلب فك الغطاء الخارجي إزالة 6 براغي تثبيت موزعة على الحواف (3 في الأعلى و3 في الأسفل).
-- يتم تثبيت اللوحة الإلكترونية الرئيسية داخل الهيكل المعدني بواسطة 5 براغي (محددة بدوائر حمراء في الصورة اليسرى).
-- اللوحة المطبوعة (PCB) تحمل العلامة التجارية "ALPHA MINER".
-- يوجد موصل مخصص للمراوح يشار إليه في الصورة بعبارة "Fan connector".
-- يعتمد التصميم على 3 مراوح تبريد مدمجة في أحد جوانب الهيكل.
-- تحتوي دائرة التبديل (Switching) على محولين (Transformers) رئيسيين كبيري الحجم.
-- يضم قسم الدخل 4 مكثفات كهرلية كبيرة موزعة في مجموعتين (2+2) لتنعيم التيار.
-- توجد صفوف من المكثفات الصلبة (Solid Capacitors) عند جهة الخرج لضمان استقرار الجهد.
-
-**1215A manual — image 24** ([17685475653581205.jpg](../sources/apw12_1215a_manual/images/202601/17685475653581205.jpg)):
-- يجب توصيل واجهة IIC interface قبل البدء بعملية الفحص.
-- يتم وضع مفتاح التشغيل (power switch) على وضعية التشغيل (ON) لتنشيط اللوحة.
-- عند تزويد اللوحة بالتيار المتردد AC power، يجب أن تضيء جميع مصابيح مؤشر الإخراج (indicator lights) باللون الأخضر.
-- القيمة الاسمية لجهد المخرج (output voltage) عند القياس بالملتيميتر (multimeter) يجب أن تكون 15V.
-- تظهر القراءة الفعلية على شاشة الملتيميتر في الصورة بقيمة 15.00V تيار مستمر (DC).
-- يتم القياس بوضع مجسات الملتيميتر مباشرة على نقاط تلامس قضبان التوصيل (busbar terminals) في المخرج.
-
-### Bench / service notes (from main guide text)
-
-- To read **default ~15.2 V** at power-up on the bench without full miner I2C control, Zeus documents using an **adapter that shorts regulator port pin EN to GND** (see appearance section in mirrored HTML).  
-- **Two AC inputs** must be energized together; **EN** active **low** enables main output; **SB 12 V** often the first rail to verify.  
-- Use **hashboard tester** `zj0001000001` or **V9 1.2** with **PSU test card firmware** when available.
-
-### APW121215A manual supplement (structure)
-
-The **1215A** PDF-style manual on Zeus adds: **product appearance**, **internal layout** (component-side photos), **high-voltage area** warnings, **fuse / input** servicing notes, and **waveform / test point** figures — use [apw12_1215a_manual/index.html](../sources/apw12_1215a_manual/index.html) alongside the generic APW12 guide above.
-
-### Architecture
-- 2 single-phase AC inputs (C14 delta connectors, requires C13 cable)
-- **CRITICAL: Both AC inputs must be connected simultaneously — two independent PFC stages require simultaneous power input. Single input = PSU will not function.**
-- Output 1 (Main): 12V–15V adjustable (max 12V/300A or 15V/240A) — voltage controlled via I2C from control board
-- Output 2 (SB — Standby): 12V fixed (for control board + fans, max 15A)
-- 4-pin signal terminal: SDA/SCL (I2C for voltage adjustment), EN (enable, active low — control board enables PSU)
-- 3 × 60mm cooling fans
-- Structure: large main board + 3 fans + lower shell
-
-### APW12 Version Compatibility
 | Version | Compatible Miners |
 |---------|------------------|
 | 1215a/b | S19, S19j, S19 Pro, S19j Pro, S19a, S19i, S19+, T19, D7, E9 |
@@ -470,74 +45,391 @@ The **1215A** PDF-style manual on Zeus adds: **product appearance**, **internal 
 | 1215f | S19, S19 Pro, S19j Pro, S19j Pro+, S19XP, S19K Pro |
 | 1215g | S19 Pro-A |
 
-**Compatibility rules:**
+**Interchangeability rules:**
 - 1215a/b/c: interchangeable (no voltage feedback)
 - 1215d/e/f: interchangeable (with voltage feedback)
-- 1215d/e/f can replace a/b/c via firmware upgrade
-- 1215a/b/c CANNOT replace d/e/f
+- 1215d/e/f can **replace** a/b/c via firmware upgrade
+- 1215a/b/c **cannot** replace d/e/f
 
-### Maintenance Platform Requirements (from source)
-1. Constant temperature soldering iron **above 80W** — pointed tip for SMD (300–350°C), knife tip for plug-in components (380–420°C)
-2. Heat gun for chip disassembly — **260°C ±2°C** — do NOT heat for long to avoid PCB blistering
-3. AC controllable voltage regulator (200–250V, 0–20A) for safe power-on — **if unavailable: use 100W light bulb in series with AC live wire**
-4. Electronic load (3.6KW, 0–50V) for load testing — **if unavailable: build resistive load matched to APW12**
-5. Multimeter (Fluke 15b+ recommended) + suction pistol + tweezers
-6. Hashboard tester (zj0001000001 or V9 1.2) + special PSU test card firmware
-7. Oscilloscope (configure if available)
-8. Flux + lead-free solder wire + IPA for cleaning
-9. **Thermal paste (2500 specification)** — for MOS ↔ heatsink heat conduction repair
-10. **704 silicone** — to re-fix cover after original PCBA glue is damaged during repair
+---
 
-### CRITICAL Safety Requirements (from source)
-> **Before opening shell and repairing PCBA:**
-> - **Discharge large capacitors first** — measure with multimeter, proceed only when voltage < 5V
-> - Work must be grounded, ESD wrist strap recommended
-> - After replacing key components: verify no short circuit before applying AC voltage — otherwise risk of miner explosion
-> - When working with AC220V: exercise extreme caution
+## Hardware Architecture
 
-### Maintenance Operations Rules
-1. Personnel must understand switching power supply working principles + 1+ year experience + welding proficiency
-2. Discharge capacitors before any work — measure < 5V before touching
-3. After any replacement: no PCB deformation, solder joints reliable, check for open/short around replacement area
+**Block diagram (main path):**
+```
+AC1 + AC2 (200–240 Vac)
+  → EMI Suppression (X-caps, common-mode chokes)
+  → Rectification (Bridge GBJ2506 / GBU2510)
+  → NTC inrush limiter + K1 relay bypass
+  → PFC Boost (NCP1654 family / U18; MOSFET TK31N60W; SiC diode SCS210AMC)
+  → VBUS (~400–450 V DC) filtering
+  → LLC Resonant Converter (FAN7688 controller U22; 4× TK31N60W5 primary FETs)
+  → Transformer (PQ5050, T3/T6)
+  → Synchronous Rectification (TPH4R10ANH FETs; IX4340 dual gate driver U25)
+  → Output filter (L8/L9 = 400 µH; output caps 150 µF/35 V)
+  → OUT1: 12–15 V / 240 A (main DC bus; lugs OUT-14.5-21V / OUT-GND)
+
+Auxiliary path:
+  ICE2QR4765 (U27, Quasi-Resonant PWM) → SB 12 V standby output
+  → SB indicator LED (green = standby active)
+  → ATX_2X3 6-pin header (+12 V / GND)
+  → 4-pin control header (GND/EN/SCL/SDA)
+```
+
+**Control / communication:**
+- I2C (SDA/SCL) from control board → adjusts main output voltage 12–15 V
+- EN pin (active low) → control board asserts low to enable main output
+- PIC MCU handles output and communication control
+- MCU programming port on rear panel
+
+---
+
+## CRITICAL Safety Requirements
+
+> **Before opening shell and working on PCBA:**
+> - **Discharge large capacitors first** — measure with multimeter; proceed only when voltage < 5 V
+> - Work must be grounded; ESD wrist strap required
+> - After replacing key components: verify no short circuit before applying AC voltage — risk of explosion
+> - When working with AC 220 V: extreme caution
+
+---
+
+## Tools & Materials Required
+
+| # | Item | Spec |
+|---|------|------|
+| 1 | Soldering iron | > 80 W; pointed tip SMD (300–350 °C); knife tip plug-in (380–420 °C) |
+| 2 | Heat gun | 260 °C ±2 °C — do NOT heat long to avoid PCB blistering |
+| 3 | AC voltage regulator | 200–250 V / 0–20 A; **if unavailable: 100 W bulb in series with AC live wire** |
+| 4 | Electronic load | 3.6 kW / 0–50 V; **if unavailable: build resistive load matched to APW12** |
+| 5 | Multimeter | Fluke 15B+ recommended |
+| 6 | Desoldering pump | Constant-temp iron + suction pistol |
+| 7 | Tweezers | — |
+| 8 | Hashboard tester | ZJ0001000001 or V9 1.2 + special PSU test card firmware |
+| 9 | Oscilloscope | Configure if available; confirm Fpwm 450 kHz–1 MHz present |
+| 10 | Thermal paste | Spec 2500 — for MOS ↔ heatsink interface |
+| 11 | 704 silicone | Re-fix cover after original PCBA glue damaged during repair |
+| 12 | Flux + solder | Lead-free solder wire + IPA for cleaning |
+| 13 | IIC enable switch | 4-wire cable (blue/brown/green/white) for bench testing without control board |
+
+---
+
+## Maintenance Operations Rules
+
+1. Personnel must understand switching power supply principles + ≥ 1 year experience + welding proficiency
+2. Discharge capacitors before any work — measure < 5 V before touching internal components
+3. After any replacement: no PCB deformation; reliable solder joints; check for open/short around replacement area
 4. After key component replacement: check entire main circuit for shorts before AC voltage test
 5. Use anti-static mat and wrist strap — grounded workspace required
 
-### Bench Setup for PSU Testing
-1. AC voltage regulator (200–250V, 0–20A current limit) — OR 100W bulb in series as safety measure
-2. Electronic load 3.6KW/0–50V for output load test — OR custom resistive load
-3. Multimeter for voltage measurement at all test points
-4. Oscilloscope if available
+---
 
-### Common Fault Diagnosis
+## Bench Setup for PSU Testing
 
-**PSU not starting**
-1. Confirm both AC inputs connected simultaneously
-2. Check EN signal from control board (must be low/0V to enable)
-3. Check SB (standby) 12V fixed output first — powers control board and fans
-4. If SB present but no main output → check main 12V–15V output circuit
+| Item | Value |
+|------|-------|
+| AC supply | Voltage regulator 200–250 V / 0–20 A (or 100 W safety bulb in series) |
+| Electronic load | 3.6 kW / 0–50 V (or custom resistive load) |
+| EN activation | Adapter shorting EN to GND on 4-pin header → reads ~15.2 V default |
+| SB output check | Verify SB 12 V first (powers control electronics); green SB LED should light |
+| IIC interface | Connect IIC enable switch to 4-pin header before testing with firmware tool |
+| Test firmware | POWER TEST v2.0; APW12 v0.1; 4 test steps total |
+| Expected output | Step 2/4: ~15.12 V OK; Step 4/4: ~14.87 V OK; stable 15.00 V on multimeter at busbars |
 
-**No main voltage output**
-1. Check PFC stage components (two independent PFC stages)
-2. Measure MOSFET gates and drains
-3. Check PWM IC outputs
+---
 
-**Overheating / fan failure**
-1. Check 3 × 60mm fans for operation
-2. Replace thermal paste (spec 2500) between MOS and heatsink
-3. Check fan power connections
-4. Re-apply 704 silicone if component cover glue was damaged
+## Fault Diagnosis
 
-### Checklist Before Starting
-- [ ] Correct APW12 version identified (match to miner model — verify before purchase/use)
+### PSU not starting
+
+```
+1. Confirm BOTH AC inputs connected simultaneously
+2. Check EN signal — must be LOW / 0 V to enable main output
+3. Check SB (standby) 12 V output first — if absent: SB converter (U27 ICE2QR4765) fault
+4. If SB present but no main output → main 12–15 V circuit fault (LLC stage)
+5. Check SB indicator LED — green = SB working
+```
+
+### No main voltage output
+
+```
+1. Check PFC stage (two independent stages):
+   - Fuse F1 (16 A) continuity
+   - Bridge rectifier (GBJ2506 / GBU2510) — diode check all 4 pins
+   - NTC (MF72-10D15) for inrush limiters
+   - PFC MOSFET (TK31N60W / TK31N60W5) — short between pins 1/4/8?
+   - PFC controller U18 power (VCC from +12V_1 line)
+2. Measure VBUS — expect ~400–450 V DC (typical reading 426.1 V)
+3. Check Primary VCC (13–15 V range; typical 13.35 V / 13.33 V) — powers PFC + PWM
+4. LLC stage: check FAN7688 (U22) gate drive outputs DRVL_1/DRVH_1/DRVH_2/DRVL_2
+5. Oscilloscope: confirm Fpwm ~450 kHz–1 MHz at PWM FET gates
+6. SR output: check IX4340 (U25) OUTA/OUTB; check TPH4R10ANH SR FETs
+7. Check output filter inductors L8/L9 (400 µH) for shorts
+```
+
+### Overheating / fan failure
+
+```
+1. Check all 3 × 60 mm fans — all must spin (intake direction)
+2. Replace thermal paste (spec 2500) between MOS devices and heatsink
+3. Check fan power connections (from SB 12 V rail)
+4. Re-apply 704 silicone if component cover glue was damaged during repair
+```
+
+---
+
+## Component Reference
+
+### AC Input / EMI Stage
+
+| Refdes | Part | Function | Key value |
+|--------|------|----------|-----------|
+| F1 | Fuse | AC input protection | 16 A |
+| D2 | GBJ2506 | Bridge rectifier | — |
+| NTC6, NTC7 | MF72-10D15 | Inrush current limiters | NTC thermistors |
+| K1 | Relay | NTC bypass relay (closes after startup) | — |
+| L5, L6 | Common mode choke | EMI suppression | 3R1350W-L11.3 |
+| X-caps | — | EMI differential-mode filter | — |
+| TEST1–TEST6 | — | Test points: AC input → PFC stage | — |
+
+### PFC Stage (×2 independent)
+
+| Refdes | Part | Function | Key value |
+|--------|------|----------|-----------|
+| U18 | NCP1654 family | PFC controller | VCC from +12V_1 |
+| Q4 (also Q6) | TK20N60W / TK31N60W | PFC boost MOSFET | — |
+| D3 (also D17) | SCS210AMC | SiC Schottky boost diode | — |
+| R15 | — | Current sense resistor | 5 mΩ |
+| D23 | ZTL431BFTA | Shunt regulator (feedback) | — |
+| PC817 (×2) | Optocoupler | Isolated feedback | — |
+| TEST21–TEST36 | — | PFC stage test points | — |
+
+### SB (Standby / Auxiliary) Converter
+
+| Refdes | Part | Function | Key value |
+|--------|------|----------|-----------|
+| U27 | ICE2QR4765 | Quasi-resonant PWM controller | — |
+| T1 | EE16_4+6 | SB transformer | — |
+| D2, D12 | ES1J | Ultra-fast recovery diodes | — |
+| D9 | M7 | Snubber diode | — |
+| U4 | PC817 | Optocoupler (feedback isolation) | — |
+| U6 | ZTL431BFTA | Shunt regulator | — |
+| R37 | — | Current sense (CS pin 3 of U27) | 2.7 Ω |
+| R43, R44 | — | Output voltage divider | 20 kΩ / 5.1 kΩ |
+| R71 | — | Snubber resistor | 390 kΩ |
+| C48 | — | Snubber capacitor | 10 nF / 1 kV |
+| C31 | — | Output filter, +12V2 | 220 µF / 25 V |
+| C29 | — | Output filter, +12V1 | 220 µF / 25 V |
+| C74, C75 | — | VCC filter (U27 pin 7) | 10 µF / 1 µF |
+| TEST13, TEST15 | — | Test points: +12V1 (TEST13), +12V2 (TEST15) | — |
+
+### ON/OFF Control / Enable Logic
+
+| Refdes | Part | Function | Key value |
+|--------|------|----------|-----------|
+| U4, U15 | PC817 | Optocouplers for ON/OFF DC-DC_1/DC-DC_2 | U15 pin 3 = EN |
+| Q3 | MMBT3906 (PNP) | VCC pass transistor | — |
+| R22 | — | Base-to-emitter resistor Q3 | 1.69 kΩ |
+| R20, R21, R49, R79, R81 | — | Signal resistors | 5.1 kΩ each |
+| C26 | — | Filter cap | 100 nF / 50 V |
+| C21, C76 | — | Smoothing caps | 1 µF each |
+| +12V3 | — | Supply to this stage | From SB/aux |
+
+### LLC Resonant Stage
+
+| Refdes | Part | Function | Key value |
+|--------|------|----------|-----------|
+| U22 | FAN7688 | LLC resonant converter controller | FMIN resistor R56 = 130 kΩ; CS resistor R94 = 316 kΩ; VCC R175 = 10 Ω |
+| Q14, Q15, Q21, Q22 | TK31N60W5 | Primary half-bridge MOSFETs | — |
+| T3, T6 | PQ5050 | Main LLC transformers | — |
+| U20, U24, U26, U28 | TLP5772 | Gate drive photocouplers | — |
+| Q11, Q23, Q24, Q26 | MMBT3906 (PNP) | Gate discharge transistors | — |
+| R63, R165, R170, R176 | — | Gate protection resistors | 51 Ω each |
+| C149, C150 | — | Supply capacitors | 220 µF / 25 V |
+| C52, C57, C152, C167 | — | Primary coupling caps | 630 V rated |
+| DRVL_1, DRVH_1, DRVH_2, DRVL_2 | — | Gate drive output signals | — |
+| 5VB | — | Internal reference / VDD for U22 pin 1 (VFB) + pin 2 (VDD) | — |
+
+### Synchronous Rectification (SR) Stage
+
+| Refdes | Part | Function | Key value |
+|--------|------|----------|-----------|
+| Q17, Q18, Q25, Q26 | TPH4R10ANH | SR output MOSFETs | — |
+| U25 | IX4340 | Dual gate driver for SR | OUTA=pin7 / OUTB=pin5; supply: +12VOUT/−3VOUT/GND-OUT |
+| D30, D34 | — | Input diodes for SROUT1/SROUT2 | — |
+| R190, R191 | — | Input signal resistors | 200 Ω each |
+| R192 | — | VDD feed resistor for U25 | 10 Ω |
+| R214, R215 | — | Base resistors for transistors | 10 Ω |
+| R188, R193 | — | Pull resistors | 1 kΩ each |
+| C63, C185, C191 | — | Filter caps | 1 µF / 25 V |
+| SR1_1, SR1_2, SR2_1, SR2_2 | — | SR gate drive outputs | — |
+| DSS4540X, DSS5540X | — | Bipolar transistors for drive stage | — |
+
+### Output Filter
+
+| Refdes | Part | Value |
+|--------|------|-------|
+| L8, L9 | Output filter inductors | 400 µH |
+| Output caps | Electrolytic bank | 150 µF / 35 V (multiple) |
+| C146, C148, C168, C171 | Secondary snubber caps | 1 nF / 1000 V |
+| OUT+ / GND-OUT | Output terminals | Main DC bus lugs (M4 lug pattern: 4-M4) |
+
+### Key Test Points and Expected Voltages
+
+| Test point / Node | Expected voltage | Stage |
+|-------------------|-----------------|-------|
+| High-voltage capacitor (VBUS) | 400–450 V DC (typical 426.1 V) | After PFC |
+| Primary VCC | 13–15 V (typical 13.33–13.35 V) | PFC/PWM supply |
+| TEST13 (+12V1) | ~12 V | SB output |
+| TEST15 (+12V2) | ~12 V | SB output |
+| Main output at busbars | 15.00 V (with IIC set) | OUT1 |
+| Logic supply | 3.304 V DC | Control |
+| SB output indicator | Green LED lit | SB working |
+
+---
+
+## PCB Layout Notes
+
+**Board zones (1215A manual):**
+- **High voltage area** (right side of PCB): PFC, bridge rectifiers, NTCs, primary LLC FETs
+- **Low voltage area** (left side): SR FETs, output busbars, thick copper traces for high DC current
+- **Isolation gap** between the two zones (safety gap — do not bridge during repair)
+- Component side (top): ICs, transformers, heatsinks, electrolytics
+- Solder side (bottom): SMD components
+
+**Disassembly:**
+- Outer shell: 6 screws (3 top edge + 3 bottom edge)
+- PCB mounting: 5 screws (marked with red circles in 1215A image 12/23)
+- PCB label: "ALPHA MINER"
+- Transformer label: "LC 2201" / "30330029"
+- Fans: dual (some variants) or triple; keyed connectors
+
+**Component identification (1215A image 3):**
+- PFC MCU control chip (PFC stage)
+- SB auxiliary power supply (top of board)
+- PWM control chip (main stage)
+- Output + communication MCU control chip
+- 2× main transformers
+- Main output interface (far right)
+- SR output transistor heatsink
+- PWM transistor heatsink
+- PFC transistor heatsink
+- 2× bridge rectifiers (input)
+- 2× PFC inductors (large toroidal)
+
+---
+
+## Repair Procedures
+
+### MOS replacement (PFC or LLC FETs)
+
+1. Discharge all capacitors — measure VBUS < 5 V before proceeding
+2. Apply ESD wrist strap and use anti-static mat
+3. Screwdriver to remove silicon potting from MOS leads
+4. Heat soldering iron (constant-temp) to melt solder; use desoldering pump to clear through-hole pins
+5. Remove fixing screws from MOS body on heatsink
+6. Remove insulating sheet between MOS body and heatsink (replace with new one on reinstall)
+7. Install same-model MOS only; apply thermal paste spec 2500 between body and heatsink
+8. Solder leads; verify no short between drain/gate/source
+9. After reassembly: full circuit short-check before applying AC voltage
+
+### Cleaning / inspection
+
+1. Use isopropyl alcohol (IPA) + small brush to clean PCB (especially solder side)
+2. Remove gray silicon compound covering wire solder joints before inspection
+3. Silicon compound on thick black wires = high-current DC output bonds — critical solder points
+4. Inspect film capacitors (DAIN yellow), electrolytics (450 V primary, 25–35 V secondary) for bulging
+5. Re-apply 704 silicone to cover after repair if original potting was disturbed
+
+---
+
+## Image Reference
+
+### Main APW12 Guide Images
+
+| # | Description | Local file |
+|---|-------------|------------|
+| 1 | Outline drawing — dual C14 inputs, 3-fan face, ~254.6×245×64 mm; output end: M4 lug pattern, 4-pin header (GND/EN/SCL/SDA), 6-pin ATX_2X3 | [16279616285583875.jpg](../sources/apw12_repair_guide/images/202108/16279616285583875.jpg) |
+| 2 | Internal photo — dual DC busbars, 6-pin aux connector, I2C communication port, airflow arrows, grounded chassis | [16279616506154066.jpg](../sources/apw12_repair_guide/images/202108/16279616506154066.jpg) |
+| 3 | 6-pin PCIe-style output connector — pins 1–3 yellow (+12 V); pins 4–6 black (return) | [16279617412997281.jpg](../sources/apw12_repair_guide/images/202108/16279617412997281.jpg) |
+| 4 | Electrical spec table — OUT1: 12–15 V / 240 A / 3600 W; OUT2: 12.3 V / 15 A; OCP ~291–350 A; UVLO ~80–89 Vac; 250×249×62.2 mm / ~3.8 kg | [16279618932109037.jpg](../sources/apw12_repair_guide/images/202108/16279618932109037.jpg) |
+| 5 | Block diagram — AC1+AC2 → EMI → Rectifier → PFC → VBUS filter → LLC step-down → Sync Rectification → 14.5–21 V main out; SB path → 12 V aux; PIC MCU; PWM Isolated drivers; feedback; fan 12 V | [16279619261096097.jpg](../sources/apw12_repair_guide/images/202108/16279619261096097.jpg) |
+| 6 | Detailed block diagram — Main 12–15 V + 12 V SB aux; AC1/AC2 → PFC → PWM → DC/DC; Drive IC + PIC IC; rectified output heavy copper traces | [16279619384501173.jpg](../sources/apw12_repair_guide/images/202108/16279619384501173.jpg) |
+| 7 | PCB overview — 3 cooling fans; green PCB; 4× large electrolytics; toroidal inductors (EMI/PFC); aluminum heatsinks; copper busbars; daughter boards | [16279620522193219.jpg](../sources/apw12_repair_guide/images/202108/16279620522193219.jpg) |
+| 8 | AC → PFC partial schematic — F1 16 A; D2 GBJ2506; NTC pair + K1 relay; U1 NCP1654; Q4 TK20N60W; D3 SiC diode; R15 5 mΩ; PC817 optocouplers; TEST1–TEST6 | [16279621082456342.jpg](../sources/apw12_repair_guide/images/202108/16279621082456342.jpg) |
+| 9 | Second PFC stage — F1 16 A; L5/L6 (3R1350W-L11.3); U17 GBU2510 bridge; Q6 TK31N60W MOSFET; D17 SCS210AMC SiC; NTC6/NTC7 (MF72-10D15); D23 ZTL431BFTA; PC817; U18 PFC controller on +12V_1; signals: PWM/RELAY_1/ON_OFF_DC-DC_1; TEST21–TEST36 | [16279621241877363.jpg](../sources/apw12_repair_guide/images/202108/16279621241877363.jpg) |
+| 10 | SB converter schematic — U27 ICE2QR4765; T1 EE16_4+6; +12V1/+12V2 outputs; TEST13 (+12V1) and TEST15 (+12V2); U4 PC817 + U6 ZTL431BFTA feedback; R37 2.7 Ω CS; C31 220µF/25V (+12V2); C29 220µF/25V (+12V1); snubber R71/C48/D9; D2/D12 ES1J; C74 10µF + C75 1µF VCC | [16279621416077024.jpg](../sources/apw12_repair_guide/images/202108/16279621416077024.jpg) |
+| 11 | (Use mirror HTML for this figure) | [16279621876812971.jpg](../sources/apw12_repair_guide/images/202108/16279621876812971.jpg) |
+| 12 | (Use mirror HTML for this figure) | [16279621987968183.jpg](../sources/apw12_repair_guide/images/202108/16279621987968183.jpg) |
+| 13 | ON/OFF control — U4/U15 PC817 optocouplers; Q3 MMBT3906 PNP; +12V3 supply → VCC-FAN7688; ON/OFF DC-DC_1/2 control signals; R20/R49/R21/R79/R81 = 5.1 kΩ each; R22 = 1.69 kΩ; C26 100nF/50V; C21/C76 1µF; U15 pin 3 = EN; optocouplers on +12V1_1 / +12V1_2 | [16279622278816328.jpg](../sources/apw12_repair_guide/images/202108/16279622278816328.jpg) |
+| 14 | LLC controller (FAN7688 U22) — U20/U24/U26/U28 TLP5772 gate photocouplers; Q11/Q23/Q24/Q26 MMBT3906 discharge PNPs; +12V1/+12V2 supply; R56 130 kΩ (FMIN); R94 316 kΩ (CS); C149/C150 220µF/25V; DRVL_1/DRVH_1/DRVH_2/DRVL_2 outputs; 5VB to VFB(1)/VDD(2); R63/R165/R170/R176 = 51 Ω gate protection; R175 10 Ω VCC | [16279622552940977.jpg](../sources/apw12_repair_guide/images/202108/16279622552940977.jpg) |
+| 15 | LLC primary + SR schematic — Q14/Q15/Q21/Q22 TK31N60W5 primary; T3/T6 PQ5050 transformers; Q17/Q18/Q25/Q26 TPH4R10ANH SR FETs; L8/L9 400µH; snubber C146/C148/C168/C171 1nF/1kV; primary caps C52/C57/C152/C167 630V; output bank 150µF/35V; R166/R180 10Ω gate; DRVH1/DRVL1/DRVH2/DRVL2; OUT+ and GND-OUT | [16279624557125120.jpg](../sources/apw12_repair_guide/images/202108/16279624557125120.jpg) |
+| 16 | SR gate driver (IX4340 U25) — SROUT1/SROUT2 inputs via D30/D34; R190/R191 200Ω; OUTA(7)/OUTB(5); DSS4540X/DSS5540X transistors; +12VOUT/−3VOUT/GND-OUT supply; R192 10Ω; R214/R215 10Ω; R188/R193 1kΩ; C63/C185/C191 1µF/25V; SR1_1/SR1_2/SR2_1/SR2_2 outputs | [16279624809715697.jpg](../sources/apw12_repair_guide/images/202108/16279624809715697.jpg) |
+| 17 | (Use mirror HTML for this figure) | [16279624978293654.jpg](../sources/apw12_repair_guide/images/202108/16279624978293654.jpg) |
+| 18 | (Use mirror HTML for this figure) | [16279625112474195.jpg](../sources/apw12_repair_guide/images/202108/16279625112474195.jpg) |
+| 19 | PCB overview map — fuses F1/F2/F3/F4; inductors L1/L2/L3/L4/L7/L10/L11/L18/L19; ICs U3/U4/U5/U6/U7/U9/U10/U11/U13/U15; large filter caps C27/C28/C34/C35; Z-mark chokes top-left; right-side SMD test point cluster | [16279625435882154.jpg](../sources/apw12_repair_guide/images/202108/16279625435882154.jpg) |
+| 20 | Output connector detail — OUT-14.5-21V (main adjustable); OUT-GND; 4-pin control: SDA/SCL/EN/GND; ATX_2X3 +12V / GND | [16279625732283033.jpg](../sources/apw12_repair_guide/images/202108/16279625732283033.jpg) |
+| 21 | (Use mirror HTML for this figure) | [16279626852314344.jpg](../sources/apw12_repair_guide/images/202108/16279626852314344.jpg) |
+
+### 1215A Manual Images
+
+| # | Description | Local file |
+|---|-------------|------------|
+| 1 | 1215A product callouts — 3× 60 mm fans (intake); both AC inputs required; MCU programming port; positive/negative bus lugs; I2C + SB aux 4-pin headers | [17685445953712629.jpg](../sources/apw12_1215a_manual/images/202601/17685445953712629.jpg) |
+| 2 | PCB zones — low voltage area (left, thick copper traces); high voltage area (right); isolation gap; board ID "03"; SMD on solder side | [17685446259205793.jpg](../sources/apw12_1215a_manual/images/202601/17685446259205793.jpg) |
+| 3 | Component layout photo — PFC MCU; SB supply (top); PWM controller; output+comms MCU; 2× main transformers; main output interface; SR/PWM/PFC heatsinks; 2× bridge rectifiers; 2× PFC inductors | [17685447543877698.jpg](../sources/apw12_1215a_manual/images/202601/17685447543877698.jpg) |
+| 4 | Functional block diagram — dual AC → EMI → Rectify → PFC Boost → OVP/UVP → PWM → Power Conversion → Sync Rectification → DC Out; SB path; PWM feedback loops: OTP/SCP/voltage reg/sampling/OCP/OPP | [17685447763271665.jpg](../sources/apw12_1215a_manual/images/202601/17685447763271665.jpg) |
+| 5 | Main stage collage — Fpwm annotations 450 kHz–1 MHz and 400 kHz–2 MHz; V-in and sensing strip; use with scope to confirm oscillation before swapping FETs | [17685448046236326.jpg](../sources/apw12_1215a_manual/images/202601/17685448046236326.jpg) |
+| 6 | Schematic file reference — KJ-P023_SCH.PDF (schematic part number) | [17685449834079984.jpg](../sources/apw12_1215a_manual/images/202601/17685449834079984.jpg) |
+| 7 | Required tools — diagonal cutting pliers; long-nose pliers; desoldering pump (blue); screwdriver (red handle); Fluke 17B+ multimeter showing O.L on MΩ range | [17685455718935118.jpg](../sources/apw12_1215a_manual/images/202601/17685455718935118.jpg) |
+| 8 | Soldering iron settings — Left unit (KOTEBONK KT-120, ESD safe, lead-free): constant temp 380±10 °C, reading 390; Right unit: high-temp 400±10 °C, reading 400; CAL port; red Power switch | [17685456155859083.jpg](../sources/apw12_1215a_manual/images/202601/17685456155859083.jpg) |
+| 9 | SB output indicator — green LED = standby active; control connector beside LED; main output indicator (green, far right of front panel); metal chassis; busbars on left | [17685456604312070.jpg](../sources/apw12_1215a_manual/images/202601/17685456604312070.jpg) |
+| 10 | IIC enable switch — 4-wire cable (blue/brown/green/white) to side-panel 4-pin header; main output indicator light (green from vent slots); IIC interface enable switch label | [17685457209345320.jpg](../sources/apw12_1215a_manual/images/202601/17685457209345320.jpg) |
+| 11 | IIC test fixture (ZJ0001000001) — POWER TEST v2.0; APW12 v0.1; Total Step 4; voltage range 11.89–15.12 V; rocker switch + green button; VR2 on PCB | [17685457529228178.jpg](../sources/apw12_1215a_manual/images/202601/17685457529228178.jpg) |
+| 12 | Shell disassembly — 6 screws (3 top + 3 bottom); 5 PCB mount screws (red circles); PCB label "ALPHA MINER"; transformer "LC 2201 30330029"; dual fans; solid caps on secondary; 4× large primary electrolytics | [17685457874434293.jpg](../sources/apw12_1215a_manual/images/202601/17685457874434293.jpg) |
+| 13 | Internal detail — MOSFETs on aluminum heatsink with white thermal paste; toroidal inductors with thick copper; DAIN yellow film caps (EMI/PFC); transformer "L12201 30330020"; 450 V electrolytics (primary); small heatsink for switching component | [17685458189165281.jpg](../sources/apw12_1215a_manual/images/202601/17685458189165281.jpg) |
+| 14 | PCB top + bottom views — primary filtering caps top; transformer "32201 0330020"; 4× solder-side SMD inspection areas; 4× component-side control IC areas; inductor heatsinks | [17685459695807722.jpg](../sources/apw12_1215a_manual/images/202601/17685459695807722.jpg) |
+| 15 | DMM measurement guide — Output terminal resistance: 0.0 Ω = short (fail), 0.712 kΩ = normal; Primary MOSFET diode: 0.000 = short (fail), 0.397 = good; Fuse: 0.000 = good (conductive), OL = blown; Bridge rectifier diode: all 4 pins, 0.000 = short, 0.472 = normal | [17685459965649931.jpg](../sources/apw12_1215a_manual/images/202601/17685459965649931.jpg) |
+| 16 | Key voltage checkpoints — VBUS cap: 400–450 V (reading 426.1 V); Primary VCC: 13–15 V (readings 13.35 V / 13.33 V) → PFC+PWM supply; relay closes after startup; Totem-pole PWM FET starts after VCC stable; secondary: 12.50 V DC; logic: 3.304 V DC | [17685460354209074.jpg](../sources/apw12_1215a_manual/images/202601/17685460354209074.jpg) |
+| 17 | Silicon removal — screwdriver removes gray potting from thick black wire solder joints; film cap C65; electrolytic C13; daughter board on heatsink | [17685460687268904.jpg](../sources/apw12_1215a_manual/images/202601/17685460687268904.jpg) |
+| 18 | Desoldering procedure — left hand holds pump body; right thumb presses switch; constant-temp iron melts solder; pump tip over MOS pins after full melt; targets R127/R129/R125/R123/R153/R166/D34; goal = clean through-holes | [17685460954560911.jpg](../sources/apw12_1215a_manual/images/202601/17685460954560911.jpg) |
+| 19 | MOS removal — screwdriver to unfasten from heatsink; insulating sheet between MOS and heatsink (prevents arcing); replace with same-model only; 4 power transistors in row on pink insulating layer; white thermal compound at pin base | [17685461208339109.jpg](../sources/apw12_1215a_manual/images/202601/17685461208339109.jpg) |
+| 20 | Solder-side inspection — through-hole pads in red frame (desoldering evidence); gray potting compound over connections; large electrolytics; SMD FETs below pads; aluminum heatsinks; yellow-taped HF inductor; thick black DC output wires | [17685461469383909.jpg](../sources/apw12_1215a_manual/images/202601/17685461469383909.jpg) |
+| 21 | PCB cleaning — IPA + small brush on solder side; large electrolytics; aluminum heatsink; manual solder touch-up on copper traces; thick black DC output wires near heatsink | [17685461705757322.jpg](../sources/apw12_1215a_manual/images/202601/17685461705757322.jpg) |
+| 22 | IIC test run — POWER TEST v2.0; APW12 v0.1; Step 2/4: 15.12 V OK ON; Step 4/4: 14.87 V OK ON; main screen 11.89 V + 15.12 V; ribbon cable between fixture and PSU board; I/O switch + green step button | [17685462136087736.jpg](../sources/apw12_1215a_manual/images/202601/17685462136087736.jpg) |
+| 23 | Shell reassembly — 6 screws; 5 PCB screws; PCB label "ALPHA MINER"; fan connector callout; 3 fans; 2 main transformers; 4 primary electrolytics in 2+2 groups; solid caps at output | [17685462396865293.jpg](../sources/apw12_1215a_manual/images/202601/17685462396865293.jpg) |
+| 24 | Final test — connect IIC interface → power switch ON → all output LEDs green → multimeter on busbars reads 15.00 V DC (confirmed in photo) | [17685475653581205.jpg](../sources/apw12_1215a_manual/images/202601/17685475653581205.jpg) |
+
+---
+
+## Local Mirrors & Sources
+
+| Source | Location |
+|--------|----------|
+| APW12 main guide HTML | [sources/apw12_repair_guide/index.html](../sources/apw12_repair_guide/index.html) · [manifest.json](../sources/apw12_repair_guide/manifest.json) |
+| APW12 1215A supplement HTML | [sources/apw12_1215a_manual/index.html](../sources/apw12_1215a_manual/index.html) · [manifest.json](../sources/apw12_1215a_manual/manifest.json) |
+
+Regenerate: `python scripts/fetch_zeus_kb_source.py apw12_repair_guide apw12_1215a_manual`
+
+**Online references:**
+- Main guide: https://www.zeusbtc.com/manuals/Antminer-APW12-Power-Supply-Repair-Guide.asp
+- 1215A manual: https://www.zeusbtc.com/manuals/5869-antminer-apw121215a-miner-power-supply-repair-manual
+
+---
+
+## Checklist Before Starting
+
+- [ ] Correct APW12 version identified — match to miner model before purchase/use
 - [ ] Both AC inputs confirmed available for simultaneous connection
-- [ ] Large capacitors discharged (< 5V measured before touching)
-- [ ] AC voltage regulator (200–250V) OR 100W safety bulb setup ready
+- [ ] Large capacitors discharged (< 5 V measured before touching internal components)
+- [ ] AC voltage regulator (200–250 V) OR 100 W safety bulb setup ready
 - [ ] ESD mat + wrist strap + grounded workspace
-- [ ] Electronic load OR resistive load ready
+- [ ] Electronic load (3.6 kW) OR resistive load ready
 - [ ] Multimeter calibrated
-- [ ] Oscilloscope available
-- [ ] Soldering iron 80W+ (pointed tip + knife tip)
-- [ ] Heat gun calibrated to 260°C ±2°C
-- [ ] MOSFETs + PWM ICs in stock
-- [ ] Thermal paste (2500 spec) + 704 silicone available
+- [ ] Oscilloscope available (confirm Fpwm ~450 kHz–1 MHz at PWM gates)
+- [ ] Soldering iron 80 W+ (pointed tip + knife tip)
+- [ ] Heat gun calibrated to 260 °C ±2 °C
+- [ ] MOSFETs (TK31N60W / TK31N60W5 / TPH4R10ANH) + PWM ICs in stock
+- [ ] Thermal paste spec 2500 + 704 silicone available
 - [ ] Flux + lead-free solder wire + IPA for cleaning
+- [ ] IIC test fixture (ZJ0001000001 or V9 1.2) with APW12 test firmware

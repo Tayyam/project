@@ -4,108 +4,122 @@
 
 ---
 
-## REPAIR FILE 4 — Whatsminer M30/M50 Test Fixture Tutorial
+## Scope & Quick Reference
 
-**Reference:** [Tutorial on Whatsminer M30 M50 test fixture (Zeus blog)](https://www.zeusbtc.com/blog/details/5314-tutorial-on-whatsminer-m30-m50-test-fixture-to-test-hash-board-asic-chip-failure)
+| Field | Value |
+|-------|-------|
+| Component | Whatsminer hashboard test fixture (standalone bench tool) |
+| Fixture model | CB4-V10 H6OS control board |
+| Compatible miners | M30S, M30S+, M31S, M32, M50, M50S+, M50S++ (air-cooled only — not hydro) |
+| Family support | M20 / M30 / M50 / M60 hookup pattern identical |
+| Fixture IP (fixed) | 192.168.2.22 |
+| PSU for hashboard | 13 V / 31 A adjustable |
+| PSU for fixture | 12 V (separate) |
+| SSH user | root (no password prompt on first connect in BusyBox ash) |
+| Key commands | `test-readchipid` (quick, no heatsink) · `test-hashboard` (full, heatsinks + fan required) |
 
-### Local mirror (offline)
+**Cross-references:**
+- Hashboard repair: [FILE 2 — Whatsminer M30S/M31S/M32 Hashboard](repair_whatsminer_m30s_hashboard.md)
+- Troubleshooting hub: [FILE 3 — Whatsminer M30/M50 Hub](repair_whatsminer_m30_m50_hub.md)
+- Control board: [FILE 6 — Whatsminer Control Board](repair_whatsminer_control_board.md)
 
-- [sources/whatsminer_m30_m50_test_fixture/index.html](../sources/whatsminer_m30_m50_test_fixture/index.html)
-- [manifest.json](../sources/whatsminer_m30_m50_test_fixture/manifest.json)
-- Regenerate: `python scripts/fetch_zeus_kb_source.py whatsminer_m30_m50_test_fixture`
+---
 
-### Mirrored tutorial images (document order)
+## Hardware Overview
 
-| # | Local file |
-|---|------------|
-| 1 | [17222430368863295.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430368863295.jpg) |
-| 2 | [17222430189805372.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430189805372.jpg) |
-| 3 | [17222430248389372.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430248389372.jpg) |
-| 4 | [17222430111046933.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430111046933.jpg) |
-| 5 | [17222430052995634.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430052995634.jpg) |
-| 6 | [17301052498697813.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202410/17301052498697813.jpg) |
-| 7 | [17222429993903516.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429993903516.jpg) |
-| 8 | [17222429925141401.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429925141401.jpg) |
-| 9 | [17222429653262052.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429653262052.jpg) |
-| 10 | [17222429699407942.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429699407942.jpg) |
-| 11 | [17222429753724576.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429753724576.jpg) |
-| 12 | [17222429844302595.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429844302595.jpg) |
-| 13 | [17222429569221174.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429569221174.jpg) |
-| 14 | [17222429214975507.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429214975507.jpg) |
-| 15 | [17222429034401746.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429034401746.jpg) |
+**Kit contents:**
+- CB4-V10 H6OS main control board (RJ45, MicroSD, fan/sensor headers, SK Hynix flash)
+- M20/M30/M50 adapter board (silk: REV:2 / CB2-V1-A)
+- 22P ribbon signal cable
+- 14P test fixture cable
 
-### Test fixture specs
+**CB4-V10 indicators:**
+- Red + green LEDs flash together → fixture ready to accept commands
+- Green power LED steady → board powered
+- RJ45 link/ACT LEDs → Ethernet connected
 
-- Main board: **CB4-V10 H6OS** control board  
-- Cables: Whatsminer **22p** ribbon signal cable + **14p** test fixture cable + **M30/M50 adapter** board  
-- Product page: [Whatsminer M30 M50 test fixture (Zeus shop)](https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3194)  
-- Compatible: **M30S, M30S+, M31S, M32, M50, M50S+, M50S++** (**air-cooled** — not hydro)  
-- **M20 / M30 / M50 / M60** families can follow the same hookup pattern per Zeus (example in article uses **M50** board)
+**First-use FPGA update (mandatory before first test):**
+1. Download the Whatsminer SD card FPGA update package for CB4-V10
+2. Write to MicroSD card (FAT32), insert into CB4-V10 slot
+3. Power on fixture → wait for update sequence (~1 min) → LED pattern changes on completion
+4. Remove SD card; fixture is now ready for use
+5. If FPGA is NOT updated: fixture may falsely report a specific chip bad every run
 
-### Local image / screenshot callouts
+---
 
-Mirrored JPEGs and [index.html](../sources/whatsminer_m30_m50_test_fixture/index.html); numbers match the table above. Supplements below were distilled from a one-time vision pass — **confirm** labels and numbers on your mirror before relying on them in the field.
+## Tools Required
 
-- **Image 1** ([17222430368863295.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430368863295.jpg)): Annotated kit — **CB4-V10 H6OS** main, **M20 / M30 / M50** adapter, **22P** ribbon, **14P** harness. Adapter silk **REV:2** / **CB2-V1-A**; main board shows **RJ45**, **MicroSD**, fan/sensor headers, and a **black heatsink** over the main SoC. *(Vision: small regulator voltages not readable at this distance.)*
-- **Image 2** ([17222430189805372.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430189805372.jpg)): Powered **CB4_V10** — **SK Hynix** flash, **MicroSD**, **RJ45** with green/yellow LEDs, **flat ribbon** data path, **4-pin** red/black DC input, **electrolytics** near regulators, green power LED on a daughter area. *(Disregard vision guesses tying this board to Antminer S17/T17 — Zeus tutorial context is **Whatsminer**.)*
-- **Image 3** ([17222430248389372.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430248389372.jpg)): Bench photo: one bench supply reads **~14.10 V / 31.00 A** and a **UNI-T** meter **~12.32 V / 0.111 A / ~1.37 W** in-frame — **illustration only**; still set your supply per Zeus (**13 V / 31 A**). **Alligator clips** to hash rails, **ribbon** to hash data, laptop shows a terminal log. Background **BITMAIN** PSU is incidental.
-- **Image 4** ([17222430111046933.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430111046933.jpg)): When the PC has **no built-in Ethernet**, the article circles a small **white RJ45 dongle** with **three status LEDs** and **red/black** DC pigtail feeding it; blue patch leads to an interface PCB with **SMD passives**. **ZEUS MINING** watermark on tutorial.
-- **Image 5** ([17222430052995634.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430052995634.jpg)): **CB4_V10** with **PCB date 20200823**, **SK hynix** flash, **ribbon** to green adapter, **red + green** LEDs steady together while **RJ45** link/ACT lit — can be **boot** or **fault**; confirm via SSH/UI per tutorial. *(Vision: simultaneous R/G may need log correlation.)*
-- **Image 6** ([17301052498697813.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202410/17301052498697813.jpg)): MobaXterm shell — **Session** (red outline) opens new connections; sidebar **Saved sessions**; toolbar **MultiExec**, **Tunneling**, **Tools** (e.g. network scanner), **Start local terminal**.
-- **Image 7** ([17222429993903516.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429993903516.jpg)): **Session → SSH**: steps **1→5** end with **OK**; fields **192.168.2.22**, user **root**, port **22**. Password prompt appears **after** OK in practice.
-- **Image 8** ([17222429925141401.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429925141401.jpg)): Open session — MobaXterm **v10.2**, **BusyBox ash**, host **WhatsMiner_0724**, **`xauth` not found**, SSH compression off, X11 forwarding on; **`/root/`** holds **`boot0_nand.fex`**, **`boot0_sdcard.fex`**, **`kernel.fex`**, **`env.fex`**, **`boot_updater`**. Use `get_info` if you need exact miner model string.
-- **Image 9** ([17222429653262052.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429653262052.jpg)): Windows **Settings → Network & Internet** (Chinese UI) — entry path toward adapter pages for static IP.
-- **Image 10** ([17222429699407942.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429699407942.jpg)): **Ethernet** settings → **Change adapter options**; screenshot shows **Unidentified network / No Internet** until you assign a manual **192.168.2.x** host address.
-- **Image 11** ([17222429753724576.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429753724576.jpg)): Adapter right-click → **Properties**; **Realtek** NIC; shield icon ⇒ admin action. Other menu entries include disable / diagnose / status (Chinese labels).
-- **Image 12** ([17222429844302595.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429844302595.jpg)): **Ethernet properties** — select **Internet Protocol Version 4 (TCP/IPv4)** → **Properties** (shows **Realtek USB FE Family Controller** path).
-- **Image 13** ([17222429569221174.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429569221174.jpg)): Example static host **IP `192.168.2.236`**, **mask `255.255.255.0`**, **gateway `192.168.2.1`**, **preferred DNS `114.114.114.114`**, **alternate DNS** blank, **validate settings on exit** checked — stay on **`192.168.2.0/24`** with any free address **other than `.22`** (the fixture).
-- **Image 14** ([17222429214975507.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429214975507.jpg)): Same SSH context as image 8 with **`test-readchipid`** typed at prompt; **`xauth`**, compression, and **`/root/*.fex`** notes apply. Output not visible in still — run on live fixture.
-- **Image 15** ([17222429034401746.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429034401746.jpg)): Example **PASS** transcript for **M50 VH95**: `probe chip_id: 0x1968, count: 117/117`, firmware line (compare to your screenshot — string varies by article revision, e.g. **`20230518.18.BT1`** in mirror), **`Chip_info`** / **`chip data len`** / EEPROM **`tag`** fields, **`Error_code`** empty on pass, **`PASS`**, GPIO note `set reset pin 197 to 0`. Epoch-style timestamps in captures are often **unset RTC**, not test time.
+| Tool | Spec |
+|------|------|
+| Whatsminer test fixture | CB4-V10 H6OS + adapter + 22P + 14P cables |
+| Adjustable DC PSU | 31 A / 13 V for hashboard rails |
+| Ethernet cable | Direct PC ↔ fixture (no router — avoids IP conflicts) |
+| Computer | With Ethernet port (or USB–Ethernet dongle) |
+| Heatsinks + fan | Required for `test-hashboard` only |
+| MobaXterm or any SSH client | v10.2+ recommended |
 
-### Required tools
+---
 
-- Whatsminer test jig (CB4-V10)  
-- Ethernet cable (**direct PC ↔ fixture**; no router — avoids IP conflicts)  
-- Computer with **Ethernet** (or **USB–Ethernet adapter** — shown in tutorial photos)  
-- Adjustable PSU **31 A / 13 V** for hashboard rails  
-- Hash board under test  
+## Bench Setup & Power Sequence
 
-### Step-by-step (aligned with Zeus)
+**Cable connection order (ON — follow exactly every board swap):**
+1. Connect 12 V power to test fixture
+2. Set adjustable supply to 13 V / 31 A limit
+3. Connect PSU +/− to hashboard (power path)
+4. Connect Ethernet to fixture
+5. **Last:** connect data cable (22P ribbon) between hashboard and fixture
 
-**1 — PSU and cabling**
+**Disconnect order (OFF — reverse):**
+1. **First:** unplug data cable (22P ribbon)
+2. Remove PSU leads from hashboard
+3. Remove fixture power
 
-- Set adjustable supply to **31 A** limit and **13 V**.  
-- Connect **12 V** power to the **test fixture**; plug in **Ethernet** to fixture.  
-- Connect PSU **+ / −** to the **hash board**.  
-- Last, connect **data cable** between hash board and fixture.  
+> **Why:** connecting data before power or removing power before data can damage level-shifter ICs on the hashboard.
 
-**Power sequence (every board swap):**
+---
 
-- **ON:** fixture/hash power path first → then **data** cable last (article: power cord first, then data).  
-- **OFF:** **unplug data first** → then remove power.  
+## PC Network Configuration
 
-**2 — Ready state**
+The fixture has a fixed IP of **192.168.2.22**. Your PC must be on the same subnet.
 
-- When **red and green** LEDs on CB4-V10 **flash together**, the fixture is ready to accept commands.  
+**Windows (images 9–13 in local mirror):**
+1. Settings → Network & Internet → Change adapter options
+2. Right-click the Ethernet adapter → Properties
+3. Select **Internet Protocol Version 4 (TCP/IPv4)** → Properties
+4. Set manually:
+   - IP: `192.168.2.236` (any free address except `.22`)
+   - Subnet: `255.255.255.0`
+   - Gateway: `192.168.2.1`
+   - DNS: `114.114.114.114`
+5. Check "Validate settings on exit" → OK
 
-**3 — PC IP configuration**
+> PC does not need Internet access for the test link.
 
-- Open **Network Settings** → adapter used for the fixture → **IPv4** manual address on the **same subnet** as the jig (**192.168.2.22** fixed on fixture — screenshots in local images **7–8**).  
+---
 
-**4 — MobaXterm SSH**
+## SSH Access — MobaXterm Steps
 
-- New **Session** → **SSH** → Host **192.168.2.22**, user **root** → OK.  
-- Successful shell = link OK (see tutorial images).  
+1. Open MobaXterm → **Session** (red outline top-left)
+2. Select **SSH**
+3. Fill in:
+   - Host: `192.168.2.22`
+   - User: `root`
+   - Port: `22`
+4. Click OK → shell opens as `WhatsMiner_XXXX` (BusyBox ash)
+5. `/root/` contains: `boot0_nand.fex`, `boot0_sdcard.fex`, `kernel.fex`, `env.fex`, `boot_updater`
+6. Run `get_info` to confirm exact miner model string
 
-**5 — Commands**
+---
+
+## Commands
 
 ```bash
-# RST low (~0 V) — reset failures
+# Drive RST low (~0 V) — use when reset failures occur
 echo 0 > /sys/class/gpio/gpio99/value
-# or
+# or (alternate GPIO)
 echo 0 > /sys/class/gpio/gpio197/value
 
-# RST high (~1.8 V)
+# Drive RST high (~1.8 V)
 echo 1 > /sys/class/gpio/gpio99/value
 # or
 echo 1 > /sys/class/gpio/gpio197/value
@@ -113,32 +127,75 @@ echo 1 > /sys/class/gpio/gpio197/value
 # Reboot fixture control board
 reboot
 
-# Chip count only (no heatsink required)
+# Chip count only — no heatsink required
 test-readchipid
 
-# Full performance test — heatsinks + fan mandatory
+# Full performance test — REQUIRES both heatsinks + fan
 test-hashboard
 ```
 
-### Important notes
+**Expected PASS output for `test-readchipid` (M50 VH95 example):**
+```
+probe chip_id: 0x1968, count: 117/117
+... Chip_info / chip data len / EEPROM tag fields ...
+Error_code: (empty)
+PASS
+set reset pin 197 to 0
+```
+> Note: epoch-style timestamps in captures are often unset RTC — not the actual test time.
 
-- `test-readchipid` — **no** heatsink required; quick ASIC enumeration.  
-- `test-hashboard` — **upper + lower** heatsinks and **fan** required or board will **overheat**.  
-- **First use:** update **FPGA** on CB4-V10 via **SD card** program (same family of process as other Zeus fixture docs).  
-- PC **does not** need Internet for the test link.  
-- Embedded **YouTube** walkthrough on live page: `https://www.youtube.com/embed/7TCDMZMmSkA` (not stored offline).  
+---
 
-### Checklist before starting
+## Important Notes
 
-- [ ] CB4-V10 + **M30/M50** test firmware on SD; **FPGA** updated if new fixture  
-- [ ] PSU at **13 V / 31 A**  
-- [ ] **Direct** Ethernet to laptop (or USB–Ethernet dongle)  
-- [ ] Static IP on PC subnet matching **192.168.2.22**  
-- [ ] MobaXterm / SSH ready  
-- [ ] For `test-hashboard`: **both** heatsinks + **fan**  
-- [ ] Power **on/off** order followed on every swap  
-</think>
+- `test-readchipid` — no heatsink required; fast ASIC enumeration only
+- `test-hashboard` — both upper and lower heatsinks **and** a fan are mandatory or board will overheat and give false failures
+- PC does not need Internet for the test link
+- If using a USB–Ethernet dongle: same subnet setup applies (dongle shown in image 4 of local mirror)
+- Embedded YouTube walkthrough (online only): `https://www.youtube.com/embed/7TCDMZMmSkA`
 
+---
 
-<｜tool▁calls▁begin｜><｜tool▁call▁begin｜>
-StrReplace
+## Image Reference
+
+| # | Description | Local file |
+|---|-------------|------------|
+| 1 | Annotated kit — CB4-V10, M20/M30/M50 adapter, 22P ribbon, 14P harness | [17222430368863295.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430368863295.jpg) |
+| 2 | Powered CB4_V10 — SK Hynix flash, RJ45, ribbon, green power LED | [17222430189805372.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430189805372.jpg) |
+| 3 | Bench wiring — PSU reads ~14.10 V / 31 A; UNI-T meter ~12.32 V for fixture; alligator clips on hash rails | [17222430248389372.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430248389372.jpg) |
+| 4 | USB–Ethernet dongle hookup for PC without built-in Ethernet | [17222430111046933.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430111046933.jpg) |
+| 5 | CB4_V10 PCB date 20200823 — red + green LEDs steady, RJ45 active | [17222430052995634.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222430052995634.jpg) |
+| 6 | MobaXterm — Session button, Saved sessions sidebar, MultiExec/Tunneling/Tools toolbar | [17301052498697813.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202410/17301052498697813.jpg) |
+| 7 | MobaXterm SSH setup — IP 192.168.2.22, user root, port 22, steps 1–5 | [17222429993903516.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429993903516.jpg) |
+| 8 | Open SSH shell — BusyBox ash, /root/ file listing, xauth not found note | [17222429925141401.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429925141401.jpg) |
+| 9 | Windows Network & Internet settings (Chinese UI) — path to adapter settings | [17222429653262052.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429653262052.jpg) |
+| 10 | Ethernet → Change adapter options — Unidentified network before manual IP | [17222429699407942.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429699407942.jpg) |
+| 11 | Adapter right-click → Properties — Realtek NIC shown | [17222429753724576.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429753724576.jpg) |
+| 12 | Ethernet properties — select IPv4 → Properties (Realtek USB FE path) | [17222429844302595.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429844302595.jpg) |
+| 13 | Static IP form — 192.168.2.236 / 255.255.255.0 / GW 192.168.2.1 / DNS 114.114.114.114 | [17222429569221174.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429569221174.jpg) |
+| 14 | SSH shell with `test-readchipid` typed at prompt | [17222429214975507.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429214975507.jpg) |
+| 15 | PASS transcript — M50 VH95: 117/117 chips, Error_code empty, PASS, gpio197 reset | [17222429034401746.jpg](../sources/whatsminer_m30_m50_test_fixture/images/202407/17222429034401746.jpg) |
+
+---
+
+## Local Mirrors & Sources
+
+| Source | Location |
+|--------|----------|
+| Tutorial HTML + images | [sources/whatsminer_m30_m50_test_fixture/index.html](../sources/whatsminer_m30_m50_test_fixture/index.html) |
+| Asset manifest | [manifest.json](../sources/whatsminer_m30_m50_test_fixture/manifest.json) |
+| Zeus shop product page | https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3194 |
+
+Regenerate: `python scripts/fetch_zeus_kb_source.py whatsminer_m30_m50_test_fixture`
+
+---
+
+## Checklist Before Starting
+
+- [ ] CB4-V10 + M30/M50 test firmware on SD; **FPGA updated** if new fixture
+- [ ] PSU at **13 V / 31 A**
+- [ ] **Direct** Ethernet to laptop (or USB–Ethernet dongle on **192.168.2.x** subnet)
+- [ ] Static IP on PC — any address on **192.168.2.0/24** except `.22`
+- [ ] MobaXterm / SSH client ready
+- [ ] For `test-hashboard`: **both** heatsinks + **fan** mounted
+- [ ] Power **on/off** order followed on every board swap
