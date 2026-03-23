@@ -35,6 +35,12 @@ function computeImportQuarterlyPlan(data) {
     };
   });
 
+  rows.sort((a, b) => {
+    const d = b.quarterUSD - a.quarterUSD;
+    if (d !== 0) return d;
+    return String(a.name).localeCompare(String(b.name), "ar");
+  });
+
   const totalQuarterlyUSD = rows.reduce((sum, r) => sum + r.quarterUSD, 0);
   return { rows, totalQuarterlyUSD, loadFactor };
 }
@@ -193,6 +199,7 @@ main.insertAdjacentHTML('beforeend', `
   <div class="card" style="margin-bottom:20px">
     <p style="color:var(--text-muted);font-size:.88rem;line-height:1.85;margin:0">${DATA.importedConsumablesQuarterly.note}</p>
     <p style="margin-top:8px;font-size:.8rem;color:#93c5fd">حجم العمل الحالي: ${DATA.monthlyVolume.totalOperations} عملية/شهر — عامل التحميل: ×${importQuarter.loadFactor.toFixed(2)}</p>
+    <p style="margin-top:6px;font-size:.75rem;color:var(--text-muted)">ترتيب الصفوف: <strong>الإجمالي الربع سنوي ($)</strong> من الأعلى → الأقل.</p>
   </div>
 
   <div class="table-wrap">
