@@ -1,13 +1,13 @@
 import { DATA } from './data.js';
 import { $, fmt, fmtUSD, fmtEGP } from './utils.js';
-import { purchaseImportRow, purchaseLocalRow, benchOrgRow } from './purchase-rows.js';
+import { purchaseImportRow, purchaseLocalRow } from './purchase-rows.js';
 import { mountSections } from './sections.js';
 import { initNavigation } from './nav.js';
 import { setupKnowledgeBase } from './kb.js';
 
 const main = $('mainContent');
 if (main) {
-  mountSections(main, DATA, { fmt, fmtUSD, fmtEGP }, { purchaseImportRow, purchaseLocalRow, benchOrgRow });
+  mountSections(main, DATA, { fmt, fmtUSD, fmtEGP }, { purchaseImportRow, purchaseLocalRow });
 }
 
 const modelTags = $('modelTagsContainer');

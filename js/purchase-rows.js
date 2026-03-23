@@ -53,20 +53,3 @@ export function purchaseLocalRow(item) {
       <td class="amber">${price}</td>
     </tr>`;
 }
-
-export function benchOrgRow(row) {
-  const tier = row.priorityTier || 'medium';
-  const priStyle = tier === 'must'
-    ? 'background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.45);color:#fca5a5'
-    : tier === 'high'
-    ? 'background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);color:#fcd34d'
-    : 'background:rgba(148,163,184,.1);border:1px solid rgba(148,163,184,.35);color:#cbd5e1';
-  return `
-    <tr>
-      <td style="font-weight:600;white-space:nowrap;font-size:.82rem;vertical-align:top">${row.category}</td>
-      <td style="font-weight:700;font-size:.86rem;vertical-align:top;max-width:200px">${row.tool}</td>
-      <td style="color:var(--text-muted);font-size:.8rem;line-height:1.65;vertical-align:top">${row.function}</td>
-      <td style="font-size:.78rem;color:var(--text-muted);vertical-align:top;max-width:200px">${row.where}</td>
-      <td style="vertical-align:top;white-space:nowrap"><span style="display:inline-block;padding:4px 10px;border-radius:20px;font-size:.72rem;font-weight:800;${priStyle}">${row.priority}</span></td>
-    </tr>`;
-}

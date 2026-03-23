@@ -1,4 +1,4 @@
-﻿export const DATA = {
+export const DATA = {
 
   models: [
     "Antminer S19 Series",
@@ -54,7 +54,7 @@
   },
 
   purchases: {
-    pageNote: "تقسيم منطقي: أصول ثابتة (مرة واحدة) → نوادر مستوردة (مخزون تخصصي) → العتبة/البستان (متجدد ومساعد). ⚠️ **فخ تقني:** FNIRSI DSO-TC3 ممتاز كـ *tester* للمكثف/الترانزستور، لكن في وضع السكوب عرض النطاق ~&lt;1 MHz — **لا يرى CLK ~25 MHz** على S19/M30؛ إلزامي شراء **أوسيلوسكوب مكتبي ≥100 MHz** (Rigol/Siglent من البستان/النخيلي).",
+    pageNote: "تقسيم منطقي: أصول ثابتة (مرة واحدة) → نوادر مستوردة (مخزون تخصصي) → العتبة/البستان (متجدد ومساعد). **تنظيم المعمل** (أدراج، علب ESD، حامل أدوات، ملصقات، إلخ) **مدمج في نفس الجداول** مع مصدر مصر / Zeus أو AliExpress وسعر تقديري. ⚠️ **فخ تقني:** FNIRSI DSO-TC3 ممتاز كـ *tester* للمكثف/الترانزستور، لكن في وضع السكوب عرض النطاق ~&lt;1 MHz — **لا يرى CLK ~25 MHz** على S19/M30؛ إلزامي شراء **أوسيلوسكوب مكتبي ≥100 MHz** (Rigol/Siglent من البستان/النخيلي).",
 
     fixedAssets: {
       title: "① قائمة الأصول — الاستثمار الثابت",
@@ -169,15 +169,22 @@
             { name: "سوار تفريغ كهروستاتيكي", model: "ESD Wrist Strap موصول أرضي مع المات", function: "الحصيرة وحدها لا تكفي — السوار إلزامي لتقليل تلف الـ ASIC من جسمك.", price: 150 },
             { name: "سنون ملتيميتر دقيقة", model: "Steel Needle Probes / حامل سن رفيع", function: "قياس بين رجلي شريحة ASIC والـ test points الضيقة — السن العادي يعمل قفلة.", price: 350 },
             { name: "قصدير لحام خالي من الرصاص", model: "Alpha أو Kester lead-free", function: "هاش S19 lead-free — خلط 60/40 في نقاط حساسة قد يسبب مشاكل توصيل حراري/موثوقية.", price: 900 },
-            { name: "منظف بورد مائي", model: "Board Wash / Aqueous flux cleaner", function: "بعد الشغل: أنظف من IPA وحده — يقلل بقايا بيضاء أحياناً مع الفلاكس.", price: 450 }
+            { name: "منظف بورد مائي", model: "Board Wash / Aqueous flux cleaner", function: "بعد الشغل: أنظف من IPA وحده — يقلل بقايا بيضاء أحياناً مع الفلاكس.", price: 450 },
+            { name: "حامل مفكات وملاقط", model: "Tool Rack / حامل رأسي — مول البستان أو محلات صيانة", function: "تنظيم الملاقط والمفكات رأسياً لحماية السنون وتوفير مساحة البنش.", price: 350 },
+            { name: "حصيرة سيليكون مغناطيسية", model: "Magnetic Heat-Insulation Mat — حماية سطح المكتب + تثبيت مسامير", function: "سيليكون مقاوم للحرارة مع مناطق مغناطيس للمسامير أثناء فك الجهاز؛ يحمي من الهوت إير.", price: 480 }
           ]
         },
         {
           sourceLabel: "📍 العتبة",
-          tableHint: "معدات مساعدة متوفرة محلياً",
+          tableHint: "معدات مساعدة + تنظيم مخزون وسير عمل (محلياً)",
           kind: "egp",
           items: [
-            { name: "غسالة ألتراسونيك", model: "Ultrasonic Cleaner سعة ~2L", function: "تنظيف نهائي للبوردة من الفلاكس والأوساخ بعد الشغل.", price: 2200 }
+            { name: "غسالة ألتراسونيك", model: "Ultrasonic Cleaner سعة ~2L", function: "تنظيف نهائي للبوردة من الفلاكس والأوساخ بعد الشغل.", price: 2200 },
+            { name: "وحدة أدراج بلاستيك", model: "40–60 درج — كماليات سيارات / محلات أدوات بالعتبة", function: "تخزين 0402 ومقاومات وترانزستورات وChips صغيرة مع تسمية القيم على كل درج.", price: 650 },
+            { name: "زجاجة مضخة للـ IPA", model: "Push-down Dispenser — محلات صيانة موبايل بالعتبة", function: "تقليل تبخر الكحول 99% وسحب كمية صغيرة بضغطة واحدة أثناء التنظيف.", price: 75 },
+            { name: "حقن فارغة بسن معدني", model: "علبة ~10 قطع — صيدليات / محلات صيانة", function: "تعبئة الفلاكس وتوزيع دقيق تحت الشريحة أو على الـ pads.", price: 45 },
+            { name: "صناديق بلاستيك ملونة (سير عمل)", model: "مجموعة ~6 صناديق — أدوات منزلية بالعتبة", function: "لون لكل حالة (مثلاً أحمر: انتظار / أخضر: جاهز) لتفادي خلط البوردات وقطع الغيار.", price: 220 },
+            { name: "مشابك تثبيت كابلات", model: "Silicone Adhesive Cable Clips — إكسسوارات كمبيوتر بالعتبة", function: "تثبيت كابلات PicoBT والباور على حافة المكتب وتقليل التشابك.", price: 95 }
           ]
         },
         {
@@ -185,7 +192,8 @@
           tableHint: "طلب سريع من المتاجر المحلية",
           kind: "egp",
           items: [
-            { name: "مفك كهربائي", model: "Xiaomi / Wowstick / مماثل", function: "فك وتركيب عشرات المسامير يومياً — يحمي المعصم.", price: 1000 }
+            { name: "مفك كهربائي", model: "Xiaomi / Wowstick / مماثل", function: "فك وتركيب عشرات المسامير يومياً — يحمي المعصم.", price: 1000 },
+            { name: "ماكينة طباعة ملصقات", model: "Label Maker — جرير / Amazon.eg / Noon (تقريباً)", function: "ملصقات لقيم المكونات على الأدراج وأكواد تتبع لكل بوردة.", price: 1850 }
           ]
         }
       ]
@@ -372,6 +380,17 @@
           url: "https://www.amazon.com/s?k=industrial+micro+sd+card+16gb",
           source: "Amazon / محلي",
           badge: "Recovery"
+        },
+        {
+          name: "علب تخزين Anti-static (ESD)",
+          model: "طقم علب موصولة / أدراج ESD للـ ASIC — Zeus غالباً لا يبيع الطقم؛ AliExpress",
+          function: "حفظ شرائح ASIC الغالية بعيداً عن الكهرباء الساكنة والرطوبة؛ **أساسي مع مخزون شرائح.**",
+          price: "$18 / طقم (~10 علب)",
+          priceBefore: null,
+          saving: "سعر تقديري شحن من الصين — قارن البائعين (ESD safe)",
+          url: "https://www.aliexpress.com/w/wholesale-esd-anti-static-storage-box-smd.html",
+          source: "AliExpress",
+          badge: "تنظيم · ASIC"
         }
       ]
     },
@@ -391,85 +410,6 @@
         { name: "إكسسوارات يد", model: "ملاقط Vetus + شفاط قصدير (Goot Sucker) + إسفنج نحاس للكاوية", function: "شغل يومي نظيف وسريع على البوردة.", price: 1200 },
         { name: "قياس وبرمجة بسيطة", model: "USB to TTL + Dupont jumpers (ذكر-ذكر/أنثى-أنثى)", function: "UART للكنترول؛ **Dupont** لتوصيل PICkit بنقاط الاختبار/ICSP على البوردة.", price: 350 },
         { name: "سلك جسر فائق الدقة", model: "Jumper / Enameled Wire قطر 0.1mm — العتبة / مول البستان", function: "جسور للمسارات المقطوعة أو الـ pads الضيقة؛ يُباع بالمتر أو بكرة صغيرة من محلات الكيماويات والإلكترونيات.", price: 120 }
-      ]
-    },
-
-    benchOrganization: {
-      title: "④ تنظيم المعمل وسير العمل",
-      note: "أدوات تخزين وتنظيم لا تبدو «إلكترونيات» لكنها تقلل الأخطاء وضياع الـ SMD والمسامير وتسرّع تتبّع كل بوردة في الورشة.",
-      rows: [
-        {
-          category: "قطع الغيار (SMD)",
-          tool: "وحدة أدراج بلاستيك (40–60 درج)",
-          function: "تخزين المقاومات (0402) والترانزستورات والـ Chips الصغيرة مع كتابة القيم عليها.",
-          where: "العتبة / محلات كماليات السيارات / أمازون",
-          priority: "قصوى (Must)",
-          priorityTier: "must"
-        },
-        {
-          category: "قطع الغيار (SMD)",
-          tool: "علب تخزين Anti-static (ESD Boxes)",
-          function: "حفظ شرائح الـ ASIC الغالية بعيداً عن الكهرباء الساكنة والرطوبة.",
-          where: "Zeus Mining / AliExpress",
-          priority: "عالية",
-          priorityTier: "high"
-        },
-        {
-          category: "أدوات البنش",
-          tool: "حامل مفكات وملاقط (Tool Rack)",
-          function: "تنظيم الملاقط والمفكات بشكل رأسي لحماية «السنون» وتوفير مساحة.",
-          where: "مول البستان / محلات الصيانة",
-          priority: "عالية",
-          priorityTier: "high"
-        },
-        {
-          category: "السوائل والكيماويات",
-          tool: "زجاجات مضخة (Push-down Dispenser)",
-          function: "للكحول (IPA)؛ تمنع التبخر وتسمح بسحب كمية بسيطة بضغطة واحدة.",
-          where: "محلات صيانة الموبايل (العتبة)",
-          priority: "قصوى (Must)",
-          priorityTier: "must"
-        },
-        {
-          category: "السوائل والكيماويات",
-          tool: "حقن فارغة بـ «سن» معدني",
-          function: "تعبئة الفلاكس (Flux) وتوزيعه بدقة مجهرية تحت الشريحة.",
-          where: "الصيدليات / محلات الصيانة",
-          priority: "عالية",
-          priorityTier: "high"
-        },
-        {
-          category: "التوثيق والتمييز",
-          tool: "ماكينة طباعة ملصقات (Label Maker)",
-          function: "طباعة قيم المكونات على الأدراج وأرقام «الأكواد» للبوردات.",
-          where: "جرير / أمازون / مكتبات كبرى",
-          priority: "متوسطة",
-          priorityTier: "medium"
-        },
-        {
-          category: "سطح العمل",
-          tool: "Magnetic Heat-Insulation Mat",
-          function: "حصيرة سيليكون فيها أماكن مغناطيسية للمسامير وتحمي المكتب من حرارة الهوت إير.",
-          where: "العتبة / مول البستان",
-          priority: "قصوى (Must)",
-          priorityTier: "must"
-        },
-        {
-          category: "الكابلات والوصلات",
-          tool: "منظم كابلات سيليكون (Adhesive Clips)",
-          function: "تثبيت كابلات الـ PicoBT والباور في طرف المكتب لمنع تشابكها.",
-          where: "أي محل إكسسوارات كمبيوتر",
-          priority: "متوسطة",
-          priorityTier: "medium"
-        },
-        {
-          category: "سير العمل (Process)",
-          tool: "صناديق بلاستيك ملونة (Job Bins)",
-          function: "صندوق لكل بوردة (أحمر: عطلان / أخضر: تم الإصلاح) لعدم خلط قطع الغيار.",
-          where: "محلات الأدوات المنزلية",
-          priority: "عالية",
-          priorityTier: "high"
-        }
       ]
     }
   },

@@ -1,7 +1,7 @@
-﻿/**
+/**
  * Tab sections rendered into #mainContent (workflow, KB shell, purchases, financials, ROI).
  */
-export function mountSections(main, DATA, { fmt, fmtUSD, fmtEGP }, { purchaseImportRow, purchaseLocalRow, benchOrgRow }) {
+export function mountSections(main, DATA, { fmt, fmtUSD, fmtEGP }, { purchaseImportRow, purchaseLocalRow }) {
 
 /* ── 1. Workflow ── */
 main.insertAdjacentHTML('beforeend', `
@@ -141,30 +141,6 @@ main.insertAdjacentHTML('beforeend', `
       </table>
     </div>
     <p style="font-size:.78rem;color:var(--text-muted);margin-top:14px">GD900 متوفر أيضاً بعبوة 1kg من Zeus (~$3.4) إن أردت جودة ثابتة وتكلفة للوحدة أقل عند الاستهلاك العالي.</p>
-  </div>
-
-  <div class="card" style="margin-top:24px">
-    <div class="card-title" style="justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <span>${DATA.purchases.benchOrganization.title}</span>
-      <span style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35);color:#93c5fd;font-size:.72rem;padding:3px 10px;border-radius:20px;font-weight:600">تنظيم · تخزين · سير عمل</span>
-    </div>
-    <p style="font-size:.83rem;color:var(--text-muted);margin-bottom:14px;line-height:1.75">${DATA.purchases.benchOrganization.note}</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>الفئة</th>
-            <th>الأداة التنظيمية</th>
-            <th>الوظيفة الأساسية</th>
-            <th>مكان الشراء المتوقع</th>
-            <th>الأولوية</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${DATA.purchases.benchOrganization.rows.map(benchOrgRow).join('')}
-        </tbody>
-      </table>
-    </div>
   </div>
 </section>
 `);
