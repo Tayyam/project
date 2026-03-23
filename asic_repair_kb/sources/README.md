@@ -73,6 +73,18 @@ python scripts/gemini_analyze_image.py --slug s19_hash_guide --out-dir build/gem
 | `apw12_repair_guide` | FILE 7 APW12 (main guide) |
 | `apw12_1215a_manual` | FILE 7 APW12 1215A supplement |
 
+### Planned slugs (not mirrored until fetch — see [knowledge_in_progress.md](../components/knowledge_in_progress.md))
+
+| Slug | Topic |
+|------|--------|
+| `whatsminer_solutions` | Whatsminer troubleshooting & solutions (article) |
+| `s19_control_flashing` | S19 control board card / firmware flashing tutorial |
+| `picobt_universal_manual` | PicoBT universal tester user manual |
+| `whatsminer_cb_repair` | Whatsminer control board inspection & repair |
+| `whatsminer_psu_repair` | How to repair Whatsminer PSU (article) |
+| `psu_output_tester` | Antminer + Whatsminer PSU output tester usage |
+| `whatsminer_p21_psu_manual` | WhatsMiner P21 Series PSU Manual (PDF) |
+
 ## Git
 
 Downloaded HTML/images are large. To exclude from git, uncomment the line in the repo [`.gitignore`](../../.gitignore) for `asic_repair_kb/sources/`.

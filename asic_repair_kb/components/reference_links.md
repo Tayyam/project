@@ -8,6 +8,12 @@
 
 Offline mirrors live under [`asic_repair_kb/sources/`](../sources/) (see [sources/README.md](../sources/README.md)). Refresh with `python scripts/fetch_zeus_kb_source.py --all` from repo root.
 
+### Knowledge in progress (URLs registered — mirrors not fetched yet)
+
+See **[knowledge_in_progress.md](knowledge_in_progress.md)** for the full table (Whatsminer troubleshooting, S19 SD flashing, PicoBT manual, Whatsminer CB/PSU repair, PSU output tester, P21 PDF).
+
+---
+
 | Document | URL | Local mirror (slug) |
 |----------|-----|---------------------|
 | S19 Hashboard Repair Guide | https://www.zeusbtc.com/manuals/Antminer-S19-Hash-Board-Repair-Guide.asp | [s19_hash_guide](../sources/s19_hash_guide/index.html) |

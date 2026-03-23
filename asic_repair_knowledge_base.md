@@ -15,6 +15,7 @@ This knowledge base is split into **components** under [`asic_repair_kb/componen
 | # | Component | Description |
 |---|-----------|-------------|
 | 1 | [Repair coverage matrix — Knowledge + Tools](asic_repair_kb/components/repair_coverage_matrix.md) | What you can repair; tool areas vs inventory |
+| 1b | [Knowledge in progress — جاري العمل](asic_repair_kb/components/knowledge_in_progress.md) | New Zeus sources: URLs + slugs; mirrors pending fetch |
 | 2 | [Agent operating rules](asic_repair_kb/components/agent_rules.md) | Mandatory rules before any work |
 | 3 | [Agent decision tree](asic_repair_kb/components/agent_decision_tree.md) | Where to start by symptom |
 | 4 | [FILE 1 — S19 hashboard](asic_repair_kb/components/repair_s19_hashboard.md) | Antminer S19 hash board repair |
