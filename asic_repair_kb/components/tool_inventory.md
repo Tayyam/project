@@ -2,94 +2,108 @@
 
 **Part of:** [ASIC Repair Knowledge Base](../../asic_repair_knowledge_base.md)
 
+**Canonical purchase map (prices, Egypt vs Zeus/AliExpress, CAPEX roll-up):** project **`js/data.js`** + hub UI **`index.html`** (Mining Repair Hub). The ROI **CAPEX** card is computed from `purchases.fixedAssets` (+ `roi.capex.extraItems`), sorted high → low — keep this file aligned when you change shop data.
+
 ---
 
 ## TOOL INVENTORY — CONFIRMED AVAILABLE ✓
 
+*Use ✓ for items you physically have on the bench. If an item exists only on the **purchase plan** in `js/data.js`, treat it as planned until received (see § Documented purchase plan below).*
+
 ### Diagnosis
 - ✓ PicoBT Universal Tester + S19 Test File + M30/M50 Test File
-- ✓ Antminer APW12 PSU (bench power — confirm version matches miner)
+- ✓ Antminer APW12 PSU (bench power — confirm **1215** letter matches hashboard/miner)
 - ✓ ZOYI ZT-R01 Thermography Multimeter (thermal + voltage simultaneously)
-- ✓ FNIRSI DSO-TC3 — **use as LCR/component tester** (caps, transistors, simple checks). **Not** a substitute for hash CLK: in oscilloscope mode real bandwidth is often **≪ 1 MHz**; S19/M30 CLK is **~25 MHz+** → invisible on TC3.
-- ⚠️ **Desktop oscilloscope ≥ 100 MHz analog bandwidth** (e.g. Rigol DS1102Z-E / Siglent) — **required** for hash CLK and related high-speed signals on S19/M30.
-- ✓ Sugon 3005D Lab PSU 30V/5A (control board circuits only — NOT hashboard)
-- ✓ USB to TTL (UART for control board)
+- ✓ FNIRSI DSO-TC3 — **LCR / component tester** (caps, transistors, simple checks). **Not** hash CLK scope: oscilloscope mode bandwidth **≪ 1 MHz**; S19/M30 CLK **~25 MHz+** does not display.
+- ⚠️ **Desktop oscilloscope ≥ 100 MHz** (e.g. Rigol DS1102Z-E / Siglent) — **required** for hash CLK / high-speed signals — *on purchase plan (EGP, local mall)*.
+- ✓ Sugon 3005D Lab PSU 30V/5A (control-board circuits only — **not** full hash rail current for M30/M50)
+- ✓ USB to TTL + **Dupont jumpers** (UART; PICkit / ICSP to test points on S19 hash — *on purchase plan in local supplies*)
 
 ### Rework
 - ✓ Quick 861DW 1300W Hot Air Station
-- ✓ PUHUI T-8280 IR Preheater 28×27cm
-- ✓ Quick 205H 150W Soldering Iron
-- ✓ Tips: Chisel T10 + Fine Point T2 + Bevel K2
-- ✓ Andonstar AD207 Digital Microscope (7 inch)
-- ✓ Ultrasonic Cleaner ~2L
+- ✓ PUHUI T-8280 IR Preheater 28×28 cm class
+- ✓ Quick 205H 150W Soldering Iron + Tips (Chisel T10, Fine T2, Bevel K2)
+- ✓ Andonstar AD207 Digital Microscope (7 inch) — *on purchase plan (EGP)*
+- ✓ Ultrasonic Cleaner ~2L — *on purchase plan (EGP, العتبة)*
 
-### Materials & Consumables
-- ✓ Amtech NC-559-ASM Flux (10g original)
-- ✓ Mechanic Solder Paste 183°C
-- ✓ S19 & M30 Stencils (magnetic)
-- ✓ BGA Reballing Kit (magnetic platform + ASIC stencils)
-- ✓ HY234 Thermal Putty 1kg (M30/S19 dual heatsink models)
-- ✓ GD900 Thermal Paste (general use)
-- ✓ IPA 99%
-- ✓ Kapton Tape + Aluminum Tape
-- ✓ Solder wick + copper sponge for iron
+### Bench organization & workflow *(purchase plan — `js/data.js` fixed assets)*
+- 📋 **Plastic drawer cabinet (40–60 drawers)** — 0402 / small parts + labels (العتبة / كماليات سيارات)
+- 📋 **Anti-static storage boxes (ASIC)** — specialty import (AliExpress kit; Zeus rarely sells full ESD box sets)
+- 📋 **Tool rack** (pliers / drivers vertical) — مول البستان
+- 📋 **Push-down dispenser bottle** for IPA — mobile-repair supply shops
+- 📋 **Empty syringes, metal tip** — flux dispensing under chips
+- 📋 **Label maker** — drawers + board traceability (جرير / Amazon.eg / Noon)
+- 📋 **Magnetic silicone heat-insulation mat** — screws + desk protection from hot air
+- 📋 **Silicone adhesive cable clips** — PicoBT / bench power leads
+- 📋 **Colored job bins** — WIP vs done boards, avoid mixing spares
 
-### Spare Parts Stock
-- ✓ BM1398 ASIC Chips (Antminer S19)
-- ✓ KF1922 ASIC Chips (Whatsminer M30/M50)
-- ✓ LDOs: 0.8V / 1.8V / 3.3V + PMIC
-- ✓ MOSFETs + PWM ICs
-- ✓ Data Cables 10-pin / 12-pin (×40)
-- ✓ AWG6 Copper Wire + power cables
+### Materials & consumables
+- ✓ Amtech NC-559-ASM Flux (10g original) + Mechanic 183 °C paste (Zeus / stock)
+- ✓ S19 & M30 magnetic stencils + BGA reball platform / ASIC stencils
+- ✓ HY234 thermal putty 1kg (dual-heatsink S19/M30 gaps)
+- ✓ GD900 (general paste — **not** Zeus chip-surface spec)
+- ✓ IPA 99% + Kapton + aluminum tape + solder wick + copper sponge
+- 📋 **Board wash** (aqueous / flux cleaner) — *on purchase plan (EGP)*
+- 📋 **Lead-free solder wire** (Alpha / Kester class) — *on purchase plan (EGP)* — S19 boards are lead-free process
 
-### Additional Spare Parts Required by Source Guides
-- ⚠️ **0402 Resistors: 0Ω, 51Ω, 10KΩ, 4.7KΩ** — needed for S19 hashboard repair (source Section I.5)
-- ⚠️ **0402 Capacitors: 0.1µF, 1µF** — needed for S19 hashboard repair (source Section I.5)
-- ⚠️ **Solder balls 0.4mm diameter** — for BGA reballing (S19 + M30)
-- ⚠️ **Thermal gel: Fujipoly SPG-30B** — required spec for S19 chip surface after replacement (NOT GD900 for chips)
-- ⚠️ **Thermal paste spec 2500** — for APW12 MOS ↔ heatsink (different from GD900 general use)
-- ⚠️ **704 Silicone** — for APW12 PCBA cover re-gluing after repair
-- ⚠️ **PICkit3 programmer** — for S19 PIC reprogramming (with MPLAB IPE software)
-- ⚠️ **Lead-free solder wire** — for APW12 and general PCB repair
+### Spare parts stock *(+ specialty import list in hub)*
+- ✓ BM1398 (S19) / KF1922 (M30/M50) ASIC chips
+- ✓ LDOs 0.8V / 1.8V / 3.3V + PMIC; MOSFETs + PWM ICs; data cables; AWG6 + power wiring
+- 📋 **0402 resistor kit** (0Ω, 51Ω, 10K, 4.7K) — AliExpress / Zeus path in `importedSpecialty`
+- 📋 **0402 capacitor kit** (0.1µF, 1µF, **2.2µF**) — same
+- 📋 **BGA solder balls 0.4 mm** — reball S19/M30
+- 📋 **APW12 bench IIC/EN enable jig** — outputs on bench without full miner — Zeus / equivalent (`importedSpecialty`)
+- 📋 **Industrial MicroSD** 8–16 GB × several — PicoBT/CB4 FPGA, S19 SD recovery (*per card ~$8 in data*)
 
-> Items marked ⚠️ are required by source guides but not listed in original inventory — acquire before starting hashboard or PSU repair.
+### Additional specs from Zeus guides *(not always in shop JSON — acquire to match FILE text)*
+- ⚠️ **Fujipoly SPG-30B** (or equivalent Zeus chip-surface thermal gel) — **not** GD900 on ASIC top
+- ⚠️ **Thermal paste spec 2500** — APW12 MOSFET ↔ heatsink (≠ GD900 for that interface)
+- ⚠️ **704 silicone** — APW12 PCBA cover re-glue after repair
 
-### Missing — Must Acquire Before Proceeding
-- ✓ Discharge Resistor 25Ω / 100W cement (acquired)
-- ✓ UV Solder Mask — Mechanic UVH900-LY (acquired)
-- ✓ Jumper Wire 0.1mm enameled (acquired)
-- ✓ MobaXterm Software (installed)
-- ✓ WhatsMinerTools Software (installed)
-- ✓ Putty Software (installed)
+> Until these three match your Zeus procedure, flag **spec mismatch** on hash/PSU jobs that cite them.
+
+### Software installed ✓
+- ✓ MobaXterm, WhatsMinerTools, Putty-class access (MobaXterm acceptable per FILE 5 note)
+- ⚠️ **MPLAB IPE** (or MPLAB X) + **PICkit 3/4 drivers** — PIC16F1704 on S19 hash; programmer *on purchase plan (EGP)* — **install before claiming PIC path ready**
+
+### Acquired small items ✓
+- ✓ Discharge resistor 25Ω / 100W cement (bench safety)
+- ✓ UV solder mask Mechanic UVH900-LY
+- ✓ Jumper / enameled wire ~0.1 mm
+
+---
+
+## Documented purchase plan vs this checklist
+
+When you **receive** an item from `js/data.js`, move its bullets from 📋 to ✓ above. Sections **① fixed assets** (USD + EGP groups) and **② imported specialty** are the source of truth for tools, bench extras, and consumable stock lines that have URLs/prices.
 
 ---
 
 ## Gaps vs repair guides — verify / add (مقارنة بالدلائل)
 
-Cross-check against [FILE 1](repair_s19_hashboard.md), [FILE 2](repair_whatsminer_m30s_hashboard.md), [FILE 4](repair_whatsminer_test_fixture.md), [FILE 7](repair_apw12_psu.md). Items below are **not** listed as ✓ above or conflict with a spec.
+Cross-check [FILE 1](repair_s19_hashboard.md), [FILE 2](repair_whatsminer_m30s_hashboard.md), [FILE 4](repair_whatsminer_test_fixture.md), [FILE 7](repair_apw12_psu.md).
 
 | Item | Status | Why |
 |------|--------|-----|
-| **Adjustable hashboard PSU ≥ 10 A** at set voltage | ⚠️ **Gap risk** | [FILE 2](repair_whatsminer_m30s_hashboard.md) requires **10 A+** for hash rail. **Sugon 3005D = 5 A max** — OK for control only, **not** for full M30/M50 hash bench current. |
-| **Oscilloscope analog bandwidth ≥ 100 MHz** | ⚠️ **Acquire desktop scope** | FILE 2 mandates **100 MHz minimum** for CLK. **DSO-TC3 is not valid** for ~25 MHz CLK — buy **Rigol/Siglent-class ≥100 MHz** (local mall). |
-| **Electronic load ~3.6 kW / 0–50 V** or matched resistive dummy | ⚠️ Missing | [FILE 7](repair_apw12_psu.md) — APW12 load test (or documented DIY resistor bank). |
-| **AC variac / regulator 200–250 V, current-limited** OR **100 W bulb in series** | ⚠️ Missing | [FILE 7](repair_apw12_psu.md) — safe AC bring-up after repair. |
-| **ESD wrist strap** (grounded) | ⚠️ **On purchase list** (local) | FILE 7 **required**; mat alone is not enough — strap ties body to ground. |
-| **Fine DMM probing** — steel needle / pin + heat-shrink “T-bush” | ⚠️ **On purchase list** (steel needle probes) | [FILE 1](repair_s19_hashboard.md) (Zeus §I) — small TPs / ASIC legs. |
-| **MPLAB IPE** (or MPLAB X) installed + PICkit drivers | ⚠️ Partial | PICkit3 is ⚠️ spare; **software** for PIC16F1704 not listed as installed. |
-| **MicroSD cards** (industrial / high-endurance, 8–16 GB, ×5–10) | ⚠️ **On purchase list** | PicoBT / CB4 **FPGA update**, S19 **SD recovery**, test images — avoid cheap phone cards for production images. |
-| **4× cooling fans + duct** (or miner shell) for S19 signal work | ⚠️ Missing | [FILE 1](repair_s19_hashboard.md) — **mandatory** for signal measurements during test. |
-| **M1 miner shell + fan** (or equivalent) | ⚠️ Missing | [FILE 2](repair_whatsminer_m30s_hashboard.md) — cooled hash test on bench. |
-| **Hand tools** — long-nose pliers, diagonal cutters, Phillips drivers | ⚠️ Missing | [FILE 7](repair_apw12_psu.md) (1215A manual photos) + general disassembly. |
-| **Knife-shaped soldering tip** (optional) | ⚠️ Optional | FILE 7 — large **through-hole** on APW12; you have chisel/fine/bevel — add knife if plugs stay hard to clear. |
-| **IIC/EN bench adapter** (APW12 data socket jig — enable output on bench) | ⚠️ **On purchase list** (Zeus / equivalent) | FILE 7 — APW12 does not output 12–15 V on bench without miner I²C / EN handling; jig **forces** bench operation. |
-| **USB–Ethernet adapter** | ⚠️ Optional | [FILE 4](repair_whatsminer_test_fixture.md) — if laptop has no RJ45. |
-| **Ethernet patch cables** | ⚠️ Optional | PicoBT / CB4 / miner LAN — not explicitly listed. |
-| **PuTTY** | Optional | [FILE 5](repair_s19_control_board.md) — **MobaXterm** can replace. |
-| **PSU test card / ZJ0001000001 + PSU firmware** | ⚠️ Unclear | FILE 7 mentions **hashboard tester + PSU test card** — confirm whether your **PicoBT** stack includes **APW12 PSU test** mode or add dedicated jig later ([knowledge_in_progress](knowledge_in_progress.md): `psu_output_tester`). |
-| **Board wash** (aqueous/flux cleaner) | ⚠️ **Recommended** | FILE 1 — complements **IPA**; fewer white flux residues in some workflows. |
-| **Zeus solder paste column M705** | ⚠️ Optional | FILE 1 names **M705** — you use **Mechanic 183 °C**; keep if results match process. |
+| **Adjustable hashboard PSU ≥ 10 A** at set voltage | ⚠️ **Gap risk** | FILE 2 — hash rail **10 A+**. **Sugon 3005D = 5 A max** — OK for control, **not** full M30/M50 hash bench. |
+| **Oscilloscope ≥ 100 MHz** | ⚠️ **Must acquire** | CLK diagnosis; TC3 invalid for ~25 MHz — **in `data.js` (البستان)**. |
+| **Electronic load ~3.6 kW / 0–50 V** or resistive dummy | ⚠️ Missing | FILE 7 — APW12 load test. |
+| **AC variac / 200–250 V limited** OR **100 W bulb in series** | ⚠️ Missing | FILE 7 — safe AC bring-up. |
+| **ESD wrist strap** | 📋 In **`data.js`** (البستان) | Required with mat — FILE 7. |
+| **Steel needle probes** | 📋 In **`data.js`** | FILE 1 — tight TPs / ASIC legs. |
+| **PICkit + MPLAB IPE** | 📋 Hardware in **`data.js`**; ⚠️ **install SW** | S19 PIC firmware path. |
+| **MicroSD industrial × several** | 📋 In **`data.js`** (`importedSpecialty`) | PicoBT / recovery images. |
+| **IIC/EN APW12 bench jig** | 📋 In **`data.js`** | FILE 7 — bench output enable. |
+| **Board wash** | 📋 In **`data.js`** | Complements IPA / flux residue. |
+| **4× fans + duct** (or miner shell) S19 signal test | ⚠️ Missing | FILE 1 — mandatory for signal measurements. |
+| **M1 shell + fan** (or equivalent) Whatsminer | ⚠️ Missing | FILE 2 — cooled hash on bench. |
+| **Hand tools** — pliers, cutters, Phillips | ⚠️ Missing | FILE 7 + general tear-down. |
+| **Knife-shaped iron tip** (optional) | ⚠️ Optional | FILE 7 — large through-hole on APW12. |
+| **USB–Ethernet adapter** | ⚠️ Optional | FILE 4 — if no RJ45 on laptop. |
+| **Ethernet patch cables** | ⚠️ Optional | PicoBT / miner LAN. |
+| **PSU test card / ZJ0001000001** | ⚠️ Unclear | FILE 7 vs PicoBT capability — see [knowledge_in_progress](knowledge_in_progress.md) `psu_output_tester`. |
+| **Zeus paste column M705** | ⚠️ Optional | FILE 1 vs your **Mechanic 183 °C** — validate process. |
 
-> **Summary:** أقوى فجوة عملية = **مصدر تيار للهاش ≥10 أ** (واتسماينر) + **حمل إلكتروني/مقاومة** و**فارياك/لمبة أمان** لـ APW12 + **تأكيد عرض نطاق الأوسيلوسكوب 100 MHz** + **ESD strap** + **مراوح/دكت** لاختبار S19 حسب الدليل.
+> **Summary:** Strongest remaining **process** gaps = **≥10 A hash bench supply** (Whatsminer), **electronic load / variac** for APW12, **fan/duct or shell** for guided signal tests, plus **install MPLAB IPE** when PICkit arrives. Purchase-plan items (ESD strap, scope, jig, 0402 kits, etc.) are already in **`js/data.js`** — track receipt here by flipping 📋 → ✓.
 
-> Core rework/diagnosis list above is strong; treat this section as a **pre-flight checklist** before claiming “fully equipped” for every FILE.
+> Treat this section as a **pre-flight checklist** before claiming “fully equipped” for every FILE.
