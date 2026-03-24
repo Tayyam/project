@@ -56,7 +56,7 @@ Physical **bench capability** tracked in this project (what you own / must acqui
 | Rework (hot air, preheater, iron, microscope, ultrasonic) | true | Quick 861DW, Quick 707D+ (حديد+هواء), PUHUI T-8280, AD207, ultrasonic |
 | Consumables (flux, paste, putty, IPA, tin stencil) | true | Amtech, Mechanic 183 °C, HY234, GD900, Zeus tin stencil لكل جيل شريحة |
 | Spares (ASIC, LDO, MOSFET, cables, copper) | true | BM1362 / BM1366BS + KF1950–KF1973, LDO/PMIC kit, AWG6, data cables |
-| Guide-required extras (⚠️ in inventory) | partial | 0402 R/C, 0.4 mm balls, SPG-30B, paste 2500, 704 silicone, PICkit3 — see ⚠️ rows in [tool_inventory.md](tool_inventory.md) |
+| Guide-required extras (⚠️ / 📎 in inventory) | yes | كرات 0.4 mm، wick، IIC/EN، 2500/704، حمل إلكتروني، ESD — انظر [tool_inventory.md](tool_inventory.md) (وسيلة الإيضاح + أولويات النواقص) |
 
 ### Tool × repair file (where guides mention requirements)
 
