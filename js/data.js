@@ -84,6 +84,7 @@ export const DATA = {
       { name: "Pre-tinned bridge wires", unit: "~100 pcs 10/15 cm", baseMonthlyQty: 0.35, unitUSD: 1.2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2461", planHint: "Consumable — not a fixed asset." },
       { name: "Amtech NC-559-ASM flux", unit: "10g syringe", baseMonthlyQty: 3, unitUSD: 8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2277" },
       { name: "Mechanic 183°C solder paste", unit: "60g", baseMonthlyQty: 1, unitUSD: 12, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264" },
+      { name: "BGA solder balls 0.4mm", unit: "bottle — select size on Zeus", baseMonthlyQty: 0.25, unitUSD: 2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1555", planHint: "Order **0.4 mm** + lead-free on product page." },
       { name: "Mechanic UVH900-LY solder mask", unit: "tube", baseMonthlyQty: 2, unitUSD: 6.54, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1585" },
       { name: "HY234 thermal putty", unit: "1 kg", baseMonthlyQty: 0.5, unitUSD: 5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638" },
       { name: "24-pin data cable", unit: "60 cm", baseMonthlyQty: 22, unitUSD: 1.8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107" },
@@ -91,6 +92,7 @@ export const DATA = {
       { name: "SI7N65F MOSFET (PSU)", unit: "chip", baseMonthlyQty: 32, unitUSD: 0.4, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934" },
       { name: "SMD resistor sample book", unit: "book", baseMonthlyQty: 0.5, unitUSD: 7.75, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005008894523897.html" },
       { name: "SMD capacitor sample book", unit: "book", baseMonthlyQty: 0.5, unitUSD: 12, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005004657585875.html" },
+      { name: "Desoldering wick CP-2015", unit: "2.0mm × 1.5m roll", baseMonthlyQty: 0.4, unitUSD: 1.96, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1870" },
       { name: "Board wash (ultrasonic)", unit: "Mechanic 500 / no-residue", baseMonthlyQty: 0.75, unitUSD: 3.9, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1782", planHint: "With ultrasonic — post-repair deep clean." }
     ]
   },
@@ -292,11 +294,19 @@ export const DATA = {
               source: "Zeus Mining"
             },
             {
-              name: "High-temp repair mat",
-              model: "Silicone mat",
-              function: "Desk protection for hot air / iron.",
-              price: "$8.48",
-              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=182",
+              name: "Anti-static table mat",
+              model: "800×1200×2 mm — PVC ESD",
+              function: "Bench ESD dissipative surface.",
+              price: "$7.38",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3010",
+              source: "Zeus Mining"
+            },
+            {
+              name: "Anti-static wrist strap",
+              model: "~3 m cord",
+              function: "Ground body during chip work.",
+              price: "$2.6",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=174",
               source: "Zeus Mining"
             },
             {
@@ -336,7 +346,10 @@ export const DATA = {
             { name: "Metal-tip syringes", model: "~10 pcs", function: "Flux dosing.", price: 45 },
             { name: "Colored part bins", model: "~6 boxes", function: "WIP status colors.", price: 220 },
             { name: "Silicone cable clips", model: "Adhesive", function: "Desk cable routing.", price: 95 },
-            { name: "Series safety bulb", model: "100 W + holder", function: "First power-up after APW12 repair.", price: 180 }
+            { name: "Series safety bulb", model: "100 W + holder", function: "First power-up after APW12 repair.", price: 180 },
+            { name: "Side cutters", model: "Electronics grade — Attaba", function: "Wire / lead trim.", price: 140 },
+            { name: "Long-nose pliers", model: "Fine tip — Attaba", function: "Bend / hold small parts.", price: 160 },
+            { name: "Fine tweezers", model: "ESD / precision — Attaba", function: "0402 / small SMD.", price: 90 }
           ]
         }
       ]
@@ -397,6 +410,14 @@ export const DATA = {
           source: "Zeus Mining"
         },
         {
+          name: "Desoldering wick CP-2015",
+          model: "2.0 mm × 1.5 m",
+          function: "Solder removal — hash / PSU.",
+          price: "$1.96",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1870",
+          source: "Zeus Mining"
+        },
+        {
           name: "Amtech NC-559-ASM flux",
           model: "10g syringe (100g also on page)",
           function: "ASIC rework.",
@@ -410,6 +431,14 @@ export const DATA = {
           function: "BGA reball.",
           price: "$12",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264",
+          source: "Zeus Mining"
+        },
+        {
+          name: "BGA solder balls",
+          model: "0.4 mm — lead or lead-free on page",
+          function: "Hash ASIC reball.",
+          price: "$2",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1555",
           source: "Zeus Mining"
         },
         {
@@ -653,7 +682,7 @@ export const DATA = {
         { label: "تجهيزات المحل (تشطيب + أثاث)", usd: 200 },
         { label: "جمارك + شحن منتجات من الخارج (مرة واحدة)", usd: 500 }
       ],
-      note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي مماثل + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + حصيرة صيانة 182 + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر). بدون فاحص مكونات منضد اختياري (مثل DSO-TC3). **يُضاف تلقائياً:** مخزون مستهلكات مستوردة (خطة 3 شهور)."
+      note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي مماثل + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + **سجادة ESD Zeus (3010)** + سوار ESD + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر). بدون فاحص مكونات منضد اختياري (مثل DSO-TC3). **يُضاف تلقائياً:** مخزون مستهلكات مستوردة (خطة 3 شهور)."
     }
   }
 
