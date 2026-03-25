@@ -1,9 +1,8 @@
-# مواصفات المهندس المطلوبة — مدينتي (Madinaty)
-
+# مواصفات المهندس المطلوبة 
 **Part of:** [ASIC Repair Knowledge Base](../../asic_repair_knowledge_base.md)
 
 > **الوظيفة:** مهندس إلكترونيات — **Hardware & Power Systems Specialist**  
-> **الموقع:** مدينتي (Madinaty)  
+> **الموقع:**
 > **طبيعة العمل:** صيانة وإعادة تأهيل شاملة للوحات إلكترونية دقيقة، وحدات طاقة متطورة، وأنظمة تحكم مدمجة (ماينرز Antminer / Whatsminer والبنية المرتبطة).
 
 ---
