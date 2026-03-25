@@ -118,7 +118,7 @@ export const DATA = {
 
     fixedAssets: {
       title: "① قائمة الأصول — الاستثمار الثابت",
-      note: "One-time tools + PicoBT test files (digital assets). Tin stencils + 90×90 tinning platform here. Pre-tinned bridge wires → quarterly import plan.",
+      note: "One-time tools + PicoBT test files (digital assets). Tin stencils + 90×90 tinning platform here. Bench: **ESD mat (3010)** + **silicone heat mat (182)**. Pre-tinned bridge wires → quarterly import plan.",
       groups: [
         {
           sourceLabel: "🇨🇳 China — Zeus Mining / AliExpress",
@@ -299,6 +299,14 @@ export const DATA = {
               function: "Bench ESD dissipative surface.",
               price: "$7.38",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3010",
+              source: "Zeus Mining"
+            },
+            {
+              name: "High-temp silicone repair mat",
+              model: "350×250 mm — to ~500 °C",
+              function: "Hot air / iron insulation; non-slip; part groove.",
+              price: "$8.48",
+              url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=182",
               source: "Zeus Mining"
             },
             {
@@ -682,7 +690,7 @@ export const DATA = {
         { label: "تجهيزات المحل (تشطيب + أثاث)", usd: 200 },
         { label: "جمارك + شحن منتجات من الخارج (مرة واحدة)", usd: 500 }
       ],
-      note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي مماثل + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + **سجادة ESD Zeus (3010)** + سوار ESD + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر). بدون فاحص مكونات منضد اختياري (مثل DSO-TC3). **يُضاف تلقائياً:** مخزون مستهلكات مستوردة (خطة 3 شهور)."
+      note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي مماثل + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + **سجادة ESD (3010)** + **حصيرة سيليكون حرارية (182)** + سوار ESD + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر). بدون فاحص مكونات منضد اختياري (مثل DSO-TC3). **يُضاف تلقائياً:** مخزون مستهلكات مستوردة (خطة 3 شهور)."
     }
   }
 
