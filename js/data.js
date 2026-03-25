@@ -635,40 +635,40 @@ export const DATA = {
   costPerRepair: [
     {
       category: "الهاشبورد",
-      materials: "~1.5 شريحة @ ~$3.5 + HY234/معجون بالشبلونة + فلاكس Amtech + Paste + مستهلكات تنظيف — تقدير **$9.8** للوحة متوسطة",
-      oldCostUSD: 22,
-      avgCostUSD: 9.8,
-      savingReason: "تحديث حسب سعر BM1362 الجديد ($3.5) مع متوسط استهلاك معجون/فلاكس/تنظيف فعلي"
+      materials: "**~1.4** شريحة BM1362 @ **$3.5** ≈ $4.9 + HY234 + Mechanic paste + Amtech + قناع UV (نصيب) + سائل حمام/IPA (نصيب) + 0402 نادراً — متوسط **$8.5** / لوحة",
+      oldCostUSD: 9.8,
+      avgCostUSD: 8.5,
+      savingReason: "إعادة تقدير حسب خطة المستورد ربع السنوية وتقليل متوسط الشرائح/لوحة مع إبقاء بروتوكول التنظيف"
     },
     {
       category: "الباور سبلاي",
-      materials: "2–3 MOSFET (SI7N65F ~$0.4) + آيسي تحكم + قصدير/فلاكس + منظف — تقدير **$3.9**",
-      oldCostUSD: 15,
-      avgCostUSD: 3.9,
-      savingReason: "سعر MOSFET المحدث ($0.4) خفّض متوسط تكلفة صيانة الباور لكل وحدة"
+      materials: "2–3× SI7N65F (~$0.4) + آيسي تحكم + فلاكس/قصدير + منظف + **نصيب سيليكون 704** بعد فتح الغلاف — متوسط **$4.2**",
+      oldCostUSD: 3.9,
+      avgCostUSD: 4.2,
+      savingReason: "إضافة تكلفة معقولة لـ 704 RTV (Zeus FILE 7) مُستهلكة على عدة وحدات"
     },
     {
       category: "الكنترول بورد",
-      materials: "2 LDO + فلاكس/قصدير + استهلاك بسيط من أسلاك Dupont عند الحاجة — تقدير **$1.3**",
-      oldCostUSD: 5,
-      avgCostUSD: 1.3,
-      savingReason: "LDO منخفض التكلفة مع استهلاك لحام محدود في أغلب أعطال الكنترول"
+      materials: "2× LDO/PMIC (~$0.05) + فلاكس/قصدير + جسور Zeus (نصيب) — متوسط **$1.5**",
+      oldCostUSD: 1.3,
+      avgCostUSD: 1.5,
+      savingReason: "تضمين نصيب أسلاك الجسر المغطاة قصدير في الاختبار/الاسترداد"
     },
     {
       category: "الكابلات",
-      materials: "كابل داتا 24-pin / 60cm — تقدير **$1.8**",
-      oldCostUSD: 7,
+      materials: "كابل داتا 24-pin / 60cm Zeus — **$1.8**",
+      oldCostUSD: 1.8,
       avgCostUSD: 1.8,
-      savingReason: "السعر محدث لبند الكابل الجديد 24-pin بطول 60cm"
+      savingReason: "بدون تغيير — يطابق بند المستورد"
     }
   ],
 
   marketerCommissionPercent: 20,
 
   pricing: [
-    { service: "صيانة الهاشبورد",    clientPrice: 100, materialCost: 9.8, marketerCommission: 20,  netProfit: 70.2 },
-    { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 3.9, marketerCommission: 16,  netProfit: 60.1 },
-    { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1.3, marketerCommission: 10,  netProfit: 38.7 },
+    { service: "صيانة الهاشبورد",    clientPrice: 100, materialCost: 8.5, marketerCommission: 20,  netProfit: 71.5 },
+    { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 4.2, marketerCommission: 16,  netProfit: 59.8 },
+    { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1.5, marketerCommission: 10,  netProfit: 38.5 },
     { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 1.8, marketerCommission: 3,   netProfit: 10.2 }
   ],
 
@@ -681,7 +681,7 @@ export const DATA = {
     ],
     totalMonthly: 34000,
     setupCost: 10000,
-    breakEvenNote: "بعد خصم خامات الهاشبورد (~$9.8) وعمولة المسوق (20% من $100 = $20)، صافي اللوحة للمركز ≈ $70.2. لتغطية المصاريف الثابتة (~630 $ شهرياً ≈ 34,000 ج) يحتاج ≈ 9 لوحات هاشبورد شهرياً (بسعر صرف 54 ج/$).",
+    breakEvenNote: "بعد خصم خامات الهاشبورد (~$8.5) وعمولة المسوق (20% من $100 = $20)، صافي اللوحة للمركز ≈ $71.5. لتغطية المصاريف الثابتة (~630 $ شهرياً ≈ 34,000 ج) يحتاج ≈ 9 لوحات هاشبورد شهرياً (بسعر صرف 54 ج/$).",
     breakEvenUnits: 9
   },
 
@@ -703,22 +703,22 @@ export const DATA = {
   },
 
   monthlyRevenue: [
-    { service: "الهاشبورد",      count: 30, pricePerUnit: 100, totalRevenue: 3000, costPerUnit: 9.8, totalCost: 294,  marketerTotal: 600  },
-    { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 3.9, totalCost: 58.5, marketerTotal: 240  },
-    { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1.3, totalCost: 13,   marketerTotal: 100  },
+    { service: "الهاشبورد",      count: 30, pricePerUnit: 100, totalRevenue: 3000, costPerUnit: 8.5, totalCost: 255,  marketerTotal: 600  },
+    { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 4.2, totalCost: 63,   marketerTotal: 240  },
+    { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1.5, totalCost: 15,   marketerTotal: 100  },
     { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 1.8, totalCost: 36,   marketerTotal: 60   }
   ],
 
   pl: {
     currency: "USD / EGP",
     exchangeRate: 54,
-    exchangeNote: "عمولة المسوق 20% تُخصم من إيراد كل خدمة قبل حساب صافي الربح التشغيلي. التحويل: 1 USD = 54 EGP",
+    exchangeNote: "عمولة المسوق 20% تُخصم من إيراد كل خدمة قبل حساب صافي الربح التشغيلي. التحويل: 1 USD = 54 EGP · COGS متوافق مع جدول الإيرادات الشهري",
     grossRevenue:         { usd: 5000,   egp: 270000 },
     marketerCommission:   { usd: 1000,   egp: 54000  },
-    cogs:                 { usd: 356,    egp: 19224  },
-    grossProfit:          { usd: 3644,   egp: 196776 },
+    cogs:                 { usd: 369,    egp: 19926  },
+    grossProfit:          { usd: 3631,   egp: 196074 },
     opex:                 { usd: 629.63, egp: 34000  },
-    netProfit:            { usd: 3014.37,egp: 162776 }
+    netProfit:            { usd: 3001.37,egp: 162074 }
   },
 
   roi: {
@@ -729,8 +729,8 @@ export const DATA = {
       ],
       note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي مماثل + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + حصيرة صيانة 182 + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر). بدون فاحص مكونات منضد اختياري (مثل DSO-TC3)."
     },
-    annualNetProfit:      { usd: 36172.44, egp: 1953312 },
-    monthlyNetProfit:     { usd: 3014.37,  egp: 162776  },
+    annualNetProfit:      { usd: 36016.44, egp: 1944888 },
+    monthlyNetProfit:     { usd: 3001.37,  egp: 162074  },
     paybackDays:          24,
     roiPercent:           1470
   }
