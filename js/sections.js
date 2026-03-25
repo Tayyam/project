@@ -197,7 +197,7 @@ main.insertAdjacentHTML('beforeend', `
                 <th>الموديل</th>
                 <th>الوظيفة الأساسية</th>
                 ${g.kind === 'usd'
-                  ? '<th>السعر</th><th>ملاحظة</th><th>رابط</th>'
+                  ? '<th>السعر</th><th>رابط</th>'
                   : '<th>السعر التقديري (ج)</th>'}
               </tr>
             </thead>
@@ -225,11 +225,10 @@ main.insertAdjacentHTML('beforeend', `
       <table>
         <thead>
           <tr>
-            <th>المخزون</th>
-            <th>الموديل / الوصف</th>
-            <th>الوظيفة</th>
+            <th>البند</th>
+            <th>الموديل</th>
+            <th>ملاحظة</th>
             <th>السعر</th>
-            <th>التوفير / ملاحظة</th>
             <th>رابط</th>
           </tr>
         </thead>
@@ -259,7 +258,6 @@ main.insertAdjacentHTML('beforeend', `
         </tbody>
       </table>
     </div>
-    <p style="font-size:.78rem;color:var(--text-muted);margin-top:14px">GD900 متوفر أيضاً بعبوة 1kg من Zeus (~$3.4) إن أردت جودة ثابتة وتكلفة للوحدة أقل عند الاستهلاك العالي.</p>
   </div>
 </section>
 `);
@@ -276,8 +274,7 @@ main.insertAdjacentHTML('beforeend', `
 
   <div class="card" style="margin-bottom:20px">
     <p style="color:var(--text-muted);font-size:.88rem;line-height:1.85;margin:0">${DATA.importedConsumablesQuarterly.note}</p>
-    <p style="margin-top:8px;font-size:.8rem;color:#93c5fd">حجم العمل الحالي: ${DATA.monthlyVolume.totalOperations} عملية/شهر — عامل التحميل: ×${importQuarter.loadFactor.toFixed(2)}</p>
-    <p style="margin-top:6px;font-size:.75rem;color:var(--text-muted)">ترتيب الصفوف: <strong>الإجمالي الربع سنوي ($)</strong> من الأعلى → الأقل.</p>
+    <p style="margin-top:8px;font-size:.78rem;color:var(--text-muted)">${DATA.monthlyVolume.totalOperations} ops/mo · load ×${importQuarter.loadFactor.toFixed(2)} · sorted by quarterly $</p>
   </div>
 
   <div class="table-wrap">
@@ -333,8 +330,7 @@ main.insertAdjacentHTML('beforeend', `
 
   <div class="card" style="margin-bottom:20px">
     <p style="color:var(--text-muted);font-size:.88rem;line-height:1.85;margin:0">${DATA.localConsumablesQuarterly.note}</p>
-    <p style="margin-top:8px;font-size:.8rem;color:#93c5fd">حجم العمل الحالي: ${DATA.monthlyVolume.totalOperations} عملية/شهر — عامل التحميل: ×${localQuarter.loadFactor.toFixed(2)}</p>
-    <p style="margin-top:6px;font-size:.75rem;color:var(--text-muted)">ترتيب الصفوف: <strong>الإجمالي الربع سنوي (ج)</strong> من الأعلى → الأقل.</p>
+    <p style="margin-top:8px;font-size:.78rem;color:var(--text-muted)">${DATA.monthlyVolume.totalOperations} ops/mo · load ×${localQuarter.loadFactor.toFixed(2)} · sorted by quarterly EGP</p>
   </div>
 
   <div class="table-wrap">

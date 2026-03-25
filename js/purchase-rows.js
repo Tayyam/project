@@ -13,20 +13,11 @@ export function purchaseImportRow(item) {
     : "this.style.background='rgba(59,130,246,.12)';this.style.borderColor='rgba(59,130,246,.35)'";
   return `
     <tr>
-      <td>
-        ${item.badge ? `<span class="badge-better">${item.badge}</span>` : ''}
-        ${item.name}
-      </td>
+      <td>${item.name}</td>
       <td class="mono">${item.model}</td>
       <td style="color:var(--text-muted);font-size:.82rem;max-width:220px">${item.function || '—'}</td>
       <td>
         <span style="color:${isZeus ? '#34d399' : '#60a5fa'};font-weight:700">${item.price}</span>
-        ${item.priceBefore ? `<span class="price-old">${item.priceBefore}</span>` : ''}
-      </td>
-      <td>
-        ${item.saving
-          ? `<span class="saving-tag">✓ ${item.saving}</span>`
-          : `<span style="color:var(--text-muted);font-size:.8rem">—</span>`}
       </td>
       <td>
         <a href="${item.url}" target="_blank" rel="noopener" style="

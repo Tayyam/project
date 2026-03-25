@@ -74,341 +74,269 @@ export const DATA = {
 
   importedConsumablesQuarterly: {
     title: "خطة الطلب ربع السنوية — مستهلكات مستوردة فقط",
-    note: "**مستهلكات ومخزون قطع فقط** (بدون أصول تشغيلية طويلة العمر). **استراتيجية الشرائح:** الهاشبورد الواحد = **76 شريحة ASIC** — لوحتان خردة تعنيان حتى **152 موضع تدوير محتمل** (مع فقد جودة/موديل). خطة المحلي: **~1.7 لوح تخليع/شهر** (≈**5 لوحات/ربع**) بـ **1500 ج/لوح**؛ لذلك تُخفَّض كميات **BM1362 جديد** في الجدول أدناه وتُرفَع فقط عند ضغط عمل أو نقص donors. **قوالب Tin ومنصة BGA 90×90** في **① الأصول**. **أسلاك الجسر** هنا كمخزون استهلاكي. **سائل تنظيف اللوحات** يدعم `post_repair_cleaning_protocol.md`. الجدول مرتب تلقائياً من الأعلى تكلفة للربع إلى الأقل.",
+    note: "Consumables + spare parts only (no long-life tools). Tin stencils + 90×90 platform: **① fixed assets**. Bridge wires here. Sorted by quarterly $ (high → low).",
     baselineMonthlyOperations: 75,
     items: [
-      { name: "شرائح ASIC Bitmain (BM1362)", unit: "شريحة", baseMonthlyQty: 10, unitUSD: 3.5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106", planHint: "احتياط **جديد** فقط: **1.7** لوح خردة/شهر × **76** شريحة ≈ **129** موضع تدوير شهري يغطي أغلب إصلاحات S19؛ Zeus للعجلة والجودة وعدم تطابق الموديل." },
-      { name: "شرائح ASIC Bitmain (BM1366BS)", unit: "شريحة S19K Pro", baseMonthlyQty: 2, unitUSD: 9, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3202", planHint: "S19K Pro — غالباً أقل توفراً من التخليع؛ احتفظ بحد أدنى جديد." },
-      { name: "شرائح Whatsminer (KF1950 / KF1958)", unit: "شريحة", baseMonthlyQty: 5, unitUSD: 2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1994", planHint: "M30 — يكمّلها تخليع لوحات Whatsminer التالفة إن وُجدت محلياً." },
-      { name: "شرائح Whatsminer (KF1968 / KF1973)", unit: "شريحة", baseMonthlyQty: 3, unitUSD: 6.65, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2200", planHint: "M50/M60 — وزّع بين جديد وتخليع حسب التوفر." },
-      { name: "أسلاك جسر للوحة (مغطاة قصدير)", unit: "عبوة ~100 عود (10cm/15cm)", baseMonthlyQty: 0.35, unitUSD: 1.2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2461", planHint: "مستهلكات اختبار/جسور مع PICKit ونقاط القياس — ليست أصلًا ثابتًا." },
-      { name: "فلاكس لحام ASIC", unit: "حقنة 10g Amtech NC-559-ASM", baseMonthlyQty: 3, unitUSD: 8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2277" },
-      { name: "معجون قصدير BGA", unit: "عبوة 60g Mechanic 183°C", baseMonthlyQty: 1, unitUSD: 12, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264" },
-      { name: "قناع لحام UV", unit: "أنبوبة Mechanic UVH900-LY", baseMonthlyQty: 2, unitUSD: 6.54, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1585" },
-      { name: "Thermal Putty HY234", unit: "كيس 1kg", baseMonthlyQty: 0.5, unitUSD: 5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638" },
-      { name: "كابلات داتا 24-pin (60cm)", unit: "كابل", baseMonthlyQty: 22, unitUSD: 1.8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107" },
-      { name: "آيسيهات الكنترول (LDO / PMIC)", unit: "شريحة", baseMonthlyQty: 26, unitUSD: 0.05, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=997" },
-      { name: "قطع غيار الباور (SI7N65F MOSFET)", unit: "شريحة", baseMonthlyQty: 32, unitUSD: 0.4, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934" },
-      { name: "طقم مقاومات SMD", unit: "Sample Book", baseMonthlyQty: 0.5, unitUSD: 7.75, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005008894523897.html" },
-      { name: "طقم مكثفات SMD", unit: "Sample Book", baseMonthlyQty: 0.5, unitUSD: 12, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005004657585875.html" },
-      { name: "سائل تنظيف لوحات (حمام فوق صوتي)", unit: "عبوة — Mechanic 500 / no-residue board wash", baseMonthlyQty: 0.75, unitUSD: 3.9, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1782", planHint: "بروتوكول التنظيف العميق بعد الصيانة — يكمّل الألتراسونيك؛ يفضل بدون بقايا." }
+      { name: "BM1362 ASIC (Bitmain)", unit: "chip", baseMonthlyQty: 10, unitUSD: 3.5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106", planHint: "~1.7 donor boards/mo × 76 ASIC — tweak qty with workload." },
+      { name: "BM1366BS ASIC (S19K Pro)", unit: "chip", baseMonthlyQty: 2, unitUSD: 9, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3202", planHint: "Fewer donors than S19 — keep minimum stock." },
+      { name: "KF1950 / KF1958 ASIC (Whatsminer)", unit: "chip", baseMonthlyQty: 5, unitUSD: 2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1994", planHint: "M30 family." },
+      { name: "KF1968 / KF1973 ASIC (Whatsminer)", unit: "chip", baseMonthlyQty: 3, unitUSD: 6.65, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2200", planHint: "M50 / M60 class." },
+      { name: "Pre-tinned bridge wires", unit: "~100 pcs 10/15 cm", baseMonthlyQty: 0.35, unitUSD: 1.2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2461", planHint: "Consumable — not a fixed asset." },
+      { name: "Amtech NC-559-ASM flux", unit: "10g syringe", baseMonthlyQty: 3, unitUSD: 8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2277" },
+      { name: "Mechanic 183°C solder paste", unit: "60g", baseMonthlyQty: 1, unitUSD: 12, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264" },
+      { name: "Mechanic UVH900-LY solder mask", unit: "tube", baseMonthlyQty: 2, unitUSD: 6.54, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1585" },
+      { name: "HY234 thermal putty", unit: "1 kg", baseMonthlyQty: 0.5, unitUSD: 5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638" },
+      { name: "24-pin data cable", unit: "60 cm", baseMonthlyQty: 22, unitUSD: 1.8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107" },
+      { name: "Control LDO / PMIC kit", unit: "chip", baseMonthlyQty: 26, unitUSD: 0.05, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=997" },
+      { name: "SI7N65F MOSFET (PSU)", unit: "chip", baseMonthlyQty: 32, unitUSD: 0.4, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934" },
+      { name: "SMD resistor sample book", unit: "book", baseMonthlyQty: 0.5, unitUSD: 7.75, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005008894523897.html" },
+      { name: "SMD capacitor sample book", unit: "book", baseMonthlyQty: 0.5, unitUSD: 12, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005004657585875.html" },
+      { name: "Board wash (ultrasonic)", unit: "Mechanic 500 / no-residue", baseMonthlyQty: 0.75, unitUSD: 3.9, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1782", planHint: "With ultrasonic — post-repair deep clean." }
     ]
   },
 
   localConsumablesQuarterly: {
     title: "خطة الطلب ربع السنوية — استهلاكات محلية",
-    note: "مواد محلية متكررة (العتبة/البستان) محسوبة على نفس حجم العمل الشهري. **هاشبورد التخليع = 76 شريحة ASIC/لوح** (تخطيط Bitmain الشائع). **1.7 لوح/شهر** → **≈5 لوحات/ربع** × **1500 ج** ≈ **7,500 ج/ربع** — تفكيك انتقائي وفحص؛ لا كل الشرائح صالحة. **شرائح Zeus جديدة** تبقى احتياطاً في خطة المستورد. **تبريد بنش 4×120mm** في **① أصول Zeus**. **أسلاك الجسر** في **خطة المستورد**. **بخاخ IPA 99%** لشطف الهاشات (`post_repair_cleaning_protocol.md`). الجدول مرتب تلقائياً من الأعلى تكلفة للربع إلى الأقل.",
+    note: "Local recurring (Attaba / Boustan). Donor board ≈76 ASIC; ~1.7 boards/mo → ~5/qtr × 1500 EGP. Bench fans + bridge wires: import plan. Sorted by quarterly EGP (high → low).",
     baselineMonthlyOperations: 75,
     currency: "EGP",
     items: [
-      { name: "هاشبورد تالف للتخليع (مصدر شرائح)", unit: "لوحة (76 ASIC)", baseMonthlyQty: 1.7, unitEGP: 1500, source: "سوق محلي / خردة تعدين", planHint: "**76 شريحة/لوح** — **1.7 لوح/شهر** ≈ **129** موضع تدوير شهري (نظري)؛ **الربع ≈5 لوحات** × 1500 ج ≈ **7,500 ج**. تفكيك انتقائي + فحص؛ Zeus يبقى للعجلة والجودة." },
-      { name: "كيماويات التنظيف", unit: "IPA 99% (عبوة 500ml)", baseMonthlyQty: 1.2, unitEGP: 220, source: "العتبة / كيماويات" },
-      { name: "بخاخ IPA 99%", unit: "عبوة رش كبيرة — شطف نهائي للهاشات", baseMonthlyQty: 0.9, unitEGP: 320, source: "العتبة / كيماويات" },
-      { name: "معجون حراري عام", unit: "GD900 أو ما يعادله", baseMonthlyQty: 1, unitEGP: 250, source: "العتبة / البستان" },
-      { name: "حماية أثناء الهواء الساخن", unit: "Kapton + شريط ألومنيوم", baseMonthlyQty: 1, unitEGP: 80, source: "العتبة" },
-      { name: "حقن فارغة بسن معدني", unit: "علبة ~10 قطع", baseMonthlyQty: 0.6, unitEGP: 45, source: "صيدليات / محلي" },
-      { name: "مشابك تثبيت كابلات", unit: "Silicone Cable Clips", baseMonthlyQty: 0.34, unitEGP: 95, source: "إكسسوارات كمبيوتر" }
+      { name: "Donor hashboard (parts harvesting)", unit: "board (~76 ASIC)", baseMonthlyQty: 1.7, unitEGP: 1500, source: "Local scrap", planHint: "Selective strip + test; new chips stay on import plan." },
+      { name: "IPA 99%", unit: "500 ml bottle", baseMonthlyQty: 1.2, unitEGP: 220, source: "Attaba / chemicals" },
+      { name: "IPA 99% spray", unit: "large spray — hash rinse", baseMonthlyQty: 0.9, unitEGP: 320, source: "Attaba / chemicals" },
+      { name: "GD900 (or equiv.)", unit: "thermal paste", baseMonthlyQty: 1, unitEGP: 250, source: "Attaba / Boustan" },
+      { name: "Kapton + aluminum tape", unit: "hot-air shielding", baseMonthlyQty: 1, unitEGP: 80, source: "Attaba" },
+      { name: "Metal-tip syringes", unit: "~10 pcs", baseMonthlyQty: 0.6, unitEGP: 45, source: "Pharmacy / local" },
+      { name: "Silicone cable clips", unit: "desk routing", baseMonthlyQty: 0.34, unitEGP: 95, source: "PC accessories" }
     ]
   },
 
   purchases: {
-    pageNote: "تقسيم منطقي: أصول ثابتة (مرة واحدة) → نوادر مستوردة (مخزون تخصصي) → العتبة/البستان (متجدد ومساعد). **تنظيم المعمل** (أدراج، علب ESD، حامل أدوات، ملصقات، إلخ) **مدمج في نفس الجداول** مع مصدر مصر / Zeus أو AliExpress وسعر تقديري. لفحص **CLK والإشارات على الهاشبورد (S19/M30 ~25 MHz+)** يلزم **أوسيلوسكوب مكتبي عرض نطاق ≥100 MHz** — مرجع Zeus: UNI-T UTD2102CEX+ مع الطلبية، أو Rigol/Siglent محلياً. فاحص مكونات منضد (مثل DSO-TC3) **اختياري** فقط لسرعة اختبار المكثف/الترانزستور ولا يُعد بديلاً للسكوب.",
+    pageNote: "① Fixed assets ② Zeus/AliExpress stock ③ Local supplies. Hash CLK needs a **bench scope ≥100 MHz** (e.g. UTD2102CEX+). Desk LCR/TC testers are optional — not a CLK substitute.",
 
     fixedAssets: {
       title: "① قائمة الأصول — الاستثمار الثابت",
-      note: "هذه الأدوات «قلب المعمل»: تُشترى مرة واحدة وتعيش معك لسنوات — بما فيها ملفات اختبار PicoBT (أصول رقمية، ليست مستهلكات). **تشمل قوالب Tin / أداة التنقيط ومنصة BGA 90×90 (Tinning)** كأصول ثابتة. **أسلاك الجسر المغطاة قصدير** ليست أصلًا ثابتًا — تُخطَّط كمستهلكات في جدول «مستورد 3 شهور». مرتبة حسب مكان الشراء.",
+      note: "One-time tools + PicoBT test files (digital assets). Tin stencils + 90×90 tinning platform here. Pre-tinned bridge wires → quarterly import plan.",
       groups: [
         {
-          sourceLabel: "🇨🇳 الصين — Zeus Mining / AliExpress",
-          tableHint: "أصول رأسمالية تُشحن من الخارج",
+          sourceLabel: "🇨🇳 China — Zeus Mining / AliExpress",
+          tableHint: "Capital equipment — shipped import",
           kind: "usd",
           items: [
             {
-              name: "التستر الشامل",
+              name: "PicoBT universal tester",
               model: "PicoBT Universal Tester",
-              function: "الجهاز الأهم لتشخيص أعطال الهاشبورد على البنش.",
+              function: "Hashboard diagnosis on bench.",
               price: "$459",
-              priceBefore: "~$587 (2200 ريال)",
-              saving: "وفر $128",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2349",
-              source: "Zeus Mining",
-              badge: "أوفر"
+              source: "Zeus Mining"
             },
             {
-              name: "باور اختبار الهاشبورد (Bench)",
-              model: "Antminer APW12 — إصدارات 1215 (a/b/c/d/e/f/g) حسب الموديل",
-              function: "12–15V / 70A+ — التشغيل الحقيقي تحت الحمل مع PicoBT. ⚠️ أكد رقم الإصدار مع مبيعات Zeus (واتساب) — الإصدارات غير متوافقة بين الموديلات.",
+              name: "APW12 bench PSU",
+              model: "Antminer APW12 — 1215 a/b/c/d/e/f/g (match hash model)",
+              function: "12–15 V / 70 A+ under load. Confirm revision with supplier.",
               price: "$82",
-              priceBefore: "باور مختبر صغير لا يكفي لتيار الهاش الكامل (≈150W مقابل 1000W+)",
-              saving: "صفحة Zeus — اختر الإصدار المناسب لهاشبورداتك",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=306",
-              source: "Zeus Mining",
-              badge: "ناقص إلزامي"
+              source: "Zeus Mining"
             },
             {
-              name: "ملتيميتر رقمي (يومي)",
+              name: "Bench DMM",
               model: "UNI-T UT136C+",
-              function: "قياس جهد/مقاومة/استمرارية للبنش — جهاز «عادي» موثوق؛ **ليس حرارياً** — للنقاط الضيقة استخدم أطراف Zeus (2856/1647) أدناه.",
+              function: "Voltage / resistance / continuity. Not thermal — use fine probes below.",
               price: "$43",
-              priceBefore: "ZOYI ZT-R01 (حراري + DMM) — أغلى إن احتجت لاحقاً كاميرا حرارية",
-              saving: "Zeus — MOQ 1",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3210",
-              source: "Zeus Mining",
-              badge: "DMM أساسي"
+              source: "Zeus Mining"
             },
             {
-              name: "محطة هواء ساخن احترافية",
-              model: "Quick 861DW 1300W Hot Air Rework Station",
-              function: "هواء ساخن احترافي لصيانة الـ ASIC والـ SMD الكثيف.",
+              name: "Hot air station",
+              model: "Quick 861DW 1300W",
+              function: "ASIC / dense SMD rework.",
               price: "$365",
-              priceBefore: "~$375 (Sugon 8610DX محلي)",
-              saving: "جودة أعلى + شراء مع الطلبية",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3208",
-              source: "Zeus Mining",
-              badge: "أفضل"
+              source: "Zeus Mining"
             },
             {
-              name: "منصة IR تسخين شاملة للهاشبورد",
-              model: "PUHUI T-8280 Large IR Preheater (28×27cm)",
-              function: "تسخين متساوٍ للهاشبورد كاملة — يقلل التقوس أثناء الـ rework.",
+              name: "IR preheater",
+              model: "PUHUI T-8280 — 28×27 cm",
+              function: "Full-board even preheat; less warp.",
               price: "$92",
-              priceBefore: "منصات تسخين صغيرة لا تغطي الهاش كاملاً — PUHUI لسطح كبير 28×27cm",
-              saving: "تسخين متساوٍ — نسبة تقوس أقل",
               url: "https://ar.aliexpress.com/item/1005010520024198.html",
-              source: "AliExpress",
-              badge: "ترقية ضرورية"
+              source: "AliExpress"
             },
             {
-              name: "ملف اختبار Antminer",
-              model: "S19 + S19j Pro Test Files",
-              function: "سوفتوير PicoBT لعائلة S19 — بدونها False Errors. أصل رقمي يبقى مع المعمل (ليس مستهلكات).",
-              price: "$49 / ملف",
-              priceBefore: null,
-              saving: "أصل — ترخيص/ملف يُشترى مرة ويُستخدم لسنوات",
+              name: "Antminer PicoBT test files",
+              model: "S19 + S19j Pro",
+              function: "Avoid false errors on S19 family.",
+              price: "$49 / file",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3093",
-              source: "Zeus Mining",
-              badge: "أصل"
+              source: "Zeus Mining"
             },
             {
-              name: "ملف اختبار Whatsminer",
-              model: "M30 / M50 / M60 Test File",
-              function: "سوفتوير PicoBT لموديلات MicroBT. أصل رقمي مع المعمل.",
+              name: "Whatsminer PicoBT test file",
+              model: "M30 / M50 / M60",
+              function: "MicroBT models on PicoBT.",
               price: "$35",
-              priceBefore: null,
-              saving: "أصل — نفس منطق ملفات Antminer",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3744",
-              source: "Zeus Mining",
-              badge: "أصل"
+              source: "Zeus Mining"
             },
             {
-              name: "أوسيلوسكوب مكتبي (فحص CLK الهاش)",
+              name: "Bench oscilloscope (CLK)",
               model: "UNI-T UTD2102CEX+ — 2CH / 100 MHz / 1 GS/s",
-              function: "CLK على S19/M30 ~25 MHz+ — **سكوب مكتبي ≥100 MHz إلزامي** لفحص الإشارات على الهاشبورد.",
+              function: "S19/M30 CLK ~25 MHz+ — need ≥100 MHz scope.",
               price: "$321",
-              priceBefore: "Rigol/Siglent محلي ~28k ج",
-              saving: "مرجع Zeus — اختر فيشة الطاقة على الصفحة",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1972",
-              source: "Zeus Mining",
-              badge: "إلزامي · CLK"
+              source: "Zeus Mining"
             },
             {
-              name: "مبرمج PIC (هاش + باور Antminer)",
+              name: "PIC programmer",
               model: "PICKit 3.5",
-              function: "حرق/قراءة PIC على هاشبورد وباور Antminer — مع MPLAB IPE؛ أصل أرخص من شراء PICkit محلي غير موثوق.",
+              function: "Hash + APW12 PIC with MPLAB IPE.",
               price: "$19",
-              priceBefore: "PICkit محلي ~3200 ج",
-              saving: "Zeus — استرداد ذاتي للفيرموير مقارنة بـ kit3",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=137",
-              source: "Zeus Mining",
-              badge: "برمجة PIC"
+              source: "Zeus Mining"
             },
             {
-              name: "كابل برمجة EEPROM (Hashboard decode)",
-              model: "Hashboard decoding tool — واجهة 18-pin → USB",
-              function: "إعادة كتابة EEPROM عند خلط لوحات أو أخطاء EEPROM في اللوج بعد الإصلاح؛ Antminer + Whatsminer حسب صفحة Zeus.",
+              name: "EEPROM / hash decode cable",
+              model: "18-pin → USB",
+              function: "Rewrite EEPROM; mixed boards / log errors.",
               price: "$15",
-              priceBefore: null,
-              saving: "أداة Zeus الرسمية لخط البيانات",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1560",
-              source: "Zeus Mining",
-              badge: "EEPROM"
+              source: "Zeus Mining"
             },
             {
-              name: "باور DC قابل للضبط (بنش — هاش + كنترول)",
-              model: "WANPTEK KPS3030D — 30V 30A 900W + كابلات تمساح 6mm",
-              function: "**وحدة واحدة للبنش:** قياس/تغذية هاشبورد (تيار عالٍ) **و** حقن فولت دوائر الكنترول — على الكنترول اضبط **حد تيار منخفض** وفعّل OCP حتى لا تضر بالـ LDO. اختر الموديل/الكابلات على الصفحة (~**$230** مع كابلات 6mm حسب اختيارك).",
+              name: "Adjustable bench DC PSU",
+              model: "WANPTEK KPS3030D — 30 V 30 A + 6 mm leads",
+              function: "Hash feed + control inject. Low current limit + OCP on control.",
               price: "$230",
-              priceBefore: "باورين منفصلين (5A محلي + هاش) لم يعودا ضروريين",
-              saving: "Zeus — سلسلة KPS",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2184",
-              source: "Zeus Mining",
-              badge: "Bench DC"
+              source: "Zeus Mining"
             },
             {
-              name: "محطة لحام 2 في 1",
-              model: "Quick 707D+ أو 709D+ — هواء ساخن + كاوية",
-              function: "إصلاح هاش وباور ASIC — **كاوية اللحام + الهواء الساخن في محطة واحدة**؛ يغني عن شراء كاوية هاش منفصلة (مثل 205H محلياً). اختر 707D+ (800W هواء) أو 709D+ أقوى؛ رؤوس **سلسلة 960** من نفس صفحة Zeus. **لا يستبدل 861DW** إن احتجت هواء أقصى للـ BGA الكبير.",
+              name: "2-in-1 rework station",
+              model: "Quick 707D+ / 709D+ — hot air + iron",
+              function: "Does not replace 861DW for max BGA air.",
               price: "$90",
-              priceBefore: null,
-              saving: "Zeus — توفير مساحة مقابل محطتين منفصلتين",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3609",
-              source: "Zeus Mining",
-              badge: "2-in-1"
+              source: "Zeus Mining"
             },
             {
-              name: "منصة BGA 90×90 (Tinning)",
-              model: "BGA 90x90 — Only tinning tool",
-              function: "منصة عامة لتثبيت الشريحة وتنقيط الكرات؛ **أصل ثابت** يُستخدم لسنوات مع قوالب Tin. اختر الـ Kit المناسب من نفس صفحة Zeus.",
+              name: "BGA 90×90 tinning platform",
+              model: "BGA 90×90 kit",
+              function: "Chip hold + reball prep; pick kit on Zeus page.",
               price: "$17.9",
-              priceBefore: null,
-              saving: "صفحة Zeus ID=1829 — اختر الـ Kit المناسب",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1829",
-              source: "Zeus Mining",
-              badge: "منصة عامة · أصل"
+              source: "Zeus Mining"
             },
             {
-              name: "Tin tool — Whatsminer KF1950",
-              model: "Tin tool / Tin stencil",
-              function: "تنقيط/تجهيز لحام لشرائح KF1950 — **قالب أصل ثابت** يُعاد استخدامه.",
+              name: "Tin stencil — KF1950",
+              model: "Whatsminer tin tool",
+              function: "KF1950 reball prep.",
               price: "$3.5",
-              priceBefore: null,
-              saving: "Zeus — مع الشريحة المناسبة",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2292",
-              source: "Zeus Mining",
-              badge: "Tin stencil · أصل"
+              source: "Zeus Mining"
             },
             {
-              name: "Tin tool — Whatsminer KF1958",
-              model: "Tin stencil",
-              function: "تنقيط لشرائح KF1958.",
+              name: "Tin stencil — KF1958",
+              model: "Whatsminer",
+              function: "KF1958.",
               price: "$3.5",
-              priceBefore: null,
-              saving: "Zeus",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2293",
-              source: "Zeus Mining",
-              badge: "Tin stencil · أصل"
+              source: "Zeus Mining"
             },
             {
-              name: "Tin tool — Whatsminer KF1968",
-              model: "Tin stencil",
-              function: "تنقيط لشرائح KF1968/KF1968E.",
+              name: "Tin stencil — KF1968",
+              model: "Whatsminer",
+              function: "KF1968 / KF1968E.",
               price: "$3.5",
-              priceBefore: null,
-              saving: "Zeus",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2295",
-              source: "Zeus Mining",
-              badge: "Tin stencil · أصل"
+              source: "Zeus Mining"
             },
             {
-              name: "Tin tool — Whatsminer KF1973",
-              model: "Tin stencil",
-              function: "تنقيط لشرائح KF1973E وما يعادلها حسب الصفحة.",
+              name: "Tin stencil — KF1973",
+              model: "Whatsminer",
+              function: "KF1973E.",
               price: "$3.5",
-              priceBefore: null,
-              saving: "Zeus",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2296",
-              source: "Zeus Mining",
-              badge: "Tin stencil · أصل"
+              source: "Zeus Mining"
             },
             {
-              name: "Tin tool — Antminer BM1362 (S19j / S19j Pro)",
-              model: "Tin stencil — سلسلة BM1362AK",
-              function: "تنقيط لشرائح BM1362 على هاش S19j / S19j Pro.",
+              name: "Tin stencil — BM1362",
+              model: "S19j / S19j Pro",
+              function: "BM1362AK.",
               price: "$3.5",
-              priceBefore: null,
-              saving: "Zeus",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2344",
-              source: "Zeus Mining",
-              badge: "Tin stencil · أصل"
+              source: "Zeus Mining"
             },
             {
-              name: "Tin stencil — Antminer BM1366BS",
-              model: "tool tin stencil",
-              function: "مساعد تنقيط لشريحة BM1366BS (S19K Pro).",
+              name: "Tin stencil — BM1366BS",
+              model: "S19K Pro",
+              function: "BM1366BS.",
               price: "$3.5",
-              priceBefore: null,
-              saving: "Zeus",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2691",
-              source: "Zeus Mining",
-              badge: "Tin stencil · أصل"
+              source: "Zeus Mining"
             },
             {
-              name: "تبريد اختبار الهاش (4×120mm)",
-              model: "Adjustable speed dual fan — 4× 120mm + منظم سرعة",
-              function: "هواء قوي تحت الهاشبورد أثناء PicoBT — بديل تجميع مراوح محلية يدوياً.",
+              name: "Bench cooling — 4×120 mm",
+              model: "Dual fan kit + speed control",
+              function: "Air under hash during PicoBT.",
               price: "$12.9",
-              priceBefore: "4× مروحة + باور + دكت محلي ~2600 ج",
-              saving: "Zeus — جاهز بمنظم سرعة",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2684",
-              source: "Zeus Mining",
-              badge: "تبريد بنش"
+              source: "Zeus Mining"
             },
             {
-              name: "منفضة ضغط (تنظيف)",
-              model: "F10 / F8 mini turbo violent fan — غبار وهاش",
-              function: "تنظيف غبار الهاش والمراوح والشاسيه وأنفاق الهواء داخل الماينر؛ Zeus يرسل F10 افتراضياً لاحقاً — جزء من «تجديد شكل الجهاز».",
+              name: "Dust blower",
+              model: "F10 / F8 turbo",
+              function: "Hash, fans, chassis dust.",
               price: "$22",
-              priceBefore: null,
-              saving: "أداة صيانة يدوية — شحن مع الطلبية",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3717",
-              source: "Zeus Mining",
-              badge: "تنظيف"
+              source: "Zeus Mining"
             },
             {
-              name: "حصيرة صيانة تحت حرارة عالية",
-              model: "High temperature repair mat",
-              function: "حماية سطح المكتب أثناء الهوت إير/الكاوية — بديل الحصيرة السيليكون المحلية.",
+              name: "High-temp repair mat",
+              model: "Silicone mat",
+              function: "Desk protection for hot air / iron.",
               price: "$8.48",
-              priceBefore: "حصيرة مغناطيس محلية ~480 ج",
-              saving: "Zeus",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=182",
-              source: "Zeus Mining",
-              badge: "سلامة البنش"
+              source: "Zeus Mining"
             },
             {
-              name: "أطراف قياس للملتيميتر",
-              model: "Multimeter test probes",
-              function: "بديل السنون المحلية — توصيل أدق على الـ test points.",
+              name: "DMM probes",
+              model: "Fine tips",
+              function: "Test points on hash.",
               price: "$3.3",
-              priceBefore: "سنون محلية ~350 ج",
-              saving: "Zeus",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2856",
-              source: "Zeus Mining",
-              badge: "قياس"
+              source: "Zeus Mining"
             },
             {
-              name: "مشبك اختبار SMD للملتيميتر",
-              model: "Multimeter SMD Test Clip",
-              function: "تثبيت على أرجل رقيقة / SMD دون انزلاق اليد.",
+              name: "DMM SMD clips",
+              model: "IC clip",
+              function: "Hands-free on small pins.",
               price: "$2.85",
-              priceBefore: null,
-              saving: "Zeus",
               url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1647",
-              source: "Zeus Mining",
-              badge: "SMD"
+              source: "Zeus Mining"
             }
           ]
         },
         {
           sourceLabel: "🏪 مول البستان",
-          tableHint: "أدوات ثقيلة / كهرباء معملية",
+          tableHint: "Heavy gear / lab electrics",
           kind: "egp",
           items: [
-            { name: "ميكروسكوب رقمي", model: "Andonstar AD207 (7 إنش)", function: "رؤية اللحامات والمسارات المقطوعة بدقة.", price: 7000 }
+            { name: "Digital microscope", model: "Andonstar AD207 — 7\"", function: "Solder / trace inspection.", price: 7000 }
           ]
         },
         {
           sourceLabel: "📍 العتبة",
-          tableHint: "معدات مساعدة + تنظيم مخزون وسير عمل (محلياً)",
+          tableHint: "Helpers + workflow",
           kind: "egp",
           items: [
-            { name: "غسالة ألتراسونيك", model: "Ultrasonic Cleaner سعة ~2L", function: "تنظيف نهائي للبوردة من الفلاكس والأوساخ بعد الشغل.", price: 2200 },
-            { name: "فرن تجفيف للبوردات", model: "Drying oven ~60–80°C — دورات ≥30 دقيقة", function: "بروتوكول ما بعد الصيانة: بعد IPA لا تشغّل البوردة رطبة تحت ASIC/LDO؛ تجفيف حراري كما يوصي Zeus — انظر `post_repair_cleaning_protocol.md`.", price: 4500 },
-            { name: "زجاجة مضخة للـ IPA", model: "Push-down Dispenser — محلات صيانة موبايل بالعتبة", function: "تقليل تبخر الكحول 99% وسحب كمية صغيرة بضغطة واحدة أثناء التنظيف.", price: 75 },
-            { name: "حقن فارغة بسن معدني", model: "علبة ~10 قطع — صيدليات / محلات صيانة", function: "تعبئة الفلاكس وتوزيع دقيق تحت الشريحة أو على الـ pads.", price: 45 },
-            { name: "صناديق بلاستيك ملونة (سير عمل)", model: "مجموعة ~6 صناديق — أدوات منزلية بالعتبة", function: "لون لكل حالة (مثلاً أحمر: انتظار / أخضر: جاهز) لتفادي خلط البوردات وقطع الغيار.", price: 220 },
-            { name: "مشابك تثبيت كابلات", model: "Silicone Adhesive Cable Clips — إكسسوارات كمبيوتر بالعتبة", function: "تثبيت كابلات PicoBT والباور على حافة المكتب وتقليل التشابك.", price: 95 },
-            { name: "لمبة سيري أمان للباور", model: "100W bulb in series + حامل + قاعدة توصيل", function: "أبسط وسيلة أمان عند أول تشغيل APW12 بعد الإصلاح لتقليل مخاطر القفلة/الانفجار.", price: 180 }
+            { name: "Ultrasonic cleaner", model: "~2 L", function: "Flux / grime after rework.", price: 2200 },
+            { name: "Board drying oven", model: "60–80 °C — ≥30 min cycles", function: "Post-IPA dry before power; see cleaning protocol.", price: 4500 },
+            { name: "IPA pump bottle", model: "Push-down dispenser", function: "Less evaporation; mobile repair shops.", price: 75 },
+            { name: "Metal-tip syringes", model: "~10 pcs", function: "Flux dosing.", price: 45 },
+            { name: "Colored part bins", model: "~6 boxes", function: "WIP status colors.", price: 220 },
+            { name: "Silicone cable clips", model: "Adhesive", function: "Desk cable routing.", price: 95 },
+            { name: "Series safety bulb", model: "100 W + holder", function: "First power-up after APW12 repair.", price: 180 }
           ]
         }
       ]
@@ -416,237 +344,180 @@ export const DATA = {
 
     importedSpecialty: {
       title: "② النوادر المستوردة — مخزون تخصصي",
-      note: "أشياء صغيرة لكنها «الخلطة السرية»: لا يُستبدل أغلبها ببديل محلي رخيص دون أن تتأثر جودة الإصلاح أو عمر الهاشبورد. **شرائح Bitmain/Whatsminer** من Zeus — **احتياط جديد** يكمّل **~1.7 لوح خردة/شهر** (**76** شريحة/لوح، انظر خطة المحلي ربع السنوية)؛ لا تكديس شرائح جديد بلا donors. **قوالب Tin / منصة BGA 90×90** في **① الأصول**.",
-      location: "الصين — Zeus Mining / AliExpress",
+      note: "Small parts + consumables from Zeus/AliExpress. New chips complement donor boards (~1.7/mo × 76 ASIC). Tin stencils + 90×90 platform: **①**.",
+      location: "China — Zeus Mining / AliExpress",
       currency: "USD",
       items: [
         {
-          name: "شرائح ASIC Bitmain (BM1362)",
-          model: "BM1362AK (ومشتقات BM1362AA/AC/AI/AJ حسب اللوحة)",
-          function: "S19 / S19j / S19j Pro / سلسلة Hydro المذكورة على صفحة Zeus — اختر الرقم حسب جدول التوافق.",
-          price: "$3.5 / شريحة",
-          priceBefore: null,
-          saving: "صفحة Zeus — MOQ 10",
+          name: "BM1362 ASIC",
+          model: "BM1362AK (+ variants per board)",
+          function: "S19 / S19j / S19j Pro — match Zeus table.",
+          price: "$3.5 / chip",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106",
-          source: "Zeus Mining",
-          badge: "مخزون أساسي"
+          source: "Zeus Mining"
         },
         {
-          name: "شرائح ASIC Bitmain (S19K Pro)",
-          model: "BM1366BS",
-          function: "استبدال شريحة هاشبورد Antminer S19K Pro.",
-          price: "$9 / شريحة",
-          priceBefore: null,
-          saving: "Zeus — تطابق موديل اللوحة",
+          name: "BM1366BS ASIC",
+          model: "S19K Pro",
+          function: "S19K Pro hash.",
+          price: "$9 / chip",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3202",
-          source: "Zeus Mining",
-          badge: "مخزون أساسي"
+          source: "Zeus Mining"
         },
         {
-          name: "شرائح ASIC Whatsminer (KF1950)",
+          name: "KF1950 ASIC",
           model: "KF1950-03C",
-          function: "هاشبورد Whatsminer M30 series.",
-          price: "$2 / شريحة",
-          priceBefore: null,
-          saving: "Zeus",
+          function: "M30 series.",
+          price: "$2 / chip",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1994",
-          source: "Zeus Mining",
-          badge: "مخزون أساسي"
+          source: "Zeus Mining"
         },
         {
-          name: "شرائح ASIC Whatsminer (KF1958)",
+          name: "KF1958 ASIC",
           model: "KF1958",
-          function: "M30s / M30s+ / M30+ hash board.",
-          price: "$2 / شريحة",
-          priceBefore: null,
-          saving: "Zeus",
+          function: "M30s / M30s+ / M30+.",
+          price: "$2 / chip",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2297",
-          source: "Zeus Mining",
-          badge: "مخزون أساسي"
+          source: "Zeus Mining"
         },
         {
-          name: "شرائح ASIC Whatsminer (KF1968)",
+          name: "KF1968 ASIC",
           model: "KF1968E-03C",
           function: "M50 / M50S / M30s++ / M30 / M53 / M53S.",
-          price: "$5.8 / شريحة",
-          priceBefore: null,
-          saving: "Zeus",
+          price: "$5.8 / chip",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2200",
-          source: "Zeus Mining",
-          badge: "مخزون أساسي"
+          source: "Zeus Mining"
         },
         {
-          name: "شرائح ASIC Whatsminer (KF1973)",
+          name: "KF1973 ASIC",
           model: "KF1973E-03C",
           function: "M50 / M50S / M53 / M60S.",
-          price: "$7.5 / شريحة",
-          priceBefore: null,
-          saving: "Zeus",
+          price: "$7.5 / chip",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2283",
-          source: "Zeus Mining",
-          badge: "مخزون أساسي"
+          source: "Zeus Mining"
         },
         {
-          name: "فلاكس لحام ASIC",
-          model: "Amtech NC-559-ASM — 10g أصلي (حقنة) أو 100g صيني",
-          function: "لتعويم الشريحة ولحام صحيح — الأصلي 10g هو المفضل للـ ASIC؛ عبوة 100g متاحة على نفس صفحة Zeus.",
+          name: "Amtech NC-559-ASM flux",
+          model: "10g syringe (100g also on page)",
+          function: "ASIC rework.",
           price: "$8",
-          priceBefore: "فلاكس محلي مضروب",
-          saving: "10g أصلي — السعر المرجعي على Zeus",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2277",
-          source: "Zeus Mining",
-          badge: "الخلطة السرية"
+          source: "Zeus Mining"
         },
         {
-          name: "معجون قصدير BGA",
-          model: "Mechanic Solder Paste 183°C — 60g أو 500g",
-          function: "Reballing مضمون — درجة انصهار مناسبة للـ ASIC؛ أوزان متعددة على Zeus.",
+          name: "Mechanic 183°C paste",
+          model: "60g / 500g",
+          function: "BGA reball.",
           price: "$12",
-          priceBefore: "قصدير محلي درجة انصهار عالية",
-          saving: "60g — السعر المرجعي على Zeus (يوجد 500g)",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264",
-          source: "Zeus Mining",
-          badge: "الخلطة السرية"
+          source: "Zeus Mining"
         },
         {
-          name: "منظف بورد (سائل)",
-          model: "Mechanic 500 / S880 / 850 — lead-free circuit board cleaner",
-          function: "تنظيف هاش/كنترول/باور بعد الشغل — بديل منظف البورد المحلي.",
+          name: "Board cleaner",
+          model: "Mechanic 500 / S880 / 850",
+          function: "Post-rework wash.",
           price: "$3.9",
-          priceBefore: "Board wash محلي ~450 ج",
-          saving: "Zeus — موديل 500 على الصفحة",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1782",
-          source: "Zeus Mining",
-          badge: "تنظيف"
+          source: "Zeus Mining"
         },
         {
-          name: "سلك لحام خالي من الرصاص",
-          model: "SANKI — 0.6mm (500g)",
-          function: "لحام يدوي للهاش S19 lead-free — بديل قصدير Alpha/Kester المحلي.",
+          name: "SANKI solder wire",
+          model: "0.6 mm — 500g — lead-free",
+          function: "S19 hand solder.",
           price: "$16.9",
-          priceBefore: "قصدير سلك محلي ~900 ج",
-          saving: "Zeus — قطر 0.6mm / 500g",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3133",
-          source: "Zeus Mining",
-          badge: "سلك لحام"
+          source: "Zeus Mining"
         },
         {
-          name: "قناع لحام UV",
+          name: "UV solder mask",
           model: "Mechanic UVH900-LY",
-          function: "عند احتراق أو رفع الـ pad: يحمي الـ traces والـ pads بعد الإصلاح — بدونه كثير من الترميمات تبقى مؤقتة. يتصلب في ثوانٍ تحت مصباح UV.",
+          function: "Pad/trace repair — cure under UV.",
           price: "$6.54",
-          priceBefore: null,
-          saving: "عزل دائم للمسار بعد إعادة اللحام",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1585",
-          source: "Zeus Mining",
-          badge: "ناقص إلزامي"
+          source: "Zeus Mining"
         },
         {
-          name: "Thermal Putty (معجون جل)",
-          model: "HY234 Hash Board Thermal Putty 1kg",
-          function: "ضروري لموديلات S19 / M30 لملء الفراغات بين المشتتات المزدوجة.",
+          name: "HY234 thermal putty",
+          model: "1 kg",
+          function: "Gap fill between dual heatsinks — S19 / M30.",
           price: "$5",
-          priceBefore: null,
-          saving: "توزيع حراري أفضل من المعجون السائل في الفجوات",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638",
-          source: "Zeus Mining",
-          badge: "S19/M30"
+          source: "Zeus Mining"
         },
         {
-          name: "مخزون كابلات داتا",
-          model: "Data line data cable 24 pin — 60cm",
-          function: "كابلات استهلاكية للبيع والتبديل السريع.",
-          price: "$1.8 / كابل",
-          priceBefore: null,
-          saving: "سعر محدث حسب النوع 24-pin / 60cm",
+          name: "24-pin data cable",
+          model: "60 cm",
+          function: "Stock for sale / swap.",
+          price: "$1.8 / cable",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107",
-          source: "Zeus Mining",
-          badge: "أوفر"
+          source: "Zeus Mining"
         },
         {
-          name: "آيسيهات الكنترول",
-          model: "LDOs (0.8V / 1.8V / 3.3V) & PMIC",
-          function: "مخزون إصلاح كنترول بورد.",
+          name: "Control LDO / PMIC",
+          model: "0.8V / 1.8V / 3.3V",
+          function: "Control board repair stock.",
           price: "$0.05 / chip",
-          priceBefore: "~$107 (400 ريال)",
-          saving: "وفر حتى 100%",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=997",
-          source: "Zeus Mining",
-          badge: "أوفر"
+          source: "Zeus Mining"
         },
         {
-          name: "قطع غيار الباور",
-          model: "SI7N65F 650V 7A N-channel MOSFET",
-          function: "مخزون صيانة باور سبلاي التعدين.",
+          name: "SI7N65F MOSFET",
+          model: "650 V 7 A",
+          function: "Mining PSU repair.",
           price: "$0.4 / chip",
-          priceBefore: null,
-          saving: "سعر محدث لشريحة SI7N65F",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934",
-          source: "Zeus Mining",
-          badge: "أوفر"
+          source: "Zeus Mining"
         },
         {
-          name: "طقم مقاومات SMD",
-          model: "Resistor Kit Sample Book (0201/0402/0603/0805/1206)",
-          function: "Zeus §I.5 S19 — المقاومات حول الـ ASIC تتلف مع الحرارة؛ حجم رملي — اشتِ sets جاهزة.",
+          name: "SMD resistor kit",
+          model: "Sample book 0201–1206",
+          function: "S19 hash — add 2.2µF per Zeus if needed.",
           price: "$7.75",
-          priceBefore: null,
-          saving: "سعر أقل + قيم كثيرة في كتاب واحد",
           url: "https://ar.aliexpress.com/item/1005008894523897.html",
-          source: "AliExpress",
-          badge: "S19 أساسي"
+          source: "AliExpress"
         },
         {
-          name: "طقم مكثفات SMD",
-          model: "Capacitor Sample Book (01005/0201/0402/0603/0805/1206)",
-          function: "نفس منطق الهاش S19 — فلترة بجانب الشرائح؛ أضف 2.2µF كما يوصي Zeus للتكملة.",
+          name: "SMD capacitor kit",
+          model: "Sample book 01005–1206",
+          function: "S19 hash bypass caps.",
           price: "$12",
-          priceBefore: null,
-          saving: "كتاب قيم متعددة بسعر اقتصادي",
           url: "https://ar.aliexpress.com/item/1005004657585875.html",
-          source: "AliExpress",
-          badge: "S19 أساسي"
+          source: "AliExpress"
         },
-        
-        
         {
-          name: "علبة تخزين شرائح (ESD)",
-          model: "Chip anti-static storage box",
-          function: "حفظ شرائح ASIC مفردة أو قطع صغيرة — كرّر الشراء حسب حجم المخزون.",
-          price: "$4.4 / علبة",
-          priceBefore: "طقم AliExpress تقديري",
-          saving: "Zeus — MOQ 1",
+          name: "ESD chip box",
+          model: "Anti-static storage",
+          function: "Loose ASIC / small parts.",
+          price: "$4.4 / box",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1754",
-          source: "Zeus Mining",
-          badge: "ESD · شريحة"
-        },
-        
+          source: "Zeus Mining"
+        }
       ]
     },
 
     localSupplies: {
       title: "③ العتبة ومول البستان — متجدد ومساعد",
-      note: "كل ما هو متاح في مصر: مواد متجددة، كيماويات، كهرباء بسيطة، وإكسسوارات يومية. يشمل **سيليكون 704**، **منظف ألومنيوم للشاسيه**، **Kimwipes**، **كشاف UV**، **بخاخ تلامسات جاف**، و**مسامير مبردات اختيارية** — انظر `post_repair_cleaning_protocol.md`. **المراوح:** يكفي التنظيف المناسب (منفضة F10 وما شابه) وليس استبدال مجموعة المراوح كبند مشتريات. **ملتيميتر Zeus، حصيرة صيانة، أطراف قياس، قصدير سلك SANKI، منظف Mechanic 500، علب ESD** في `①`/`②`؛ **قوالب Tin ومنصة 90×90** في `①` فقط؛ **أسلاك الجسر** في **مستورد 3 شهور**. ميكروسكوب AD207 محلياً غالباً.",
-      location: "مصر — العتبة / مول البستان / شركات كيماويات",
+      note: "Local recurring: chemicals, bench wiring, finishing. Details: `post_repair_cleaning_protocol.md`. Zeus DMM / SANKI / ESD box → ①/②; bridge wires → quarterly import.",
+      location: "Egypt — Attaba / Boustan / chemical suppliers",
       currency: "EGP",
       items: [
-        { name: "كيماويات التنظيف", model: "IPA 99% (≈500ml) — شركات كيماويات بالعتبة", function: "تنظيف الفلاكس والبادز — 99% فقط وليس 70%.", price: 220 },
-        { name: "حماية أثناء الهواء الساخن", model: "شريط Kapton أصفر + شريط ألومنيوم", function: "عزل الحرارة وحماية الـ SMD المجاورة.", price: 80 },
-        { name: "كهرباء البنش", model: "أسلاك نحاس AWG6 + ترامل حلقية + كابلات باور أصلية", function: "ربط APW12 بالهاشبورد بأمان — يفصلها كهربائي ~100 ج.", price: 150 },
-        { name: "مقاومة تفريغ (سلامة البنش)", model: "Discharge Resistor — 25Ω / 100W اسمنتية — محلياً", function: "✗ مطلوب لأمان باور الاختبار على البنش: تفريغ تدريجي للمكثفات الكبيرة بعد الفصل وتقليل صدمات/شرر عند التعامل مع APW12 أو التغذية العالية. اشترِها من محلات المقاومات والكهرباء (العتبة/البستان).", price: 100 },
-        { name: "معجون حراري عام", model: "GD900 أو ما يعادله (سائل)", function: "للاستخدام العام على المشتتات — ليس بديل Thermal Putty في الفجوات.", price: 250 },
-        { name: "قياس وبرمجة بسيطة", model: "USB to TTL (UART للكنترول)", function: "سيريال PuTTY/MobaXterm؛ **أسلاك جسر مغطاة قصدير** تُخطَّط في **خطة المستهلكات المستوردة ربع السنوية** (Zeus ID=2461) وليست من **① الأصول**.", price: 250 },
-        { name: "Recovery كروت MicroSD (صناعية)", model: "8–16 GB × 5–10 — Industrial / High Endurance (Amazon / محلي)", function: "تحديث FPGA على PicoBT/CB4، استعادة كنترول S19، صور اختبار — **لا تستخدم كرت موبايل رخيص للإنتاج.**", price: 432 },
-        { name: "سلك جسر فائق الدقة", model: "Jumper / Enameled Wire قطر 0.1mm — العتبة / مول البستان", function: "جسور للمسارات المقطوعة أو الـ pads الضيقة؛ يُباع بالمتر أو بكرة صغيرة من محلات الكيماويات والإلكترونيات.", price: 120 },
-        { name: "لمبة UV / كشاف UV صغير", model: "UV Curing Lamp (365–405nm)", function: "تنشيط قناع اللحام UV الأخضر بسرعة بعد ترميم المسارات؛ نفس الأداة تُستخدم بعد Jumpers — دقائق بدل انتظار طويل.", price: 320 },
-        { name: "بخاخ تنظيف تلامسات (جاف)", model: "WD-40 Specialist Contact Cleaner أو مكافئ", function: "تنظيف جاف لكابلات الداتا والكنترول من الأكسدة — يقلل هبوط الهاش ريت بسبب سوء التوصيل.", price: 280 },
-        { name: "سلك تنظيف الكاوية", model: "Brass Wool Cup", function: "أفضل من السفنجة المبلولة للحفاظ على حرارة السن وإطالة عمر الـ tip.", price: 90 },
-        { name: "شفاط قصدير يدوي", model: "Desoldering Pump (SS-02 أو مكافئ)", function: "فك مكونات PSU الأكبر وسحب القصدير من الثقوب بشكل أنظف.", price: 420 },
-        { name: "فرش تنظيف ESD", model: "طقم 3-5 أحجام (Anti-static Brushes)", function: "تنظيف الفلاكس وبواقي الكربون حول الـ ASIC ودوائر الباور بدون شحنات ساكنة.", price: 220 },
-        { name: "مناديل Kimwipes أو خالية من الوبر", model: "Lint-free Wipes — علبة", function: "مسح سطح الشيبات قبل وضع HY234/SPG-30B؛ لا تترك وبراً تحت المعجون الحراري.", price: 140 },
-        { name: "سيليكون 704 (RTV)", model: "أنبوبة — إغلاق APW12 بعد الفتح", function: "دليل Zeus FILE 7: إعادة عزل/تثبيت الغطاء والأطراف بعد إصلاح البور — يمنع رطوبة واهتزاز كما في المصنع.", price: 180 },
-        { name: "منظف ألومنيوم للشاسيه", model: "Metal polish / aluminum cleaner — S19", function: "إرجاع لمعة هيكل الألومنيوم بعد إزالة البقع والتأكسد — «الجهاز يبان جديد» للعميل.", price: 220 },
-        { name: "مسامير مبردات ستانلس (اختياري)", model: "طقم متوافق مع تثبيت المشتتات على الهاش", function: "استبدال مسامير مصدية لمظهر احترافي بعد فك المبردات.", price: 120 }
+        { name: "IPA 99%", model: "~500 ml — Attaba", function: "Flux / pads — not 70%.", price: 220 },
+        { name: "Kapton + aluminum tape", model: "Hot-air shield", function: "Protect nearby SMD.", price: 80 },
+        { name: "Bench power wiring", model: "AWG6 + lugs + OEM cables", function: "Safe APW12 → hash.", price: 150 },
+        { name: "Discharge resistor", model: "25 Ω 100 W cement", function: "Bleed big caps after bench power-off.", price: 100 },
+        { name: "GD900 (or equiv.)", model: "Paste — general heatsinks", function: "Not a substitute for HY234 gap fill.", price: 250 },
+        { name: "USB–TTL adapter", model: "UART for control", function: "PuTTY / MobaXterm. Pre-tinned bridges → import plan.", price: 250 },
+        { name: "Industrial MicroSD", model: "8–16 GB × 5–10 — endurance rated", function: "PicoBT FPGA, S19 recovery — not cheap phone cards.", price: 432 },
+        { name: "Fine jumper wire", model: "0.1 mm enameled — Attaba/Boustan", function: "Tight traces / pads.", price: 120 },
+        { name: "UV curing lamp", model: "365–405 nm", function: "Cure UV solder mask fast.", price: 320 },
+        { name: "Contact cleaner spray", model: "WD-40 Specialist or equiv.", function: "Data / control connectors.", price: 280 },
+        { name: "Brass wool (iron tip)", model: "Cup", function: "Tip cleaning — keeps temperature stable.", price: 90 },
+        { name: "Desoldering pump", model: "SS-02 class", function: "PSU through-holes.", price: 420 },
+        { name: "ESD brushes", model: "Set 3–5", function: "Flux / carbon around ASIC & PSU.", price: 220 },
+        { name: "Lint-free wipes", model: "Kimwipes class", function: "Die prep before thermal compound.", price: 140 },
+        { name: "Silicone 704 RTV", model: "Tube", function: "Reseal APW12 after open (Zeus PSU guide).", price: 180 },
+        { name: "Aluminum chassis polish", model: "Metal polish", function: "Cosmetic finish on S19 shell.", price: 220 },
+        { name: "Heatsink screws (optional)", model: "Stainless kit", function: "Replace corroded screws after teardown.", price: 120 }
       ]
     }
   },
