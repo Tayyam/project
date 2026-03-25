@@ -350,9 +350,9 @@ main.insertAdjacentHTML('beforeend', `
   </div>
   <div class="grid-4">
     ${DATA.costPerRepair.map((r, i) => {
-      const colors = ['amber','blue','green','red'];
+      const colors = ['amber','blue','green','red','purple'];
       return `
-        <div class="stat-card ${colors[i]}">
+        <div class="stat-card ${colors[i % colors.length]}">
           <div class="stat-label">${r.category}</div>
           <div class="stat-value">${fmtUSD(r.avgCostUSD)}</div>
           <div class="stat-sub">كان ${fmtUSD(r.oldCostUSD)} → وفّر ${fmtUSD(r.oldCostUSD - r.avgCostUSD)}</div>
@@ -418,9 +418,9 @@ main.insertAdjacentHTML('beforeend', `
   </div>
   <div class="grid-4">
     ${DATA.pricing.map((p, i) => {
-      const colors = ['green','blue','amber','red'];
+      const colors = ['green','blue','amber','red','purple'];
       return `
-        <div class="stat-card ${colors[i]}">
+        <div class="stat-card ${colors[i % colors.length]}">
           <div class="stat-label">${p.service}</div>
           <div class="stat-value">${fmtUSD(p.netProfit)}</div>
           <div class="stat-sub">صافي الربح</div>

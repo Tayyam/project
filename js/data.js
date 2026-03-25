@@ -660,6 +660,13 @@ export const DATA = {
       oldCostUSD: 1.8,
       avgCostUSD: 1.8,
       savingReason: "بدون تغيير — يطابق بند المستورد"
+    },
+    {
+      category: "تدوير جهاز كامل (لوحات تالفة)",
+      materials: "**شراء الجهاز $100** (باور/كنترول/مراوح سليمة، هاش معطل) + خامات إصلاح وتجميل **~$38** (≈3 لوحات بمتوسط استهلاك شرائح/معجون/فلاكس/تنظيف + معجون مبردات «زي الجديد») — **~$138** تكلفة مباشرة / جهاز قبل البيع بـ **$1000**",
+      oldCostUSD: 155,
+      avgCostUSD: 138,
+      savingReason: "تقدير موحّد: شراء منخفض + إصلاح مركّز على الهاشات فقط؛ عدّل حسب موديل الجهاز وعدد الشرائح الفعلي"
     }
   ],
 
@@ -669,7 +676,8 @@ export const DATA = {
     { service: "صيانة الهاشبورد",    clientPrice: 100, materialCost: 8.5, marketerCommission: 20,  netProfit: 71.5 },
     { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 4.2, marketerCommission: 16,  netProfit: 59.8 },
     { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1.5, marketerCommission: 10,  netProfit: 38.5 },
-    { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 1.8, marketerCommission: 3,   netProfit: 10.2 }
+    { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 1.8, marketerCommission: 3,   netProfit: 10.2 },
+    { service: "بيع جهاز بعد الترميم (شراء معيب)", clientPrice: 1000, materialCost: 138, marketerCommission: 200, netProfit: 662 }
   ],
 
   opex: {
@@ -693,32 +701,34 @@ export const DATA = {
       { type: "صيانة هاشبورد",      monthlyCount: 30, timePerUnit: "25–30 دقيقة", totalHours: 13.5, improvement: "كان 45 دق — بفضل قوالب المعجون والتنظيم" },
       { type: "صيانة باور سبلاي",   monthlyCount: 15, timePerUnit: "60 دقيقة",    totalHours: 15,   improvement: null },
       { type: "إحياء كنترول بورد",  monthlyCount: 10, timePerUnit: "20 دقيقة",    totalHours: 3.5,  improvement: "كان 30 دق — بفضل سكوب مكتبي + لحام دقيق + برمجة عند الحاجة" },
-      { type: "بيع/تغيير كابلات",   monthlyCount: 20, timePerUnit: "10 دقائق",    totalHours: 3.5,  improvement: null }
+      { type: "بيع/تغيير كابلات",   monthlyCount: 20, timePerUnit: "10 دقائق",    totalHours: 3.5,  improvement: null },
+      { type: "تدوير جهاز تعدين (شراء معيب)", monthlyCount: 10, timePerUnit: "8–12 ساعة / جهاز", hoursPerUnit: 10, totalHours: 100, improvement: "3 لوحات + اختبار كامل + تنظيف شاسيه ومعجون مبردات" }
     ],
-    totalOperations: 75,
-    totalEffectiveHours: 35.5,
-    capacityUsedPercent: 18,
-    dailyCapacity: "6–8 لوحات هاشبورد يومياً",
-    note: "بفضل قوالب المعجون والسير المنظم، انخفض وقت الهاشبورد من 45 إلى 25–30 دقيقة"
+    totalOperations: 85,
+    totalEffectiveHours: 135.5,
+    capacityUsedPercent: 68,
+    dailyCapacity: "6–8 لوحات هاشبورد يومياً + تدوير أجهزة كاملة حسب الطلب",
+    note: "بفضل قوالب المعجون والسير المنظم، انخفض وقت الهاشبورد من 45 إلى 25–30 دقيقة. **تدوير الجهاز**: افتراض 8–12 ساعة عمل فعلية لكل معدّن (شراء معيب، هاش معطل، باقي الوحدات سليمة)."
   },
 
   monthlyRevenue: [
     { service: "الهاشبورد",      count: 30, pricePerUnit: 100, totalRevenue: 3000, costPerUnit: 8.5, totalCost: 255,  marketerTotal: 600  },
     { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 4.2, totalCost: 63,   marketerTotal: 240  },
     { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1.5, totalCost: 15,   marketerTotal: 100  },
-    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 1.8, totalCost: 36,   marketerTotal: 60   }
+    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 1.8, totalCost: 36,   marketerTotal: 60   },
+    { service: "تدوير جهاز تعدين (شراء معيب)", count: 10, pricePerUnit: 1000, totalRevenue: 10000, costPerUnit: 138, totalCost: 1380, marketerTotal: 2000 }
   ],
 
   pl: {
     currency: "USD / EGP",
     exchangeRate: 54,
-    exchangeNote: "عمولة المسوق 20% تُخصم من إيراد كل خدمة قبل حساب صافي الربح التشغيلي. التحويل: 1 USD = 54 EGP · COGS متوافق مع جدول الإيرادات الشهري",
-    grossRevenue:         { usd: 5000,   egp: 270000 },
-    marketerCommission:   { usd: 1000,   egp: 54000  },
-    cogs:                 { usd: 369,    egp: 19926  },
-    grossProfit:          { usd: 3631,   egp: 196074 },
+    exchangeNote: "عمولة المسوق 20% تُخصم من إيراد كل خدمة قبل حساب صافي الربح التشغيلي. التحويل: 1 USD = 54 EGP · COGS متوافق مع جدول الإيرادات الشهري (يشمل بند تدوير الأجهزة: شراء + خامات إصلاح لكل جهاز).",
+    grossRevenue:         { usd: 15000,  egp: 810000 },
+    marketerCommission:   { usd: 3000,   egp: 162000 },
+    cogs:                 { usd: 1749,   egp: 94446  },
+    grossProfit:          { usd: 12251,  egp: 661554 },
     opex:                 { usd: 629.63, egp: 34000  },
-    netProfit:            { usd: 3001.37,egp: 162074 }
+    netProfit:            { usd: 11621.37, egp: 627554 }
   },
 
   roi: {
@@ -729,8 +739,8 @@ export const DATA = {
       ],
       note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي مماثل + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + حصيرة صيانة 182 + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر). بدون فاحص مكونات منضد اختياري (مثل DSO-TC3)."
     },
-    annualNetProfit:      { usd: 36016.44, egp: 1944888 },
-    monthlyNetProfit:     { usd: 3001.37,  egp: 162074  },
+    annualNetProfit:      { usd: 139456.44, egp: 7530648 },
+    monthlyNetProfit:     { usd: 11621.37,  egp: 627554  },
     paybackDays:          24,
     roiPercent:           1470
   }
