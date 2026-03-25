@@ -57,7 +57,7 @@ Physical **bench capability** tracked in this project (what you own / must acqui
 | Consumables (flux, paste, putty, IPA, bridge jumpers) | true | Amtech, Mechanic 183 °C, HY234, GD900؛ أسلاك جسر مغطاة قصدير كمستهلكات في خطة الاستيراد الربعية |
 | Fixed assets (tin stencil, tin tool, BGA 90×90 tinning platform) | true | قوالب Tin ومنصة التنقيط في **① قائمة الأصول** بـ `js/data.js` |
 | Spares (ASIC, LDO, MOSFET, cables, copper) | true | BM1362 / BM1366BS + KF1950–KF1973, LDO/PMIC kit, AWG6, data cables |
-| Guide-required extras (⚠️ / 📎 in inventory) | yes | كرات 0.4 mm، wick، IIC/EN، 2500/704، حمل إلكتروني، ESD — انظر [tool_inventory.md](tool_inventory.md) (وسيلة الإيضاح + أولويات النواقص) |
+| Guide-required extras (**❌** غير في `data.js`) | yes | كرات 0.4 mm، wick، IIC/EN، 2500، حمل إلكتروني، ESD — رمز **❌** في [tool_inventory.md](tool_inventory.md) |
 
 ### Tool × repair file (where guides mention requirements)
 

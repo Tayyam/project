@@ -34,7 +34,7 @@ This knowledge base is split into **components** under [`asic_repair_kb/componen
 
 | # | Component | Description |
 |---|-----------|-------------|
-| 1 | [Tool inventory](asic_repair_kb/components/tool_inventory.md) | Diagnosis, rework, spares, consumables (confirmed + ⚠️ + acquired) |
+| 1 | [Tool inventory](asic_repair_kb/components/tool_inventory.md) | ✅ في `data.js` مقابل ❌ غير موجود في قائمة المشتريات |
 
 ---
 
