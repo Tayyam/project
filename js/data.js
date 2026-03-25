@@ -679,7 +679,7 @@ export const DATA = {
     { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 4.2, marketerCommission: 16,  netProfit: 59.8 },
     { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1.5, marketerCommission: 10,  netProfit: 38.5 },
     { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 1.8, marketerCommission: 3,   netProfit: 10.2 },
-    { service: "بيع جهاز بعد الترميم (شراء معيب)", clientPrice: 1000, materialCost: 138, marketerCommission: 200, netProfit: 662, successRate: 0.8 }
+    { service: "بيع جهاز بعد الترميم (شراء معيب)", clientPrice: 1000, materialCost: 138, marketerCommission: 0, netProfit: 862, successRate: 0.8, marketerCommissionApplies: false }
   ],
 
   opex: {
@@ -737,24 +737,25 @@ export const DATA = {
     costPerUnit: 138,
     totalRevenue: 8000,
     totalCost: 1380,
-    marketerTotal: 1600
+    marketerTotal: 0,
+    marketerCommissionApplies: false
   },
 
   deviceFlipProject: {
     title: "مشروع تدوير الأجهزة المعيبة",
-    intro: "**مسار مالي مستقل** عن إصلاح القطع بالسعر الثابت: رأس مال دوّار لكل محاولة (**شراء ~$100 + خامات إصلاح** ضمن ~**$138**/محاولة)، بيع **$1000** عند اكتمال الترميم. **الإيراد وعمولة المسوق** تُحسبان على **البيع الناجح فقط** (افتراض نجاح **80%**)؛ **COGS** على **كل محاولة** حتى الفاشلة. **OPEX** الورشة (إيجار، راتب، كهرباء) **لا يُوزَّع** هنا — يظل في قائمة الدخل **المجمّعة** فقط؛ هذا القسم يعرض **مساهمة المشروع قبل OPEX**."
+    intro: "**مسار مالي مستقل** عن إصلاح القطع بالسعر الثابت: رأس مال دوّار لكل محاولة (**شراء ~$100 + خامات إصلاح** ضمن ~**$138**/محاولة)، بيع **$1000** عند اكتمال الترميم. **لا تُطبَّق عمولة المسوق** على هذا البند — **الإيراد** يُحسب على **البيع الناجح فقط** (افتراض نجاح **80%**)؛ **COGS** على **كل محاولة** حتى الفاشلة. **OPEX** الورشة **لا يُوزَّع** هنا — يظل في قائمة الدخل **المجمّعة**؛ هذا القسم يعرض **مساهمة المشروع قبل OPEX**."
   },
 
   pl: {
     currency: "USD / EGP",
     exchangeRate: 54,
-    exchangeNote: "قائمة الدخل تعرض **جزأين** (ورشة إصلاح + مشروع تدوير معيبين) ثم **المجمّع**. عمولة المسوق 20% من إيراد كل بند. مشروع التدوير: إيراد/عمولة على البيع الناجح فقط (80%)، COGS على كل محاولة. **OPEX** يُخصم مرة واحدة من المجمّع.",
+    exchangeNote: "قائمة الدخل: **ورشة الإصلاح** (عمولة مسوق 20% على الإيراد) + **مشروع إعادة بيع الجهاز** (بدون عمولة مسوق) ثم **المجمّع**. التدوير: إيراد على البيع الناجح فقط (80%)، COGS على كل محاولة. **OPEX** يُخصم مرة واحدة من المجمّع.",
     grossRevenue:         { usd: 13000,  egp: 702000 },
-    marketerCommission:   { usd: 2600,   egp: 140400 },
+    marketerCommission:   { usd: 1000,   egp: 54000  },
     cogs:                 { usd: 1749,   egp: 94446  },
-    grossProfit:          { usd: 8651,   egp: 467154 },
+    grossProfit:          { usd: 10251,  egp: 553554 },
     opex:                 { usd: 629.63, egp: 34000  },
-    netProfit:            { usd: 8021.37, egp: 433154 }
+    netProfit:            { usd: 9621.37, egp: 519554 }
   },
 
   roi: {
@@ -765,8 +766,8 @@ export const DATA = {
       ],
       note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي مماثل + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + حصيرة صيانة 182 + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر). بدون فاحص مكونات منضد اختياري (مثل DSO-TC3)."
     },
-    annualNetProfit:      { usd: 96256.44, egp: 5197848 },
-    monthlyNetProfit:     { usd: 8021.37,  egp: 433154  },
+    annualNetProfit:      { usd: 115456.44, egp: 6234648 },
+    monthlyNetProfit:     { usd: 9621.37,  egp: 519554  },
     paybackDays:          24,
     roiPercent:           1470
   }

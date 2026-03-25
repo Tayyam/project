@@ -63,9 +63,10 @@ function computeLocalQuarterlyPlan(data) {
   };
 }
 
-/** صف إيراد شهري مع تطبيق successRate (0–1) إن وُجد: إيراد وعمولة على البيع الناجح فقط، خامات على كل محاولة. */
+/** صف إيراد شهري مع تطبيق successRate (0–1) إن وُجد: إيراد وعمولة على البيع الناجح فقط، خامات على كل محاولة. إن وُجد `marketerCommissionApplies: false` لا تُحسب عمولة على الصف. */
 function effectiveMonthlyRevenueRow(r, marketerPct) {
   const pct = Number(marketerPct) || 20;
+  const skipMkt = r.marketerCommissionApplies === false;
   const rawP = r.successRate;
   const p = rawP != null && rawP !== "" ? Number(rawP) : NaN;
   if (!Number.isNaN(p) && p >= 0 && p <= 1) {
@@ -75,7 +76,7 @@ function effectiveMonthlyRevenueRow(r, marketerPct) {
     const expectedSold = n * p;
     const totalRevenue = expectedSold * price;
     const totalCost = n * cpu;
-    const marketerTotal = totalRevenue * (pct / 100);
+    const marketerTotal = skipMkt ? 0 : totalRevenue * (pct / 100);
     return {
       ...r,
       totalRevenue,
@@ -90,7 +91,7 @@ function effectiveMonthlyRevenueRow(r, marketerPct) {
     ...r,
     totalRevenue: Number(r.totalRevenue) || 0,
     totalCost: Number(r.totalCost) || 0,
-    marketerTotal: Number(r.marketerTotal) || 0,
+    marketerTotal: skipMkt ? 0 : (Number(r.marketerTotal) || 0),
     _expectedSold: Number(r.count) || 0,
     _attempts: Number(r.count) || 0,
     _successRate: null
@@ -442,27 +443,36 @@ main.insertAdjacentHTML('beforeend', `
       <tbody>
         ${DATA.pricing.map(p => {
           const xr = DATA.pl.exchangeRate;
+          const mkPct = Number(DATA.marketerCommissionPercent) || 20;
+          const noMkt = p.marketerCommissionApplies === false;
           const sr = p.successRate != null && p.successRate !== "" ? Number(p.successRate) : null;
           const hasSr = sr != null && !Number.isNaN(sr) && sr >= 0 && sr <= 1;
+          const mktIfSold = noMkt ? 0 : p.clientPrice * mkPct / 100;
+          const netIfSold = p.clientPrice - mktIfSold - p.materialCost;
           const expNetPerAttempt = hasSr
-            ? sr * p.netProfit - (1 - sr) * p.materialCost
+            ? sr * netIfSold - (1 - sr) * p.materialCost
             : null;
           const margin = hasSr && p.clientPrice > 0
             ? ((expNetPerAttempt / p.clientPrice) * 100).toFixed(1)
             : ((p.netProfit / p.clientPrice) * 100).toFixed(1);
-          const mktIfSold = p.clientPrice * (Number(DATA.marketerCommissionPercent) || 20) / 100;
-          const expMktPerAttempt = hasSr ? sr * mktIfSold : p.marketerCommission;
+          const expMktPerAttempt = hasSr && !noMkt ? sr * mktIfSold : (noMkt ? 0 : p.marketerCommission);
           const netMain = hasSr ? fmtUSD(expNetPerAttempt) : fmtUSD(p.netProfit);
           const netSub = hasSr
-            ? `<div style="font-size:.72rem;color:var(--text-muted);margin-top:4px">عند نجاح البيع: ${fmtUSD(p.netProfit)} · عمولة متوقعة/محاولة ≈ ${fmtUSD(expMktPerAttempt)} · خامات/محاولة ${fmtUSD(p.materialCost)}</div>`
+            ? `<div style="font-size:.72rem;color:var(--text-muted);margin-top:4px">عند نجاح البيع: ${fmtUSD(netIfSold)}${noMkt ? " · <span style=\"color:#93c5fd\">بدون عمولة مسوق</span>" : ` · عمولة متوقعة/محاولة ≈ ${fmtUSD(expMktPerAttempt)}`} · خامات/محاولة ${fmtUSD(p.materialCost)}</div>`
             : "";
+          const mktCell = hasSr
+            ? (noMkt
+              ? `<span style="color:var(--text-muted)">—</span><div style="font-size:.68rem;color:#93c5fd;margin-top:2px">لا عمولة</div>`
+              : `${fmtUSD(expMktPerAttempt)} <span style="font-size:.7rem;color:var(--text-muted)">متوقع/محاولة</span><div style="font-size:.68rem;color:var(--text-muted)">${fmtUSD(mktIfSold)} عند بيع واحد</div>`)
+            : fmtUSD(p.marketerCommission);
+          const mktEgpVal = hasSr ? expMktPerAttempt : p.marketerCommission;
           return `
             <tr>
               <td style="font-weight:600">${p.service}${hasSr ? `<div style="font-size:.72rem;color:#93c5fd;font-weight:500;margin-top:4px">نجاح متوقع ${Math.round(sr * 100)}% (إيراد فقط على البيع الناجح)</div>` : ""}</td>
               <td class="blue mono">${fmtUSD(p.clientPrice)}</td>
               <td class="mono" style="color:#93c5fd;font-size:.85rem">${fmtEGP(Math.round(p.clientPrice * xr))}</td>
-              <td style="color:#fbbf24" class="mono">${hasSr ? `${fmtUSD(expMktPerAttempt)} <span style="font-size:.7rem;color:var(--text-muted)">متوقع/محاولة</span><div style="font-size:.68rem;color:var(--text-muted)">${fmtUSD(mktIfSold)} عند بيع واحد</div>` : fmtUSD(p.marketerCommission)}</td>
-              <td class="mono" style="color:#fcd34d;font-size:.85rem">${fmtEGP(Math.round((hasSr ? expMktPerAttempt : p.marketerCommission) * xr))}</td>
+              <td style="color:#fbbf24" class="mono">${mktCell}</td>
+              <td class="mono" style="color:#fcd34d;font-size:.85rem">${fmtEGP(Math.round(mktEgpVal * xr))}</td>
               <td style="color:#f87171" class="mono">${fmtUSD(p.materialCost)}</td>
               <td class="mono" style="color:#fca5a5;font-size:.85rem">${fmtEGP(Math.round(p.materialCost * xr))}</td>
               <td class="green mono">${netMain}${netSub || ""}</td>
@@ -481,15 +491,19 @@ main.insertAdjacentHTML('beforeend', `
         }).join('')}
       </tbody>
     </table>
-    <p class="stat-note" style="margin-top:10px;text-align:center">عمولة المسوق ${DATA.marketerCommissionPercent}% من سعر العميل · صافي للمركز = سعر العميل − العمولة − الخامات · بند التدوير: <strong>صافي متوقع/محاولة</strong> = نسبة النجاح × صافي عند البيع − (1 − نسبة النجاح) × خامات المحاولة · تحويل: 1 USD = ${DATA.pl.exchangeRate} EGP</p>
+    <p class="stat-note" style="margin-top:10px;text-align:center">عمولة المسوق ${DATA.marketerCommissionPercent}% من سعر العميل على خدمات الإصلاح · **إعادة بيع الجهاز بعد الترميم**: بدون عمولة مسوق · صافي متوقع/محاولة (التدوير) = نسبة النجاح × (سعر البيع − خامات المحاولة) − (1 − نسبة النجاح) × خامات المحاولة · تحويل: 1 USD = ${DATA.pl.exchangeRate} EGP</p>
   </div>
   <div class="grid-4">
     ${DATA.pricing.map((p, i) => {
       const colors = ['green','blue','amber','red','purple'];
+      const mkPct = Number(DATA.marketerCommissionPercent) || 20;
+      const noMkt = p.marketerCommissionApplies === false;
+      const mktIfSold = noMkt ? 0 : p.clientPrice * mkPct / 100;
+      const netIfSold = p.clientPrice - mktIfSold - p.materialCost;
       const sr = p.successRate != null && p.successRate !== "" ? Number(p.successRate) : null;
       const hasSr = sr != null && !Number.isNaN(sr) && sr >= 0 && sr <= 1;
-      const expNet = hasSr ? sr * p.netProfit - (1 - sr) * p.materialCost : p.netProfit;
-      const sub = hasSr ? `متوقع/محاولة (${Math.round(sr * 100)}% نجاح) · عند البيع ${fmtUSD(p.netProfit)}` : "صافي الربح";
+      const expNet = hasSr ? sr * netIfSold - (1 - sr) * p.materialCost : p.netProfit;
+      const sub = hasSr ? `متوقع/محاولة (${Math.round(sr * 100)}% نجاح) · عند البيع ${fmtUSD(netIfSold)}${noMkt ? " · لا عمولة" : ""}` : "صافي الربح";
       return `
         <div class="stat-card ${colors[i % colors.length]}">
           <div class="stat-label">${p.service}</div>
@@ -763,7 +777,7 @@ main.insertAdjacentHTML('beforeend', `
         </tr>
       </tbody>
     </table>
-    <p class="stat-note" style="margin-top:10px;text-align:center">الخامات ≈ ${fmtEGP(Math.round(totCost * DATA.pl.exchangeRate))} · عمولة المسوق ≈ ${fmtEGP(Math.round(totMkt * DATA.pl.exchangeRate))} · صافي التشغيل قبل OPEX ≈ ${fmtUSD(totNetToCenter)}${hasSuccessRateAdjustedFlip ? " · <strong>مشروع التدوير</strong>: الإيراد والعمولة بنسبة النجاح؛ الخامات على كل محاولة." : ""}</p>
+    <p class="stat-note" style="margin-top:10px;text-align:center">الخامات ≈ ${fmtEGP(Math.round(totCost * DATA.pl.exchangeRate))} · عمولة المسوق ≈ ${fmtEGP(Math.round(totMkt * DATA.pl.exchangeRate))} · صافي التشغيل قبل OPEX ≈ ${fmtUSD(totNetToCenter)}${hasSuccessRateAdjustedFlip ? " · <strong>مشروع التدوير</strong>: الإيراد بنسبة النجاح، <strong>بدون عمولة مسوق</strong>؛ الخامات على كل محاولة." : ""}</p>
   </div>
 </section>
 `);
@@ -798,7 +812,7 @@ main.insertAdjacentHTML('beforeend', `
     <div class="stat-card blue">
       <div class="stat-label">إيراد متوقع (بيع ناجح)</div>
       <div class="stat-value">${fmtUSD(plSegFlip.rev)}</div>
-      <div class="stat-sub">عمولة مسوق ${fmtUSD(plSegFlip.mkt)}</div>
+      <div class="stat-sub">${plSegFlip.mkt > 0 ? `عمولة مسوق ${fmtUSD(plSegFlip.mkt)}` : "بدون عمولة مسوق على إعادة البيع"}</div>
     </div>
     <div class="stat-card red">
       <div class="stat-label">تكلفة مباشرة (كل المحاولات)</div>
