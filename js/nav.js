@@ -4,8 +4,10 @@ export function animateRoiBars() {
   setTimeout(() => {
     const b1 = document.getElementById('roiBar1');
     const b2 = document.getElementById('roiBar2');
-    if (b1) b1.style.width = '100%';
-    if (b2) b2.style.width = '100%';
+    const w1 = Math.min(100, Math.max(0, Number(b1?.dataset.fillPct) || 0));
+    const w2 = Math.min(100, Math.max(0, Number(b2?.dataset.fillPct) || 0));
+    if (b1) b1.style.width = `${w1}%`;
+    if (b2) b2.style.width = `${w2}%`;
   }, 100);
 }
 

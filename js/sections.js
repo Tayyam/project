@@ -118,12 +118,16 @@ function segmentTotalsUSD(arr) {
 }
 
 /* ── 1. Workflow ── */
+const workflowIntro = DATA.workflowIntro || "";
 main.insertAdjacentHTML('beforeend', `
 <section id="workflow" class="active">
   <div class="section-heading">
     <div class="icon">⚙️</div>
     <h2>مسار العمل <span>الاحترافي</span></h2>
   </div>
+  ${workflowIntro ? `<div class="card" style="margin-bottom:22px;padding:16px 20px;border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06)">
+    <p style="margin:0;font-size:.88rem;color:var(--text-muted);line-height:1.9">${workflowIntro}</p>
+  </div>` : ""}
   <div class="workflow-list">
     ${DATA.workflow.map(w => `
       <div class="workflow-step">
@@ -135,6 +139,7 @@ main.insertAdjacentHTML('beforeend', `
       </div>
     `).join('')}
   </div>
+  <p class="stat-note" style="margin-top:22px;text-align:center;font-size:.8rem">الترتيب إرشادي — رجّح السلامة والتشخيص قبل اللحام. للتفاصيل التقنية افتح تبويب <strong>دليل الإصلاح</strong> والملفات المرتبطة.</p>
 </section>
 `);
 
@@ -999,11 +1004,15 @@ const roiPercent = capexComputed.totalUSD > 0
   : 0;
 const paybackLabel = paybackDays ? `${paybackDays} يوم` : "غير متاح";
 const paybackSub = paybackDays ? "فترة الاسترداد" : "صافي الربح الشهري ≤ 0";
+const roiBarFillPct = Math.min(100, Math.max(0, roiPercent));
+const recoveryOneMonthPct = capexComputed.totalUSD > 0 && monthlyNetProfitUSD > 0
+  ? Math.min(100, (monthlyNetProfitUSD / capexComputed.totalUSD) * 100)
+  : 0;
 const roiItems = [
   { label: 'صافي الربح الشهري',  value: fmtUSD(monthlyNetProfitUSD), color: 'green', sub: fmtEGP(monthlyNetProfitEGP) },
   { label: 'صافي الربح السنوي',  value: fmtUSD(annualNetProfitUSD),  color: 'amber', sub: fmtEGP(annualNetProfitEGP)  },
   { label: 'استرداد رأس المال',  value: paybackLabel,                color: 'blue',  sub: paybackSub                 },
-  { label: 'العائد السنوي',      value: (roiPercent >= 0 ? '+' : '') + roiPercent + '%', color: 'red', sub: 'محسوب ديناميكياً' }
+  { label: 'العائد السنوي (ROI)', value: (roiPercent >= 0 ? '+' : '') + roiPercent + '%', color: 'red', sub: 'صافي سنوي ÷ إجمالي CAPEX' }
 ];
 
 main.insertAdjacentHTML('beforeend', `
@@ -1012,8 +1021,9 @@ main.insertAdjacentHTML('beforeend', `
     <div class="icon">🚀</div>
     <h2>العائد على <span>الاستثمار</span></h2>
   </div>
+  ${roiCfg.intro ? `<div class="card" style="margin-bottom:20px"><p style="margin:0;font-size:.86rem;color:var(--text-muted);line-height:1.85">${roiCfg.intro}</p></div>` : ""}
 
-  <div class="grid-4" style="margin-bottom:28px">
+  <div class="grid-4" style="margin-bottom:24px">
     ${roiItems.map(item => `
       <div class="stat-card ${item.color}">
         <div class="stat-label">${item.label}</div>
@@ -1021,6 +1031,32 @@ main.insertAdjacentHTML('beforeend', `
         <div class="stat-sub">${item.sub}</div>
       </div>
     `).join('')}
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-title">📎 من الإيراد إلى الصافي <span style="font-size:.72rem;color:var(--text-muted)">(نفس افتراضات الجداول)</span></div>
+    <div class="table-wrap" style="margin:0">
+      <table>
+        <thead>
+          <tr>
+            <th>البند</th>
+            <th style="text-align:left">USD</th>
+            <th style="text-align:left">EGP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="font-weight:600">إيرادات العملاء (مجمّع)</td><td class="mono" style="color:#60a5fa">${fmtUSD(monthlyRevenueFromTable)}</td><td class="mono" style="color:#93c5fd">${fmtEGP(Math.round(monthlyRevenueFromTable * xr))}</td></tr>
+          <tr><td>عمولة المسوق <span style="font-size:.72rem;color:var(--text-muted)">(ورشة فقط — لا تُطبَّق على إعادة بيع الجهاز)</span></td><td class="mono" style="color:#fbbf24">− ${fmtUSD(monthlyMktFromTable)}</td><td class="mono">− ${fmtEGP(Math.round(monthlyMktFromTable * xr))}</td></tr>
+          <tr><td>COGS (خامات)</td><td class="mono" style="color:#f87171">− ${fmtUSD(monthlyCogsFromTable)}</td><td class="mono">− ${fmtEGP(Math.round(monthlyCogsFromTable * xr))}</td></tr>
+          <tr style="background:rgba(16,185,129,.06)"><td style="font-weight:700">صافي قبل OPEX</td><td class="mono" style="color:#34d399;font-weight:800">${fmtUSD(monthlyGrossProfitFromTable)}</td><td class="mono" style="font-weight:800">${fmtEGP(Math.round(monthlyGrossProfitFromTable * xr))}</td></tr>
+          <tr><td style="padding-inline-start:16px;font-size:.88rem;color:var(--text-muted)">├ ورشة الإصلاح</td><td class="mono">${fmtUSD(plSegRepair.gross)}</td><td class="mono">${fmtEGP(Math.round(plSegRepair.gross * xr))}</td></tr>
+          <tr><td style="padding-inline-start:16px;font-size:.88rem;color:var(--text-muted)">└ مشروع تدوير المعيبين</td><td class="mono">${fmtUSD(plSegFlip.gross)}</td><td class="mono">${fmtEGP(Math.round(plSegFlip.gross * xr))}</td></tr>
+          <tr><td>OPEX شهري</td><td class="mono" style="color:#f87171">− ${fmtUSD(monthlyOpexUSD)}</td><td class="mono">− ${fmtEGP(monthlyOpexEGP)}</td></tr>
+          <tr style="background:rgba(245,158,11,.1)"><td style="font-weight:800">صافي ربح شهري</td><td class="mono" style="font-weight:900;color:var(--accent)">${fmtUSD(monthlyNetProfitUSD)}</td><td class="mono" style="font-weight:900">${fmtEGP(monthlyNetProfitEGP)}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="stat-note" style="margin-top:12px;margin-bottom:0;text-align:center;font-size:.78rem">استرداد CAPEX التقريبي: <strong>${recoveryOneMonthPct.toFixed(1)}%</strong> من رأس المال المقدَّر كل شهر (صافي شهري ÷ CAPEX) — عند ثبات الصافي والـ CAPEX.</p>
   </div>
 
   <div class="grid-2">
@@ -1047,16 +1083,17 @@ main.insertAdjacentHTML('beforeend', `
           <span style="font-weight:800;color:var(--accent3)">${(roiPercent >= 0 ? '+' : '') + roiPercent}%</span>
         </div>
         <div class="roi-bar-wrap">
-          <div class="roi-bar" id="roiBar1" style="width:0%"></div>
+          <div class="roi-bar" id="roiBar1" data-fill-pct="${roiBarFillPct}" style="width:0%" title="ROI سنوي ${roiPercent}% — العرض مُقصى عند 100%"></div>
         </div>
+        <div style="font-size:.72rem;color:var(--text-muted);margin-top:6px">الشريط يعكس min(ROI، 100%) للعرض؛ النسبة الكاملة أعلى.</div>
       </div>
       <div style="padding:10px 0;margin-top:8px">
         <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-          <span style="font-size:.84rem;color:var(--text-muted)">نسبة استرداد رأس المال</span>
-          <span style="font-weight:800;color:#60a5fa">${paybackDays ? `في ${paybackDays} يوماً فقط!` : "غير متاح حالياً"}</span>
+          <span style="font-size:.84rem;color:var(--text-muted)">نسبة استرداد CAPEX في شهر</span>
+          <span style="font-weight:800;color:#60a5fa">${paybackDays ? `${paybackDays} يوم ≈ استرداد كامل` : "غير متاح"} · ${recoveryOneMonthPct.toFixed(1)}%/شهر</span>
         </div>
         <div class="roi-bar-wrap">
-          <div class="roi-bar" id="roiBar2" style="width:0%;background:linear-gradient(90deg,var(--accent2),#93c5fd)"></div>
+          <div class="roi-bar" id="roiBar2" data-fill-pct="${recoveryOneMonthPct.toFixed(1)}" style="width:0%;background:linear-gradient(90deg,var(--accent2),#93c5fd)"></div>
         </div>
       </div>
       <div style="margin-top:20px;padding:14px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:10px;text-align:center">
@@ -1065,7 +1102,7 @@ main.insertAdjacentHTML('beforeend', `
         <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px">${fmtEGP(annualNetProfitEGP)} سنوياً</div>
       </div>
       <p class="stat-note" style="margin-top:12px;text-align:center">
-        يعتمد على جدول الإيرادات <strong>المجمّع</strong> (ورشة إصلاح + مشروع تدوير معيبين): ${fmtUSD(monthlyRevenueFromTable)} إيراد − ${fmtUSD(monthlyMktFromTable)} عمولة − ${fmtUSD(monthlyCogsFromTable)} خامات − ${fmtUSD(monthlyOpexUSD)} OPEX.
+        صافي الربح = إيراد مجمّع − عمولة مسوق <strong>على الورشة فقط</strong> − COGS − OPEX. إجمالي CAPEX المستخدم في ROI واسترداد الأيام: <strong>${fmtUSD(capexComputed.totalUSD)}</strong> (${fmtEGP(capexComputed.totalEGP)}).
       </p>
     </div>
   </div>
