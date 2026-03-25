@@ -57,7 +57,7 @@ Physical **bench capability** tracked in this project (what you own / must acqui
 | Consumables (flux, paste, putty, IPA, bridge jumpers) | true | Amtech, Mechanic 183 °C, HY234, GD900؛ أسلاك جسر مغطاة قصدير كمستهلكات في خطة الاستيراد الربعية |
 | Fixed assets (tin stencil, tin tool, BGA 90×90 tinning platform) | true | قوالب Tin ومنصة التنقيط في **① قائمة الأصول** بـ `js/data.js` |
 | Spares (ASIC, LDO, MOSFET, cables, copper) | true | BM1362 / BM1366BS + KF1950–KF1973, LDO/PMIC kit, AWG6, data cables |
-| Guide-required extras (**❌** غير في `data.js`) | yes | IIC/EN، 2500، حمل إلكتروني — رمز **❌** في [tool_inventory.md](tool_inventory.md) |
+| Guide-required extras (**❌** غير في `data.js`) | yes | IIC/EN، حمل إلكتروني — رمز **❌** في [tool_inventory.md](tool_inventory.md) |
 
 ### Tool × repair file (where guides mention requirements)
 
@@ -66,7 +66,7 @@ Physical **bench capability** tracked in this project (what you own / must acqui
 | [repair_s19_hashboard.md](repair_s19_hashboard.md) | APW12, PicoBT V2.2010, 4 fans, 25 Ω discharge, scope (CLK), 0402 kit, SPG-30B, 0.4 mm balls, PICkit3 |
 | [repair_whatsminer_m30s_hashboard.md](repair_whatsminer_m30s_hashboard.md) | CB4-V10, 12 V + adjustable hash supply, **100 MHz scope**, M1 shell + fan, HY234, شرائح KF1950–KF1973 + tin stencil المطابق |
 | [repair_whatsminer_test_fixture.md](repair_whatsminer_test_fixture.md) | CB4-V10, 13 V / 31 A PSU, Ethernet/USB dongle, MobaXterm |
-| [repair_apw12_psu.md](repair_apw12_psu.md) | 80 W+ iron, heat gun 260 °C, AC variac or bulb, electronic load, scope, paste **2500**, **704 silicone** |
+| [repair_apw12_psu.md](repair_apw12_psu.md) | 80 W+ iron, heat gun 260 °C, AC variac or bulb, electronic load, scope, thermal paste (**MX-6** في `data.js` بدل spec **2500** بالدليل)، **704 silicone** |
 | [repair_s19_control_board.md](repair_s19_control_board.md) | UART, PuTTY, fine soldering, LDO/PMIC spares |
 | [repair_whatsminer_control_board.md](repair_whatsminer_control_board.md) | WhatsMinerTools, MobaXterm, cable/polarity checks |
 

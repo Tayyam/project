@@ -87,9 +87,12 @@ export const DATA = {
       { name: "BGA solder balls 0.4mm", unit: "bottle — select size on Zeus", baseMonthlyQty: 0.25, unitUSD: 2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1555", planHint: "Order **0.4 mm** + lead-free on product page." },
       { name: "Mechanic UVH900-LY solder mask", unit: "tube", baseMonthlyQty: 2, unitUSD: 6.54, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1585" },
       { name: "HY234 thermal putty", unit: "1 kg", baseMonthlyQty: 0.5, unitUSD: 5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1638" },
+      { name: "Arctic MX-6 thermal paste", unit: "8 g tube — select on Zeus", baseMonthlyQty: 0.2, unitUSD: 19, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2835", planHint: "IceRiver hash re-paste (Zeus); also workshop MOS ↔ heatsink vs Bitmain **2500** spec in APW12 mirror." },
       { name: "24-pin data cable", unit: "60 cm", baseMonthlyQty: 22, unitUSD: 1.8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=107" },
       { name: "Control LDO / PMIC kit", unit: "chip", baseMonthlyQty: 26, unitUSD: 0.05, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=997" },
       { name: "SI7N65F MOSFET (PSU)", unit: "chip", baseMonthlyQty: 32, unitUSD: 0.4, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934" },
+      { name: "TPHR9003NL MOSFET (hash)", unit: "chip", baseMonthlyQty: 2, unitUSD: 1.2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=84", planHint: "S19 buck — Zeus MOQ 20; adjust order batch." },
+      { name: "PIC16F1704", unit: "chip", baseMonthlyQty: 1.5, unitUSD: 3.5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1124", planHint: "Hash U3 + APW12 PIC — Zeus MOQ 10." },
       { name: "SMD resistor sample book", unit: "book", baseMonthlyQty: 0.5, unitUSD: 7.75, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005008894523897.html" },
       { name: "SMD capacitor sample book", unit: "book", baseMonthlyQty: 0.5, unitUSD: 12, source: "AliExpress", url: "https://ar.aliexpress.com/item/1005004657585875.html" },
       { name: "Desoldering wick CP-2015", unit: "2.0mm × 1.5m roll", baseMonthlyQty: 0.4, unitUSD: 1.96, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1870" },
@@ -482,6 +485,14 @@ export const DATA = {
           source: "Zeus Mining"
         },
         {
+          name: "Arctic MX-6 thermal paste",
+          model: "8 g — pick size on Zeus page",
+          function: "IceRiver hash board repair (Zeus). Workshop also uses for MOS ↔ heatsink; Bitmain mirror cites spec **2500** bulk grease for APW12.",
+          price: "$19",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2835",
+          source: "Zeus Mining"
+        },
+        {
           name: "24-pin data cable",
           model: "60 cm",
           function: "Stock for sale / swap.",
@@ -503,6 +514,22 @@ export const DATA = {
           function: "Mining PSU repair.",
           price: "$0.4 / chip",
           url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3934",
+          source: "Zeus Mining"
+        },
+        {
+          name: "TPHR9003NL MOSFET",
+          model: "Hash board — S19pro / S19jpro / S19+ / D7 / L7 / S9",
+          function: "Main buck switch FETs (Q2/Q3/Q6/Q7 class).",
+          price: "$1.2 / chip",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=84",
+          source: "Zeus Mining"
+        },
+        {
+          name: "PIC16F1704",
+          model: "S19 family hash U3; APW9/APW12 PIC",
+          function: "Replace damaged PIC — Zeus lists S19jpro, S19a, T19a, S19pro, Hydro variants, S19+, E9PRO, D7, L7 hash + APW9/APW12.",
+          price: "$3.5 / chip",
+          url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1124",
           source: "Zeus Mining"
         },
         {

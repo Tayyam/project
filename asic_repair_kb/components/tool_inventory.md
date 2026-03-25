@@ -74,13 +74,14 @@
 
 | العنصر | | مرجع |
 |--------|---|------|
-| شرائح ASIC Zeus · LDO · MOSFET · كابلات داتا | ✅ | |
+| شرائح ASIC Zeus · LDO · SI7N65F · كابلات داتا | ✅ | |
+| **PIC16F1704** (هاش + APW12) | ✅ | [Zeus ID=1124](https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1124) |
+| **TPHR9003NL** (هاش buck) | ✅ | [Zeus ID=84](https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=84) · قائمة الأدوات: [Repair tools](https://www.zeusbtc.com/ASIC-Miner-Repair/Repair-tools/) |
 | طقم مقاومات/مكثفات | ✅ | |
 | كرات لحام **0.4 mm** | ✅ | Zeus ID=1555 · `②` + مخزون ربع سنوي |
 | كابل IIC/EN لبنش APW12 | ❌ | باور |
-| معجون واجهة **2500** (MOS–مشتت) | ❌ | باور |
+| معجون واجهة MOS–مشتت | ✅ 🔄 الدليل يذكر **2500**؛ المخزن **Arctic MX-6** 8g | [Zeus ID=2835](https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2835) |
 | MicroSD صناعي | ✅ | |
-| رقائق عطل محدد (TPHR… / PIC…) | ❌ حسب العطل | |
 
 ## سوفتوير
 
@@ -97,6 +98,6 @@
 
 ---
 
-**نواقص سريعة:** ❌ IIC/EN · 2500 · (اختياري) حمل إلكتروني.
+**نواقص سريعة:** ❌ IIC/EN لبنش APW12 · (اختياري) حمل إلكتروني ~3.6 kW.
 
 **صفوف ✅** = راجع السعر والكمية في `data.js` قبل الطلب.

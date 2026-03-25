@@ -45,7 +45,7 @@
 ## مراجع
 
 - [repair_s19_hashboard.md](repair_s19_hashboard.md) — SPG-30B، IPA، غسل اللوحة  
-- [repair_apw12_psu.md](repair_apw12_psu.md) — 704، 2500  
+- [repair_apw12_psu.md](repair_apw12_psu.md) — 704، معجون حراري واجهة (MX-6 في المشتريات؛ الدليل يذكر spec 2500)  
 - [youtube_learning.md](youtube_learning.md)
 
 ---

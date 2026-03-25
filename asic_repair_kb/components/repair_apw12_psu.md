@@ -107,7 +107,7 @@ Auxiliary path:
 | 7 | Tweezers | — |
 | 8 | Hashboard tester | ZJ0001000001 or V9 1.2 + special PSU test card firmware |
 | 9 | Oscilloscope | Configure if available; confirm Fpwm 450 kHz–1 MHz present |
-| 10 | Thermal paste | Spec 2500 — for MOS ↔ heatsink interface |
+| 10 | Thermal paste | **Arctic MX-6** 8g (Zeus ID=2835) — MOS ↔ heatsink; Bitmain mirror cites spec **2500** bulk grease |
 | 11 | 704 silicone | Re-fix cover after original PCBA glue damaged during repair |
 | 12 | Flux + solder | Lead-free solder wire + IPA for cleaning |
 | 13 | IIC enable switch | 4-wire cable (blue/brown/green/white) for bench testing without control board |
@@ -171,7 +171,7 @@ Auxiliary path:
 
 ```
 1. Check all 3 × 60 mm fans — all must spin (intake direction)
-2. Replace thermal paste (spec 2500) between MOS devices and heatsink
+2. Replace thermal paste between MOS devices and heatsink (workshop: **Arctic MX-6** — see `data.js`; Bitmain text: spec **2500**)
 3. Check fan power connections (from SB 12 V rail)
 4. Re-apply 704 silicone if component cover glue was damaged during repair
 ```
@@ -329,7 +329,7 @@ Auxiliary path:
 4. Heat soldering iron (constant-temp) to melt solder; use desoldering pump to clear through-hole pins
 5. Remove fixing screws from MOS body on heatsink
 6. Remove insulating sheet between MOS body and heatsink (replace with new one on reinstall)
-7. Install same-model MOS only; apply thermal paste spec 2500 between body and heatsink
+7. Install same-model MOS only; apply thermal paste (**MX-6** or equivalent) between body and heatsink
 8. Solder leads; verify no short between drain/gate/source
 9. After reassembly: full circuit short-check before applying AC voltage
 
@@ -430,6 +430,6 @@ Regenerate: `python scripts/fetch_zeus_kb_source.py apw12_repair_guide apw12_121
 - [ ] Soldering iron 80 W+ (pointed tip + knife tip)
 - [ ] Heat gun calibrated to 260 °C ±2 °C
 - [ ] MOSFETs (TK31N60W / TK31N60W5 / TPH4R10ANH) + PWM ICs in stock
-- [ ] Thermal paste spec 2500 + 704 silicone available
+- [ ] Thermal paste (**Arctic MX-6** per `data.js`) + 704 silicone available
 - [ ] Flux + lead-free solder wire + IPA for cleaning
 - [ ] IIC test fixture (ZJ0001000001 or V9 1.2) with APW12 test firmware
