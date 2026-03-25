@@ -9,6 +9,10 @@ python -m http.server 8080
 
 Then browse `http://localhost:8080/`.
 
+**Netlify:** [`netlify.toml`](netlify.toml) sets `publish = "."` and redirects `/sources/*` → `/asic_repair_kb/sources/*` (old broken image URLs). The KB renderer rewrites `../sources/…` links to `/asic_repair_kb/sources/…` in [`js/kb.js`](js/kb.js). **Deploy must include** `asic_repair_kb/sources/` (large trees sometimes stay untracked — if images still 404, confirm the folder is in git and not excluded by `.gitignore`).
+
+**Knowledge base (Markdown):** start at [`asic_repair_knowledge_base.md`](asic_repair_knowledge_base.md) — includes [YouTube Zeus playlists](asic_repair_kb/components/youtube_learning.md), [engineer spec — Madinaty](asic_repair_kb/components/engineer_job_spec_madinaty.md), and [post-repair cleaning protocol](asic_repair_kb/components/post_repair_cleaning_protocol.md).
+
 ## Layout
 
 | Path | Role |

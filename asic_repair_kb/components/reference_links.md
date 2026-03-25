@@ -8,6 +8,18 @@
 
 Offline mirrors live under [`asic_repair_kb/sources/`](../sources/) (see [sources/README.md](../sources/README.md)). Refresh with `python scripts/fetch_zeus_kb_source.py --all` from repo root.
 
+### YouTube — Zeus training playlists
+
+Free video curricula (signal flow, hands-on rework, PSU, fragile parts): **[youtube_learning.md](youtube_learning.md)**.
+
+| Topic | Start link (opens playlist) |
+|-------|----------------------------|
+| ASIC Miner repair operation (~78) | [YouTube playlist](https://www.youtube.com/watch?v=OMg8mJawZfk&list=PLg1kmGkrRa7UBWvyZB-BpAZv6uucJ7jLH) |
+| Antminer repair training | [YouTube playlist](https://www.youtube.com/watch?v=pSC6GYuWv7k&list=PLg1kmGkrRa7VdjyYUOHTIi5zk5rkNfuCH) |
+| Whatsminer repair training | [YouTube playlist](https://www.youtube.com/watch?v=TVKk_aViais&list=PLg1kmGkrRa7XGEe2lOndIXHsNRW0J82Oj) |
+| PSU online repair training (~17) | [YouTube playlist](https://www.youtube.com/watch?v=QaR08PfHhaE&list=PLg1kmGkrRa7Vp17-oT66ypvnJg8kJ1Jxf) |
+| Easily damaged parts (~20) | [YouTube playlist](https://www.youtube.com/watch?v=Fym3PmVi4Ps&list=PLg1kmGkrRa7XRmF02Qln3FpYYXXElgOc7) |
+
 ### Knowledge in progress (URLs registered — mirrors not fetched yet)
 
 See **[knowledge_in_progress.md](knowledge_in_progress.md)** for the full table (Whatsminer troubleshooting, S19 SD flashing, PicoBT manual, Whatsminer CB/PSU repair, PSU output tester, P21 PDF).

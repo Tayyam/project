@@ -26,6 +26,9 @@ This knowledge base is split into **components** under [`asic_repair_kb/componen
 | 9 | [FILE 6 — Whatsminer control board](asic_repair_kb/components/repair_whatsminer_control_board.md) | M50 / M30S setup, pools, firmware |
 | 10 | [FILE 7 — APW12 PSU](asic_repair_kb/components/repair_apw12_psu.md) | Power supply repair and safety |
 | 11 | [Reference links](asic_repair_kb/components/reference_links.md) | All Zeus / manual URLs |
+| 12 | [YouTube — تعلم صيانة ASIC (Zeus)](asic_repair_kb/components/youtube_learning.md) | Playlists: عمل يدوي، Antminer/Whatsminer، PSU، قطع سريعة التلف |
+| 13 | [مواصفات المهندس — مدينتي](asic_repair_kb/components/engineer_job_spec_madinaty.md) | Hardware & power specialist + أدوات المعمل |
+| 14 | [بروتوكول التنظيف بعد الصيانة](asic_repair_kb/components/post_repair_cleaning_protocol.md) | فينش الهاشة + الجهاز: Ultrasonic، IPA بخاخ، HY234/UV، 704، شاسيه، F10 |
 
 ### Tools
 

@@ -54,7 +54,8 @@ Physical **bench capability** tracked in this project (what you own / must acqui
 |-----------|:----------:|-------|
 | Diagnosis (tester, scope, thermal, lab PSU, UART) | true | PicoBT + APW12 bench, UNI-T UTD2102CEX+ (أو ≥100 MHz), UT136C+ + أطراف Zeus، WANPTEK KPS، PICKit 3.5، كابل EEPROM، USB–TTL |
 | Rework (hot air, preheater, iron, microscope, ultrasonic) | true | Quick 861DW, Quick 707D+ (حديد+هواء), PUHUI T-8280, AD207, ultrasonic |
-| Consumables (flux, paste, putty, IPA, tin stencil) | true | Amtech, Mechanic 183 °C, HY234, GD900, Zeus tin stencil لكل جيل شريحة |
+| Consumables (flux, paste, putty, IPA, bridge jumpers) | true | Amtech, Mechanic 183 °C, HY234, GD900؛ أسلاك جسر مغطاة قصدير كمستهلكات في خطة الاستيراد الربعية |
+| Fixed assets (tin stencil, tin tool, BGA 90×90 tinning platform) | true | قوالب Tin ومنصة التنقيط في **① قائمة الأصول** بـ `js/data.js` |
 | Spares (ASIC, LDO, MOSFET, cables, copper) | true | BM1362 / BM1366BS + KF1950–KF1973, LDO/PMIC kit, AWG6, data cables |
 | Guide-required extras (⚠️ / 📎 in inventory) | yes | كرات 0.4 mm، wick، IIC/EN، 2500/704، حمل إلكتروني، ESD — انظر [tool_inventory.md](tool_inventory.md) (وسيلة الإيضاح + أولويات النواقص) |
 

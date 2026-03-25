@@ -19,12 +19,42 @@ export function setupKnowledgeBase(DATA) {
   }
   if (typeof marked.use === 'function') marked.use({ gfm: true });
 
+  /**
+   * Markdown lives under asic_repair_kb/components/ with links like ../sources/foo.jpg.
+   * The KB is rendered on / (index.html), so the browser resolves ../sources → /sources/…
+   * which 404s. Real files are at /asic_repair_kb/sources/…
+   */
+  function rewriteMirrorAssetPaths(html) {
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    function toKbSources(u) {
+      if (!u || /^(https?:|mailto:|data:|#)/i.test(u)) return u;
+      if (u.startsWith('/asic_repair_kb/')) return u;
+      if (u.startsWith('asic_repair_kb/')) return '/' + u;
+      if (u.startsWith('../sources/')) return '/asic_repair_kb/' + u.substring(3);
+      if (u.startsWith('../../sources/')) return '/asic_repair_kb/' + u.substring(6);
+      return u;
+    }
+    doc.querySelectorAll('img[src]').forEach(function (img) {
+      var s = img.getAttribute('src');
+      var n = toKbSources(s);
+      if (n !== s) img.setAttribute('src', n);
+    });
+    doc.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (!h || h.endsWith('.md')) return;
+      var n = toKbSources(h);
+      if (n !== h) a.setAttribute('href', n);
+    });
+    return doc.body.innerHTML;
+  }
+
   function setToolbar(isSubPage) {
     if (toolbar) toolbar.style.display = isSubPage ? 'block' : 'none';
   }
 
   function renderMd(text, path) {
-    root.innerHTML = marked.parse(text);
+    var raw = marked.parse(text);
+    root.innerHTML = rewriteMirrorAssetPaths(raw);
     root.hidden = false;
     status.style.display = 'none';
     setToolbar(path !== hubPath);

@@ -1,0 +1,9 @@
+# Netlify — static site root = repo root (index.html + asic_repair_kb/ + js/ + css/)
+[build]
+  publish = "."
+
+# Old / wrong links resolve ../sources from "/" to /sources/… — forward to real mirror path
+[[redirects]]
+  from = "/sources/*"
+  to = "/asic_repair_kb/sources/:splat"
+  status = 302
