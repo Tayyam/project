@@ -990,25 +990,53 @@ const monthlyOpexEGP = Number(DATA.opex?.totalMonthly) || (DATA.opex?.monthly ||
 const monthlyOpexUSD = monthlyOpexEGP / xr;
 const monthlyNetProfitUSD = monthlyGrossProfitFromTable - monthlyOpexUSD;
 const monthlyNetProfitEGP = Math.round(monthlyNetProfitUSD * xr);
-const annualNetProfitUSD = monthlyNetProfitUSD * 12;
-const annualNetProfitEGP = Math.round(annualNetProfitUSD * xr);
-const paybackDays = monthlyNetProfitUSD > 0
-  ? Math.ceil((capexComputed.totalUSD / monthlyNetProfitUSD) * 30)
+/** أشهر بدون خصم OPEX في احتساب ROI فقط (متسق مع احتياط 3 أشهر في CAPEX). */
+const roiOpexGraceMonths = 3;
+const firstYearNetProfitRoiUSD =
+  roiOpexGraceMonths * monthlyGrossProfitFromTable +
+  (12 - roiOpexGraceMonths) * monthlyNetProfitUSD;
+const firstYearNetProfitRoiEGP = Math.round(firstYearNetProfitRoiUSD * xr);
+const monthlyAvgFirstYearRoiUSD = firstYearNetProfitRoiUSD / 12;
+const monthlyAvgFirstYearRoiEGP = Math.round(monthlyAvgFirstYearRoiUSD * xr);
+
+function paybackMonthsWithOpexGrace(capexUsd, grossMonthly, opexMonthly, graceMonths) {
+  if (capexUsd <= 0) return 0;
+  let cum = 0;
+  const maxM = 600;
+  for (let m = 1; m <= maxM; m++) {
+    const add = m <= graceMonths ? grossMonthly : (grossMonthly - opexMonthly);
+    if (m > graceMonths && add <= 0) return null;
+    cum += add;
+    if (cum >= capexUsd) return m;
+  }
+  return null;
+}
+
+const paybackMonthsRoi = paybackMonthsWithOpexGrace(
+  capexComputed.totalUSD,
+  monthlyGrossProfitFromTable,
+  monthlyOpexUSD,
+  roiOpexGraceMonths
+);
+const paybackDays = paybackMonthsRoi != null && paybackMonthsRoi > 0
+  ? Math.ceil(paybackMonthsRoi * 30)
   : null;
 const roiPercent = capexComputed.totalUSD > 0
-  ? Math.round((annualNetProfitUSD / capexComputed.totalUSD) * 100)
+  ? Math.round((firstYearNetProfitRoiUSD / capexComputed.totalUSD) * 100)
   : 0;
 const paybackLabel = paybackDays ? `${paybackDays} يوم` : "غير متاح";
-const paybackSub = paybackDays ? "فترة الاسترداد" : "صافي الربح الشهري ≤ 0";
+const paybackSub = paybackDays
+  ? `فترة الاسترداد (بدون OPEX أول ${roiOpexGraceMonths} أشهر)`
+  : "تعادل غير متاح بهذه الافتراضات";
 const roiBarFillPct = Math.min(100, Math.max(0, roiPercent));
-const recoveryOneMonthPct = capexComputed.totalUSD > 0 && monthlyNetProfitUSD > 0
-  ? Math.min(100, (monthlyNetProfitUSD / capexComputed.totalUSD) * 100)
+const recoveryOneMonthPct = capexComputed.totalUSD > 0 && monthlyAvgFirstYearRoiUSD > 0
+  ? Math.min(100, (monthlyAvgFirstYearRoiUSD / capexComputed.totalUSD) * 100)
   : 0;
 const roiItems = [
-  { label: 'صافي الربح الشهري',  value: fmtUSD(monthlyNetProfitUSD), color: 'green', sub: fmtEGP(monthlyNetProfitEGP) },
-  { label: 'صافي الربح السنوي',  value: fmtUSD(annualNetProfitUSD),  color: 'amber', sub: fmtEGP(annualNetProfitEGP)  },
+  { label: 'صافي الربح الشهري',  value: fmtUSD(monthlyAvgFirstYearRoiUSD), color: 'green', sub: `${fmtEGP(monthlyAvgFirstYearRoiEGP)} · متوسط سنة أولى` },
+  { label: 'صافي الربح السنوي',  value: fmtUSD(firstYearNetProfitRoiUSD),  color: 'amber', sub: `${fmtEGP(firstYearNetProfitRoiEGP)} · سنة أولى (3 شهور بدون OPEX)` },
   { label: 'استرداد رأس المال',  value: paybackLabel,                color: 'blue',  sub: paybackSub                 },
-  { label: 'العائد السنوي (ROI)', value: (roiPercent >= 0 ? '+' : '') + roiPercent + '%', color: 'red', sub: 'صافي سنوي ÷ إجمالي CAPEX' }
+  { label: 'العائد السنوي (ROI)', value: (roiPercent >= 0 ? '+' : '') + roiPercent + '%', color: 'red', sub: 'صافي سنة أولى ÷ إجمالي CAPEX' }
 ];
 
 main.insertAdjacentHTML('beforeend', `
@@ -1048,11 +1076,11 @@ main.insertAdjacentHTML('beforeend', `
           <tr><td style="padding-inline-start:16px;font-size:.88rem;color:var(--text-muted)">├ ورشة الإصلاح</td><td class="mono">${fmtUSD(plSegRepair.gross)}</td><td class="mono">${fmtEGP(Math.round(plSegRepair.gross * xr))}</td></tr>
           <tr><td style="padding-inline-start:16px;font-size:.88rem;color:var(--text-muted)">└ مشروع تدوير المعيبين</td><td class="mono">${fmtUSD(plSegFlip.gross)}</td><td class="mono">${fmtEGP(Math.round(plSegFlip.gross * xr))}</td></tr>
           <tr><td>OPEX شهري</td><td class="mono" style="color:#f87171">− ${fmtUSD(monthlyOpexUSD)}</td><td class="mono">− ${fmtEGP(monthlyOpexEGP)}</td></tr>
-          <tr style="background:rgba(245,158,11,.1)"><td style="font-weight:800">صافي ربح شهري</td><td class="mono" style="font-weight:900;color:var(--accent)">${fmtUSD(monthlyNetProfitUSD)}</td><td class="mono" style="font-weight:900">${fmtEGP(monthlyNetProfitEGP)}</td></tr>
+          <tr style="background:rgba(245,158,11,.1)"><td style="font-weight:800">صافي ربح شهري <span style="font-size:.72rem;color:var(--text-muted)">(ثابت — بعد OPEX)</span></td><td class="mono" style="font-weight:900;color:var(--accent)">${fmtUSD(monthlyNetProfitUSD)}</td><td class="mono" style="font-weight:900">${fmtEGP(monthlyNetProfitEGP)}</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="stat-note" style="margin-top:12px;margin-bottom:0;text-align:center;font-size:.78rem">استرداد CAPEX التقريبي: <strong>${recoveryOneMonthPct.toFixed(1)}%</strong> من رأس المال المقدَّر كل شهر (صافي شهري ÷ CAPEX) — عند ثبات الصافي والـ CAPEX.</p>
+    <p class="stat-note" style="margin-top:12px;margin-bottom:0;text-align:center;font-size:.78rem">بطاقات العائد أعلاه: <strong>لا يُخصم OPEX لأول ${roiOpexGraceMonths} أشهر</strong> (يُفترض تغطيته من بند احتياط OPEX في CAPEX)، ثم صافي شهرية = صافي قبل OPEX − OPEX. استرداد CAPEX التقريبي: <strong>${recoveryOneMonthPct.toFixed(1)}%</strong> من رأس المال شهرياً — <strong>متوسط سنة أولى</strong> (ليس الصافي الثابت بعد OPEX).</p>
   </div>
 
   <div class="grid-2">
@@ -1094,11 +1122,11 @@ main.insertAdjacentHTML('beforeend', `
       </div>
       <div style="margin-top:20px;padding:14px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:10px;text-align:center">
         <div style="font-size:.84rem;color:var(--text-muted);margin-bottom:6px">الربح السنوي المتوقع</div>
-        <div style="font-size:1.8rem;font-weight:900;color:#34d399">${fmtUSD(annualNetProfitUSD)}</div>
-        <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px">${fmtEGP(annualNetProfitEGP)} سنوياً</div>
+        <div style="font-size:1.8rem;font-weight:900;color:#34d399">${fmtUSD(firstYearNetProfitRoiUSD)}</div>
+        <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px">${fmtEGP(firstYearNetProfitRoiEGP)} سنة أولى (3 شهور بدون OPEX في الاحتساب)</div>
       </div>
       <p class="stat-note" style="margin-top:12px;text-align:center">
-        صافي الربح = إيراد مجمّع − عمولة مسوق <strong>على الورشة فقط</strong> − COGS − OPEX. إجمالي CAPEX المستخدم في ROI واسترداد الأيام: <strong>${fmtUSD(capexComputed.totalUSD)}</strong> (${fmtEGP(capexComputed.totalEGP)}).
+        في هذا القسم: صافي سنة أولى = <strong>3×</strong> (صافي قبل OPEX) + <strong>9×</strong> (صافي بعد OPEX)؛ استرداد الأيام يُجمَّع شهراً بشهر بنفس القاعدة. إجمالي CAPEX: <strong>${fmtUSD(capexComputed.totalUSD)}</strong> (${fmtEGP(capexComputed.totalEGP)}). قائمة الدخل العامة ما زالت تستخدم صافياً شهرياً بعد OPEX بالكامل.
       </p>
     </div>
   </div>
