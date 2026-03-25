@@ -63,6 +63,59 @@ function computeLocalQuarterlyPlan(data) {
   };
 }
 
+/** صف إيراد شهري مع تطبيق successRate (0–1) إن وُجد: إيراد وعمولة على البيع الناجح فقط، خامات على كل محاولة. */
+function effectiveMonthlyRevenueRow(r, marketerPct) {
+  const pct = Number(marketerPct) || 20;
+  const rawP = r.successRate;
+  const p = rawP != null && rawP !== "" ? Number(rawP) : NaN;
+  if (!Number.isNaN(p) && p >= 0 && p <= 1) {
+    const n = Number(r.count) || 0;
+    const price = Number(r.pricePerUnit) || 0;
+    const cpu = Number(r.costPerUnit) || 0;
+    const expectedSold = n * p;
+    const totalRevenue = expectedSold * price;
+    const totalCost = n * cpu;
+    const marketerTotal = totalRevenue * (pct / 100);
+    return {
+      ...r,
+      totalRevenue,
+      totalCost,
+      marketerTotal,
+      _expectedSold: expectedSold,
+      _attempts: n,
+      _successRate: p
+    };
+  }
+  return {
+    ...r,
+    totalRevenue: Number(r.totalRevenue) || 0,
+    totalCost: Number(r.totalCost) || 0,
+    marketerTotal: Number(r.marketerTotal) || 0,
+    _expectedSold: Number(r.count) || 0,
+    _attempts: Number(r.count) || 0,
+    _successRate: null
+  };
+}
+
+const marketerPctGlobal = Number(DATA.marketerCommissionPercent) || 20;
+const repairRevenueSource = DATA.monthlyRevenueRepair ?? DATA.monthlyRevenue ?? [];
+const flipRevenueSource = DATA.monthlyDeviceFlip ? [DATA.monthlyDeviceFlip] : [];
+const repairRevenueEffective = repairRevenueSource.map(row =>
+  effectiveMonthlyRevenueRow(row, marketerPctGlobal)
+);
+const flipRevenueEffective = flipRevenueSource.map(row =>
+  effectiveMonthlyRevenueRow(row, marketerPctGlobal)
+);
+const monthlyRevenueEffective = [...repairRevenueEffective, ...flipRevenueEffective];
+
+function segmentTotalsUSD(arr) {
+  const rev = arr.reduce((a, r) => a + r.totalRevenue, 0);
+  const mkt = arr.reduce((a, r) => a + r.marketerTotal, 0);
+  const cogs = arr.reduce((a, r) => a + r.totalCost, 0);
+  const gross = rev - mkt - cogs;
+  return { rev, mkt, cogs, gross };
+}
+
 /* ── 1. Workflow ── */
 main.insertAdjacentHTML('beforeend', `
 <section id="workflow" class="active">
@@ -388,42 +441,60 @@ main.insertAdjacentHTML('beforeend', `
       </thead>
       <tbody>
         ${DATA.pricing.map(p => {
-          const margin = ((p.netProfit / p.clientPrice) * 100).toFixed(1);
           const xr = DATA.pl.exchangeRate;
+          const sr = p.successRate != null && p.successRate !== "" ? Number(p.successRate) : null;
+          const hasSr = sr != null && !Number.isNaN(sr) && sr >= 0 && sr <= 1;
+          const expNetPerAttempt = hasSr
+            ? sr * p.netProfit - (1 - sr) * p.materialCost
+            : null;
+          const margin = hasSr && p.clientPrice > 0
+            ? ((expNetPerAttempt / p.clientPrice) * 100).toFixed(1)
+            : ((p.netProfit / p.clientPrice) * 100).toFixed(1);
+          const mktIfSold = p.clientPrice * (Number(DATA.marketerCommissionPercent) || 20) / 100;
+          const expMktPerAttempt = hasSr ? sr * mktIfSold : p.marketerCommission;
+          const netMain = hasSr ? fmtUSD(expNetPerAttempt) : fmtUSD(p.netProfit);
+          const netSub = hasSr
+            ? `<div style="font-size:.72rem;color:var(--text-muted);margin-top:4px">عند نجاح البيع: ${fmtUSD(p.netProfit)} · عمولة متوقعة/محاولة ≈ ${fmtUSD(expMktPerAttempt)} · خامات/محاولة ${fmtUSD(p.materialCost)}</div>`
+            : "";
           return `
             <tr>
-              <td style="font-weight:600">${p.service}</td>
+              <td style="font-weight:600">${p.service}${hasSr ? `<div style="font-size:.72rem;color:#93c5fd;font-weight:500;margin-top:4px">نجاح متوقع ${Math.round(sr * 100)}% (إيراد فقط على البيع الناجح)</div>` : ""}</td>
               <td class="blue mono">${fmtUSD(p.clientPrice)}</td>
               <td class="mono" style="color:#93c5fd;font-size:.85rem">${fmtEGP(Math.round(p.clientPrice * xr))}</td>
-              <td style="color:#fbbf24" class="mono">${fmtUSD(p.marketerCommission)}</td>
-              <td class="mono" style="color:#fcd34d;font-size:.85rem">${fmtEGP(Math.round(p.marketerCommission * xr))}</td>
+              <td style="color:#fbbf24" class="mono">${hasSr ? `${fmtUSD(expMktPerAttempt)} <span style="font-size:.7rem;color:var(--text-muted)">متوقع/محاولة</span><div style="font-size:.68rem;color:var(--text-muted)">${fmtUSD(mktIfSold)} عند بيع واحد</div>` : fmtUSD(p.marketerCommission)}</td>
+              <td class="mono" style="color:#fcd34d;font-size:.85rem">${fmtEGP(Math.round((hasSr ? expMktPerAttempt : p.marketerCommission) * xr))}</td>
               <td style="color:#f87171" class="mono">${fmtUSD(p.materialCost)}</td>
               <td class="mono" style="color:#fca5a5;font-size:.85rem">${fmtEGP(Math.round(p.materialCost * xr))}</td>
-              <td class="green mono">${fmtUSD(p.netProfit)}</td>
-              <td class="mono" style="color:#6ee7b7;font-size:.85rem">${fmtEGP(Math.round(p.netProfit * xr))}</td>
+              <td class="green mono">${netMain}${netSub || ""}</td>
+              <td class="mono" style="color:#6ee7b7;font-size:.85rem">${fmtEGP(Math.round((hasSr ? expNetPerAttempt : p.netProfit) * xr))}</td>
               <td>
                 <div style="display:flex;align-items:center;gap:8px">
                   <span class="amber" style="font-weight:700">${margin}%</span>
                   <div style="flex:1;background:var(--bg3);border-radius:4px;height:6px;min-width:60px">
-                    <div style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent3),#6ee7b7);width:${Math.min(parseFloat(margin), 100)}%"></div>
+                    <div style="height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent3),#6ee7b7);width:${Math.min(Math.max(parseFloat(margin), 0), 100)}%"></div>
                   </div>
                 </div>
+                ${hasSr ? `<div style="font-size:.68rem;color:var(--text-muted);margin-top:4px">الهامش من صافي متوقع/محاولة ÷ سعر الإعلان</div>` : ""}
               </td>
             </tr>
           `;
         }).join('')}
       </tbody>
     </table>
-    <p class="stat-note" style="margin-top:10px;text-align:center">عمولة المسوق ${DATA.marketerCommissionPercent}% من سعر العميل · صافي للمركز = سعر العميل − العمولة − الخامات · تحويل: 1 USD = ${DATA.pl.exchangeRate} EGP</p>
+    <p class="stat-note" style="margin-top:10px;text-align:center">عمولة المسوق ${DATA.marketerCommissionPercent}% من سعر العميل · صافي للمركز = سعر العميل − العمولة − الخامات · بند التدوير: <strong>صافي متوقع/محاولة</strong> = نسبة النجاح × صافي عند البيع − (1 − نسبة النجاح) × خامات المحاولة · تحويل: 1 USD = ${DATA.pl.exchangeRate} EGP</p>
   </div>
   <div class="grid-4">
     ${DATA.pricing.map((p, i) => {
       const colors = ['green','blue','amber','red','purple'];
+      const sr = p.successRate != null && p.successRate !== "" ? Number(p.successRate) : null;
+      const hasSr = sr != null && !Number.isNaN(sr) && sr >= 0 && sr <= 1;
+      const expNet = hasSr ? sr * p.netProfit - (1 - sr) * p.materialCost : p.netProfit;
+      const sub = hasSr ? `متوقع/محاولة (${Math.round(sr * 100)}% نجاح) · عند البيع ${fmtUSD(p.netProfit)}` : "صافي الربح";
       return `
         <div class="stat-card ${colors[i % colors.length]}">
           <div class="stat-label">${p.service}</div>
-          <div class="stat-value">${fmtUSD(p.netProfit)}</div>
-          <div class="stat-sub">صافي الربح</div>
+          <div class="stat-value">${fmtUSD(expNet)}</div>
+          <div class="stat-sub">${sub}</div>
         </div>
       `;
     }).join('')}
@@ -431,7 +502,19 @@ main.insertAdjacentHTML('beforeend', `
 </section>
 `);
 
-/* ── 5. OPEX ── */
+/* ── 5. OPEX (مصاريف ثابتة + تعادل محسوب من جدول الإيرادات) ── */
+const xrOpex = Number(DATA.pl?.exchangeRate) || 54;
+const opexMonthlyEGP = Number(DATA.opex?.totalMonthly) || (DATA.opex?.monthly || []).reduce((s, r) => s + (Number(r.amount) || 0), 0);
+const opexMonthlyUSD = opexMonthlyEGP / xrOpex;
+const hashRowPricing = (DATA.pricing || []).find(p => /هاشبورد/.test(String(p.service || "")));
+const netPerHashUSD = hashRowPricing && Number(hashRowPricing.netProfit) > 0 ? Number(hashRowPricing.netProfit) : 71.5;
+const breakEvenHashboardsDyn = netPerHashUSD > 0 ? Math.ceil(opexMonthlyUSD / netPerHashUSD) : Number(DATA.opex.breakEvenUnits) || 9;
+const totRevOpex  = monthlyRevenueEffective.reduce((a, r) => a + r.totalRevenue, 0);
+const totCostOpex = monthlyRevenueEffective.reduce((a, r) => a + r.totalCost, 0);
+const totMktOpex  = monthlyRevenueEffective.reduce((a, r) => a + r.marketerTotal, 0);
+const grossBeforeOpexUSD = totRevOpex - totMktOpex - totCostOpex;
+const netAfterOpexUSD = grossBeforeOpexUSD - opexMonthlyUSD;
+
 main.insertAdjacentHTML('beforeend', `
 <section id="opex">
   <div class="section-heading">
@@ -448,8 +531,12 @@ main.insertAdjacentHTML('beforeend', `
         </div>
       `).join('')}
       <div class="pl-row total">
-        <span class="pl-label strong">الإجمالي الثابت الشهري</span>
-        <span class="pl-value net">${fmt(DATA.opex.totalMonthly)} ج</span>
+        <span class="pl-label strong">الإجمالي الثابت الشهري (OPEX)</span>
+        <span class="pl-value net">${fmt(opexMonthlyEGP)} ج</span>
+      </div>
+      <div class="pl-row" style="border-top:1px dashed var(--border);margin-top:8px;padding-top:10px">
+        <span class="pl-label">ما يعادل بالدولار (للمقارنة مع الإيرادات $)</span>
+        <span class="mono" style="color:#93c5fd;font-weight:600">≈ ${fmtUSD(opexMonthlyUSD)} / شهر · 1 USD = ${xrOpex} EGP</span>
       </div>
       <div style="margin-top:14px;padding:12px 14px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-size:.82rem;color:var(--text-muted)">
         ⚡ تكلفة تجهيز المكان (مرة واحدة): <strong style="color:var(--accent)">${fmt(DATA.opex.setupCost)} ج</strong>
@@ -459,11 +546,16 @@ main.insertAdjacentHTML('beforeend', `
       <div class="card-title">🎯 نقطة التعادل (Break-Even)</div>
       <div style="text-align:center;padding:20px 0">
         <div style="font-size:4rem;font-weight:900;font-family:'Orbitron',monospace;color:var(--accent3);line-height:1">
-          ${DATA.opex.breakEvenUnits}
+          ${breakEvenHashboardsDyn}
         </div>
-        <div style="font-size:1rem;color:var(--text-muted);margin-top:8px">لوحات هاشبورد فقط</div>
-        <div style="margin-top:16px;font-size:.86rem;color:var(--text-muted);line-height:1.7;max-width:300px;margin-inline:auto">
+        <div style="font-size:1rem;color:var(--text-muted);margin-top:8px">لوحات هاشبورد / شهر <span style="font-size:.78rem">(سيناريو تحفّظي)</span></div>
+        <div style="margin-top:16px;font-size:.86rem;color:var(--text-muted);line-height:1.7;max-width:340px;margin-inline:auto;text-align:center">
           ${DATA.opex.breakEvenNote}
+        </div>
+        <div style="margin-top:18px;padding:12px 14px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.22);border-radius:8px;font-size:.8rem;color:#a7f3d0;line-height:1.65;max-width:360px;margin-inline:auto;text-align:right">
+          <strong style="color:#34d399">بحسب جدول الإيرادات الحالي</strong> (نفس الافتراضات في الموقع):<br/>
+          صافي للمركز <strong>قبل</strong> OPEX ≈ <span class="mono">${fmtUSD(grossBeforeOpexUSD)}</span><br/>
+          بعد خصم OPEX ≈ <span class="mono">${fmtUSD(netAfterOpexUSD)}</span> / شهر
         </div>
       </div>
     </div>
@@ -485,7 +577,7 @@ const keyOfService = (name = "") => {
 };
 templateServices.forEach(s => serviceTemplateByKey.set(keyOfService(s.type), s));
 
-const volumeRows = (DATA.monthlyRevenue || []).map(r => {
+const volumeRows = monthlyRevenueEffective.map(r => {
   const key = keyOfService(r.service);
   const tpl = serviceTemplateByKey.get(key);
   const count = Number(r.count) || 0;
@@ -494,17 +586,34 @@ const volumeRows = (DATA.monthlyRevenue || []).map(r => {
     : 0;
   const hoursPerUnit = Number(tpl?.hoursPerUnit) || fallbackHoursPerUnit;
   const totalHours = count * hoursPerUnit;
+  const sr = r._successRate != null ? r._successRate : (r.successRate != null ? Number(r.successRate) : null);
   return {
     type: tpl?.type || r.service,
     monthlyCount: count,
     timePerUnit: tpl?.timePerUnit || "—",
     improvement: tpl?.improvement || null,
-    totalHours
+    totalHours,
+    excludeFromOperationCount: false,
+    successRate: sr != null && !Number.isNaN(sr) ? sr : null
   };
 });
 
-const totalOperationsDyn = volumeRows.reduce((s, r) => s + r.monthlyCount, 0);
+const ks = volumeCfg.knowledgeStudy;
+if (ks && Number(ks.totalHours) > 0) {
+  const th = Number(ks.totalHours) || 0;
+  volumeRows.push({
+    type: ks.label || "مراجعة Knowledge Base",
+    monthlyCount: Number(ks.sessionsPerMonth) || 0,
+    timePerUnit: ks.timePerUnit || "—",
+    improvement: ks.improvement || null,
+    totalHours: th,
+    excludeFromOperationCount: true
+  });
+}
+
+const totalOperationsDyn = volumeRows.reduce((s, r) => s + (r.excludeFromOperationCount ? 0 : r.monthlyCount), 0);
 const totalEffectiveHoursDyn = volumeRows.reduce((s, r) => s + r.totalHours, 0);
+const knowledgeSessionsDyn = volumeRows.reduce((s, r) => s + (r.excludeFromOperationCount ? r.monthlyCount : 0), 0);
 const workDays = Number(volumeCfg.workDays) || 25;
 const hoursPerDay = Number(volumeCfg.hoursPerDay) || 8;
 const totalHoursDyn = workDays * hoursPerDay;
@@ -554,7 +663,7 @@ main.insertAdjacentHTML('beforeend', `
         ${volumeRows.map(s => `
           <tr>
             <td style="font-weight:600">${s.type}</td>
-            <td class="blue mono">${s.monthlyCount}</td>
+            <td class="blue mono">${s.monthlyCount}${s.successRate != null && s.successRate < 1 ? `<div style="font-size:.72rem;color:#93c5fd;font-weight:600;margin-top:4px">${Math.round(s.successRate * 100)}% نجاح متوقع → ~${(s.monthlyCount * s.successRate).toFixed(1)} بيع</div>` : ""}</td>
             <td>
               <span style="color:var(--text-muted)">${s.timePerUnit}</span>
               ${s.improvement ? `<span style="display:block;font-size:.72rem;color:#34d399;margin-top:2px">↑ ${s.improvement}</span>` : ''}
@@ -564,7 +673,7 @@ main.insertAdjacentHTML('beforeend', `
         `).join('')}
         <tr style="background:rgba(245,158,11,.05)">
           <td style="font-weight:800;color:var(--accent)">الإجمالي</td>
-          <td class="blue mono" style="font-weight:800">${totalOperationsDyn} عملية</td>
+          <td class="blue mono" style="font-weight:800">${totalOperationsDyn} عملية إصلاح${knowledgeSessionsDyn > 0 ? ` <span style="color:var(--text-muted);font-weight:600">+ ${knowledgeSessionsDyn} جلسة KB</span>` : ""}</td>
           <td style="color:#34d399;font-size:.82rem">${volumeCfg.dailyCapacity || "—"}</td>
           <td class="amber mono" style="font-weight:800">${totalEffectiveHoursDyn.toFixed(1)} ساعة</td>
         </tr>
@@ -576,16 +685,53 @@ main.insertAdjacentHTML('beforeend', `
 `);
 
 /* ── 7. Monthly Revenue ── */
-const totRev  = DATA.monthlyRevenue.reduce((a, r) => a + r.totalRevenue, 0);
-const totCost = DATA.monthlyRevenue.reduce((a, r) => a + r.totalCost, 0);
-const totMkt  = DATA.monthlyRevenue.reduce((a, r) => a + r.marketerTotal, 0);
+const totRev  = monthlyRevenueEffective.reduce((a, r) => a + r.totalRevenue, 0);
+const totCost = monthlyRevenueEffective.reduce((a, r) => a + r.totalCost, 0);
+const totMkt  = monthlyRevenueEffective.reduce((a, r) => a + r.marketerTotal, 0);
 const totNetToCenter = totRev - totMkt - totCost;
+const hasSuccessRateAdjustedFlip = flipRevenueEffective.some(
+  r => r._successRate != null && r._successRate > 0 && r._successRate < 1
+);
+const plSegRepair = segmentTotalsUSD(repairRevenueEffective);
+const plSegFlip = segmentTotalsUSD(flipRevenueEffective);
+
+function formatMonthlyRevenueRowHtml(r) {
+  const rowNet = r.totalRevenue - r.marketerTotal - r.totalCost;
+  const srNote = r._successRate != null && r._successRate < 1
+    ? `<div style="font-size:.72rem;color:#93c5fd;margin-top:4px">${r._attempts} محاولة · نجاح ${Math.round(r._successRate * 100)}% → ≈${r._expectedSold.toFixed(1)} بيع متوقع</div>`
+    : "";
+  return `
+          <tr>
+            <td style="font-weight:600">${r.service}${srNote}</td>
+            <td class="mono">${r.count}</td>
+            <td class="blue mono">${fmtUSD(r.pricePerUnit)}</td>
+            <td class="green mono">${fmtUSD(r.totalRevenue)}</td>
+            <td style="color:#fbbf24" class="mono">${fmtUSD(r.marketerTotal)}</td>
+            <td style="color:#f87171" class="mono">${fmtUSD(r.costPerUnit)}</td>
+            <td style="color:#f87171" class="mono">${fmtUSD(r.totalCost)}</td>
+            <td class="mono" style="color:#6ee7b7;font-weight:700">${fmtUSD(rowNet)}</td>
+          </tr>`;
+}
+
+function monthlySubtotalRow(label, seg) {
+  return `
+        <tr style="background:rgba(59,130,246,.08)">
+          <td colspan="3" style="font-weight:800;color:#93c5fd">${label}</td>
+          <td class="green mono" style="font-weight:800">${fmtUSD(seg.rev)}</td>
+          <td style="color:#fbbf24;font-weight:800" class="mono">${fmtUSD(seg.mkt)}</td>
+          <td>—</td>
+          <td style="color:#f87171;font-weight:800" class="mono">${fmtUSD(seg.cogs)}</td>
+          <td class="mono" style="color:#6ee7b7;font-weight:800">${fmtUSD(seg.gross)}</td>
+        </tr>`;
+}
+
 main.insertAdjacentHTML('beforeend', `
 <section id="monthly">
   <div class="section-heading">
     <div class="icon">📈</div>
     <h2>الإيرادات وتكلفة الخامات <span>الشهرية</span></h2>
   </div>
+  <p class="stat-note" style="text-align:center;margin:-4px 0 16px;font-size:.85rem">جدولان: <strong>ورشة الإصلاح</strong> (خدمات بالقطعة) و<strong>مشروع تدوير المعيبين</strong> (مسار مالي منفصل). الإجمالي في الأسفل يدمج الاثنين قبل OPEX.</p>
   <div class="table-wrap">
     <table>
       <thead>
@@ -601,22 +747,14 @@ main.insertAdjacentHTML('beforeend', `
         </tr>
       </thead>
       <tbody>
-        ${DATA.monthlyRevenue.map(r => {
-          const rowNet = r.totalRevenue - r.marketerTotal - r.totalCost;
-          return `
-          <tr>
-            <td style="font-weight:600">${r.service}</td>
-            <td class="mono">${r.count}</td>
-            <td class="blue mono">${fmtUSD(r.pricePerUnit)}</td>
-            <td class="green mono">${fmtUSD(r.totalRevenue)}</td>
-            <td style="color:#fbbf24" class="mono">${fmtUSD(r.marketerTotal)}</td>
-            <td style="color:#f87171" class="mono">${fmtUSD(r.costPerUnit)}</td>
-            <td style="color:#f87171" class="mono">${fmtUSD(r.totalCost)}</td>
-            <td class="mono" style="color:#6ee7b7;font-weight:700">${fmtUSD(rowNet)}</td>
-          </tr>
-        `}).join('')}
-        <tr style="background:rgba(245,158,11,.05)">
-          <td colspan="3" style="font-weight:800;color:var(--accent)">الإجمالي الشهري</td>
+        <tr><td colspan="8" style="font-weight:800;color:var(--accent);background:rgba(245,158,11,.06);padding:10px 12px">① ورشة الإصلاح</td></tr>
+        ${repairRevenueEffective.map(formatMonthlyRevenueRowHtml).join("")}
+        ${monthlySubtotalRow("إجمالي ورشة الإصلاح", plSegRepair)}
+        <tr><td colspan="8" style="font-weight:800;color:#a78bfa;background:rgba(139,92,246,.08);padding:10px 12px">② مشروع تدوير الأجهزة المعيبة <span style="font-weight:500;font-size:.78rem">(تكلفة وأرباح مستقلة — انظر تبويب «تدوير المعيبين»)</span></td></tr>
+        ${flipRevenueEffective.map(formatMonthlyRevenueRowHtml).join("")}
+        ${flipRevenueEffective.length ? monthlySubtotalRow("إجمالي مشروع التدوير (قبل OPEX)", plSegFlip) : ""}
+        <tr style="background:rgba(245,158,11,.12)">
+          <td colspan="3" style="font-weight:800;color:var(--accent)">الإجمالي الشهري (الورشة + التدوير)</td>
           <td class="green mono" style="font-weight:800">${fmtUSD(totRev)}</td>
           <td style="color:#fbbf24;font-weight:800" class="mono">${fmtUSD(totMkt)}</td>
           <td>—</td>
@@ -625,13 +763,73 @@ main.insertAdjacentHTML('beforeend', `
         </tr>
       </tbody>
     </table>
-    <p class="stat-note" style="margin-top:10px;text-align:center">الخامات ≈ ${fmtEGP(Math.round(totCost * DATA.pl.exchangeRate))} · عمولة المسوق ≈ ${fmtEGP(Math.round(totMkt * DATA.pl.exchangeRate))} · صافي التشغيل قبل OPEX ≈ ${fmtUSD(totNetToCenter)}</p>
+    <p class="stat-note" style="margin-top:10px;text-align:center">الخامات ≈ ${fmtEGP(Math.round(totCost * DATA.pl.exchangeRate))} · عمولة المسوق ≈ ${fmtEGP(Math.round(totMkt * DATA.pl.exchangeRate))} · صافي التشغيل قبل OPEX ≈ ${fmtUSD(totNetToCenter)}${hasSuccessRateAdjustedFlip ? " · <strong>مشروع التدوير</strong>: الإيراد والعمولة بنسبة النجاح؛ الخامات على كل محاولة." : ""}</p>
   </div>
+</section>
+`);
+
+/* ── 7b. مشروع تدوير المعيبين (صفحة مستقلة) ── */
+const dfp = DATA.deviceFlipProject || {};
+const flipOne = flipRevenueEffective[0];
+const flipAttempts = flipOne ? (Number(flipOne._attempts) || Number(flipOne.count) || 0) : 0;
+const flipNetPerAttempt = flipAttempts > 0 && flipOne ? (plSegFlip.gross / flipAttempts) : 0;
+const flipMarginOnRev = plSegFlip.rev > 0 ? ((plSegFlip.gross / plSegFlip.rev) * 100).toFixed(1) : "0";
+const xrFlip = Number(DATA.pl?.exchangeRate) || 54;
+
+main.insertAdjacentHTML('beforeend', `
+<section id="deviceFlip">
+  <div class="section-heading">
+    <div class="icon">🔄</div>
+    <h2>${dfp.title || "مشروع تدوير الأجهزة المعيبة"}</h2>
+  </div>
+  ${dfp.intro ? `<div class="card" style="margin-bottom:20px"><p style="margin:0;font-size:.88rem;color:var(--text-muted);line-height:1.85">${dfp.intro}</p></div>` : ""}
+  ${flipOne ? `
+  <div class="grid-4" style="margin-bottom:24px">
+    <div class="stat-card green">
+      <div class="stat-label">صافي المشروع / شهر</div>
+      <div class="stat-value">${fmtUSD(plSegFlip.gross)}</div>
+      <div class="stat-sub">${fmtEGP(Math.round(plSegFlip.gross * xrFlip))} · قبل OPEX الورشة</div>
+    </div>
+    <div class="stat-card amber">
+      <div class="stat-label">صافي متوقع / محاولة</div>
+      <div class="stat-value">${fmtUSD(flipNetPerAttempt)}</div>
+      <div class="stat-sub">${flipAttempts} محاولة · نسبة نجاح ${flipOne._successRate != null ? Math.round(flipOne._successRate * 100) : 100}%</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-label">إيراد متوقع (بيع ناجح)</div>
+      <div class="stat-value">${fmtUSD(plSegFlip.rev)}</div>
+      <div class="stat-sub">عمولة مسوق ${fmtUSD(plSegFlip.mkt)}</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-label">تكلفة مباشرة (كل المحاولات)</div>
+      <div class="stat-value">${fmtUSD(plSegFlip.cogs)}</div>
+      <div class="stat-sub">هامش على الإيراد ≈ ${flipMarginOnRev}%</div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">📑 المشروع — USD</div>
+      <div class="pl-row"><span class="pl-label strong">إيراد (بيع ناجح فقط)</span><span style="color:#60a5fa;font-weight:700">${fmtUSD(plSegFlip.rev)}</span></div>
+      <div class="pl-row"><span class="pl-label">عمولة المسوق</span><span style="color:#fbbf24;font-weight:700">- ${fmtUSD(plSegFlip.mkt)}</span></div>
+      <div class="pl-row"><span class="pl-label">COGS (شراء + خامات / محاولة)</span><span style="color:#f87171;font-weight:700">- ${fmtUSD(plSegFlip.cogs)}</span></div>
+      <div class="pl-row total"><span class="pl-label strong">صافي مساهمة المشروع</span><span class="pl-value net">${fmtUSD(plSegFlip.gross)}</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">📑 المشروع — EGP</div>
+      <div class="pl-row"><span class="pl-label strong">إيراد</span><span style="color:#60a5fa;font-weight:700">${fmtEGP(Math.round(plSegFlip.rev * xrFlip))}</span></div>
+      <div class="pl-row"><span class="pl-label">عمولة المسوق</span><span style="color:#fbbf24;font-weight:700">- ${fmtEGP(Math.round(plSegFlip.mkt * xrFlip))}</span></div>
+      <div class="pl-row"><span class="pl-label">COGS</span><span style="color:#f87171;font-weight:700">- ${fmtEGP(Math.round(plSegFlip.cogs * xrFlip))}</span></div>
+      <div class="pl-row total"><span class="pl-label strong">صافي مساهمة المشروع</span><span class="pl-value net">${fmtEGP(Math.round(plSegFlip.gross * xrFlip))}</span></div>
+    </div>
+  </div>
+  <p class="stat-note" style="margin-top:16px;text-align:center;font-size:.82rem">صافي سنوي تقريبي للمشروع (قبل OPEX): ≈ ${fmtUSD(plSegFlip.gross * 12)} · ${fmtEGP(Math.round(plSegFlip.gross * 12 * xrFlip))}</p>
+  ` : `<p class="stat-note" style="text-align:center">لا يوجد بند <code>monthlyDeviceFlip</code> في البيانات.</p>`}
 </section>
 `);
 
 /* ── 8. P&L ── */
 const pl = DATA.pl;
+const xrPl = Number(pl.exchangeRate) || 54;
 main.insertAdjacentHTML('beforeend', `
 <section id="pl">
   <div class="section-heading">
@@ -639,9 +837,28 @@ main.insertAdjacentHTML('beforeend', `
     <h2>قائمة الدخل <span>الشهرية</span></h2>
   </div>
   ${pl.exchangeNote ? `<p class="stat-note" style="text-align:center;margin:-8px 0 16px;font-size:.85rem">${pl.exchangeNote}</p>` : ''}
+  <div class="grid-2" style="margin-bottom:20px">
+    <div class="card" style="border:1px solid rgba(245,158,11,.25)">
+      <div class="card-title">🔧 ورشة الإصلاح <span style="font-size:.72rem;color:var(--text-muted)">(قطع فقط)</span></div>
+      <div class="pl-row"><span class="pl-label">إيراد</span><span style="color:#60a5fa;font-weight:700">${fmtUSD(plSegRepair.rev)}</span></div>
+      <div class="pl-row"><span class="pl-label">عمولة المسوق</span><span style="color:#fbbf24;font-weight:700">- ${fmtUSD(plSegRepair.mkt)}</span></div>
+      <div class="pl-row"><span class="pl-label">COGS</span><span style="color:#f87171;font-weight:700">- ${fmtUSD(plSegRepair.cogs)}</span></div>
+      <div class="pl-row total"><span class="pl-label strong">صافي الورشة</span><span style="color:#34d399;font-weight:800">${fmtUSD(plSegRepair.gross)}</span></div>
+      <div style="margin-top:10px;font-size:.75rem;color:var(--text-muted)">${fmtEGP(Math.round(plSegRepair.gross * xrPl))} ج</div>
+    </div>
+    <div class="card" style="border:1px solid rgba(139,92,246,.3)">
+      <div class="card-title">🔄 مشروع التدوير <span style="font-size:.72rem;color:var(--text-muted)">(قبل OPEX)</span></div>
+      <div class="pl-row"><span class="pl-label">إيراد (نجاح)</span><span style="color:#60a5fa;font-weight:700">${fmtUSD(plSegFlip.rev)}</span></div>
+      <div class="pl-row"><span class="pl-label">عمولة المسوق</span><span style="color:#fbbf24;font-weight:700">- ${fmtUSD(plSegFlip.mkt)}</span></div>
+      <div class="pl-row"><span class="pl-label">COGS المحاولات</span><span style="color:#f87171;font-weight:700">- ${fmtUSD(plSegFlip.cogs)}</span></div>
+      <div class="pl-row total"><span class="pl-label strong">صافي المشروع</span><span style="color:#a78bfa;font-weight:800">${fmtUSD(plSegFlip.gross)}</span></div>
+      <div style="margin-top:10px;font-size:.75rem;color:var(--text-muted)">${fmtEGP(Math.round(plSegFlip.gross * xrPl))} ج · لا يشمل تخصيص OPEX</div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:.88rem;color:var(--text-muted);margin:0 0 16px"><strong>المجمّع</strong> أدناه = ورشة + تدوير؛ <strong>OPEX</strong> يُخصم مرة واحدة على الورشة بأكملها.</p>
   <div class="grid-2">
     <div class="card">
-      <div class="card-title">📑 بالدولار الأمريكي (USD)</div>
+      <div class="card-title">📑 المجمّع — USD</div>
       <div class="pl-row">
         <span class="pl-label strong">إجمالي الإيرادات (فواتير العملاء)</span>
         <span style="color:#60a5fa;font-weight:700">${fmtUSD(pl.grossRevenue.usd)}</span>
@@ -668,7 +885,7 @@ main.insertAdjacentHTML('beforeend', `
       </div>
     </div>
     <div class="card">
-      <div class="card-title">📑 بالجنيه المصري (EGP)</div>
+      <div class="card-title">📑 المجمّع — EGP</div>
       <div class="pl-row">
         <span class="pl-label strong">إجمالي الإيرادات (فواتير العملاء)</span>
         <span style="color:#60a5fa;font-weight:700">${fmtEGP(pl.grossRevenue.egp)}</span>
@@ -834,7 +1051,7 @@ main.insertAdjacentHTML('beforeend', `
         <div style="font-size:.8rem;color:var(--text-muted);margin-top:4px">${fmtEGP(annualNetProfitEGP)} سنوياً</div>
       </div>
       <p class="stat-note" style="margin-top:12px;text-align:center">
-        يعتمد على «الإيرادات الشهرية»: ${fmtUSD(monthlyRevenueFromTable)} إيراد - ${fmtUSD(monthlyMktFromTable)} عمولة - ${fmtUSD(monthlyCogsFromTable)} خامات - ${fmtUSD(monthlyOpexUSD)} OPEX.
+        يعتمد على جدول الإيرادات <strong>المجمّع</strong> (ورشة إصلاح + مشروع تدوير معيبين): ${fmtUSD(monthlyRevenueFromTable)} إيراد − ${fmtUSD(monthlyMktFromTable)} عمولة − ${fmtUSD(monthlyCogsFromTable)} خامات − ${fmtUSD(monthlyOpexUSD)} OPEX.
       </p>
     </div>
   </div>

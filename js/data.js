@@ -15,6 +15,7 @@ export const DATA = {
     { id: "opex",            label: "📊 المصاريف والتعادل" },
     { id: "volume",          label: "📅 حجم العمل" },
     { id: "monthly",         label: "📈 الإيرادات الشهرية" },
+    { id: "deviceFlip",      label: "🔄 تدوير المعيبين" },
     { id: "pl",              label: "🧾 قائمة الدخل" },
     { id: "roi",             label: "🚀 العائد على الاستثمار" },
   ],
@@ -56,13 +57,13 @@ export const DATA = {
 
   importedConsumablesQuarterly: {
     title: "خطة الطلب ربع السنوية — مستهلكات مستوردة فقط",
-    note: "**مستهلكات ومخزون قطع فقط** (بدون أصول تشغيلية طويلة العمر). شرائح Bitmain/Whatsminer حسب صفحات Zeus الحالية؛ **قوالب Tin ومنصة BGA 90×90** في **① قائمة الأصول** (استثمار ثابت). **أسلاك الجسر المغطاة قصدير** هنا كـ **مخزون استهلاكي** (تُستهلك مع الاختبار والجسور). **سائل تنظيف اللوحات للألتراسونيك** يدعم `post_repair_cleaning_protocol.md`. **الجدول مرتب تلقائياً** من الأعلى تكلفة للربع إلى الأقل.",
+    note: "**مستهلكات ومخزون قطع فقط** (بدون أصول تشغيلية طويلة العمر). **استراتيجية الشرائح:** لا نعتمد على طلبات Zeus الضخمة فقط — جزء كبير من الاحتياج يُغطّى **بتخليع هاشبوردات تالفة محلياً** (~**76 شريحة**/لوح بتكلفة تقديرية **1500 ج** للوح، انظر جدول المحلي). نحتفظ بكمية **معتدلة من الشرائح الجديدة** (Zeus) لضمان **سرعة العمل**، وجودة مضمونة للحالات الحرجة، والموديلات/الدفعات التي يصعب تخليعها. **قوالب Tin ومنصة BGA 90×90** في **① الأصول**. **أسلاك الجسر** هنا كمخزون استهلاكي. **سائل تنظيف اللوحات** يدعم `post_repair_cleaning_protocol.md`. الجدول مرتب تلقائياً من الأعلى تكلفة للربع إلى الأقل.",
     baselineMonthlyOperations: 75,
     items: [
-      { name: "شرائح ASIC Bitmain (BM1362)", unit: "شريحة", baseMonthlyQty: 42, unitUSD: 3.5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106", planHint: "غالبية هاش S19 / S19j — عدّل حسب مزيج اللوحات." },
-      { name: "شرائح ASIC Bitmain (BM1366BS)", unit: "شريحة S19K Pro", baseMonthlyQty: 3, unitUSD: 9, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3202", planHint: "فقط إصلاحات S19K Pro." },
-      { name: "شرائح Whatsminer (KF1950 / KF1958)", unit: "شريحة", baseMonthlyQty: 10, unitUSD: 2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1994", planHint: "سلسلة M30 الأرخص — راجع ID=2297 لـ KF1958." },
-      { name: "شرائح Whatsminer (KF1968 / KF1973)", unit: "شريحة", baseMonthlyQty: 6, unitUSD: 6.65, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2200", planHint: "متوسط سعر ~$6.65 بين $5.8 و $7.5 — وزّع حسب M50/M60 عندك." },
+      { name: "شرائح ASIC Bitmain (BM1362)", unit: "شريحة", baseMonthlyQty: 16, unitUSD: 3.5, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1106", planHint: "كمية **احتياط جديد** معتدلة (S19 / S19j) — الباقي من تخليع اللوحات البايظة؛ زِد عند ضغط عمل أو نقص donors." },
+      { name: "شرائح ASIC Bitmain (BM1366BS)", unit: "شريحة S19K Pro", baseMonthlyQty: 2, unitUSD: 9, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=3202", planHint: "S19K Pro — غالباً أقل توفراً من التخليع؛ احتفظ بحد أدنى جديد." },
+      { name: "شرائح Whatsminer (KF1950 / KF1958)", unit: "شريحة", baseMonthlyQty: 5, unitUSD: 2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=1994", planHint: "M30 — يكمّلها تخليع لوحات Whatsminer التالفة إن وُجدت محلياً." },
+      { name: "شرائح Whatsminer (KF1968 / KF1973)", unit: "شريحة", baseMonthlyQty: 3, unitUSD: 6.65, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2200", planHint: "M50/M60 — وزّع بين جديد وتخليع حسب التوفر." },
       { name: "أسلاك جسر للوحة (مغطاة قصدير)", unit: "عبوة ~100 عود (10cm/15cm)", baseMonthlyQty: 0.35, unitUSD: 1.2, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2461", planHint: "مستهلكات اختبار/جسور مع PICKit ونقاط القياس — ليست أصلًا ثابتًا." },
       { name: "فلاكس لحام ASIC", unit: "حقنة 10g Amtech NC-559-ASM", baseMonthlyQty: 3, unitUSD: 8, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=2277" },
       { name: "معجون قصدير BGA", unit: "عبوة 60g Mechanic 183°C", baseMonthlyQty: 1, unitUSD: 12, source: "Zeus Mining", url: "https://www.zeusbtc.com/ASIC-Miner-Repair/Parts-Tools-Details.asp?ID=264" },
@@ -79,10 +80,11 @@ export const DATA = {
 
   localConsumablesQuarterly: {
     title: "خطة الطلب ربع السنوية — استهلاكات محلية",
-    note: "مواد محلية متكررة (العتبة/البستان) محسوبة على نفس حجم العمل الشهري. **تبريد بنش 4×120mm** في **① أصول Zeus**. **أسلاك الجسر المغطاة قصدير (Zeus)** في **خطة المستهلكات المستوردة ربع السنوية** وليس في الأصول. **بخاخ IPA 99% كبير** مكمّل لعبوة السحب — لشطف الهاشات بعد الألتراسونيك (انظر `post_repair_cleaning_protocol.md`). الجدول مرتب تلقائياً من الأعلى تكلفة للربع إلى الأقل.",
+    note: "مواد محلية متكررة (العتبة/البستان) محسوبة على نفس حجم العمل الشهري. **مصدر شرائح رخيص:** شراء **هاشبوردات تالفة للتخليع** (~**76 شريحة**/لوح) بسعر تقديري **1500 ج/لوح** — يقلّل الحاجة لشراء كميات ضخمة من Zeus؛ **مع ذلك** يبقى طلب **شرائح جديدة** في خطة المستورد واجباً للتوازن (سرعة، جودة، موديلات نادرة). **تبريد بنش 4×120mm** في **① أصول Zeus**. **أسلاك الجسر** في **خطة المستورد**. **بخاخ IPA 99%** لشطف الهاشات بعد الألتراسونيك (`post_repair_cleaning_protocol.md`). الجدول مرتب تلقائياً من الأعلى تكلفة للربع إلى الأقل.",
     baselineMonthlyOperations: 75,
     currency: "EGP",
     items: [
+      { name: "هاشبورد تالف للتخليع (مصدر شرائح)", unit: "لوحة (~76 ASIC)", baseMonthlyQty: 1.5, unitEGP: 1500, source: "سوق محلي / خردة تعدين", planHint: "تقدير **1500 ج/لوحة** — تفكيك انتقائي + فحص؛ لا يعوّض بالكامل الشرائح الجديدة للحالات العاجلة أو الجودة العالية." },
       { name: "كيماويات التنظيف", unit: "IPA 99% (عبوة 500ml)", baseMonthlyQty: 1.2, unitEGP: 220, source: "العتبة / كيماويات" },
       { name: "بخاخ IPA 99%", unit: "عبوة رش كبيرة — شطف نهائي للهاشات", baseMonthlyQty: 0.9, unitEGP: 320, source: "العتبة / كيماويات" },
       { name: "معجون حراري عام", unit: "GD900 أو ما يعادله", baseMonthlyQty: 1, unitEGP: 250, source: "العتبة / البستان" },
@@ -397,7 +399,7 @@ export const DATA = {
 
     importedSpecialty: {
       title: "② النوادر المستوردة — مخزون تخصصي",
-      note: "أشياء صغيرة لكنها «الخلطة السرية»: لا يُستبدل أغلبها ببديل محلي رخيص دون أن تتأثر جودة الإصلاح أو عمر الهاشبورد. **شرائح Bitmain/Whatsminer** من Zeus. **قوالب Tin / أداة التنقيط ومنصة BGA 90×90 (Tinning)** نُقلت إلى **① قائمة الأصول** (استثمار ثابت).",
+      note: "أشياء صغيرة لكنها «الخلطة السرية»: لا يُستبدل أغلبها ببديل محلي رخيص دون أن تتأثر جودة الإصلاح أو عمر الهاشبورد. **شرائح Bitmain/Whatsminer** من Zeus — **كمية احتياط جديد** تكمّل **تخليع هاشبوردات بايظة** (~76 شريحة/لوح محلياً، انظر خطة المحلي ربع السنوية)؛ لا حاجة لتكديس شرائح جديدة بمفردها. **قوالب Tin / منصة BGA 90×90** في **① الأصول**.",
       location: "الصين — Zeus Mining / AliExpress",
       currency: "USD",
       items: [
@@ -638,7 +640,7 @@ export const DATA = {
       materials: "**~1.4** شريحة BM1362 @ **$3.5** ≈ $4.9 + HY234 + Mechanic paste + Amtech + قناع UV (نصيب) + سائل حمام/IPA (نصيب) + 0402 نادراً — متوسط **$8.5** / لوحة",
       oldCostUSD: 9.8,
       avgCostUSD: 8.5,
-      savingReason: "إعادة تقدير حسب خطة المستورد ربع السنوية وتقليل متوسط الشرائح/لوحة مع إبقاء بروتوكول التنظيف"
+      savingReason: "مزج **تخليع** (لوح بايظ ~76 شريحة) مع **شرائح Zeus جديدة** للسرعة والجودة؛ متوسط التكلفة/لوحة يبقى مضبوطاً مع خطة الطلب المعتدلة"
     },
     {
       category: "الباور سبلاي",
@@ -663,10 +665,10 @@ export const DATA = {
     },
     {
       category: "تدوير جهاز كامل (لوحات تالفة)",
-      materials: "**شراء الجهاز $100** (باور/كنترول/مراوح سليمة، هاش معطل) + خامات إصلاح وتجميل **~$38** (≈3 لوحات بمتوسط استهلاك شرائح/معجون/فلاكس/تنظيف + معجون مبردات «زي الجديد») — **~$138** تكلفة مباشرة / جهاز قبل البيع بـ **$1000**",
+      materials: "**شراء الجهاز $100** (باور/كنترول/مراوح سليمة، هاش معطل) + خامات إصلاح وتجميل **~$38** (≈3 لوحات بمتوسط استهلاك شرائح/معجون/فلاكس/تنظيف + معجون مبردات «زي الجديد») — **~$138** تكلفة مباشرة / محاولة؛ بيع ناجح **$1000** · الإيرادات في الجداول تفترض **نجاحاً 80%** (تُحسب تلقائياً من `successRate` في الواجهة)",
       oldCostUSD: 155,
       avgCostUSD: 138,
-      savingReason: "تقدير موحّد: شراء منخفض + إصلاح مركّز على الهاشات فقط؛ عدّل حسب موديل الجهاز وعدد الشرائح الفعلي"
+      savingReason: "تقدير موحّد لكل محاولة؛ المحاولات الفاشلة لا تُباع لكن تبقى تكلفتها المباشرة — راجع نسبة النجاح في `monthlyDeviceFlip` و`pricing`"
     }
   ],
 
@@ -677,7 +679,7 @@ export const DATA = {
     { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 4.2, marketerCommission: 16,  netProfit: 59.8 },
     { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1.5, marketerCommission: 10,  netProfit: 38.5 },
     { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 1.8, marketerCommission: 3,   netProfit: 10.2 },
-    { service: "بيع جهاز بعد الترميم (شراء معيب)", clientPrice: 1000, materialCost: 138, marketerCommission: 200, netProfit: 662 }
+    { service: "بيع جهاز بعد الترميم (شراء معيب)", clientPrice: 1000, materialCost: 138, marketerCommission: 200, netProfit: 662, successRate: 0.8 }
   ],
 
   opex: {
@@ -689,7 +691,7 @@ export const DATA = {
     ],
     totalMonthly: 34000,
     setupCost: 10000,
-    breakEvenNote: "بعد خصم خامات الهاشبورد (~$8.5) وعمولة المسوق (20% من $100 = $20)، صافي اللوحة للمركز ≈ $71.5. لتغطية المصاريف الثابتة (~630 $ شهرياً ≈ 34,000 ج) يحتاج ≈ 9 لوحات هاشبورد شهرياً (بسعر صرف 54 ج/$).",
+    breakEvenNote: "إذا توقفت **كل** الإيرادات ما عدا إصلاح الهاشبورد: صافي اللوحة ≈ **$71.5** (سعر $100 − عمولة 20% − خامات ~$8.5). يُقسَم OPEX الشهري (~**34,000 ج** ≈ **$629.6** عند 54 ج/$) على هذا الصافي → العدد الظاهر أعلاه (يُقرب لأعلى). **تنبيه:** مشروع **تدوير المعيبين** (`monthlyDeviceFlip`) مسار مالي منفصل في الجداول؛ نسبة نجاحه لا تدخل في هذا السيناريو. الرقم الكبير يُحدَّث من `pricing` + `monthlyRevenueRepair` + OPEX.",
     breakEvenUnits: 9
   },
 
@@ -702,33 +704,57 @@ export const DATA = {
       { type: "صيانة باور سبلاي",   monthlyCount: 15, timePerUnit: "60 دقيقة",    totalHours: 15,   improvement: null },
       { type: "إحياء كنترول بورد",  monthlyCount: 10, timePerUnit: "20 دقيقة",    totalHours: 3.5,  improvement: "كان 30 دق — بفضل سكوب مكتبي + لحام دقيق + برمجة عند الحاجة" },
       { type: "بيع/تغيير كابلات",   monthlyCount: 20, timePerUnit: "10 دقائق",    totalHours: 3.5,  improvement: null },
-      { type: "تدوير جهاز تعدين (شراء معيب)", monthlyCount: 10, timePerUnit: "8–12 ساعة / جهاز", hoursPerUnit: 10, totalHours: 100, improvement: "3 لوحات + اختبار كامل + تنظيف شاسيه ومعجون مبردات" }
+      { type: "تدوير جهاز تعدين (شراء معيب)", monthlyCount: 10, timePerUnit: "8–12 ساعة / جهاز", hoursPerUnit: 10, totalHours: 100, improvement: "3 لوحات + اختبار كامل + تنظيف شاسيه ومعجون مبردات · **نسبة نجاح متوقعة 80%** (≈8 بيع من 10 محاولات) — الجداول المالية تستخدم هذا الافتراض" }
     ],
     totalOperations: 85,
-    totalEffectiveHours: 135.5,
-    capacityUsedPercent: 68,
+    totalEffectiveHours: 145.5,
+    capacityUsedPercent: 73,
     dailyCapacity: "6–8 لوحات هاشبورد يومياً + تدوير أجهزة كاملة حسب الطلب",
-    note: "بفضل قوالب المعجون والسير المنظم، انخفض وقت الهاشبورد من 45 إلى 25–30 دقيقة. **تدوير الجهاز**: افتراض 8–12 ساعة عمل فعلية لكل معدّن (شراء معيب، هاش معطل، باقي الوحدات سليمة)."
+    knowledgeStudy: {
+      label: "مراجعة ومذاكرة دليل الإصلاح (Knowledge Base)",
+      sessionsPerMonth: 20,
+      timePerUnit: "30 دقيقة / جلسة",
+      totalHours: 10,
+      improvement: "فهرس `asic_repair_kb` — سجلات، باور، بروتوكول تنظيف، checklists؛ بدون إيراد مباشر"
+    },
+    note: "بفضل قوالب المعجون والسير المنظم، انخفض وقت الهاشبورد من 45 إلى 25–30 دقيقة. **تدوير الجهاز**: افتراض 8–12 ساعة عمل فعلية لكل معدّن (شراء معيب، هاش معطل، باقي الوحدات سليمة). **الوقت المخصص للـ KB** يُحسب ضمن ساعات العمل الفعلية ونسبة استخدام الوقت ولا يُدخل في عدد عمليات الإصلاح المدفوعة."
   },
 
-  monthlyRevenue: [
+  /** إيرادات ورشة الإصلاح فقط (بدون مشروع تدوير الأجهزة المعيبة). */
+  monthlyRevenueRepair: [
     { service: "الهاشبورد",      count: 30, pricePerUnit: 100, totalRevenue: 3000, costPerUnit: 8.5, totalCost: 255,  marketerTotal: 600  },
     { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 4.2, totalCost: 63,   marketerTotal: 240  },
     { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1.5, totalCost: 15,   marketerTotal: 100  },
-    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 1.8, totalCost: 36,   marketerTotal: 60   },
-    { service: "تدوير جهاز تعدين (شراء معيب)", count: 10, pricePerUnit: 1000, totalRevenue: 10000, costPerUnit: 138, totalCost: 1380, marketerTotal: 2000 }
+    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 1.8, totalCost: 36,   marketerTotal: 60   }
   ],
+
+  /** مشروع مستقل: شراء معيب + إصلاح + بيع — تُحسب أرباحه وCOGS منفصلة في الواجهة. */
+  monthlyDeviceFlip: {
+    service: "تدوير جهاز تعدين (شراء معيب)",
+    count: 10,
+    successRate: 0.8,
+    pricePerUnit: 1000,
+    costPerUnit: 138,
+    totalRevenue: 8000,
+    totalCost: 1380,
+    marketerTotal: 1600
+  },
+
+  deviceFlipProject: {
+    title: "مشروع تدوير الأجهزة المعيبة",
+    intro: "**مسار مالي مستقل** عن إصلاح القطع بالسعر الثابت: رأس مال دوّار لكل محاولة (**شراء ~$100 + خامات إصلاح** ضمن ~**$138**/محاولة)، بيع **$1000** عند اكتمال الترميم. **الإيراد وعمولة المسوق** تُحسبان على **البيع الناجح فقط** (افتراض نجاح **80%**)؛ **COGS** على **كل محاولة** حتى الفاشلة. **OPEX** الورشة (إيجار، راتب، كهرباء) **لا يُوزَّع** هنا — يظل في قائمة الدخل **المجمّعة** فقط؛ هذا القسم يعرض **مساهمة المشروع قبل OPEX**."
+  },
 
   pl: {
     currency: "USD / EGP",
     exchangeRate: 54,
-    exchangeNote: "عمولة المسوق 20% تُخصم من إيراد كل خدمة قبل حساب صافي الربح التشغيلي. التحويل: 1 USD = 54 EGP · COGS متوافق مع جدول الإيرادات الشهري (يشمل بند تدوير الأجهزة: شراء + خامات إصلاح لكل جهاز).",
-    grossRevenue:         { usd: 15000,  egp: 810000 },
-    marketerCommission:   { usd: 3000,   egp: 162000 },
+    exchangeNote: "قائمة الدخل تعرض **جزأين** (ورشة إصلاح + مشروع تدوير معيبين) ثم **المجمّع**. عمولة المسوق 20% من إيراد كل بند. مشروع التدوير: إيراد/عمولة على البيع الناجح فقط (80%)، COGS على كل محاولة. **OPEX** يُخصم مرة واحدة من المجمّع.",
+    grossRevenue:         { usd: 13000,  egp: 702000 },
+    marketerCommission:   { usd: 2600,   egp: 140400 },
     cogs:                 { usd: 1749,   egp: 94446  },
-    grossProfit:          { usd: 12251,  egp: 661554 },
+    grossProfit:          { usd: 8651,   egp: 467154 },
     opex:                 { usd: 629.63, egp: 34000  },
-    netProfit:            { usd: 11621.37, egp: 627554 }
+    netProfit:            { usd: 8021.37, egp: 433154 }
   },
 
   roi: {
@@ -739,8 +765,8 @@ export const DATA = {
       ],
       note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي مماثل + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + حصيرة صيانة 182 + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر). بدون فاحص مكونات منضد اختياري (مثل DSO-TC3)."
     },
-    annualNetProfit:      { usd: 139456.44, egp: 7530648 },
-    monthlyNetProfit:     { usd: 11621.37,  egp: 627554  },
+    annualNetProfit:      { usd: 96256.44, egp: 5197848 },
+    monthlyNetProfit:     { usd: 8021.37,  egp: 433154  },
     paybackDays:          24,
     roiPercent:           1470
   }
