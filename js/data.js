@@ -653,16 +653,16 @@ export const DATA = {
     hoursPerDay: 8,
     totalHours: 200,
     services: [
-      { type: "صيانة هاشبورد",      monthlyCount: 30, timePerUnit: "25–30 دقيقة", totalHours: 13.5, improvement: "كان 45 دق — بفضل قوالب المعجون والتنظيم" },
-      { type: "صيانة باور سبلاي",   monthlyCount: 15, timePerUnit: "60 دقيقة",    totalHours: 15,   improvement: null },
-      { type: "إحياء كنترول بورد",  monthlyCount: 10, timePerUnit: "20 دقيقة",    totalHours: 3.5,  improvement: "كان 30 دق — بفضل سكوب مكتبي + لحام دقيق + برمجة عند الحاجة" },
-      { type: "بيع/تغيير كابلات",   monthlyCount: 20, timePerUnit: "10 دقائق",    totalHours: 3.5,  improvement: null },
-      { type: "تدوير جهاز تعدين (شراء معيب)", monthlyCount: 10, timePerUnit: "8–12 ساعة / جهاز", hoursPerUnit: 10, totalHours: 100, improvement: "3 لوحات + اختبار كامل + تنظيف شاسيه ومعجون مبردات · **نسبة نجاح متوقعة 80%** (≈8 بيع من 10 محاولات) — الجداول المالية تستخدم هذا الافتراض" }
+      { type: "صيانة هاشبورد",      monthlyCount: 20, timePerUnit: "25–30 دقيقة", totalHours: 9,    improvement: "كان 45 دق — بفضل قوالب المعجون والتنظيم · **سيناريو محافظ**" },
+      { type: "صيانة باور سبلاي",   monthlyCount: 2,  timePerUnit: "60 دقيقة",    totalHours: 2,    improvement: null },
+      { type: "إحياء كنترول بورد",  monthlyCount: 1,  timePerUnit: "20 دقيقة",    totalHours: 0.35, improvement: "كان 30 دق — بفضل سكوب مكتبي + لحام دقيق + برمجة عند الحاجة" },
+      { type: "بيع/تغيير كابلات",   monthlyCount: 4,  timePerUnit: "10 دقائق",    totalHours: 0.7,  improvement: null },
+      { type: "تدوير جهاز تعدين (شراء معيب)", monthlyCount: 5, timePerUnit: "8–12 ساعة / جهاز", hoursPerUnit: 10, totalHours: 50, improvement: "3 لوحات + اختبار كامل + تنظيف شاسيه ومعجون مبردات · **نسبة نجاح متوقعة 80%** (≈4 بيع من 5 محاولات) — الجداول المالية تستخدم هذا الافتراض" }
     ],
-    totalOperations: 85,
-    totalEffectiveHours: 145.5,
-    capacityUsedPercent: 73,
-    dailyCapacity: "6–8 لوحات هاشبورد يومياً + تدوير أجهزة كاملة حسب الطلب",
+    totalOperations: 32,
+    totalEffectiveHours: 72.05,
+    capacityUsedPercent: 36,
+    dailyCapacity: "تقدير محافظ: ~20 هاشبورد/شهر + باور/كنترول/كابلات محدودة + حتى 5 محاولات تدوير/شهر",
     knowledgeStudy: {
       label: "مراجعة ومذاكرة دليل الإصلاح (Knowledge Base)",
       sessionsPerMonth: 20,
@@ -675,21 +675,21 @@ export const DATA = {
 
   /** إيرادات ورشة الإصلاح فقط (بدون مشروع تدوير الأجهزة المعيبة). */
   monthlyRevenueRepair: [
-    { service: "الهاشبورد",      count: 30, pricePerUnit: 100, totalRevenue: 3000, costPerUnit: 8.5, totalCost: 255,  marketerTotal: 600  },
-    { service: "الباور سبلاي",   count: 15, pricePerUnit: 80,  totalRevenue: 1200, costPerUnit: 4.2, totalCost: 63,   marketerTotal: 240  },
-    { service: "الكنترول بورد",  count: 10, pricePerUnit: 50,  totalRevenue: 500,  costPerUnit: 1.5, totalCost: 15,   marketerTotal: 100  },
-    { service: "الكابلات",       count: 20, pricePerUnit: 15,  totalRevenue: 300,  costPerUnit: 1.8, totalCost: 36,   marketerTotal: 60   }
+    { service: "الهاشبورد",      count: 20, pricePerUnit: 100, totalRevenue: 2000, costPerUnit: 8.5, totalCost: 170,  marketerTotal: 400  },
+    { service: "الباور سبلاي",   count: 2,  pricePerUnit: 80,  totalRevenue: 160,  costPerUnit: 4.2, totalCost: 8.4,  marketerTotal: 32   },
+    { service: "الكنترول بورد",  count: 1,  pricePerUnit: 50,  totalRevenue: 50,   costPerUnit: 1.5, totalCost: 1.5,  marketerTotal: 10   },
+    { service: "الكابلات",       count: 4,  pricePerUnit: 15,  totalRevenue: 60,   costPerUnit: 1.8, totalCost: 7.2,  marketerTotal: 12   }
   ],
 
   /** مشروع مستقل: شراء معيب + إصلاح + بيع — تُحسب أرباحه وCOGS منفصلة في الواجهة. */
   monthlyDeviceFlip: {
     service: "تدوير جهاز تعدين (شراء معيب)",
-    count: 10,
+    count: 5,
     successRate: 0.8,
     pricePerUnit: 1000,
     costPerUnit: 138,
-    totalRevenue: 8000,
-    totalCost: 1380,
+    totalRevenue: 4000,
+    totalCost: 690,
     marketerTotal: 0,
     marketerCommissionApplies: false
   },
@@ -703,12 +703,12 @@ export const DATA = {
     currency: "USD / EGP",
     exchangeRate: 54,
     exchangeNote: "قائمة الدخل: **ورشة الإصلاح** (عمولة مسوق 20% على الإيراد) + **مشروع إعادة بيع الجهاز** (بدون عمولة مسوق) ثم **المجمّع**. التدوير: إيراد على البيع الناجح فقط (80%)، COGS على كل محاولة. **OPEX** يُخصم مرة واحدة من المجمّع.",
-    grossRevenue:         { usd: 13000,  egp: 702000 },
-    marketerCommission:   { usd: 1000,   egp: 54000  },
-    cogs:                 { usd: 1749,   egp: 94446  },
-    grossProfit:          { usd: 10251,  egp: 553554 },
+    grossRevenue:         { usd: 6270,   egp: 338580 },
+    marketerCommission:   { usd: 454,    egp: 24516  },
+    cogs:                 { usd: 877.1,  egp: 47363  },
+    grossProfit:          { usd: 4938.9, egp: 266701 },
     opex:                 { usd: 944.44, egp: 51000  },
-    netProfit:            { usd: 9306.56, egp: 502554 }
+    netProfit:            { usd: 3994.46, egp: 215701 }
   },
 
   roi: {
