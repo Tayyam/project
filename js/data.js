@@ -627,7 +627,7 @@ export const DATA = {
   marketerCommissionPercent: 20,
 
   pricing: [
-    { service: "صيانة الهاشبورد",    clientPrice: 100, materialCost: 8.5, marketerCommission: 20,  netProfit: 71.5 },
+    { service: "صيانة الهاشبورد",    clientPrice: 120, materialCost: 8.5, marketerCommission: 24,  netProfit: 87.5 },
     { service: "صيانة الباور سبلاي", clientPrice: 80,  materialCost: 4.2, marketerCommission: 16,  netProfit: 59.8 },
     { service: "إحياء الكنترول بورد",clientPrice: 50,  materialCost: 1.5, marketerCommission: 10,  netProfit: 38.5 },
     { service: "تغيير كابل داتا",    clientPrice: 15,  materialCost: 1.8, marketerCommission: 3,   netProfit: 10.2 },
@@ -640,12 +640,12 @@ export const DATA = {
       { label: "الإيجار",                          amount: 5000  },
       { label: "كهرباء وإنترنت ومستهلكات عامة",   amount: 2000  },
       { label: "راتب مهندس (1)",                   amount: 22000 },
-      { label: "راتب مهندس (2)",                   amount: 22000 }
+      { label: "راتب محاسب",                      amount: 7000  }
     ],
-    totalMonthly: 51000,
+    totalMonthly: 36000,
     setupCost: 10000,
-    breakEvenNote: "إذا توقفت **كل** الإيرادات ما عدا إصلاح الهاشبورد: صافي اللوحة ≈ **$71.5** (سعر $100 − عمولة 20% − خامات ~$8.5). يُقسَم OPEX الشهري (~**51,000 ج** ≈ **$944.4** عند 54 ج/$) على هذا الصافي → العدد الظاهر أعلاه (يُقرب لأعلى). **تنبيه:** مشروع **تدوير المعيبين** (`monthlyDeviceFlip`) مسار مالي منفصل في الجداول؛ نسبة نجاحه لا تدخل في هذا السيناريو. الرقم الكبير يُحدَّث من `pricing` + `monthlyRevenueRepair` + OPEX.",
-    breakEvenUnits: 14
+    breakEvenNote: "إذا توقفت **كل** الإيرادات ما عدا إصلاح الهاشبورد: صافي اللوحة ≈ **$87.5** (سعر **$120** − عمولة 20% − خامات ~$8.5). يُقسَم OPEX الشهري (~**36,000 ج** ≈ **$666.7** عند 54 ج/$) على هذا الصافي → العدد الظاهر أعلاه (يُقرب لأعلى). **تنبيه:** مشروع **تدوير المعيبين** (`monthlyDeviceFlip`) مسار مالي منفصل في الجداول؛ نسبة نجاحه لا تدخل في هذا السيناريو. الرقم الكبير يُحدَّث من `pricing` + `monthlyRevenueRepair` + OPEX.",
+    breakEvenUnits: 8
   },
 
   monthlyVolume: {
@@ -653,16 +653,16 @@ export const DATA = {
     hoursPerDay: 8,
     totalHours: 200,
     services: [
-      { type: "صيانة هاشبورد",      monthlyCount: 20, timePerUnit: "25–30 دقيقة", totalHours: 9,    improvement: "كان 45 دق — بفضل قوالب المعجون والتنظيم · **سيناريو محافظ**" },
+      { type: "صيانة هاشبورد",      monthlyCount: 35, timePerUnit: "25–30 دقيقة", totalHours: 15.75, improvement: "كان 45 دق — بفضل قوالب المعجون والتنظيم" },
       { type: "صيانة باور سبلاي",   monthlyCount: 2,  timePerUnit: "60 دقيقة",    totalHours: 2,    improvement: null },
       { type: "إحياء كنترول بورد",  monthlyCount: 1,  timePerUnit: "20 دقيقة",    totalHours: 0.35, improvement: "كان 30 دق — بفضل سكوب مكتبي + لحام دقيق + برمجة عند الحاجة" },
       { type: "بيع/تغيير كابلات",   monthlyCount: 4,  timePerUnit: "10 دقائق",    totalHours: 0.7,  improvement: null },
       { type: "تدوير جهاز تعدين (شراء معيب)", monthlyCount: 5, timePerUnit: "8–12 ساعة / جهاز", hoursPerUnit: 10, totalHours: 50, improvement: "3 لوحات + اختبار كامل + تنظيف شاسيه ومعجون مبردات · **نسبة نجاح متوقعة 80%** (≈4 بيع من 5 محاولات) — الجداول المالية تستخدم هذا الافتراض" }
     ],
-    totalOperations: 32,
-    totalEffectiveHours: 72.05,
-    capacityUsedPercent: 36,
-    dailyCapacity: "تقدير محافظ: ~20 هاشبورد/شهر + باور/كنترول/كابلات محدودة + حتى 5 محاولات تدوير/شهر",
+    totalOperations: 47,
+    totalEffectiveHours: 78.8,
+    capacityUsedPercent: 39,
+    dailyCapacity: "~35 لوحة هاشبورد/شهر + باور/كنترول/كابلات محدودة + حتى 5 محاولات تدوير/شهر",
     knowledgeStudy: {
       label: "مراجعة ومذاكرة دليل الإصلاح (Knowledge Base)",
       sessionsPerMonth: 20,
@@ -675,7 +675,7 @@ export const DATA = {
 
   /** إيرادات ورشة الإصلاح فقط (بدون مشروع تدوير الأجهزة المعيبة). */
   monthlyRevenueRepair: [
-    { service: "الهاشبورد",      count: 20, pricePerUnit: 100, totalRevenue: 2000, costPerUnit: 8.5, totalCost: 170,  marketerTotal: 400  },
+    { service: "الهاشبورد",      count: 35, pricePerUnit: 120, totalRevenue: 4200, costPerUnit: 8.5, totalCost: 297.5, marketerTotal: 840  },
     { service: "الباور سبلاي",   count: 2,  pricePerUnit: 80,  totalRevenue: 160,  costPerUnit: 4.2, totalCost: 8.4,  marketerTotal: 32   },
     { service: "الكنترول بورد",  count: 1,  pricePerUnit: 50,  totalRevenue: 50,   costPerUnit: 1.5, totalCost: 1.5,  marketerTotal: 10   },
     { service: "الكابلات",       count: 4,  pricePerUnit: 15,  totalRevenue: 60,   costPerUnit: 1.8, totalCost: 7.2,  marketerTotal: 12   }
@@ -703,12 +703,12 @@ export const DATA = {
     currency: "USD / EGP",
     exchangeRate: 54,
     exchangeNote: "قائمة الدخل: **ورشة الإصلاح** (عمولة مسوق 20% على الإيراد) + **مشروع إعادة بيع الجهاز** (بدون عمولة مسوق) ثم **المجمّع**. التدوير: إيراد على البيع الناجح فقط (80%)، COGS على كل محاولة. **OPEX** يُخصم مرة واحدة من المجمّع.",
-    grossRevenue:         { usd: 6270,   egp: 338580 },
-    marketerCommission:   { usd: 454,    egp: 24516  },
-    cogs:                 { usd: 877.1,  egp: 47363  },
-    grossProfit:          { usd: 4938.9, egp: 266701 },
-    opex:                 { usd: 944.44, egp: 51000  },
-    netProfit:            { usd: 3994.46, egp: 215701 }
+    grossRevenue:         { usd: 8470,   egp: 457380 },
+    marketerCommission:   { usd: 894,    egp: 48276  },
+    cogs:                 { usd: 1004.6, egp: 54248  },
+    grossProfit:          { usd: 6571.4, egp: 354856 },
+    opex:                 { usd: 666.67, egp: 36000  },
+    netProfit:            { usd: 5904.73, egp: 318855 }
   },
 
   roi: {
@@ -717,7 +717,7 @@ export const DATA = {
       extraItems: [
         { label: "تجهيزات المحل (تشطيب + أثاث)", usd: 200 },
         { label: "جمارك + شحن منتجات من الخارج (مرة واحدة)", usd: 500 },
-        { label: "احتياط تشغيل — 3 أشهر من هيكل التكاليف الثابتة (OPEX)", usd: 2833.33 }
+        { label: "احتياط تشغيل — 3 أشهر من هيكل التكاليف الثابتة (OPEX)", usd: 2000 }
       ],
       note: "CAPEX يشمل تقدير جمارك وشحن لمرة واحدة ($500) + **UNI-T UTD2102CEX+ (100 MHz)** أو سكوب محلي مماثل + **UNI-T UT136C+** + ملحقات قياس Zeus + PICKit 3.5 + كابل EEPROM + WANPTEK KPS + تبريد 4×120mm + **سجادة ESD (3010)** + **حصيرة سيليكون حرارية (182)** + سوار ESD + **Quick 707D+** + **861DW** + AD207 + **PUHUI T-8280** (بدون HP-B100 مكرر). بدون فاحص مكونات منضد اختياري (مثل DSO-TC3). **يُضاف:** بند **3× OPEX شهري** (`opex.totalMonthly` ÷ سعر الصرف × 3) كاحتياط تمويل تشغيلي، و**تلقائياً** مخزون مستهلكات مستوردة (خطة 3 شهور)."
     }
